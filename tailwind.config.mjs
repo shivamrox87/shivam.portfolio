@@ -11,6 +11,12 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      aspectRatio: {
+        '3.55/1': '3.55 / 1',
+      },
+      fontFamily: {
+        Plus_Jakarta_Sans: "Plus Jakarta Sans"
+      }
     },
   },
   plugins: [],
