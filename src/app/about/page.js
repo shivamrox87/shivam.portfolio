@@ -1,5 +1,4 @@
-import Header from '@/components/Header';
-import React from 'react'
+import AboutSide from "@/components/AboutComponent/AboutSide";
 
 export const metadata = {
   title: "About",
@@ -7,9 +6,10 @@ export const metadata = {
 };
 
 const page = () => {
+
   return (
-    <div>
-      <Header textColor="#0d0d0d" />
+    <div className='flex flex-col items-center bg-[#e9e9e7] gap-0 h-min overflow-hidden p-0 relative min-h-screen w-auto'>
+      <AboutSide />
     </div>
   )
 }

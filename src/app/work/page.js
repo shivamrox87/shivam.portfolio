@@ -1,5 +1,5 @@
-import Header from '@/components/Header';
-import React from 'react'
+import WorkSide from '@/components/WorkComponent/WorkSide';
+
 
 export const metadata = {
   title: "Work",
@@ -8,8 +8,8 @@ export const metadata = {
 
 const page = () => {
   return (
-    <div>
-      <Header textColor="#0d0d0d" />
+    <div className='bg-[#e9e9e7]'>
+      <WorkSide />
     </div>
   )
 }

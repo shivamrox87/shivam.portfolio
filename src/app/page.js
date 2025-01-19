@@ -1,5 +1,4 @@
 'use client';
-import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -7,6 +6,7 @@ import { profolio, companiesData } from "@/server/data";
 
 export default function Home() {
   const [headerColor, setHeaderColor] = useState("#FFF");
+  const [open, setOpen] = useState(null)
 
   const sections = [
     { id: "partOne", color: "#FFF" },
@@ -64,9 +64,9 @@ export default function Home() {
                 <h2 className="text-base font-Plus_Jakarta_Sans text-[#E9E9E7]">Hi, I’m Shivam Maurya—a tech enthusiast, AI engineer, and mentor passionate about transforming ideas into impactful solutions. From creating cutting-edge AI projects to guiding aspiring minds in Python and data science, my journey is all about blending innovation with expertise. Let’s connect to build, innovate, and inspire!</h2>
               </div>
               <div className="relative w-full">
-                <Link href="/work" className="w-max flex flex-col justify-start bg-[#E9E9E7] text-[#000] transform transition-all duration-700 ease-out px-5 py-[10px] hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939]">
+                <Link href="/work" className="w-max flex flex-col justify-start bg-[#E9E9E7] text-[#0d0d0d] transform transition-all duration-500 ease-out px-5 py-[10px] hover:tracking-[0.08em] hover:text-[#E9E9E7] hover:bg-[#EB5939]">
                   <div className="w-auto">
-                    <p className="text-sm font-Plus_Jakarta_Sans ">Explore Works</p>
+                    <p className="text-sm leading-[1.1em] font-Plus_Jakarta_Sans font-medium">EXPLORE WORKS</p>
                   </div>
                 </Link>
               </div>
@@ -226,13 +226,13 @@ export default function Home() {
             </div>
             <div className="flex-none h-auto relative w-full">
               <div className="flex items-center flex-col flex-wrap-nowrap gap-0 h-min justify-center overflow-hidden p-0 relative w-full transform-none transform-origin-[50%_50%_0px]">
-                {companiesData.map((data) => (<div key={data.id} className="flex-none h-auto relative w-full transform-none transform-origin-[50%_50%_0px]">
+                {companiesData.map((data, index) => (<div key={data.id} className="flex-none h-auto relative w-full transform-none transform-origin-[50%_50%_0px]" onClick={() => setOpen(index)}>
                   <div className="flex cursor-pointer flex-col gap-0 h-min justify-center overflow-hidden p-0 relative bg-transparent w-full transform-none transform-origin-[50%_50%_0px] opacity-100">
                     <div className="flex-none items-start flex flex-row gap-2.5 h-min justify-center overflow-hidden p-2.5 relative w-full transform-none transform-origin-[50%_50%_0px] opacity-100">
                       <div className="outline-none flex flex-col justify-start flex-shrink-0 transform-none transform-origin-[50%_50%_0px] opacity-100 flex-[1_0_0px] h-auto relative whitespace-pre-wrap w-[1px] break-words">
                         <h2 className="text-xl text-[#0d0d0d] leading-[1.2em] font-medium font-Plus_Jakarta_Sans">{data.companyName}</h2>
                       </div>
-                      <div className="items-center cursor-pointer flex flex-none flex-row flex-nowrap gap-2.5 h-[44px] justify-center overflow-hidden p-0 relative w-[44px] will-change-[none,_transform] bg-transparent rounded-full transform-none transform-origin-[50%_50%_0px]">
+                      <div className="items-center cursor-pointer flex flex-none flex-row flex-nowrap gap-2.5 h-[44px] justify-center overflow-hidden p-0 relative w-[44px] will-change-[none,_transform] bg-transparent rounded-full transform-none transform-origin-[50%_50%_0px]" onClick={() => {open === index ? setOpen(null) : setOpen(index)}}>
                         <div className="flex-none h-[28px] relative w-[28px] transform-none transform-origin-[50%_50%_0px] will-change-transform">
                           <div className="contents">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" fill='#0d0d0d'><g color='#0d0d0d' weight="light"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"></path></g></svg>
@@ -241,17 +241,17 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="flex-none h-[1px] overflow-hidden relative w-full bg-[rgba(13,13,13,0.5)] transform-none transform-origin-[50%_50%_0px] opacity-100" />
-                    <div>
-                      <div>
-                        <h5>{data.position}</h5>
+                    {open === index && <div className="flex flex-col items-center justify-center flex-none flex-wrap-none gap-0 h-min overflow-hidden p-2 relative w-full transform-none origin-center">
+                      <div className="flex flex-col items-start flex-none flex-shrink-0 h-auto relative whitespace-pre-wrap w-full break-words overflow-wrap-anywhere transform-none origin-center outline-none">
+                        <h5 className="text-base text-[#e9e9e7] leading-[1.4em] font-Plus_Jakarta_Sans font-normal">{data.position}</h5>
                       </div>
-                      <div>
-                        <h5>{data.activeYears}</h5>
+                      <div className="flex flex-col items-start flex-shrink-0 transform-none origin-center outline-none">
+                        <h5 className="text-base text-[#e9e9e7] leading-[1.4em] font-Plus_Jakarta_Sans font-normal">{data.activeYears}</h5>
                       </div>
-                      <div>
-                        <p>{data.description}</p>
+                      <div className="flex flex-col items-start flex-none flex-shrink-0 h-auto relative whitespace-pre-wrap w-full break-words overflow-wrap-anywhere outline-none transform-none origin-center">
+                        <p className="text-base text-[#e9e9e7] leading-[1.4em] font-Plus_Jakarta_Sans font-normal">{data.description}</p>
                       </div>
-                    </div>
+                    </div>}
                   </div>
                 </div>))}
               </div>
@@ -259,7 +259,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
