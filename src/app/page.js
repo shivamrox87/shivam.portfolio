@@ -5,14 +5,14 @@ import { useEffect, useRef, useState } from "react";
 import { profolio, companiesData } from "@/server/data";
 
 export default function Home() {
-  const [headerColor, setHeaderColor] = useState("#FFF");
+  const [headerColor, setHeaderColor] = useState("#e9e9e7");
   const [open, setOpen] = useState(null)
 
   const sections = [
-    { id: "partOne", color: "#FFF" },
-    { id: "partTwo", color: "#000" },
-    { id: "partThree", color: "#FFF" },
-    { id: "partFour", color: "#000" },
+    { id: "partOne", color: "#e9e9e7" },
+    { id: "partTwo", color: "#0d0d0d" },
+    { id: "partThree", color: "#e9e9e7" },
+    { id: "partFour", color: "#0d0d0d" },
   ];
 
   useEffect(() => {
@@ -98,7 +98,7 @@ export default function Home() {
                   <p className="text-base text-[#0d0d0d] leading-[1.4em] font-normal font-Plus_Jakarta_Sans">I'm Shivam Maurya—an AI engineer, mentor, and entrepreneur passionate about driving innovation and creating impactful solutions. With years of experience in AI, data science, and technology, I specialize in transforming ideas into real-world applications that solve complex problems. Whether it’s building cutting-edge AI systems, mentoring aspiring tech leaders, or helping startups streamline their processes, my goal is to inspire growth, foster creativity, and make technology accessible. I’m all about pushing boundaries and helping you leverage the power of AI to bring your ideas to life.</p>
                 </div>
                 <div className="flex-none h-auto relative w-auto">
-                  <Link href="/work" className="w-max flex flex-col justify-start bg-transparent border border-[#0d0d0d] text-[#0d0d0d] transform transition-all duration-700 ease-out px-5 py-[2px] rounded-full hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939] hover:border-[#EB5939] group">
+                  <Link href="/about" className="w-max flex flex-col justify-start bg-transparent border border-[#0d0d0d] text-[#0d0d0d] transform transition-all duration-700 ease-out px-5 py-[2px] rounded-full hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939] hover:border-[#EB5939] group">
                     <div className="w-auto flex gap-[10px]">
                       <p className="text-sm font-Plus_Jakarta_Sans ">MORE ABOUT ME</p>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" focusable="false" fill='#0d0d0d' className="group-hover:fill-[#E9E9E7] group-hover:text-[#E9E9E7]"><g color='#0d0d0d' weight="light"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"></path></g></svg>
@@ -188,7 +188,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="flex-none h-auto relative w-auto">
-                        <Link href={data.link} className="w-max flex flex-col justify-start bg-transparent border border-[#E9E9E7] text-[#E9E9E7] transform transition-all duration-700 ease-out px-5 py-[2px] rounded-full hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939] hover:border-[#EB5939]">
+                        <Link href={`/work/${data.link}`} className="w-max flex flex-col justify-start bg-transparent border border-[#E9E9E7] text-[#E9E9E7] transform transition-all duration-700 ease-out px-5 py-[2px] rounded-full hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939] hover:border-[#EB5939]">
                           <div className="w-auto flex gap-[10px]">
                             <p className="text-sm font-Plus_Jakarta_Sans ">ABOUT PROJECT</p>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" focusable="false" fill='#E9E9E7'><g color='#E9E9E7' weight="light"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"></path></g></svg>
@@ -226,34 +226,47 @@ export default function Home() {
             </div>
             <div className="flex-none h-auto relative w-full">
               <div className="flex items-center flex-col flex-wrap-nowrap gap-0 h-min justify-center overflow-hidden p-0 relative w-full transform-none transform-origin-[50%_50%_0px]">
-                {companiesData.map((data, index) => (<div key={data.id} className="flex-none h-auto relative w-full transform-none transform-origin-[50%_50%_0px]" onClick={() => setOpen(index)}>
-                  <div className="flex cursor-pointer flex-col gap-0 h-min justify-center overflow-hidden p-0 relative bg-transparent w-full transform-none transform-origin-[50%_50%_0px] opacity-100">
+                {companiesData.map((data, index) => {
+                  const isOpen = open === index;
+                  const contentRef = useRef(null);
+
+                  return(<div key={data.id} className={`flex-none h-auto relative w-full ${open === index? 'transform transition-all' : 'transform-none'} duration-500  transform-origin-[50%_50%_0px]`} onClick={() => {open === index ? setOpen(null) : setOpen(index)}}>
+                  <div className={`flex cursor-pointer flex-col gap-0 h-min justify-center overflow-hidden p-0 relative ${open === index ? 'bg-[#EB5939]' : 'bg-transparent' } w-full transform-none transform-origin-[50%_50%_0px] opacity-100`}>
                     <div className="flex-none items-start flex flex-row gap-2.5 h-min justify-center overflow-hidden p-2.5 relative w-full transform-none transform-origin-[50%_50%_0px] opacity-100">
                       <div className="outline-none flex flex-col justify-start flex-shrink-0 transform-none transform-origin-[50%_50%_0px] opacity-100 flex-[1_0_0px] h-auto relative whitespace-pre-wrap w-[1px] break-words">
-                        <h2 className="text-xl text-[#0d0d0d] leading-[1.2em] font-medium font-Plus_Jakarta_Sans">{data.companyName}</h2>
+                        <h2 className={`text-xl ${open === index? 'text-[#e9e9e7]' : 'text-[#0d0d0d]'} duration-500 leading-[1.2em] font-medium font-Plus_Jakarta_Sans`}>{data.companyName}</h2>
                       </div>
-                      <div className="items-center cursor-pointer flex flex-none flex-row flex-nowrap gap-2.5 h-[44px] justify-center overflow-hidden p-0 relative w-[44px] will-change-[none,_transform] bg-transparent rounded-full transform-none transform-origin-[50%_50%_0px]" onClick={() => {open === index ? setOpen(null) : setOpen(index)}}>
-                        <div className="flex-none h-[28px] relative w-[28px] transform-none transform-origin-[50%_50%_0px] will-change-transform">
+                      <div className={`items-center cursor-pointer flex flex-none flex-row flex-nowrap gap-2.5 h-[44px] justify-center overflow-hidden p-0 relative w-[44px] will-change-[none,_transform] ${open === index ? 'bg-[#e9e9e7] transform' : 'bg-transparent transform-none'} duration-700 ease-out rounded-full transform-origin-[50%_50%_0px]`} onClick={() => {open === index ? setOpen(null) : setOpen(index)}}>
+                        <div className={`flex-none h-[28px] relative w-[28px] ${open === index? 'rotate-180 transform' : 'transform: rotate-0 transform-none'} transform-origin-[50%_50%_0px] will-change-transform duration-500`}>
                           <div className="contents">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" fill='#0d0d0d'><g color='#0d0d0d' weight="light"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"></path></g></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" fill= {open === index? '#EB5939' : '#0d0d0d'}><g color={open === index? '#EB5939' : '#0d0d0d'} weight="light"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"></path></g></svg>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="flex-none h-[1px] overflow-hidden relative w-full bg-[rgba(13,13,13,0.5)] transform-none transform-origin-[50%_50%_0px] opacity-100" />
-                    {open === index && <div className="flex flex-col items-center justify-center flex-none flex-wrap-none gap-0 h-min overflow-hidden p-2 relative w-full transform-none origin-center">
-                      <div className="flex flex-col items-start flex-none flex-shrink-0 h-auto relative whitespace-pre-wrap w-full break-words overflow-wrap-anywhere transform-none origin-center outline-none">
-                        <h5 className="text-base text-[#e9e9e7] leading-[1.4em] font-Plus_Jakarta_Sans font-normal">{data.position}</h5>
+                    <div className={`flex-none h-[1px] overflow-hidden relative w-full duration-500 ${open === index ? 'bg-[#E9E9E780]' : 'bg-[#0d0d0d80]'} transform-none transform-origin-[50%_50%_0px] opacity-100`} />
+                    <div
+                      ref={contentRef}
+                      style={{
+                        maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : '0px',
+                        transition: 'max-height 0.5s ease',
+                      }}
+                      className={`overflow-hidden`}
+                    >
+                      <div className={`flex flex-col items-center justify-center flex-none flex-wrap-none gap-0 overflow-hidden p-2 relative w-full transform-none origin-center`}>
+                        <div className="flex flex-col items-start flex-none flex-shrink-0 h-auto relative whitespace-pre-wrap w-full break-words overflow-wrap-anywhere transform-none origin-center outline-none">
+                          <h5 className="text-base text-[#e9e9e7] leading-[1.4em] font-Plus_Jakarta_Sans font-normal">{data.position}</h5>
+                        </div>
+                        <div className="flex flex-col items-start flex-none flex-shrink-0 h-auto relative whitespace-pre-wrap w-full break-words overflow-wrap-anywhere transform-none origin-center outline-none">
+                          <h5 className="text-base text-[#e9e9e7] leading-[1.4em] font-Plus_Jakarta_Sans font-normal">{data.activeYears}</h5>
+                        </div>
+                        <div className="flex flex-col items-start flex-none flex-shrink-0 h-auto relative whitespace-pre-wrap w-full break-words overflow-wrap-anywhere outline-none transform-none origin-center">
+                          <p className="text-base text-[#e9e9e7] tracking-[-0.02em] leading-[1.6em] font-Plus_Jakarta_Sans font-normal">{data.description}</p>
+                        </div>
                       </div>
-                      <div className="flex flex-col items-start flex-shrink-0 transform-none origin-center outline-none">
-                        <h5 className="text-base text-[#e9e9e7] leading-[1.4em] font-Plus_Jakarta_Sans font-normal">{data.activeYears}</h5>
-                      </div>
-                      <div className="flex flex-col items-start flex-none flex-shrink-0 h-auto relative whitespace-pre-wrap w-full break-words overflow-wrap-anywhere outline-none transform-none origin-center">
-                        <p className="text-base text-[#e9e9e7] leading-[1.4em] font-Plus_Jakarta_Sans font-normal">{data.description}</p>
-                      </div>
-                    </div>}
+                    </div>
                   </div>
-                </div>))}
+                </div>)})}
               </div>
             </div>
           </div>
@@ -262,3 +275,4 @@ export default function Home() {
     </div>
   );
 }
+// ${open === index? "block animate-custom-transform-Down" : "hidden animate-custom-transform-Up"} 

@@ -1,26 +1,32 @@
 export const profolio = [
     {
         "heading": "The Case",
-        "subHeading": "Remain valley who mrs uneasy remove wooded him you. Her questions favourite him concealed.",
+        "subHeading": "Remain valley who mrs uneasy remove wooded him you. Her questions favourite him concealed. We to wife face took he. The taste begin early old why since dried can first. Prepared as or humoured formerly.",
+        "textsec": "It real sent your at. Amounted all shy set why followed declared. Repeated of endeavor mr position kindness offering ignorant so up. Simplicity are melancholy preference considered saw companions. Disposal on outweigh do speedily in on.",
         "date": "22 Feb 2023",
         "imageLink": "https://framerusercontent.com/images/ghMhv5HY22zqjHQfz5eWIaKY0.jpg",
-        "link": "/work/protfolio-01",
+        "imageLinkSec": "https://framerusercontent.com/images/uFv8yA70Yp4qV4TrFTKGA6j9nM.jpg",
+        "link": "protfolio-01",
         "id": "pr-1"
     },
     {
         "heading": "Enchanting Nature",
         "subHeading": "Exquisite cordially mr happiness of neglected distrusts. Boisterous impossible unaffected he me everything.",
+        "textsec": "It real sent your at. Amounted all shy set why followed declared. Repeated of endeavor mr position kindness offering ignorant so up. Simplicity are melancholy preference considered saw companions. Disposal on outweigh do speedily in on.",
         "date": "17 Feb 2023",
         "imageLink": "https://framerusercontent.com/images/VHSRY3CaYm81qqXWOnzD8O0AcE.jpg",
-        "link": "/work/protfolio-02",
+        "imageLinkSec": "https://framerusercontent.com/images/uFv8yA70Yp4qV4TrFTKGA6j9nM.jpg",
+        "link": "protfolio-02",
         "id": "pr-2"
     },
     {
         "heading": "Elegant Women",
         "subHeading": "Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham",
+        "textsec": "It real sent your at. Amounted all shy set why followed declared. Repeated of endeavor mr position kindness offering ignorant so up. Simplicity are melancholy preference considered saw companions. Disposal on outweigh do speedily in on.",
         "date": "2 Feb 2023",
         "imageLink": "https://framerusercontent.com/images/PoBsbzTvpSQ3IgvFmpiUtKHkSmo.jpg",
-        "link": "/work/protfolio-03",
+        "imageLinkSec": "https://framerusercontent.com/images/uFv8yA70Yp4qV4TrFTKGA6j9nM.jpg",
+        "link": "protfolio-03",
         "id": "pr-3"
     },
 ]
@@ -143,5 +149,29 @@ export const blogs = [
         "postedBy": "Javier Maximo",
         "postedAt": "News",
         "content": "In today’s digital age, a well-designed website is no longer just a luxury; it’s a necessity for any business or individual seeking an online presence. Web design goes beyond creating visually appealing layouts; it’s about crafting seamless user experiences that engage, inform, and convert visitors into loyal customers. In this blog post, we will explore the essential elements of web design and how they contribute to creating captivating and effective websites.\n\nUnderstanding the User:\n\nThe foundation of exceptional web design is a deep understanding of the target audience. Before diving into any design work, it’s crucial to conduct thorough research to identify user preferences, pain points, and behaviors. By understanding your audience, you can tailor the website’s design, content, and navigation to meet their specific needs, leading to a more satisfying user experience.\n\nSimple and Intuitive Navigation:\n\nAn intuitive website navigation system is like a roadmap that guides users through your digital space. Keep the navigation clean, simple, and consistent across all pages. Avoid overwhelming users with too many options or complex menus. Consider implementing a clear call-to-action (CTA) on every page to encourage visitors to take the desired action, whether it’s making a purchase, subscribing to a newsletter, or contacting your business.Responsive Design:In a mobile-dominated world, responsive web design is no longer optional—it’s mandatory. Your website should adapt seamlessly to various screen sizes and devices, providing an optimal experience regardless of whether users access it on a smartphone, tablet, or desktop. A responsive design not only improves user satisfaction but also positively impacts search engine rankings.Compelling Visuals:Eye-catching visuals play a pivotal role in capturing users’ attention and creating a lasting impression. High-quality images, relevant videos, and engaging graphics can communicate your brand’s personality and message effectively. However, it’s essential to strike a balance between attractive visuals and page load speed. Compress images and use appropriate formats to maintain a quick loading time. Consistent Branding: Your website is an extension of your brand identity. Maintain consistency in color schemes, typography, and overall design elements to strengthen your brand presence. A cohesive brand experience across all touchpoints will enhance brand recall and build trust with your audience. Optimized Content: Compelling content goes hand in hand with stunning visuals. Well-crafted copy and informative content not only engage visitors but also improve search engine optimization (SEO). Use keywords strategically throughout your content to boost organic search rankings and drive more organic traffic to your website. Accessibility and Inclusivity: Web design should be inclusive, catering to users with diverse abilities and needs. Ensure that your website meets accessibility standards, such as providing alt text for images and ensuring keyboard navigation. An inclusive design not only broadens your audience but also aligns with ethical and legal considerations.Conclusion:Web design is a powerful tool that can make or break your online presence. By understanding your audience, simplifying navigation, embracing responsive design, leveraging compelling visuals, maintaining consistent branding, optimizing content, and prioritizing accessibility, you can create a website that captivates visitors and drives meaningful results for your business or personal brand. Embrace the art of web design, and you’ll be on your way to crafting digital experiences that leave a lasting impact."
+    },
+]
+
+export const books = [
+    {
+        "image": "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i9qtafthgqj107s9o9i0i1hjsr.png",
+        "postedOn": "Nov 18, 2023",
+        "bookHeading": "Introduction to NLP",
+        "bookSubHeading": "Write Something About your Book",
+        "slug": "https://buyat.shivammaurya.com/b/introduction-to-nlp",
+    },
+    {
+        "image": "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i8l1t4lj1q7jjn9gj07d24mr.png",
+        "postedOn": "Nov 18, 2023",
+        "bookHeading": "Getting Started with Data Science",
+        "bookSubHeading": "Write Something About your Book",
+        "slug": "https://buyat.shivammaurya.com/b/getting-started-with-data-science",
+    },
+    {
+        "image": "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i9qtafthgqj107s9o9i0i1hjsr.png",
+        "postedOn": "Nov 18, 2023",
+        "bookHeading": "Introduction to Python Programming",
+        "bookSubHeading": "Write Something About your Book",
+        "slug": "https://buyat.shivammaurya.com/b/introduction-to-python-programming",
     },
 ]

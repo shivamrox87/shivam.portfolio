@@ -1,11 +1,11 @@
 'use client';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from '@/components/Header';
 import { companiesData, playGround, tools } from '@/server/data';
 import Link from 'next/link';
 
 const AboutSide = () => {
-
+    const [open, setOpen] = useState(null)
     const [headerColor, setHeaderColor] = useState("#0d0d0d");
 
     const sections = [
@@ -101,34 +101,48 @@ const AboutSide = () => {
                         </div>
                         <div className="flex-none h-auto relative w-full">
                             <div className="flex items-center flex-col flex-wrap-nowrap gap-0 h-min justify-center overflow-hidden p-0 relative w-full transform-none transform-origin-[50%_50%_0px] ">
-                                {companiesData.map((data) => (<div key={data.id} className="flex-none h-auto relative w-full transform-none transform-origin-[50%_50%_0px]">
-                                    <div className="flex cursor-pointer flex-col gap-0 h-min justify-center overflow-hidden p-0 relative bg-transparent w-full transform-none transform-origin-[50%_50%_0px] opacity-100">
-                                        <div className="flex-none items-start flex flex-row gap-2.5 h-min justify-center overflow-hidden p-2.5 relative w-full transform-none transform-origin-[50%_50%_0px] opacity-100">
-                                            <div className="outline-none flex flex-col justify-start flex-shrink-0 transform-none transform-origin-[50%_50%_0px] opacity-100 flex-[1_0_0px] h-auto relative whitespace-pre-wrap w-[1px] break-words">
-                                                <h2 className="text-xl text-[#e9e9e7] leading-[1.2em] font-medium font-Plus_Jakarta_Sans">{data.companyName}</h2>
+                                {companiesData.map((data, index) => {
+                                    const isOpen = open === index;
+                                    const contentRef = useRef(null);
+
+                                    return (<div key={data.id} className={`flex-none h-auto relative w-full ${open === index ? 'transform transition-all' : 'transform-none'} duration-500  transform-origin-[50%_50%_0px]`} onClick={() => { open === index ? setOpen(null) : setOpen(index) }}>
+                                        <div className={`flex cursor-pointer flex-col gap-0 h-min justify-center overflow-hidden p-0 relative ${open === index ? 'bg-[#EB5939]' : 'bg-transparent'} w-full transform-none transform-origin-[50%_50%_0px] opacity-100`}>
+                                            <div className="flex-none items-start flex flex-row gap-2.5 h-min justify-center overflow-hidden p-2.5 relative w-full transform-none transform-origin-[50%_50%_0px] opacity-100">
+                                                <div className="outline-none flex flex-col justify-start flex-shrink-0 transform-none transform-origin-[50%_50%_0px] opacity-100 flex-[1_0_0px] h-auto relative whitespace-pre-wrap w-[1px] break-words">
+                                                    <h2 className={`text-xl ${open === index ? 'text-[#e9e9e7]' : 'text-[#e9e9e7]'} duration-500 leading-[1.2em] font-medium font-Plus_Jakarta_Sans`}>{data.companyName}</h2>
+                                                </div>
+                                                <div className={`items-center cursor-pointer flex flex-none flex-row flex-nowrap gap-2.5 h-[44px] justify-center overflow-hidden p-0 relative w-[44px] will-change-[none,_transform] ${open === index ? 'bg-[#e9e9e7] transform' : 'bg-transparent transform-none'} duration-700 ease-out rounded-full transform-origin-[50%_50%_0px]`} onClick={() => { open === index ? setOpen(null) : setOpen(index) }}>
+                                                    <div className={`flex-none h-[28px] relative w-[28px] ${open === index ? 'rotate-180 transform' : 'transform: rotate-0 transform-none'} transform-origin-[50%_50%_0px] will-change-transform duration-500`}>
+                                                        <div className="contents">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" fill={open === index ? '#EB5939' : '#e9e9e7'}><g color={open === index ? '#EB5939' : '#e9e9e7'} weight="light"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"></path></g></svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="items-center cursor-pointer flex flex-none flex-row flex-nowrap gap-2.5 h-[44px] justify-center overflow-hidden p-0 relative w-[44px] will-change-[none,_transform] bg-transparent rounded-full transform-none transform-origin-[50%_50%_0px]">
-                                                <div className="flex-none h-[28px] relative w-[28px] transform-none transform-origin-[50%_50%_0px] will-change-transform">
-                                                    <div className="contents">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" fill='#e9e9e7'><g color='#0d0d0d' weight="light"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"></path></g></svg>
+                                            <div className={`flex-none h-[1px] overflow-hidden relative w-full duration-500 ${open === index ? 'bg-[#E9E9E780]' : 'bg-[#e9e9e780]'} transform-none transform-origin-[50%_50%_0px] opacity-100`} />
+                                            <div
+                                                ref={contentRef}
+                                                style={{
+                                                    maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : '0px',
+                                                    transition: 'max-height 0.5s ease',
+                                                }}
+                                                className={`overflow-hidden`}
+                                            >
+                                                <div className={`flex flex-col items-center justify-center flex-none flex-wrap-none gap-0 overflow-hidden p-2 relative w-full transform-none origin-center`}>
+                                                    <div className="flex flex-col items-start flex-none flex-shrink-0 h-auto relative whitespace-pre-wrap w-full break-words overflow-wrap-anywhere transform-none origin-center outline-none">
+                                                        <h5 className="text-base text-[#e9e9e7] leading-[1.4em] font-Plus_Jakarta_Sans font-normal">{data.position}</h5>
+                                                    </div>
+                                                    <div className="flex flex-col items-start flex-none flex-shrink-0 h-auto relative whitespace-pre-wrap w-full break-words overflow-wrap-anywhere transform-none origin-center outline-none">
+                                                        <h5 className="text-base text-[#e9e9e7] leading-[1.4em] font-Plus_Jakarta_Sans font-normal">{data.activeYears}</h5>
+                                                    </div>
+                                                    <div className="flex flex-col items-start flex-none flex-shrink-0 h-auto relative whitespace-pre-wrap w-full break-words overflow-wrap-anywhere outline-none transform-none origin-center">
+                                                        <p className="text-base text-[#e9e9e7] tracking-[-0.02em] leading-[1.6em] font-Plus_Jakarta_Sans font-normal">{data.description}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="flex-none h-[1px] overflow-hidden relative w-full bg-[#e9e9e780] transform-none transform-origin-[50%_50%_0px] opacity-100" />
-                                        <div>
-                                            <div>
-                                                <h5>{data.position}</h5>
-                                            </div>
-                                            <div>
-                                                <h5>{data.activeYears}</h5>
-                                            </div>
-                                            <div>
-                                                <p>{data.description}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>))}
+                                    </div>)
+                                })}
                             </div>
                         </div>
                     </div>

@@ -66,10 +66,8 @@ const BlogReadPage = ({ params }) => {
                         <div className='relative opacity-100 flex flex-row items-center justify-center gap-[30px] flex-nowrap grow max-w-[1200px] w-[1px] overflow-hidden p-0'>
                             <div className='relative flex justify-center items-center flex-row gap-5 p-0 w-min	h-min overflow-hidden'>
                                 <Link href='/' className='relative overflow-visible w-[142px] aspect-3.55/1 flex justify-center items-center gap-2'>
-                                    <img className='w-11 h-11' src='https://res.cloudinary.com/ddtfebvov/image/upload/v1735989459/IMG_8531_aerspw.webp' alt='logo' />
-                                    <div className='flex flex-col justify-center'>
-                                        <span style={{ color: '#0d0d0d' }} className='font-medium text-xl leading-4'>SHIVAM</span>
-                                        <span className='text-[#EB5939] font-medium text-xl'>MAURYA.</span>
+                                    <div className='absolute inset-0'>
+                                        <img className='block w-full h-full rounded-inherit object-center object-cover' src='https://framerusercontent.com/images/5iIrc0JRCKsG14DhG4kBtQPzXTs.png' />
                                     </div>
                                 </Link>
                             </div>
@@ -123,7 +121,13 @@ const BlogReadPage = ({ params }) => {
                                     </Link>
                                 </div>
                             </div>
-                            <div></div>
+                            <div className="flex-none h-auto relative w-auto">
+                                <Link href="/books" className={`text-[#e9e9e7] rounded-[50px] w-max flex flex-col justify-start transform transition-all duration-500 ease-out px-5 py-[10px] hover:tracking-[0.08em] hover:text-[#E9E9E7] hover:bg-[#EB5939] bg-[#0d0d0d]`}>
+                                    <div className="w-auto">
+                                        <p className="text-sm leading-[1.1em] font-Plus_Jakarta_Sans font-medium">BOOKS</p>
+                                    </div>
+                                </Link>
+                            </div>
                         </div>
                     </header>
                 </div>
