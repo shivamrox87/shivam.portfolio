@@ -70,7 +70,7 @@ const page = ({ params }) => {
                                             <div className='absolute inset-0'>
                                                 <img className='block w-full h-full rounded-inherit object-center object-cover' src='https://framerusercontent.com/images/J4zFQPQvdzCcM8cbsgUWye4TiQE.png' />
                                             </div>
-                                        </Link>
+                                        </Link> 
                                     </div>
                                     <div className='relative flex grow flex-row items-center justify-end gap-[10px] flex-nowrap h-min overflow-hidden p-0 w-[1px]'>
                                         <div className='opacity-100 h-auto w-auto relative'>
