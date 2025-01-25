@@ -54,9 +54,9 @@ export default function Home() {
         <div className="flex flex-none flex-row flex-nowrap items-center justify-center gap-2 bg-transparent h-full w-full overflow-hidden px-10pt-[100px] pb-[50px] absolute z-10 top-0">
           <div className="flex flex-nowrap items-end justify-between gap-[100px] flex-[1_0_0px] h-full max-w-[1200px] overflow-hidden p-0 relative w-[1px]">
             <div className='flex gap-5'>
-              <span className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'>TWITTER</span>
-              <span className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'>BEHANCE</span>
-              <span className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'>DRIBBLE</span>
+              <span className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'>TOPMATE</span>
+              <span className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'>LINKEDIN</span>
+              <span className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'>NEWSLETTER</span>
             </div>
             <div className="flex flex-col gap-[30px] w-[550px]">
               <div className="flex flex-col gap-[10px]">
