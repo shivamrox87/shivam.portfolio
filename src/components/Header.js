@@ -54,7 +54,7 @@ const Header = ({ textColor }) => {
               <div className='opacity-100 h-auto w-auto relative'>
                 <Link href='/blog' className='relative flex flex-row flex-nowrap items-center justify-center gap-[10px] h-min w-min overflow-hidden px-2 py-[5px] group'>
                   <div className='bg-[#eb5939] group-hover:w-auto group-hover:left-0 transform transition-all duration-500 ease-in-out origin-center group-hover:translate-x-1 group-hover:translate-y-0 group-hover:translate-z-0 flex items-center justify-center gap-2 h-full w-0 absolute top-0 -left-12 overflow-hidden p-1 z-10'>
-                    <div className="flex flex-col justify-start relative h-auto w-auto whitespace-pre outline-none flex-shrink-0 opacity-100" style={{ transform: 'none', transformOrigin: '50% 50% 0' }}>
+                    <div className="flex flex-col justify-start relative h-auto w-auto whitespace-pre outline-none flex-shrink-0 opacity-100">
                       <p className='text-[#FFF] text-sm font-semibold font-Plus_Jakarta_Sans'>BLOG</p>
                     </div>
                   </div>
@@ -63,11 +63,35 @@ const Header = ({ textColor }) => {
                   </div>
                 </Link>
               </div>
+              <div className='opacity-100 h-auto w-auto relative'>
+                <Link href='/ebooks' className='relative flex flex-row flex-nowrap items-center justify-center gap-[10px] h-min w-min overflow-hidden px-2 py-[5px] group'>
+                  <div className='bg-[#eb5939] group-hover:w-auto group-hover:left-0 transform transition-all duration-500 ease-in-out origin-center group-hover:translate-x-1 group-hover:translate-y-0 group-hover:translate-z-0 flex items-center justify-center gap-2 h-full w-0 absolute top-0 -left-12 overflow-hidden p-1 z-10'>
+                    <div className="flex flex-col justify-start relative h-auto w-auto whitespace-pre outline-none flex-shrink-0 opacity-100">
+                      <p className='text-[#FFF] text-sm font-semibold font-Plus_Jakarta_Sans'>EBOOKS</p>
+                    </div>
+                  </div>
+                  <div className='flex flex-col justify-start relative h-auto w-auto whitespace-pre outline-none flex-shrink-0 opacity-100'>
+                    <p style={{ color: textColor }} className='text-sm font-semibold font-Plus_Jakarta_Sans'>EBOOKS</p>
+                  </div>
+                </Link>
+              </div>
+              <div className='opacity-100 h-auto w-auto relative'>
+                <Link href='/sessions' className='relative flex flex-row flex-nowrap items-center justify-center gap-[10px] h-min w-min overflow-hidden px-2 py-[5px] group'>
+                  <div className='bg-[#eb5939] group-hover:w-auto group-hover:left-0 transform transition-all duration-500 ease-in-out origin-center group-hover:translate-x-1 group-hover:translate-y-0 group-hover:translate-z-0 flex items-center justify-center gap-2 h-full w-0 absolute top-0 -left-12 overflow-hidden p-1 z-10'>
+                    <div className="flex flex-col justify-start relative h-auto w-auto whitespace-pre outline-none flex-shrink-0 opacity-100">
+                      <p className='text-[#FFF] text-sm font-semibold font-Plus_Jakarta_Sans'>LIVE SESSIONS</p>
+                    </div>
+                  </div>
+                  <div className='flex flex-col justify-start relative h-auto w-auto whitespace-pre outline-none flex-shrink-0 opacity-100'>
+                    <p style={{ color: textColor }} className='text-sm font-semibold font-Plus_Jakarta_Sans'>LIVE SESSIONS</p>
+                  </div>
+                </Link>
+              </div>
             </div>
             <div className="flex-none h-auto relative w-auto">
-              <Link href="/books" className={`${textColor === '#e9e9e7' ? 'text-[#0d0d0d]' : 'text-[#e9e9e7]'} rounded-[50px] w-max flex flex-col justify-start transform transition-all duration-500 ease-out px-5 py-[10px] hover:tracking-[0.08em] hover:text-[#E9E9E7] hover:bg-[#EB5939] bg-[${textColor}]`}>
+              <Link href="/book" className={`${textColor === '#e9e9e7' ? 'text-[#0d0d0d]' : 'text-[#e9e9e7]'} rounded-[50px] w-max flex flex-col justify-start transform transition-all duration-500 ease-out px-5 py-[10px] hover:tracking-[0.08em] hover:text-[#E9E9E7] hover:bg-[#EB5939] bg-[${textColor}]`}>
                 <div className="w-auto">
-                  <p className="text-sm leading-[1.1em] font-Plus_Jakarta_Sans font-medium">BOOKS</p>
+                  <p className="text-sm leading-[1.1em] font-Plus_Jakarta_Sans font-medium">LET'S TALK</p>
                 </div>
               </Link>
             </div>
