@@ -78,24 +78,7 @@ const BookComponent = () => {
                     </div>
                 </div>
             </div>
-            {/* Part Two */}
-            <div id="partTwo" className='place-content-center items-center bg-[#0d0d0d] flex flex-none flex-row gap-2 h-min overflow-hidden p-0 relative w-full'>
-                <div
-                    className='aspect-w-17 aspect-h-10 flex-1 h-[700px] overflow-visible relative w-[1px]'
-                    style={{
-                        transform: `translateY(${translateY}px)`,
-                        willChange: 'transform',
-                        visibility: 'initial',
-                        opacity: 1,
-                        transition: 'transform 0s ease-out',
-                    }}
-                >
-                    <div className='absolute inset-0'>
-                        <img className='block w-full h-full rounded-inherit object-center object-cover' src='https://framerusercontent.com/images/AY34Q2gsg9hQvMguzSwe4GNAyd8.jpg' alt='img' />
-                    </div>
-                </div>
-            </div>
-            {/* Part Three*/}
+            {/* Remove Part Two and go directly to Part Three */}
             <div id="partThree" className="flex-none bg-[#0d0d0d] flex flex-row gap-2.5 h-min justify-center overflow-hidden px-10 py-[100px] relative w-full border-b border-[#e9e9e780]">
                 <div className="flex items-center flex-[1_0_0px] flex-col gap-[50px] h-min justify-center max-w-[1200px] overflow-hidden p-0 relative w-[1px]">
                     <div className="flex flex-row justify-between h-min overflow-hidden px-0 relative w-full">
@@ -135,7 +118,11 @@ const BookComponent = () => {
                                         <div className="flex items-center aspect-[1.6/1] flex-1 flex-row gap-2.5 justify-center overflow-hidden p-0 relative w-[1px] opacity-100">
                                             <div className="flex-none h-[110%] overflow-hidden relative w-[110%] transform-none origin-[50%_50%_0px] group-hover:scale-[0.92] duration-700">
                                                 <div className="absolute rounded-inherit top-0 right-0 bottom-0 left-0">
-                                                    <img sizes="calc(max(min(1100px, 100vw) * 0.6818 - 50px, 0px) * 1.1)" className="block w-full h-full rounded-inherit object-center object-cover" src={data.image} />
+                                                    <img 
+                                                        sizes="calc(max(min(1100px, 100vw) * 0.6818 - 50px, 0px) * 1.1)" 
+                                                        className="block w-full h-full rounded-inherit object-center object-contain" 
+                                                        src={data.image} 
+                                                    />
                                                 </div>
                                             </div>
                                         </div>

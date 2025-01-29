@@ -8,7 +8,7 @@ export const metadata = {
 const page = () => {
 
   return (
-    <div className='flex flex-col items-center bg-[#e9e9e7] gap-0 h-min overflow-hidden p-0 relative min-h-screen w-auto'>
+    <div className='flex flex-col items-center bg-white gap-0 h-min overflow-hidden p-0 relative min-h-screen w-auto'>
       <AboutSide />
     </div>
   )

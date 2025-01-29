@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import { Plus_Jakarta_Sans } from 'next/font/google';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,9 +13,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-plus-jakarta-sans',
+});
+
 export const metadata = {
   title: "Shivam Maurya - Personal Portfolio Website",
   description: "This is my Portfolio Website",
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -26,7 +35,7 @@ export default function RootLayout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet"></link>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${plusJakartaSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
         <Footer />
