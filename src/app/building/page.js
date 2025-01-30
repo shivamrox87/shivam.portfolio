@@ -33,20 +33,28 @@ export default function Ventures() {
 
   const ventures = [
     {
-      title: 'AI Product 1',
-      description: 'Description of your first GenAI product/venture',
-      role: 'Co-founder & Technical Lead',
-      technologies: ['GPT-4', 'LangChain', 'Vector DB'],
-      link: 'https://product1.com',
-      image: '/summit.png'
+      title: 'Aiution',
+      description: 'Navigating the Future of Business with AI and Automation - Our services empower businesses with AI-enhanced chatbots, automation flows, backend development, and tailored learning platforms, all designed to drive productivity, engagement, and growth.',
+      role: 'Founder & Technical Lead',
+      technologies: [
+        'Enterprise AI Solutions',
+        'Business Process Automation',
+        'Production Systems'
+      ],
+      link: 'https://aiution.com',
+      image: 'https://aiution.com/Logo.svg'
     },
     {
-      title: 'Startup Name',
-      description: 'Description of the startup where you are a partner',
-      role: 'Partner & AI Strategy Lead',
-      technologies: ['Large Language Models', 'Neural Networks', 'Cloud Infrastructure'],
-      link: 'https://startup.com',
-      image: '/summit.png'
+      title: 'SageRai',
+      description: 'Welcome to SageRai – Your Smart Spending Companion! We\'re revolutionizing personal finance management through our innovative expense tracking app. Powered by advanced analytics and AI, SageRai helps users track expenses, analyze spending patterns, and optimize budgets with smart suggestions, making financial management both effortless and intelligent.',
+      role: 'Partner & Technical Lead',
+      technologies: [
+        'Smart Analytics',
+        'Budget Intelligence',
+        'FinTech Solutions'
+      ],
+      link: 'https://www.linkedin.com/company/sage-rai/',
+      image: 'https://media.licdn.com/dms/image/v2/D4D0BAQGdkvj_mjToNQ/company-logo_200_200/company-logo_200_200/0/1726059233540/sage_rai_logo?e=1746057600&v=beta&t=edsTSa-eo9bIvRlEOnClYAnitclJaFUp9GhxkepYm38'
     },
   ];
 
@@ -65,7 +73,7 @@ export default function Ventures() {
             className="max-w-3xl mx-auto mb-16"
           >
             <h1 className="text-5xl font-bold mb-6 text-[#0d0d0d] font-Plus_Jakarta_Sans">
-              Ventures
+              Building
             </h1>
             <p className="text-[#0d0d0d]/70 text-lg font-medium leading-relaxed font-Plus_Jakarta_Sans max-w-2xl">
               Exploring the frontiers of Generative AI through innovative products and partnerships.
@@ -95,8 +103,9 @@ export default function Ventures() {
                     <Image
                       src={venture.image}
                       alt={venture.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                      width={800}
+                      height={450}
+                      className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>

@@ -56,22 +56,40 @@ export default function Home() {
         <div className="flex flex-none flex-row flex-nowrap items-center justify-center gap-2 bg-transparent h-full w-full overflow-hidden lg:md:px-10 px-5 lg:md:pt-[100px] pt-[60px] lg:md:pb-[50px] pb-[30px] absolute z-10 lg:md:top-0 top-[52px]">
           <div className="flex flex-nowrap lg:md:flex-row flex-col-reverse items-end lg:md:justify-between justify-center lg:md:gap-[100px] gap-3 flex-[1_0_0px] h-full max-w-[1200px] overflow-hidden p-0 relative w-[1px]">
             <div className="lg:md:hidden relative w-full flex justify-start">
-              <Link href="/work" className="w-max flex flex-col justify-start bg-transparent border border-[#E9E9E7] text-[#E9E9E7] transform transition-all duration-700 ease-out px-5 py-[2px] rounded-full hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939] hover:border-[#EB5939]">
+              <Link href="/connect" className="w-max flex flex-col justify-start bg-transparent border border-[#E9E9E7] text-[#E9E9E7] transform transition-all duration-700 ease-out px-5 py-[2px] rounded-full hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939] hover:border-[#EB5939]">
                 <div className="w-auto flex gap-[10px]">
-                  <p className="text-sm font-Plus_Jakarta_Sans ">LET’S TALK</p>
+                  <p className="text-sm font-Plus_Jakarta_Sans ">LET'S TALK</p>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" focusable="false" fill='#E9E9E7'><g color='#E9E9E7' weight="light"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"></path></g></svg>
                 </div>
               </Link>
             </div>
             <div className='flex justify-start lg:md:w-auto w-full gap-5'>
-              <span className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'>TWITTER</span>
-              <span className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'>BEHANCE</span>
-              <span className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'>DRIBBLE</span>
+              <Link 
+                href="https://www.linkedin.com/in/shivam--maurya" 
+                target="_blank"
+                className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'
+              >
+                LINKEDIN
+              </Link>
+              <Link 
+                href="https://topmate.io/shivam_maurya10" 
+                target="_blank"
+                className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'
+              >
+                TOPMATE
+              </Link>
+              <Link 
+                href="https://www.instagram.com/shivam_maurya_28/" 
+                target="_blank"
+                className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'
+              >
+                INSTAGRAM
+              </Link>
             </div>
             <div className="flex flex-col gap-[30px] overflow-hidden lg:md:w-[550px] w-full">
               <div className="flex flex-col gap-[10px]">
                 <h1 className="lg:md:text-[42px] text-[32px] leading-[1.2em] font-medium font-Plus_Jakarta_Sans text-[#E9E9E7]">AI Innovator and Mentor, Crafting Impactful Ideas and Careers from India</h1>
-                <h2 className="text-base font-Plus_Jakarta_Sans text-[#E9E9E7]">Hi, I’m Shivam Maurya—a tech enthusiast, AI engineer, and mentor passionate about transforming ideas into impactful solutions. From creating cutting-edge AI projects to guiding aspiring minds in Python and data science, my journey is all about blending innovation with expertise. Let’s connect to build, innovate, and inspire!</h2>
+                <h2 className="text-base font-Plus_Jakarta_Sans text-[#E9E9E7]">Hi, I'm Shivam Maurya—a tech enthusiast, AI engineer, and mentor passionate about transforming ideas into impactful solutions. From creating cutting-edge AI projects to guiding aspiring minds in Python and data science, my journey is all about blending innovation with expertise. Let's connect to build, innovate, and inspire!</h2>
               </div>
               <div className="relative w-full">
                 <Link href="/work" className="w-max flex flex-col justify-start bg-[#E9E9E7] text-[#0d0d0d] transform transition-all duration-500 ease-out px-5 py-[10px] hover:tracking-[0.08em] hover:text-[#E9E9E7] hover:bg-[#EB5939]">
@@ -81,9 +99,9 @@ export default function Home() {
                 </Link>
               </div>
               <div className="hidden relative w-full lg:md:flex justify-end">
-                <Link href="/work" className="w-max flex flex-col justify-start bg-transparent border border-[#E9E9E7] text-[#E9E9E7] transform transition-all duration-700 ease-out px-5 py-[2px] rounded-full hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939] hover:border-[#EB5939]">
+                <Link href="/connect" className="w-max flex flex-col justify-start bg-transparent border border-[#E9E9E7] text-[#E9E9E7] transform transition-all duration-700 ease-out px-5 py-[2px] rounded-full hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939] hover:border-[#EB5939]">
                   <div className="w-auto flex gap-[10px]">
-                    <p className="text-sm font-Plus_Jakarta_Sans ">LET’S TALK</p>
+                    <p className="text-sm font-Plus_Jakarta_Sans ">LET'S TALK</p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" focusable="false" fill='#E9E9E7'><g color='#E9E9E7' weight="light"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"></path></g></svg>
                   </div>
                 </Link>
@@ -102,10 +120,10 @@ export default function Home() {
             <div className="flex lg:md:flex-row flex-col-reverse flex-nowrap items-start justify-center gap-[30px] h-min overflow-hidden p-0 relative lg:md:w-[1px] w-full flex-1">
               <div className="flex flex-col flex-nowrap items-start justify-center gap-[30px] h-min overflow-hidden p-0 relative lg:md:w-[1px] w-full flex-1">
                 <div className="flex flex-col justify-start flex-none h-auto relative whitespace-pre-wrap w-full break-words outline-none flex-shrink-0 transform-none">
-                  <h2 className="lg:md:text-[36px] text-[28px] text-[#0d0d0d] leading-[1.2em] font-medium font-Plus_Jakarta_Sans">Ready to Turn Your Ideas into Impact? Let’s Make It Happen with AI.</h2>
+                  <h2 className="lg:md:text-[36px] text-[28px] text-[#0d0d0d] leading-[1.2em] font-medium font-Plus_Jakarta_Sans">Ready to Turn Your Ideas into Impact? Let's Make It Happen with AI.</h2>
                 </div>
                 <div className="flex flex-col justify-start flex-none h-auto relative whitespace-pre-wrap w-full break-words outline-none flex-shrink-0 transform-none">
-                  <p className="text-base text-[#0d0d0d] leading-[1.4em] font-normal font-Plus_Jakarta_Sans">I'm Shivam Maurya—an AI engineer, mentor, and entrepreneur passionate about driving innovation and creating impactful solutions. With years of experience in AI, data science, and technology, I specialize in transforming ideas into real-world applications that solve complex problems. Whether it’s building cutting-edge AI systems, mentoring aspiring tech leaders, or helping startups streamline their processes, my goal is to inspire growth, foster creativity, and make technology accessible. I’m all about pushing boundaries and helping you leverage the power of AI to bring your ideas to life.</p>
+                  <p className="text-base text-[#0d0d0d] leading-[1.4em] font-normal font-Plus_Jakarta_Sans">I'm Shivam Maurya—an AI engineer, mentor, and entrepreneur passionate about driving innovation and creating impactful solutions. With years of experience in AI, data science, and technology, I specialize in transforming ideas into real-world applications that solve complex problems. Whether it's building cutting-edge AI systems, mentoring aspiring tech leaders, or helping startups streamline their processes, my goal is to inspire growth, foster creativity, and make technology accessible. I'm all about pushing boundaries and helping you leverage the power of AI to bring your ideas to life.</p>
                 </div>
                 <div className="flex-none h-auto relative w-auto">
                   <Link href="/about" className="w-max flex flex-col justify-start bg-transparent border border-[#0d0d0d] text-[#0d0d0d] transform transition-all duration-700 ease-out px-5 py-[2px] rounded-full hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939] hover:border-[#EB5939] group">
@@ -229,10 +247,10 @@ export default function Home() {
           </div>
           <div className="flex items-center flex-1 flex-col lg:md:gap-8 gap-[30px] h-min justify-center overflow-hidden p-0 relative lg:md:w-[1px] w-full">
             <div className="outline-none flex flex-col justify-start flex-shrink-0 transform-none">
-              <p className="text-base text-[#0d0d0d] leading-[1.4em] font-normal font-Plus_Jakarta_Sans">With 4 years of experience, I’ve worked on personal projects, supported startups, and contributed to large MNCs. My journey has involved developing AI solutions, building innovative tech products, and helping businesses optimize their operations. Whether working on small-scale projects or large corporate initiatives, I've gained valuable insights that allow me to adapt and create meaningful impact across different sectors.</p>
+              <p className="text-base text-[#0d0d0d] leading-[1.4em] font-normal font-Plus_Jakarta_Sans">With 4 years of experience, I've worked on personal projects, supported startups, and contributed to large MNCs. My journey has involved developing AI solutions, building innovative tech products, and helping businesses optimize their operations. Whether working on small-scale projects or large corporate initiatives, I've gained valuable insights that allow me to adapt and create meaningful impact across different sectors.</p>
             </div>
             <div className="flex-none h-auto relative whitespace-pre-wrap w-full break-words word-wrap outline-none flex flex-col justify-start flex-shrink-0 transform-none">
-              <h3 className="lg:md:text-2xl text-[20px] text-[#0d0d0d] leading-[1.2em] font-medium font-Plus_Jakarta_Sans">Here are some of the companies I’ve had the privilege to work with:</h3>
+              <h3 className="lg:md:text-2xl text-[20px] text-[#0d0d0d] leading-[1.2em] font-medium font-Plus_Jakarta_Sans">Here are some of the companies I've had the privilege to work with:</h3>
             </div>
             <div className="flex-none h-auto relative w-full">
               <div className="flex items-center flex-col flex-wrap-nowrap gap-0 h-min justify-center overflow-hidden p-0 relative w-full transform-none transform-origin-[50%_50%_0px]">

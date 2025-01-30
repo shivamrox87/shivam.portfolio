@@ -41,24 +41,24 @@ const SessionsPage = () => {
   const sessions = [
     {
       id: 1,
-      title: "React.js Deep Dive",
-      description: "Advanced React concepts including hooks, state management, and performance optimization. Real-world examples and best practices were discussed.",
+      title: "Ladies in Tech Summit ",
+      description: "AI had an amazing time speaking at the Ladies in Tech Summit hosted by the University of Energy and Natural Resources. Huge thanks to Tiffany Ofori for organizing the event and Kanin Osei-Poku for the invitation and support from past sessions. The summit brought together motivated individuals to explore tech innovations, career opportunities, and the benefits of a tech career. I discussed topics like programming languages for women, AI in civil engineering, and how ChatGPT can support career development. The feedback was fantastic, and I’m excited to keep sharing insights and connecting with passionate tech professionals!",
       imageUrl: "/summit.png",
-      link: "https://yourplatform.com/session-recording-2",
+      link: "https://www.linkedin.com/posts/shivam--maurya_summit-by-shivam-maurya-activity-7219559035400855553-Ra7s",
     },
     {
       id: 2,
-      title: "Web Development Fundamentals",
-      description: "A comprehensive session covering HTML, CSS, and JavaScript basics for beginners. Participants learned how to structure web pages, style them effectively, and add basic interactivity.",
-      imageUrl: "/GHANA.jpg",
-      link: "https://yourplatform.com/session-recording-1",
+      title: "'Get Started with AI Workshop' Using OpenAI and GPT-3",
+      description: "The 'Get Started with AI Workshop' (20-22 Sep 2023), led by Shivam Maurya, provided an in-depth exploration of AI, including its fundamentals and real-world applications. Participants engaged in live demonstrations of GPT-3, learned how to create AI-generated content through hands-on coding exercises, and discovered how AI is transforming industries like marketing, healthcare, and education. With over 60 participants, the workshop offered valuable insights into AI, chatbot development, and its practical uses, leaving attendees with a deeper understanding of the potential of AI technologies.",
+      imageUrl: "https://thingqbator.s3.ap-south-1.amazonaws.com/programdetail-1695399026712.jpeg",
+      link: "https://thingqbator.nasscomfoundation.org/main/eventdetail/650813ee3afae5376461e330",
     },
     {
       id: 3,
-      title: "React.js Deep Dive",
-      description: "Advanced React concepts including hooks, state management, and performance optimization. Real-world examples and best practices were discussed.",
-      imageUrl: "/summit.png",
-      link: "https://yourplatform.com/session-recording-2",
+      title: "Python 101 Live Course for College Students in Ghana",
+      description: "The Python 101 Live Course for college students in Ghana has now been completed! Over the past 3 months, we learned Python from basics to intermediate levels, with two major projects along the way. After completing the Python course, we also covered the basics of Machine Learning. It was an amazing experience, and I’m grateful for the opportunity to guide these enthusiastic students through their learning journey.",
+      imageUrl: "/GHANA.jpg",
+      link: "https://www.linkedin.com/posts/shivam--maurya_python-101-live-session-activity-6987844195424088064-KeGV",
     },
   ];
 

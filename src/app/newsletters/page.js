@@ -71,6 +71,19 @@ const NewslettersPage = () => {
     fetchMediumPosts();
   }, []);
 
+  useEffect(() => {
+    // Load Fillout script
+    const script = document.createElement('script');
+    script.src = 'https://server.fillout.com/embed/v1/';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup script when component unmounts
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#e9e9e7]">
       <Header textColor={isScrolled ? '#e9e9e7' : '#0d0d0d'} />
@@ -80,10 +93,10 @@ const NewslettersPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 font-Plus_Jakarta_Sans text-[#0d0d0d]">
-              The Pipeline Post Newsletter
+              AI & Automation Insights Newsletter
             </h1>
             <p className="text-xl md:text-2xl text-[#0d0d0d]/80 max-w-3xl mx-auto font-Plus_Jakarta_Sans">
-              Stay updated with the latest insights, strategies, and trends in technology and business.
+              Your weekly guide to AI innovation, automation strategies, and ethical tech implementation. From business processes to personal productivity, stay ahead in the AI revolution.
             </p>
           </div>
         </div>
@@ -131,10 +144,10 @@ const NewslettersPage = () => {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-[#e9e9e7] mb-4 font-Plus_Jakarta_Sans">
-              Latest from Our Blog
+              Deep Dives into AI & Automation
             </h2>
             <p className="text-[#e9e9e7]/80 font-Plus_Jakarta_Sans">
-              Discover our recent articles and insights
+              Explore our latest insights on AI implementation, automation strategies, and ethical tech considerations
             </p>
           </div>
           
@@ -186,27 +199,22 @@ const NewslettersPage = () => {
           <div className="bg-[#1a1a1a] rounded-2xl p-8 md:p-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-[#e9e9e7] mb-4 font-Plus_Jakarta_Sans">
-                Subscribe to Our Newsletter
+                Join the Newsletter – Be the Person Who Knows What's Coming Next!
               </h2>
-              <p className="text-[#e9e9e7]/80 font-Plus_Jakarta_Sans">
-                Get the latest insights delivered directly to your inbox.
+              <p className="text-[#e9e9e7]/80 font-Plus_Jakarta_Sans mb-4">
+                Get the freshest insights on AI and automation sent right to your inbox. This isn't just any newsletter – it's a collection of trends, tips, and insider knowledge that'll keep you ahead of the pack (and make you sound ridiculously smart in any tech conversation).
+              </p>
+              <p className="text-[#e9e9e7]/80 font-Plus_Jakarta_Sans text-lg font-semibold">
+                Ready to level up?
               </p>
             </div>
-            <form className="space-y-4">
-              <div>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-3 rounded-lg bg-[#2a2a2a] text-[#e9e9e7] border border-[#3a3a3a] focus:outline-none focus:border-[#eb5939] transition-colors"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-[#eb5939] text-[#e9e9e7] py-3 px-6 rounded-lg font-semibold hover:bg-[#eb5939]/90 transition-colors"
-              >
-                Subscribe Now
-              </button>
-            </form>
+            <div 
+              style={{width:'100%', height:'500px'}} 
+              data-fillout-id="ee2Ko2jmWnus" 
+              data-fillout-embed-type="standard" 
+              data-fillout-inherit-parameters="true"
+              data-fillout-dynamic-resize="true"
+            ></div>
           </div>
         </div>
 

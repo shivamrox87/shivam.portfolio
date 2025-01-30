@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react'
 import Header from '@/components/Header';
-import { companiesData, playGround, tools } from '@/server/data';
+import { companiesData, playGround, tools, skills } from '@/server/data';
 import Link from 'next/link';
 
 const AboutSide = () => {
@@ -57,7 +57,7 @@ const AboutSide = () => {
                     <div className='place-content-center items-center flex flex-1 flex-col gap-[30px] h-min overflow-hidden p-0 relative lg:md:w-[1px] w-full'>
                         <div className='outline-none flex flex-col justify-start flex-shrink-0 transform-none flex-[0_0_auto] h-auto relative whitespace-pre-wrap w-full break-words overflow-wrap-anywhere'>
                             <h1 className='lg:md:text-[140px] text-[60px] text-[#0d0d0d] leading-[1.1em] font-medium font-Plus_Jakarta_Sans'>
-                                Hey, <br />I’m Shivam
+                                Hey, <br />I'm Shivam
                             </h1>
                         </div>
                         <div className='place-content-center items-center flex flex-[0_0_auto] flex-col gap-2.5 h-min overflow-hidden p-0 relative w-full'>
@@ -98,10 +98,10 @@ const AboutSide = () => {
                     </div>
                     <div className='flex flex-grow flex-col place-content-center items-center gap-[30px] h-min overflow-hidden p-0 relative lg:md:w-[1px] w-full'>
                         <div className="outline-none flex flex-col justify-start flex-shrink-0 transform-none">
-                            <p className="text-base text-[#e9e9e7] leading-[1.4em] font-normal font-Plus_Jakarta_Sans">With 4 years of experience, I’ve worked on personal projects, supported startups, and contributed to large MNCs. My journey has involved developing AI solutions, building innovative tech products, and helping businesses optimize their operations. Whether working on small-scale projects or large corporate initiatives, I've gained valuable insights that allow me to adapt and create meaningful impact across different sectors.</p>
+                            <p className="text-base text-[#e9e9e7] leading-[1.4em] font-normal font-Plus_Jakarta_Sans">With 4 years of experience, I've worked on personal projects, supported startups, and contributed to large MNCs. My journey has involved developing AI solutions, building innovative tech products, and helping businesses optimize their operations. Whether working on small-scale projects or large corporate initiatives, I've gained valuable insights that allow me to adapt and create meaningful impact across different sectors.</p>
                         </div>
                         <div className="flex-none h-auto relative whitespace-pre-wrap w-full break-words word-wrap outline-none flex flex-col justify-start flex-shrink-0 transform-none">
-                            <h3 className="lg:md:text-2xl text-[20px] text-[#e9e9e7] leading-[1.2em] font-medium font-Plus_Jakarta_Sans">Here are some of the companies I’ve had the privilege to work with:</h3>
+                            <h3 className="lg:md:text-2xl text-[20px] text-[#e9e9e7] leading-[1.2em] font-medium font-Plus_Jakarta_Sans">Here are some of the companies I've had the privilege to work with:</h3>
                         </div>
                         <div className="flex-none h-auto relative w-full">
                             <div className="flex items-center flex-col flex-wrap-nowrap gap-0 h-min justify-center overflow-hidden p-0 relative w-full transform-none transform-origin-[50%_50%_0px] ">
@@ -152,6 +152,42 @@ const AboutSide = () => {
                     </div>
                 </div>
             </div>
+            {/* Skills Section */}
+            <div className='flex flex-none flex-row place-content-center items-center gap-[10px] h-min overflow-hidden lg:md:p-[100px_40px] p-[60px_20px] relative w-full border-t border-[#0d0d0d80]'>
+                <div className='flex flex-grow lg:md:flex-row flex-col place-content-start items-start lg:md:gap-[50px] gap-[40px] h-min max-w-[1200px] overflow-hidden p-0 relative lg:md:w-[1px] w-full'>
+                    <div className='flex flex-none flex-col justify-start flex-shrink-0 outline-none transform-none relative h-auto lg:md:w-[300px] w-full whitespace-pre-wrap break-words'>
+                        <p className='text-lg text-[#0d0d0d] leading-[1.2em] font-medium font-Plus_Jakarta_Sans'>THE SKILLS</p>
+                    </div>
+                    <div className='flex flex-grow flex-col place-content-center items-center gap-[50px] h-min overflow-hidden p-0 relative lg:md:w-[1px] w-full'>
+                        <div className='flex flex-none flex-col place-content-start items-start gap-[20px] h-min overflow-hidden p-0 relative w-full'>
+                            <div className='flex flex-none flex-col justify-start flex-shrink-0 outline-none transform-none relative h-auto lg:md:w-1/2 w-full whitespace-pre-wrap break-words'>
+                                <h2 className='lg:md:text-4xl text-[28px] text-[#0d0d0d] leading-[1.2em] font-medium font-Plus_Jakarta_Sans'>Technical & Product Development</h2>
+                            </div>
+                            <div className='flex flex-none flex-col justify-start flex-shrink-0 outline-none transform-none relative h-auto w-full whitespace-pre-wrap break-words'>
+                                <p className='text-base text-[#0d0d0d] leading-[1.4em] font-normal font-Plus_Jakarta_Sans'>
+                                    My expertise spans both technical development and product leadership. From building robust AI systems and cloud architectures to managing full-cycle product development and business operations, I bring a holistic approach to every project. This combination of technical depth and entrepreneurial experience enables me to deliver innovative, scalable solutions that drive real business impact.
+                                </p>
+                            </div>
+                        </div>
+                        <div className='grid flex-none lg:md:gap-7 gap-[15px] auto-rows-min lg:md:grid-cols-[repeat(4,_minmax(100px,_1fr))] grid-cols-[repeat(2,_minmax(100px,_1fr))] grid-rows-[repeat(2,_min-content)] h-min justify-center overflow-hidden p-0 relative w-full'>
+                            {skills.map((data) => (
+                                <div key={data.name} className='place-self-start flex-none h-auto relative w-full'>
+                                    <div className='place-content-center items-center cursor-pointer flex flex-col lg:md:gap-[15px] gap-[10px] h-min overflow-hidden lg:md:p-[20px] p-[15px] relative will-change-[transform] transform transition-all duration-500 ease-out bg-[#0d0d0d] w-full rounded-[5px] opacity-100 hover:bg-[#EB5939]'>
+                                        <div className='flex-none h-[50px] overflow-hidden relative w-full'>
+                                            <div className='absolute inset-0 rounded-inherit'>
+                                                <img className='block w-full h-full rounded-inherit object-left object-contain' src={data.image} alt={data.alt} />
+                                            </div>
+                                        </div>
+                                        <div className='outline-none flex flex-col justify-start flex-none h-auto relative whitespace-pre-wrap w-full break-words'>
+                                            <h6 className='text-xl text-[#e9e9e6] leading-[1.2em] font-medium font-Plus_Jakarta_Sans'>{data.name}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
             {/* Part Three */}
             <div id="partThree" className='flex flex-none flex-row place-content-center items-center gap-[10px] h-min overflow-hidden lg:md:p-[100px_40px] p-[60px_20px] relative w-full'>
                 <div className='flex flex-grow lg:md:flex-row flex-col place-content-start items-start lg:md:gap-[50px] gap-[40px] h-min max-w-[1200px] overflow-hidden p-0 relative lg:md:w-[1px] w-full'>
@@ -164,7 +200,7 @@ const AboutSide = () => {
                                 <h2 className='lg:md:text-4xl text-[28px] text-[#0d0d0d] leading-[1.2em] font-medium font-Plus_Jakarta_Sans'>Building with Powerful Technologies</h2>
                             </div>
                             <div className='flex flex-none flex-col justify-start flex-shrink-0 outline-none transform-none relative h-auto w-full whitespace-pre-wrap break-words'>
-                                <p className='text-base text-[#0d0d0d] leading-[1.4em] font-normal font-Plus_Jakarta_Sans'>I use a variety of tools to drive the development and deployment of my projects. For AI and automation, Python is my go-to language, while OpenAI provides powerful NLP capabilities. For cloud infrastructure, I work with Azure, AWS, and GCP, depending on the project’s requirements. Langchain is my choice for data processing, and GitHub ensures smooth version control and collaboration. To optimize development and deployment workflows, I rely on Docker for containerization, ensuring projects run seamlessly across environments. Below are the key technologies I specialize in.</p>
+                                <p className='text-base text-[#0d0d0d] leading-[1.4em] font-normal font-Plus_Jakarta_Sans'>I use a variety of tools to drive the development and deployment of my projects. For AI and automation, Python is my go-to language, while OpenAI provides powerful NLP capabilities. For cloud infrastructure, I work with Azure, AWS, and GCP, depending on the project's requirements. Langchain is my choice for data processing, and GitHub ensures smooth version control and collaboration. To optimize development and deployment workflows, I rely on Docker for containerization, ensuring projects run seamlessly across environments. Below are the key technologies I specialize in.</p>
                             </div>
                         </div>
                         <div className='grid flex-none lg:md:gap-7 gap-[15px] auto-rows-min lg:md:grid-cols-[repeat(4,_minmax(100px,_1fr))] grid-cols-[repeat(2,_minmax(100px,_1fr))] grid-rows-[repeat(2,_min-content)] h-min justify-center overflow-hidden p-0 relative w-full'>
