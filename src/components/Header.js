@@ -44,6 +44,8 @@ const Header = ({ textColor }) => {
                   </div>
                 </Link>
               </div>
+              
+              {/* Temporarily hidden WORKS button
               <div className='opacity-100 h-auto w-auto relative'>
                 <Link href='/work' className='relative flex flex-row flex-nowrap items-center justify-center gap-[10px] h-min w-min overflow-hidden px-2 py-[5px] group'>
                   <div className='bg-[#eb5939] group-hover:w-auto group-hover:left-0 transform transition-all duration-500 ease-in-out origin-center group-hover:translate-x-1 group-hover:translate-y-0 group-hover:translate-z-0 flex items-center justify-center gap-2 h-full w-0 absolute top-0 -left-12 overflow-hidden p-1 z-10'>
@@ -56,6 +58,8 @@ const Header = ({ textColor }) => {
                   </div>
                 </Link>
               </div>
+              */}
+
               <div className='opacity-100 h-auto w-auto relative'>
                 <Link href='/building' className='relative flex flex-row flex-nowrap items-center justify-center gap-[10px] h-min w-min overflow-hidden px-2 py-[5px] group'>
                   <div className='bg-[#eb5939] group-hover:w-auto group-hover:left-0 transform transition-all duration-500 ease-in-out origin-center group-hover:translate-x-1 group-hover:translate-y-0 group-hover:translate-z-0 flex items-center justify-center gap-2 h-full w-0 absolute top-0 -left-12 overflow-hidden p-1 z-10'>
@@ -129,7 +133,8 @@ const Header = ({ textColor }) => {
           <nav className="flex flex-col space-y-3">
             <MobileNavLink href="/" text="HOME" />
             <MobileNavLink href="/about" text="ABOUT" />
-            <MobileNavLink href="/work" text="WORKS" />
+            {/* Temporarily hidden WORKS link */}
+            {/* <MobileNavLink href="/work" text="WORKS" /> */}
             <MobileNavLink href="/building" text="BUILDING" />
             <MobileNavLink href="/books" text="EBOOKS" />
             <MobileNavLink href="/newsletters" text="NEWSLETTERS" />
