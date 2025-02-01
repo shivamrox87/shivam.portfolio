@@ -64,15 +64,15 @@ const BookComponent = () => {
                     <div className='flex flex-col items-center justify-center gap-5 h-min overflow-hidden p-0 relative w-full'>
                         <div className='flex flex-col items-center justify-center gap-0 h-min overflow-hidden p-0 relative w-[550px]'>
                             <div className='flex flex-col items-start flex-shrink-0 h-auto relative whitespace-pre w-auto outline-none transform-none'>
-                                <p className='text-lg text-[#EB5939] uppercase tracking-[0.12em] leading-[1.2em] font-medium font-Plus_Jakarta_Sans'>My Books</p>
+                                <p className='text-lg text-[#EB5939] uppercase tracking-[0.12em] leading-[1.2em] font-medium font-Plus_Jakarta_Sans'>Tech eBooks</p>
                             </div>
-                            <div className='flex flex-col justify-start flex-shrink-0 transform-none flex-none h-auto relative whitespace-pre-wrap w-full break-words overflow-wrap break-word outline-none'>
-                                <h1 className='text-[42px] text-[#0d0d0d] text-center leading-[1.2em] font-medium font-Plus_Jakarta_Sans'>Unlocking the Power of Brand Evolution</h1>
+                            <div className='flex flex-col justify-start flex-shrink-0 transform-none flex-none h-auto relative whitespace-pre-wrap w-full break-words outline-none'>
+                                <h1 className='text-[42px] text-[#0d0d0d] text-center leading-[1.2em] font-medium font-Plus_Jakarta_Sans'>AI, Data Science & Python Resources</h1>
                             </div>
                         </div>
                         <div className='outline-none flex flex-col justify-start flex-shrink-0 transform-none flex-none h-auto relative whitespace-pre-wrap w-[600px] break-words overflow-wrap'>
                             <p className='text-base text-[#0d0d0d] text-center leading-[1.4em] font-normal font-Plus_Jakarta_Sans'>
-                                Explore My Books: Discovering How I Evolve Brands for a Changing World, Ensuring Cultural Relevance and Future Readiness through Case Studies.
+                                Explore our comprehensive collection of eBooks covering artificial intelligence, data science, and Python programming. Each book focuses on specific topics to help you master these cutting-edge technologies.
                             </p>
                         </div>
                     </div>
@@ -83,7 +83,7 @@ const BookComponent = () => {
                 <div className="flex items-center flex-[1_0_0px] flex-col gap-[50px] h-min justify-center max-w-[1200px] overflow-hidden p-0 relative w-[1px]">
                     <div className="flex flex-row justify-between h-min overflow-hidden px-0 relative w-full">
                         <div className="outline-none flex flex-col justify-start flex-shrink-0 transform-none flex-none h-auto relative w-[500px] whitespace-pre-wrap break-words">
-                            <h2 className="text-[36px] text-[#e9e9e7] leading-[1.2em] font-Plus_Jakarta_Sans font-medium">Take a Look at My Books</h2>
+                            <h2 className="text-[36px] text-[#e9e9e7] leading-[1.2em] font-Plus_Jakarta_Sans font-medium">Browse Our Technical Library</h2>
                         </div>
                     </div>
                     <div className="bg-[rgba(233,233,231,0.5)] flex-none h-[1px] overflow-hidden relative w-full"></div>

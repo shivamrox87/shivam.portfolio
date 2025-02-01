@@ -71,7 +71,7 @@ export default function Ventures() {
     {
       title: '12 Products in 12 Months',
       description: 'An ambitious initiative to build 12 enterprise-focused AI products in 12 months. Each product addresses specific business challenges through innovative AI solutions, from automated document processing to intelligent decision support systems and advanced data analytics platforms.',
-      role: 'Partner & Technical Lead',
+      role: 'AI Engineer',
       technologies: [
         'AI Product Development',
         'Enterprise Solutions',
@@ -100,7 +100,7 @@ export default function Ventures() {
               Building
             </h1>
             <p className="text-[#0d0d0d]/70 text-lg font-medium leading-relaxed font-Plus_Jakarta_Sans max-w-2xl">
-              Exploring the frontiers of Generative AI through innovative products and partnerships.
+              Crafting innovative AI solutions and building transformative products that empower businesses to thrive in the digital age. From enterprise solutions to cutting-edge experiments, these are the ventures shaping tomorrow.
             </p>
           </motion.div>
         </main>
