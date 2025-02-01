@@ -92,7 +92,7 @@ export default function Home() {
                 <h2 className="text-base font-Plus_Jakarta_Sans text-[#E9E9E7]">Hi, I'm Shivam Maurya—a tech enthusiast, AI engineer, and mentor passionate about transforming ideas into impactful solutions. From creating cutting-edge AI projects to guiding aspiring minds in Python and data science, my journey is all about blending innovation with expertise. Let's connect to build, innovate, and inspire!</h2>
               </div>
               <div className="relative w-full">
-                <Link href="/work" className="w-max flex flex-col justify-start bg-[#E9E9E7] text-[#0d0d0d] transform transition-all duration-500 ease-out px-5 py-[10px] hover:tracking-[0.08em] hover:text-[#E9E9E7] hover:bg-[#EB5939]">
+                <Link href="/" className="w-max flex flex-col justify-start bg-[#E9E9E7] text-[#0d0d0d] transform transition-all duration-500 ease-out px-5 py-[10px] hover:tracking-[0.08em] hover:text-[#E9E9E7] hover:bg-[#EB5939]">
                   <div className="w-auto">
                     <p className="text-sm leading-[1.1em] font-Plus_Jakarta_Sans font-medium">EXPLORE WORKS</p>
                   </div>
