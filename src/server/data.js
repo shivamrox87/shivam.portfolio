@@ -1,14 +1,15 @@
 export const profolio = [
     {
-        "heading": "The Case",
-        "subHeading": "Remain valley who mrs uneasy remove wooded him you. Her questions favourite him concealed. We to wife face took he. The taste begin early old why since dried can first. Prepared as or humoured formerly.",
-        "textsec": "It real sent your at. Amounted all shy set why followed declared. Repeated of endeavor mr position kindness offering ignorant so up. Simplicity are melancholy preference considered saw companions. Disposal on outweigh do speedily in on.",
+        "heading": "Arya ",
+        "subHeading": "Arya is the world's first AI Acharya, delivering Vedic teachings and spiritual guidance through modern technology.",
+        "textsec": "Arya is the world's first AI Acharya, delivering Vedic teachings and spiritual guidance through modern technology. Arya assists with mantras, life advice, and Vedic interpretations. It real sent your at. Amounted all shy set why followed declared. Repeated of endeavor mr position kindness offering ignorant so up. Simplicity are melancholy preference considered saw companions. Disposal on outweigh do speedily in on.",
         "date": "22 Feb 2023",
-        "imageLink": "https://framerusercontent.com/images/ghMhv5HY22zqjHQfz5eWIaKY0.jpg",
-        "imageLinkSec": "https://framerusercontent.com/images/uFv8yA70Yp4qV4TrFTKGA6j9nM.jpg",
-        "link": "protfolio-01",
+        "imageLink": "",
+        "imageLinkSec": "",
+      //  "link": "protfolio-01",
         "id": "pr-1"
     },
+    {/*
     {
         "heading": "Enchanting Nature",
         "subHeading": "Exquisite cordially mr happiness of neglected distrusts. Boisterous impossible unaffected he me everything.",
@@ -29,6 +30,7 @@ export const profolio = [
         "link": "protfolio-03",
         "id": "pr-3"
     },
+    */}
 ]
 
 export const companiesData = [
@@ -197,24 +199,41 @@ export const blogs = [
 
 export const books = [
     {
-        "image": "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i9qtafthgqj107s9o9i0i1hjsr.png",
-        "postedOn": "Nov 18, 2023",
-        "bookHeading": "Introduction to NLP",
-        "bookSubHeading": "Write Something About your Book",
-        "slug": "https://buyat.shivammaurya.com/b/introduction-to-nlp",
+        id: 1,
+        bookHeading: "Introduction to Python Programming",
+        bookSubHeading: "Master Python Programming from Basics to Advanced",
+        postedOn: "Nov 18, 2023",
+        description: "Unlock the world of programming with 'Introduction to Python Programming'! This comprehensive eBook is your gateway to mastering one of the most versatile and powerful programming languages available today. Perfect for students, professionals, and anyone eager to explore the limitless possibilities of coding.\n\nWhether you're a complete beginner or looking to enhance your coding skills, this eBook offers a clear and engaging introduction to Python. With its intuitive syntax and extensive libraries, Python empowers you to build everything from simple scripts to complex applications in web development, data analysis, and artificial intelligence.",
+        images: [
+            "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i8l067hgrmp1g3b1luejebvilr.png",
+            "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i8ih0jed186s1ur0118v1sqn90t.png",
+            "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i8ih0jeda71a661tjq15qsp2gs.png"
+        ],
+        slug: "https://buyat.shivammaurya.com/b/introduction-to-python-programming"
     },
     {
-        "image": "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i8l1t4lj1q7jjn9gj07d24mr.png",
-        "postedOn": "Nov 18, 2023",
-        "bookHeading": "Getting Started with Data Science",
-        "bookSubHeading": "Write Something About your Book",
-        "slug": "https://buyat.shivammaurya.com/b/getting-started-with-data-science",
+        id: 2,
+        bookHeading: "Getting Started with Data Science",
+        bookSubHeading: "Your Complete Guide to Data Science",
+        postedOn: "Nov 18, 2023",
+        description: "In today's data-driven world, having a solid grasp of data science can set you apart. This comprehensive guide is designed for learners at all levels, from absolute beginners to those looking to deepen their understanding of how data impacts industries and drives innovation.\n\nExplore the tools and techniques used by data scientists worldwide. With practical tutorials, you'll get comfortable using Python libraries like Pandas, NumPy, and Matplotlib for data manipulation and visualization. Learn machine learning algorithms and how they're applied to real-world problems, from linear regression to decision trees.",
+        images: [
+            "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i8l1t4lj1q7jjn9gj07d24mr.png",
+            "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i8l0m1itb061bh31ktn1ahs18drt.png",
+            "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i8l0m1itsommdi163j14o21joqs.png"
+        ],
+        slug: "https://buyat.shivammaurya.com/b/getting-started-with-data-science"
     },
     {
-        "image": "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i9qtafthgqj107s9o9i0i1hjsr.png",
-        "postedOn": "Nov 18, 2023",
-        "bookHeading": "Introduction to Python Programming",
-        "bookSubHeading": "Write Something About your Book",
-        "slug": "https://buyat.shivammaurya.com/b/introduction-to-python-programming",
-    },
-]
+        id: 3,
+        bookHeading: "Introduction to NLP",
+        bookSubHeading: "Natural Language Processing Fundamentals",
+        postedOn: "Nov 18, 2023",
+        description: "Dive into the fascinating world of Natural Language Processing with this comprehensive guide! Whether you're curious about how computers understand human language or want to explore the world of AI and language processing, this is your perfect starting point.\n\nThis eBook covers everything from the basics of NLP to advanced concepts, breaking it down into simple, easy-to-follow sections. Learn about text preprocessing, sentiment analysis, language modeling, and practical applications in real-world scenarios. Perfect for both beginners and those looking to enhance their NLP skills.",
+        images: [
+            "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i9qtafthgqj107s9o9i0i1hjsr.png",
+            "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i9qtafthgqj107s9o9i0i1hjsr.png"
+        ],
+        slug: "https://buyat.shivammaurya.com/b/introduction-to-nlp"
+    }
+];

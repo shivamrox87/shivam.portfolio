@@ -188,7 +188,7 @@ export default function Home() {
               <h2 className="lg:md:text-[36px] text-[28px] text-[#e9e9e7] leading-[1.2em] font-Plus_Jakarta_Sans font-medium">Take a Look at My AI Portfolio</h2>
             </div>
             <div className="flex-none h-auto relative w-auto">
-              <Link href="/work" className="w-max flex flex-col justify-start bg-[#E9E9E7] text-[#000] transform transition-all duration-700 ease-out px-5 py-[10px] hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939]">
+              <Link href="/" className="w-max flex flex-col justify-start bg-[#E9E9E7] text-[#000] transform transition-all duration-700 ease-out px-5 py-[10px] hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939]">
                 <div className="w-auto">
                   <p className="text-sm font-Plus_Jakarta_Sans ">BROWSE ALL</p>
                 </div>
@@ -216,9 +216,10 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="flex-none h-auto relative w-auto">
-                        <Link href={`/work/${data.link}`} className="w-max flex flex-col justify-start bg-transparent border border-[#E9E9E7] text-[#E9E9E7] transform transition-all duration-700 ease-out px-5 py-[2px] rounded-full hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939] hover:border-[#EB5939]">
+                      <Link href={`/`} className="w-max flex flex-col justify-start bg-transparent border border-[#E9E9E7] text-[#E9E9E7] transform transition-all duration-700 ease-out px-5 py-[2px] rounded-full hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939] hover:border-[#EB5939]">
+                        {/*<Link href={`/work/${data.link}`} className="w-max flex flex-col justify-start bg-transparent border border-[#E9E9E7] text-[#E9E9E7] transform transition-all duration-700 ease-out px-5 py-[2px] rounded-full hover:tracking-widest hover:text-[#E9E9E7] hover:bg-[#EB5939] hover:border-[#EB5939]">*/}
                           <div className="w-auto flex gap-[10px]">
-                            <p className="text-sm font-Plus_Jakarta_Sans ">ABOUT PROJECT</p>
+                            <p className="text-sm font-Plus_Jakarta_Sans ">This section is still in Updation</p>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" focusable="false" fill='#E9E9E7'><g color='#E9E9E7' weight="light"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"></path></g></svg>
                           </div>
                         </Link>

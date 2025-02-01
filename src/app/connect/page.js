@@ -16,7 +16,7 @@ const BookingPage = () => {
 
     return (
         <>
-            <Header textColor="#0d0d0d" />
+            <Header textColor="#0d0d0d" showMenu={true} />
             <div className='flex-none h-[100px] overflow-hidden relative w-full'></div>
             
             {/* Main Content */}
@@ -142,9 +142,9 @@ const BookingPage = () => {
 
                     {/* Social Media Section */}
                     <div className='flex flex-col gap-6 mt-12 max-w-[800px] border-t border-[#EB5939]/10 pt-8'>
-                        <div className='flex flex-wrap items-center gap-6'>
+                        <div className='flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-6'>
                             <span className='text-[#1E293B] font-medium text-lg'>Connect with me:</span>
-                            <div className='flex items-center gap-6'>
+                            <div className='grid grid-cols-2 sm:flex items-center gap-x-6 gap-y-4'>
                                 <a 
                                     href="https://twitter.com/_shivammaurya___" 
                                     target="_blank" 

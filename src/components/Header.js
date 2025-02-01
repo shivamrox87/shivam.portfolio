@@ -73,7 +73,7 @@ const Header = ({ textColor }) => {
                 </Link>
               </div>
               <div className='opacity-100 h-auto w-auto relative'>
-                <Link href='/books' className='relative flex flex-row flex-nowrap items-center justify-center gap-[10px] h-min w-min overflow-hidden px-2 py-[5px] group'>
+                <Link href='/ebooks' className='relative flex flex-row flex-nowrap items-center justify-center gap-[10px] h-min w-min overflow-hidden px-2 py-[5px] group'>
                   <div className='bg-[#eb5939] group-hover:w-auto group-hover:left-0 transform transition-all duration-500 ease-in-out origin-center group-hover:translate-x-1 group-hover:translate-y-0 group-hover:translate-z-0 flex items-center justify-center gap-2 h-full w-0 absolute top-0 -left-12 overflow-hidden p-1 z-10'>
                     <div className="flex flex-col justify-start relative h-auto w-auto whitespace-pre outline-none flex-shrink-0 opacity-100">
                       <p className='text-[#FFF] text-sm font-semibold font-Plus_Jakarta_Sans'>EBOOKS</p>
