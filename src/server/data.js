@@ -202,7 +202,6 @@ export const books = [
         "bookHeading": "Introduction to NLP",
         "bookSubHeading": "Write Something About your Book",
         "slug": "https://buyat.shivammaurya.com/b/introduction-to-nlp",
-        "payhipKey": "piQXH"
     },
     {
         "image": "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i8l1t4lj1q7jjn9gj07d24mr.png",
@@ -210,7 +209,6 @@ export const books = [
         "bookHeading": "Getting Started with Data Science",
         "bookSubHeading": "Write Something About your Book",
         "slug": "https://buyat.shivammaurya.com/b/getting-started-with-data-science",
-        "payhipKey": "piQXH"
     },
     {
         "image": "https://payhip.com/cdn-cgi/image/format=auto,width=1500/https://pe56d.s3.amazonaws.com/o_1i9qtafthgqj107s9o9i0i1hjsr.png",
@@ -218,6 +216,5 @@ export const books = [
         "bookHeading": "Introduction to Python Programming",
         "bookSubHeading": "Write Something About your Book",
         "slug": "https://buyat.shivammaurya.com/b/introduction-to-python-programming",
-        "payhipKey": "piQXH"
     },
 ]
