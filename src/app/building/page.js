@@ -56,6 +56,30 @@ export default function Ventures() {
       link: 'https://www.linkedin.com/company/sage-rai/',
       image: 'https://media.licdn.com/dms/image/v2/D4D0BAQGdkvj_mjToNQ/company-logo_200_200/company-logo_200_200/0/1726059233540/sage_rai_logo?e=1746057600&v=beta&t=edsTSa-eo9bIvRlEOnClYAnitclJaFUp9GhxkepYm38'
     },
+    {
+      title: 'Neufra Technologies Private Limited',
+      description: 'We at Neufra are building a multi-agent hierarchical system, along with additional AI-driven products for enterprises.',
+      role: 'Partner & Technical Lead',
+      technologies: [
+        'Multi-Agent Systems',
+        'Enterprise AI',
+        'LLM Applications'
+      ],
+      link: 'https://neufratech.com/',
+      image: 'https://neufratech.com/assets/img/logo.png'
+    },
+    {
+      title: '12 Products in 12 Months',
+      description: 'An ambitious initiative to build 12 enterprise-focused AI products in 12 months. Each product addresses specific business challenges through innovative AI solutions, from automated document processing to intelligent decision support systems and advanced data analytics platforms.',
+      role: 'Partner & Technical Lead',
+      technologies: [
+        'AI Product Development',
+        'Enterprise Solutions',
+        'Rapid Innovation'
+      ],
+      link: 'https://www.linkedin.com/in/shivam--maurya/',
+      image: 'https://i.ibb.co/B5hGyTRC/iotools-cloud-tweet-to-image.png'
+    },
   ];
 
   return (
