@@ -23,8 +23,8 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: "Shivam Maurya - Personal Portfolio Website",
-  description: "This is my Portfolio Website",
+  title: "Shivam Maurya",
+  description: "Shivam Maurya is an AI engineer with expertise in building AI-driven products from scratch, specializing in Python, cloud deployment, and chatbot development. With experience in both collaborative and freelance projects, he has developed intelligent systems for education, finance, and productivity, integrating AI, automation, and user-centric design. Currently working at AlphaFMC, he focuses on scalable architectures, seamless integrations, and impactful AI solutions that drive efficiency and innovation.",
   viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
   icons: {
     icon: '/favicon.ico',
