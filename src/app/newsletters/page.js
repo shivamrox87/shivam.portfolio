@@ -199,10 +199,10 @@ const NewslettersPage = () => {
           <div className="bg-[#1a1a1a] rounded-2xl p-8 md:p-12">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-[#e9e9e7] mb-4 font-Plus_Jakarta_Sans">
-                Join the Newsletter – Be the Person Who Knows What's Coming Next!
+                Join the Newsletter – Be the Person Who Knows What&apos;s Coming Next!
               </h2>
               <p className="text-[#e9e9e7]/80 font-Plus_Jakarta_Sans mb-4">
-                Get the freshest insights on AI and automation sent right to your inbox. This isn't just any newsletter – it's a collection of trends, tips, and insider knowledge that'll keep you ahead of the pack (and make you sound ridiculously smart in any tech conversation).
+                Get the freshest insights on AI and automation sent right to your inbox. This isn&apos;t just any newsletter – it&apos;s a collection of trends, tips, and insider knowledge that&apos;ll keep you ahead of the pack (and make you sound ridiculously smart in any tech conversation).
               </p>
               <p className="text-[#e9e9e7]/80 font-Plus_Jakarta_Sans text-lg font-semibold">
                 Ready to level up?
@@ -231,4 +231,4 @@ const NewslettersPage = () => {
   );
 };
 
-export default NewslettersPage; 
+export default NewslettersPage;
