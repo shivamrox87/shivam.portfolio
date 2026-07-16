@@ -15,7 +15,9 @@ export default {
         '3.55/1': '3.55 / 1',
       },
       fontFamily: {
-        Plus_Jakarta_Sans: "Plus Jakarta Sans"
+        sans: ["var(--font-manrope)", "sans-serif"],
+        serif: ["var(--font-newsreader)", "serif"],
+        Plus_Jakarta_Sans: ["var(--font-manrope)", "sans-serif"],
       }
     },
   },

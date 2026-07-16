@@ -1,11 +1,16 @@
 import "./globals.css";
 import Footer from "@/components/Footer";
-import { Plus_Jakarta_Sans } from 'next/font/google';
-import { Analytics } from '@vercel/analytics/react'
+import { Manrope, Newsreader } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-plus-jakarta-sans',
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
 });
 
 export const metadata = {
@@ -28,9 +33,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${plusJakartaSans.variable} antialiased font-Plus_Jakarta_Sans`}
-      >
+      <body className={`${manrope.variable} ${newsreader.variable} bg-[#fbfaf7] font-sans text-[#171714] antialiased`}>
         {children}
         <Footer />
         <Analytics />

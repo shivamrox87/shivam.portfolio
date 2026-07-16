@@ -1,64 +1,20 @@
-import Link from 'next/link';
-import React from 'react';
+import Link from "next/link";
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className='bg-[#0D0D0D] flex flex-row flex-nowrap items-center justify-center gap-[10px] h-min overflow-hidden p-[100px_40px_30px] relative w-full'>
-      <div className='flex flex-col flex-nowrap items-center justify-center gap-[30px] h-min max-w-[1200px] w-full overflow-hidden p-0 relative'>
-        <div className='flex flex-col flex-nowrap items-start justify-center gap-[10px] h-min overflow-visible p-0 relative w-full'>
-          <div className='flex flex-col flex-nowrap items-start justify-center gap-0 h-min overflow-hidden p-0 relative w-full'>
-            <div className='text-xl text-[#E9E9E7] leading-[1.4em] font-normal font-Plus_Jakarta_Sans'>Building with AI, automation, or product workflows?</div>
-            <div className='text-4xl text-[#E9E9E7] font-Plus_Jakarta_Sans font-medium'>Let&apos;s build something useful.</div>
-          </div>
-          <div className='w-full h-[1px] bg-[#E9E9E7] mt-[10px]' />
-          <div>
-            <Link href="/connect" className='text-[42px] md:text-[84px] text-[#E9E9E7] font-Plus_Jakarta_Sans font-medium hover:text-[#EB5939] transition-colors'>
-              Contact Me
-            </Link>
-          </div>
+    <footer className="border-t border-[#d8d5cc] bg-[#fbfaf7] py-10">
+      <div className="site-shell flex flex-col gap-8 text-sm text-[#68675f] md:flex-row md:items-end md:justify-between">
+        <div>
+          <Link href="/" className="font-serif text-2xl text-[#171714]">Shivam Maurya</Link>
+          <p className="mt-2">Senior AI Engineer · Varanasi, India</p>
         </div>
-        <div className='w-full h-[1px] bg-[#E9E9E7]' />
-        <div className='w-full flex flex-col md:flex-row justify-between items-center md:items-start gap-8 md:gap-0'>
-          <div className='relative flex justify-center items-center flex-row gap-5 p-0 w-min h-min overflow-hidden'>
-            <Link href='/' className='relative overflow-visible w-[142px] aspect-3.55/1 flex justify-center items-center gap-2'>
-              <img className='w-11 h-11' src='https://res.cloudinary.com/ddtfebvov/image/upload/v1735989459/IMG_8531_aerspw.webp' alt='logo' />
-              <div className='flex flex-col justify-center'>
-                <span className='text-[#E9E9E7] font-medium text-xl leading-4'>SHIVAM</span>
-                <span className='text-[#EB5939] font-medium text-xl'>MAURYA.</span>
-              </div>
-            </Link>
-          </div>
-          <div className='flex flex-col items-center'>
-            <div className='text-base text-[#E9E9E7] font-Plus_Jakarta_Sans'>Based in Varanasi</div>
-            <div className='text-base text-[#E9E9E7] font-Plus_Jakarta_Sans'>INDIA</div>
-          </div>
-          <div className='flex justify-start lg:md:w-auto w-full gap-5'>
-            <Link 
-              href="https://www.linkedin.com/in/shivam--maurya" 
-              target="_blank"
-              className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'
-            >
-              LINKEDIN
-            </Link>
-            <Link 
-              href="https://topmate.io/shivam_maurya10" 
-              target="_blank"
-              className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'
-            >
-              TOPMATE
-            </Link>
-            <Link 
-              href="https://www.instagram.com/shivam_maurya_28/" 
-              target="_blank"
-              className='cursor-pointer relative inline-block text-base text-[#E9E9E7] font-medium hover:text-[#EB5939] after:content-[""] after:block after:h-[1px] after:w-0 after:bg-[#EB5939] after:transition-all after:duration-500 after:ease-out hover:after:w-full'
-            >
-              INSTAGRAM
-            </Link>
-          </div>
+        <div className="flex flex-wrap gap-x-6 gap-y-3">
+          <Link href="/connect" className="hover:text-[#b84a2b]">Contact</Link>
+          <Link href="https://www.linkedin.com/in/shivam--maurya" target="_blank" className="hover:text-[#b84a2b]">LinkedIn</Link>
+          <Link href="https://topmate.io/shivam_maurya10" target="_blank" className="hover:text-[#b84a2b]">Topmate</Link>
         </div>
+        <p>© {new Date().getFullYear()} Shivam Maurya</p>
       </div>
     </footer>
-  )
+  );
 }
-
-export default Footer;

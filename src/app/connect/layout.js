@@ -1,8 +1,8 @@
 export const metadata = {
-    title: 'Book a Session | Shivam',
-    description: 'Schedule a one-on-one consultation session to discuss your project, technical challenges, or development strategies.',
+    title: 'Contact',
+    description: 'Contact Shivam Maurya about enterprise AI, developer tools, speaking, or technical collaboration.',
 };
 
 export default function BookLayout({ children }) {
     return children;
-} 
+}

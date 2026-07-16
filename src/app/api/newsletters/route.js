@@ -183,6 +183,8 @@ async function getPostImage(href) {
 
 export async function GET() {
   try {
+    await ensureDirectories();
+
     const siteUrl = 'https://thepipelinepost.beehiiv.com';
     const cachedData = await readNewsletters();
     
@@ -387,4 +389,4 @@ export async function GET() {
       newsletters: []
     });
   }
-} 
+}

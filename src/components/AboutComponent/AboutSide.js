@@ -1,147 +1,92 @@
-"use client";
-
 import Header from "@/components/Header";
-import Link from "next/link";
 import { companiesData } from "@/server/data";
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
-const AboutSide = () => {
-  const [headerColor, setHeaderColor] = useState("#0d0d0d");
+const focusAreas = [
+  ["Enterprise AI infrastructure", "Model access, routing, identity, storage, governance, and cloud deployment for internal AI systems."],
+  ["Applied AI products", "Retrieval, conversational interfaces, backend services, and integrations designed around a specific operating problem."],
+  ["Developer workflows", "Tools that help engineers understand complex systems and act on technical context with greater confidence."],
+];
 
-  useEffect(() => {
-    const sections = [
-      { id: "about-hero", color: "#0d0d0d" },
-      { id: "about-focus", color: "#e9e9e7" },
-      { id: "experience", color: "#0d0d0d" },
-    ];
-
-    const handleScroll = () => {
-      const position = window.scrollY;
-      sections.forEach((section) => {
-        const element = document.getElementById(section.id);
-        if (element && position >= element.offsetTop - 70 && position < element.offsetTop + element.offsetHeight - 70) {
-          setHeaderColor(section.color);
-        }
-      });
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+export default function AboutSide() {
   return (
-    <>
-      <Header textColor={headerColor} />
+    <main className="w-full">
+      <Header />
 
-      <section id="about-hero" className="relative overflow-hidden bg-[#e9e9e7] px-5 pb-20 pt-28 md:px-10 md:pb-28 md:pt-36">
-        <div className="absolute right-[-8rem] top-16 h-80 w-80 rounded-full bg-[#EB5939]/10 blur-3xl" />
-        <div className="relative mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+      <section className="site-shell page-section">
+        <div className="grid gap-10 md:grid-cols-[1fr_300px] md:items-start md:gap-16 lg:grid-cols-[1fr_340px]">
           <div>
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#EB5939]">
-              About Shivam
-            </p>
-            <h1 className="mt-5 max-w-4xl text-5xl font-medium leading-[1.04] text-[#0d0d0d] md:text-7xl">
-              Senior AI engineer working across systems, infrastructure, and product delivery.
-            </h1>
-            <p className="mt-7 max-w-3xl text-lg leading-8 text-[#0d0d0d]/70 md:text-xl">
-              Based in Varanasi, India, I build production AI systems spanning model access,
-              backend services, cloud delivery, and user-facing workflows.
-            </p>
+            <p className="eyebrow">About</p>
+            <h1 className="display-title mt-4 max-w-[760px]">Engineering AI systems that can survive real operations.</h1>
+            <div className="mt-9 max-w-[720px] space-y-5 body-copy">
+              <p>
+                I am a Senior AI Engineer at AlphaFMC, part of Lionpoint Group. I work on AI
+                systems for financial-services environments, where security, reliability,
+                identity, and integration matter as much as model capability.
+              </p>
+              <p>
+                My path into AI started through teaching. From 2020 to 2023, I ran Programming
+                With Maurya and taught Python, data science, and applied AI to learners in India
+                and Ghana. That experience continues to shape how I explain and design complex systems.
+              </p>
+              <p>
+                I later worked across startup AI products and automation-heavy operations before
+                moving deeper into enterprise AI infrastructure. I am based in Varanasi, India.
+              </p>
+            </div>
+            <div className="mt-8 flex gap-5">
+              <Link href="/work" className="text-link">View work</Link>
+              <Link href="/connect" className="text-link">Contact me</Link>
+            </div>
           </div>
-
-          <div className="overflow-hidden rounded-[32px] bg-[#0d0d0d] p-3">
-            <img
-              className="aspect-[4/5] w-full rounded-[24px] object-cover object-center grayscale transition duration-700 hover:grayscale-0"
-              src="https://res.cloudinary.com/ddtfebvov/image/upload/v1735989459/IMG_8531_aerspw.webp"
-              alt="Shivam Maurya"
-            />
-          </div>
+          <Image
+            src="https://res.cloudinary.com/ddtfebvov/image/upload/v1735629588/uoGweUB1Hmu5gOVlOQ7RI0QXup8_rf6xoh.avif"
+            alt="Shivam Maurya working at a desk"
+            width={680}
+            height={850}
+            className="aspect-[4/5] w-full object-cover object-center"
+          />
         </div>
       </section>
 
-      <section id="about-focus" className="bg-[#0d0d0d] px-5 py-20 md:px-10 md:py-28">
-        <div className="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[0.7fr_1.3fr]">
+      <section className="border-t border-[#d8d5cc]">
+        <div className="site-shell page-section grid gap-10 md:grid-cols-[0.35fr_1fr] md:gap-16">
           <div>
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#EB5939]">
-              Areas of focus
-            </p>
-            <h2 className="mt-4 text-3xl font-medium leading-tight text-[#e9e9e7] md:text-5xl">
-              Technical depth tied to operational use.
-            </h2>
+            <p className="eyebrow">Focus</p>
+            <h2 className="section-title mt-3">What I work on</h2>
           </div>
-          <div className="border-t border-white/20">
-            {[
-              ["Enterprise AI infrastructure", "Secure model access, routing, identity, storage, and deployment workflows for internal AI systems."],
-              ["Applied AI products", "Retrieval, conversational interfaces, backend services, and integrations designed around a specific operating problem."],
-              ["Developer workflows", "Tools that make complex codebases and technical context easier to understand and act on."],
-            ].map(([title, detail], index) => (
-              <div key={title} className="grid gap-4 border-b border-white/20 py-7 sm:grid-cols-[0.12fr_0.88fr]">
-                <span className="text-sm text-[#EB5939]">0{index + 1}</span>
-                <div>
-                  <h3 className="text-xl font-medium text-[#e9e9e7]">{title}</h3>
-                  <p className="mt-3 max-w-2xl text-base leading-7 text-[#e9e9e7]/70">{detail}</p>
-                </div>
+          <div className="border-t border-[#171714]">
+            {focusAreas.map(([title, detail]) => (
+              <div key={title} className="grid gap-3 border-b border-[#d8d5cc] py-7 sm:grid-cols-[0.42fr_1fr] sm:gap-8">
+                <h3 className="font-serif text-2xl">{title}</h3>
+                <p className="text-sm leading-7 text-[#4f4e48]">{detail}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="experience" className="bg-[#f5f3ef] px-5 py-20 md:px-10 md:py-28">
-        <div className="mx-auto max-w-[1200px]">
-          <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
-            <div>
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#EB5939]">
-                Experience
-              </p>
-              <h2 className="mt-4 text-3xl font-medium text-[#0d0d0d] md:text-5xl">
-                Professional background.
-              </h2>
-            </div>
-            <div className="border-t border-[#0d0d0d]/20">
-              {companiesData.map((company) => (
-                <article
-                  key={company.id}
-                  className="grid gap-4 border-b border-[#0d0d0d]/20 py-7 md:grid-cols-[0.75fr_1.25fr]"
-                >
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.16em] text-[#EB5939]">
-                      {company.activeYears}
-                    </p>
-                    <h3 className="mt-2 text-xl font-medium text-[#0d0d0d]">
-                      {company.companyName}
-                    </h3>
-                    <p className="mt-1 text-sm text-[#0d0d0d]/60">{company.position}</p>
-                  </div>
-                  <p className="text-base leading-7 text-[#0d0d0d]/70">{company.description}</p>
-                </article>
-              ))}
-            </div>
+      <section id="experience" className="border-t border-[#d8d5cc]">
+        <div className="site-shell page-section grid gap-10 md:grid-cols-[0.35fr_1fr] md:gap-16">
+          <div>
+            <p className="eyebrow">Experience</p>
+            <h2 className="section-title mt-3">Professional background</h2>
+          </div>
+          <div className="border-t border-[#171714]">
+            {companiesData.map((company) => (
+              <article key={company.id} className="border-b border-[#d8d5cc] py-7">
+                <div className="grid gap-2 sm:grid-cols-[1fr_auto] sm:items-baseline">
+                  <h3 className="font-serif text-2xl">{company.companyName}</h3>
+                  <p className="text-sm text-[#68675f]">{company.activeYears}</p>
+                </div>
+                <p className="mt-1 text-sm font-semibold text-[#b84a2b]">{company.position}</p>
+                <p className="mt-4 max-w-[720px] text-sm leading-7 text-[#4f4e48]">{company.description}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
-
-      <section className="bg-[#EB5939] px-5 py-16 md:px-10 md:py-20">
-        <div className="mx-auto flex max-w-[1200px] flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-3xl">
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#0d0d0d]/60">
-              Selected work
-            </p>
-            <h2 className="mt-4 text-3xl font-medium leading-tight text-[#0d0d0d] md:text-5xl">
-              Review the systems and products behind the experience.
-            </h2>
-          </div>
-          <Link
-            href="/work"
-            className="inline-flex w-fit bg-[#0d0d0d] px-6 py-4 text-sm font-medium uppercase tracking-[0.16em] text-[#e9e9e7] transition hover:bg-[#e9e9e7] hover:text-[#0d0d0d]"
-          >
-            Explore the work
-          </Link>
-        </div>
-      </section>
-    </>
+    </main>
   );
-};
-
-export default AboutSide;
+}

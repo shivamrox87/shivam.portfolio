@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --paper: #fbfaf7;
+  --ink: #171714;
+  --muted: #68675f;
+  --line: #d8d5cc;
+  --accent: #b84a2b;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); }
+::selection { background: #e8c9bc; color: var(--ink); }
+
+@layer components {
+  .site-shell { @apply mx-auto w-full max-w-[1120px] px-5 md:px-8; }
+  .page-section { @apply py-16 md:py-24; }
+  .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.2em] text-[#b84a2b]; }
+  .display-title { @apply font-serif text-5xl font-normal leading-[0.98] tracking-[-0.025em] md:text-7xl; }
+  .section-title { @apply font-serif text-4xl font-normal leading-[1.05] tracking-[-0.02em] md:text-5xl; }
+  .body-copy { @apply text-base leading-8 text-[#4f4e48] md:text-[17px]; }
+  .text-link { @apply inline-flex border-b border-[#171714] pb-0.5 text-sm font-semibold transition-colors hover:border-[#b84a2b] hover:text-[#b84a2b]; }
+}
+
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: #666666 #1A1A1A;
@@ -20,12 +42,6 @@
   border-radius: 3px;
 }
 
-@layer components {
-  .newsletter-card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300;
-  }
-}
-
 @layer utilities {
   .line-clamp-2 {
     display: -webkit-box;
@@ -40,4 +56,4 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-} 
+}
