@@ -8,9 +8,7 @@ const nextConfig = {
       }
     ]
   },
-  experimental: {
-    serverExternalPackages: ['cheerio']
-  }
+  serverExternalPackages: ['cheerio']
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig

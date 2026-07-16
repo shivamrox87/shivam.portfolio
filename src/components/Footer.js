@@ -7,14 +7,14 @@ const Footer = () => {
       <div className='flex flex-col flex-nowrap items-center justify-center gap-[30px] h-min max-w-[1200px] w-full overflow-hidden p-0 relative'>
         <div className='flex flex-col flex-nowrap items-start justify-center gap-[10px] h-min overflow-visible p-0 relative w-full'>
           <div className='flex flex-col flex-nowrap items-start justify-center gap-0 h-min overflow-hidden p-0 relative w-full'>
-            <div className='text-xl text-[#E9E9E7] leading-[1.4em] font-normal font-Plus_Jakarta_Sans'>Have an idea?</div>
-            <div className='text-4xl text-[#E9E9E7] font-Plus_Jakarta_Sans font-medium'>Let's rock with me</div>
+            <div className='text-xl text-[#E9E9E7] leading-[1.4em] font-normal font-Plus_Jakarta_Sans'>Building with AI, automation, or product workflows?</div>
+            <div className='text-4xl text-[#E9E9E7] font-Plus_Jakarta_Sans font-medium'>Let&apos;s build something useful.</div>
           </div>
           <div className='w-full h-[1px] bg-[#E9E9E7] mt-[10px]' />
           <div>
-            <p className='text-[42px] md:text-[84px] text-[#E9E9E7] font-Plus_Jakarta_Sans font-medium'>
-              <a className='hover:text-[#EB5939] cursor-pointer'>Contact Me</a>
-            </p>
+            <Link href="/connect" className='text-[42px] md:text-[84px] text-[#E9E9E7] font-Plus_Jakarta_Sans font-medium hover:text-[#EB5939] transition-colors'>
+              Contact Me
+            </Link>
           </div>
         </div>
         <div className='w-full h-[1px] bg-[#E9E9E7]' />

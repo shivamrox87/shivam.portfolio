@@ -25,10 +25,10 @@ const BookingPage = () => {
                     {/* Title Section */}
                     <div className='flex flex-col gap-6'>
                         <h1 className='text-5xl text-[#1E293B] leading-[1.2em] font-medium font-Plus_Jakarta_Sans'>
-                            Let's Build Something Great
+                            Let&apos;s Build Something Great
                         </h1>
                         <p className='text-lg text-[#64748B] leading-[1.4em] font-normal font-Plus_Jakarta_Sans max-w-[800px]'>
-                            Whether you're exploring AI integration, scaling your tech infrastructure, or need technical guidance for your startup, I'm here to help turn your ideas into reality.
+                            Whether you&apos;re exploring AI integration, scaling your tech infrastructure, or need technical guidance for your startup, I&apos;m here to help turn your ideas into reality.
                         </p>
                     </div>
 
@@ -49,11 +49,11 @@ const BookingPage = () => {
                         <div className='w-full md:w-1/3 bg-[#F4F7FE] rounded-lg p-8 h-fit shadow-lg border border-[#EB5939]/10'>
                             <div className='flex flex-col gap-6'>
                                 <h3 className='text-2xl text-[#EB5939] font-medium font-Plus_Jakarta_Sans'>
-                                    Let's Solve Together
+                                    Let&apos;s Solve Together
                                 </h3>
                                 <div className='space-y-4'>
                                     <p className='text-base text-[#1E293B] leading-relaxed font-Plus_Jakarta_Sans'>
-                                        I'm here to help you with:
+                                        I&apos;m here to help you with:
                                     </p>
                                     <ul className='space-y-3'>
                                         <li className='flex items-start gap-2'>
@@ -72,7 +72,7 @@ const BookingPage = () => {
                                 </div>
                                 <div className='bg-white/80 rounded-lg p-4'>
                                     <p className='text-sm text-[#1E293B] leading-relaxed'>
-                                        Whether you need help with a proof-of-concept AI app or scaling to production, I can be your technical sounding board. Let's have a focused chat to explore how to bring your ideas to life.
+                                        Whether you need help with a proof-of-concept AI app or scaling to production, I can be your technical sounding board. Let&apos;s have a focused chat to explore how to bring your ideas to life.
                                     </p>
                                 </div>
                                 <div className='space-y-2'>
@@ -95,7 +95,7 @@ const BookingPage = () => {
                     {/* Additional Information */}
                     <div className='flex flex-col gap-6 mt-8 max-w-[800px]'>
                         <h2 className='text-2xl text-[#EB5939] leading-[1.2em] font-medium font-Plus_Jakarta_Sans'>
-                            What You'll Get
+                            What You&apos;ll Get
                         </h2>
                         <ul className='space-y-4'>
                             <li className='flex items-start gap-3'>
@@ -197,4 +197,4 @@ const BookingPage = () => {
     );
 };
 
-export default BookingPage; 
+export default BookingPage;

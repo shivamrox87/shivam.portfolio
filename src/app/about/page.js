@@ -2,7 +2,7 @@ import AboutSide from "@/components/AboutComponent/AboutSide";
 
 export const metadata = {
   title: "About",
-  description: "Here You Know More About Shivam",
+  description: "The story, experience, principles, and technical focus behind Shivam Maurya's work in AI products and developer tooling.",
 };
 
 const page = () => {
