@@ -15,7 +15,7 @@ export default function BuildingPage() {
       </section>
       <section className="border-t border-[#d8d5cc]">
         <div className="site-shell page-section grid gap-10 md:grid-cols-[0.3fr_1fr] md:gap-16">
-          <div><p className="eyebrow">Products</p><h2 className="section-title mt-3">In progress</h2></div>
+          <div><p className="eyebrow">Products</p><h2 className="section-title mt-3">Current status</h2></div>
           <div className="border-t border-[#171714]">
             {currentBuilds.map((item) => (
               <article key={item.slug} className="border-b border-[#d8d5cc] py-7">
@@ -24,7 +24,7 @@ export default function BuildingPage() {
                   <p className="text-xs uppercase tracking-[0.14em] text-[#b84a2b]">{item.stage}</p>
                 </div>
                 <p className="mt-4 max-w-[680px] text-sm leading-7 text-[#4f4e48]">{item.summary}</p>
-                {item.slug === "explaingithub" || item.slug === "reqbeam" ? <Link href={`/work/${item.slug}`} className="text-link mt-4">Product notes</Link> : null}
+                {["explaingithub", "reqbeam", "repoflicks", "openwebui-operating-system"].includes(item.slug) ? <Link href={`/work/${item.slug}`} className="text-link mt-4">Product notes</Link> : null}
               </article>
             ))}
           </div>

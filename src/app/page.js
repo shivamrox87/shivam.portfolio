@@ -61,7 +61,7 @@ export default function Home() {
             <div className="border-t border-[#171714]">
               {[
                 ["At work", "Building secure enterprise AI infrastructure and internal systems for financial-services organisations."],
-                ["Independently", "Developing ExplainGitHub and exploring better workflows for understanding repositories and software systems."],
+                ["Independently", "Developing ExplainGitHub, evolving ReqBeam, and building OpenWebUI-based knowledge and automation workflows."],
                 ["Researching", "Model gateways, agent permissions, evaluation, context quality, and dependable deployment patterns."],
               ].map(([label, detail]) => (
                 <div key={label} className="grid gap-3 border-b border-[#d8d5cc] py-6 sm:grid-cols-[0.25fr_0.75fr] sm:gap-8">

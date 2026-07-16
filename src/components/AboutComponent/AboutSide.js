@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import { companiesData } from "@/server/data";
+import { communityHighlights, companiesData } from "@/server/data";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -33,9 +33,9 @@ export default function AboutSide() {
                 identity, and integration matter as much as model capability.
               </p>
               <p>
-                My path into AI started through teaching. From 2020 to 2023, I ran Programming
-                With Maurya and taught Python, data science, and applied AI to learners in India
-                and Ghana. That experience continues to shape how I explain and design complex systems.
+                My path into AI started through teaching. From 2020 to 2023, I ran the MSME-registered
+                Programming With Maurya business and taught Python, data science, and applied AI to
+                learners in India and Ghana. That experience continues to shape how I explain and design complex systems.
               </p>
               <p>
                 I later worked across startup AI products and automation-heavy operations before
@@ -52,6 +52,7 @@ export default function AboutSide() {
             alt="Shivam Maurya working at a desk"
             width={680}
             height={850}
+            priority
             className="aspect-[4/5] w-full object-cover object-center"
           />
         </div>
@@ -108,6 +109,23 @@ export default function AboutSide() {
                 <p className="mt-1 text-sm font-semibold text-[#b84a2b]">{company.position}</p>
                 <p className="mt-4 max-w-[720px] text-sm leading-7 text-[#4f4e48]">{company.description}</p>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#d8d5cc]">
+        <div className="site-shell page-section grid gap-10 md:grid-cols-[0.35fr_1fr] md:gap-16">
+          <div>
+            <p className="eyebrow">Community and leadership</p>
+            <h2 className="section-title mt-3">Teaching, ownership, and collaboration</h2>
+          </div>
+          <div className="border-t border-[#171714]">
+            {communityHighlights.map((item) => (
+              <div key={item.title} className="grid gap-3 border-b border-[#d8d5cc] py-7 sm:grid-cols-[0.38fr_0.62fr] sm:gap-8">
+                <h3 className="font-serif text-2xl">{item.title}</h3>
+                <p className="text-sm leading-7 text-[#4f4e48]">{item.detail}</p>
+              </div>
             ))}
           </div>
         </div>

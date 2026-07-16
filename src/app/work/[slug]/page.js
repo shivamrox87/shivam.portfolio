@@ -48,6 +48,25 @@ export default async function WorkDetailPage({ params }) {
         </div>
       </section>
 
+      {project.responsibilities?.length ? (
+        <section className="border-t border-[#d8d5cc]">
+          <div className="site-shell page-section grid gap-10 md:grid-cols-[0.32fr_1fr] md:gap-16">
+            <div>
+              <p className="eyebrow">Scope</p>
+              <h2 className="section-title mt-3">What the work covered</h2>
+            </div>
+            <div className="border-t border-[#171714]">
+              {project.responsibilities.map((item, index) => (
+                <div key={item} className="grid grid-cols-[40px_1fr] gap-4 border-b border-[#d8d5cc] py-5">
+                  <span className="text-xs text-[#b84a2b]">0{index + 1}</span>
+                  <p className="text-sm leading-7 text-[#4f4e48]">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <section id="architecture" className="border-t border-[#d8d5cc]">
         <div className="site-shell page-section">
           <p className="eyebrow">Architecture</p>
@@ -55,6 +74,25 @@ export default async function WorkDetailPage({ params }) {
           <ArchitectureFlow title={project.heading} steps={project.architecture} />
         </div>
       </section>
+
+      {project.roadmap?.length ? (
+        <section className="border-t border-[#d8d5cc]">
+          <div className="site-shell page-section grid gap-10 md:grid-cols-[0.32fr_1fr] md:gap-16">
+            <div>
+              <p className="eyebrow">Planned direction</p>
+              <h2 className="section-title mt-3">Roadmap, not shipped features</h2>
+            </div>
+            <div className="border-t border-[#171714]">
+              {project.roadmap.map((item, index) => (
+                <div key={item} className="grid grid-cols-[40px_1fr] gap-4 border-b border-[#d8d5cc] py-5">
+                  <span className="text-xs text-[#b84a2b]">0{index + 1}</span>
+                  <p className="text-sm leading-7 text-[#4f4e48]">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="border-t border-[#d8d5cc]">
         <div className="site-shell page-section grid gap-12 md:grid-cols-2 md:gap-16">

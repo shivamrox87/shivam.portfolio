@@ -6,6 +6,7 @@ import { useState } from "react";
 const navigation = [
   { href: "/about", label: "About" },
   { href: "/work", label: "Work" },
+  { href: "/research", label: "Research" },
   { href: "/blog", label: "Writing" },
   { href: "/sessions", label: "Speaking" },
   { href: "/connect", label: "Contact" },
@@ -21,7 +22,7 @@ export default function Header() {
           Shivam Maurya
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary navigation">
+        <nav className="hidden items-center gap-6 md:flex lg:gap-8" aria-label="Primary navigation">
           {navigation.map((item) => (
             <Link key={item.href} href={item.href} className="text-xs font-semibold uppercase tracking-[0.16em] text-[#55544e] transition hover:text-[#b84a2b]">
               {item.label}

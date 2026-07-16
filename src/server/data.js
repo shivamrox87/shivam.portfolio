@@ -34,22 +34,22 @@ export const selectedWork = [
     href: "/work/enterprise-ai",
   },
   {
-    name: "Arya",
-    context: "Applied AI system · Mokx",
-    status: "Shipped · 2023",
-    description:
-      "A multilingual conversational product combining retrieval, speech interfaces, APIs, and messaging-platform distribution for a specialised knowledge domain.",
-    scope: ["OpenAI", "LangChain", "Python", "Speech interfaces"],
-    href: "/work/arya",
-  },
-  {
     name: "ExplainGitHub",
     context: "Independent developer tool",
     status: "In development",
     description:
-      "A repository-understanding product focused on helping engineers trace architecture, intent, and important code paths in unfamiliar codebases.",
-    scope: ["Repository parsing", "LLM workflows", "Developer UX"],
+      "An AI repository intelligence platform for understanding unfamiliar codebases, architecture, and implementation decisions.",
+    scope: ["Repository ingestion", "Codebase Q&A", "Developer UX"],
     href: "/work/explaingithub",
+  },
+  {
+    name: "ReqBeam",
+    context: "Independent developer product",
+    status: "Active exploration",
+    description:
+      "An AI-native workspace for understanding, testing, documenting, and debugging APIs.",
+    scope: ["API testing", "Response analysis", "Agent workflows"],
+    href: "/work/reqbeam",
   },
 ];
 
@@ -75,13 +75,23 @@ export const currentBuilds = [
     accent: "from-[#0d0d0d] via-[#1d3557] to-[#457b9d]",
   },
   {
+    name: "OpenWebUI AI Operating System",
+    slug: "openwebui-operating-system",
+    stage: "Ongoing internal tooling",
+    summary:
+      "Custom tools and knowledge workflows for organising conversations, analysing recent work, managing Markdown knowledge, and producing recurring task summaries.",
+    focus: ["OpenWebUI", "Custom tools", "Knowledge workflows"],
+    statusNote: "Active platform and workflow experimentation.",
+    accent: "from-[#1f2937] via-[#374151] to-[#b84a2b]",
+  },
+  {
     name: "RepoFlicks",
     slug: "repoflicks",
-    stage: "Product concept",
+    stage: "Shipped product",
     summary:
-      "A more visual way to discover repositories and understand what makes them interesting before diving into the code.",
-    focus: ["Open source discovery", "Product design", "Developer discovery"],
-    statusNote: "Concept-stage product research.",
+      "A social-feed-style product for discovering open-source repositories, built and deployed with production and development environments.",
+    focus: ["Open-source discovery", "Next.js", "Cloud Run"],
+    statusNote: "Launched and used for early product-growth experiments.",
     accent: "from-[#16213e] via-[#533483] to-[#EB5939]",
   },
   {
@@ -115,24 +125,33 @@ export const caseStudies = [
     outcome:
       "Created and improved reusable foundations for internal AI applications, with model access and operational concerns handled as platform responsibilities rather than duplicated application code.",
     role: "Senior AI Engineer",
-    stack: ["Azure OpenAI", "LiteLLM", "SSO", "Traefik", "Azure DevOps"],
+    stack: ["Azure OpenAI", "Claude", "Gemini", "AWS Bedrock", "LiteLLM", "OpenWebUI"],
+    responsibilities: [
+      "Multi-provider model integration and model-gateway architecture.",
+      "Identity, authentication, access control, and enterprise data-protection considerations.",
+      "Backend AI services, cloud delivery, and provider-specific production debugging.",
+      "OpenWebUI customisation, integrations, and open-source platform evaluation.",
+      "Technical reviews and architecture decisions with product, DevOps, IT, and engineering stakeholders.",
+    ],
     architecture: [
       "Internal users and applications initiate requests through approved interfaces.",
       "Identity and access controls establish who can use the system.",
       "Shared application services apply product and workflow context.",
-      "A model gateway centralises routing and provider access.",
-      "Cloud services support model execution, storage, and repeatable delivery.",
+      "A LiteLLM-based gateway centralises routing, model abstraction, and provider access.",
+      "Azure OpenAI, Claude, Gemini, and Bedrock-backed services execute model workloads.",
     ],
     constraints: [
       "Financial-services security and governance expectations shape every integration.",
       "The platform must support multiple internal workflows without coupling them to one interface.",
       "Provider abstraction must not hide operational failures or make debugging harder.",
+      "Tool-calling behaviour and request formats differ across model providers.",
       "Public discussion must protect employer, client, and implementation confidentiality.",
     ],
     decisions: [
       "Treat model access as shared infrastructure rather than application-specific integration.",
       "Keep identity and permissions at the system boundary instead of relying on prompt-level controls.",
       "Separate user interfaces, application workflows, routing, and model providers into distinct responsibilities.",
+      "Prefer native tool-calling patterns while handling provider-specific compatibility explicitly.",
       "Use repeatable deployment practices so environments can be operated consistently.",
     ],
     learnings: [
@@ -159,7 +178,19 @@ export const caseStudies = [
     outcome:
       "The current work is focused on context quality, traceability, and the developer experience around generated repository explanations.",
     role: "Founder, product builder, and AI engineer",
-    stack: ["LLM orchestration", "Repository parsing", "Backend workflows", "Product UX"],
+    stack: ["GitHub OAuth", "Repository ingestion", "LLM orchestration", "Backend workflows", "Product UX"],
+    responsibilities: [
+      "Product ideation, feature scoping, roadmap design, and developer-experience decisions.",
+      "GitHub authentication, repository ingestion, and multi-file codebase question answering.",
+      "Repository context management, code explanation, and architecture understanding.",
+      "Large-repository handling and source-aware answer design.",
+    ],
+    roadmap: [
+      "Saved conversations and bring-your-own-key model support.",
+      "Architecture diagrams generated from repository context.",
+      "GitLab, Bitbucket, and Azure DevOps repository support.",
+      "Browser-extension workflows for repository understanding in context.",
+    ],
     architecture: [
       "Ingest repository structure and relevant files.",
       "Classify and prioritize code paths for explanation.",
@@ -198,25 +229,36 @@ export const caseStudies = [
     slug: "reqbeam",
     heading: "ReqBeam",
     category: "Workflow Product",
-    status: "Exploration",
-    date: "Early stage",
+    status: "Active exploration",
+    date: "Evolving product",
     subHeading:
-      "A modern collaboration layer for requirements and API workflows, designed to reduce confusion between product and engineering teams.",
+      "An AI-native workspace for understanding, testing, documenting, and debugging APIs.",
     summary:
-      "An early-stage exploration of structured requirements and API collaboration workflows.",
+      "An evolving developer product combining API understanding, request creation, test generation, response analysis, and collaboration workflows.",
     problem:
       "Requirements, API iterations, and product feedback loops often break down across tools, threads, and handoffs.",
     solution:
-      "Design a workflow-first product that captures intent, structures collaboration, and keeps iteration connected to implementation.",
+      "Design an AI-assisted API workspace that can understand an endpoint, help create requests, generate tests, analyse responses, and preserve debugging context.",
     outcome:
       "The exploration is testing whether clearer state, ownership, and shared context can reduce ambiguity across product and engineering handoffs.",
     role: "Product builder and technical lead",
-    stack: ["Next.js", "Backend APIs", "Workflow design", "Product systems"],
+    stack: ["Next.js", "Backend APIs", "AI test generation", "Response analysis", "Product systems"],
+    responsibilities: [
+      "Product ideation, competitive research, product scope, and PRD design.",
+      "API understanding, request creation, test generation, and response-analysis workflows.",
+      "AI-assisted API documentation and developer collaboration concepts.",
+      "Technical feasibility and integration with existing developer workflows.",
+    ],
+    roadmap: [
+      "Agent-based API testing and debugging workflows.",
+      "Shared collaboration context for product and engineering teams.",
+      "Deeper AI-assisted documentation and test maintenance.",
+    ],
     architecture: [
-      "Capture requirements in structured product flows.",
-      "Organize API and implementation context around shared artifacts.",
-      "Reduce handoff ambiguity through better visibility and state tracking.",
-      "Support iteration without fragmenting product knowledge.",
+      "Capture an API definition, request, or endpoint as structured context.",
+      "Generate and refine requests, tests, and documentation with AI assistance.",
+      "Execute requests and analyse responses, errors, and behavioural differences.",
+      "Preserve findings and collaboration context around shared API artifacts.",
     ],
     constraints: [
       "Requirements and implementation context are distributed across tools and conversations.",
@@ -245,6 +287,114 @@ export const caseStudies = [
   },
   {
     id: "cs-03",
+    slug: "repoflicks",
+    heading: "RepoFlicks",
+    category: "Developer Product",
+    status: "Shipped product",
+    date: "Launched",
+    subHeading:
+      "A social-feed-style product for discovering open-source repositories and exploring what makes them useful.",
+    summary:
+      "A founder-led product taken through authentication, application development, cloud deployment, environment separation, launch, and early growth experiments.",
+    problem:
+      "Open-source discovery is often driven by search results and static lists, making it difficult to browse interesting repositories in a lightweight, visual way.",
+    solution:
+      "Build a feed-based repository discovery experience with GitHub authentication, structured repository data, media handling, onboarding, and production deployment.",
+    outcome:
+      "Launched a working product with separate development and production environments, then used it to learn about onboarding, acquisition, analytics, deployment operations, and infrastructure costs.",
+    role: "Founder and product engineer",
+    stack: ["Next.js", "GitHub OAuth", "Supabase", "Cloudinary", "Docker", "Google Cloud Run"],
+    responsibilities: [
+      "Product positioning, user-flow design, authentication, onboarding, and launch planning.",
+      "Next.js application development with Supabase-backed product data.",
+      "Cloudinary media handling and GitHub OAuth integration.",
+      "Docker and Cloud Run deployment with GitHub Actions CI/CD.",
+      "Production and development environments, analytics, user acquisition, and infrastructure-cost management.",
+    ],
+    architecture: [
+      "Users authenticate through GitHub OAuth and enter the onboarding flow.",
+      "Repository and user data is normalised into Supabase-backed application records.",
+      "The Next.js product renders a visual discovery feed and repository detail workflows.",
+      "Cloudinary supports media delivery for product and repository presentation.",
+      "Docker, GitHub Actions, and Cloud Run support separate development and production delivery.",
+    ],
+    constraints: [
+      "GitHub authentication and external repository data must remain reliable across environments.",
+      "A feed product needs useful discovery and onboarding before network effects exist.",
+      "Development and production services create operational and cost-management overhead.",
+      "Early analytics must guide product decisions without overstating traction.",
+    ],
+    decisions: [
+      "Use a familiar social-feed interaction model to lower the cost of repository discovery.",
+      "Separate development and production deployments to protect live user workflows.",
+      "Use managed application and media services to keep founder-led operations tractable.",
+      "Treat acquisition, analytics, and infrastructure cost as product responsibilities.",
+    ],
+    learnings: [
+      "Shipping the product exposed operational questions that do not appear during local development.",
+      "Authentication and onboarding are central product flows, not supporting implementation details.",
+      "Infrastructure cost and user acquisition need attention before a product reaches meaningful scale.",
+    ],
+  },
+  {
+    id: "cs-04",
+    slug: "openwebui-operating-system",
+    heading: "OpenWebUI AI Operating System",
+    category: "AI Platform Tooling",
+    status: "Internal tooling",
+    date: "Ongoing",
+    subHeading:
+      "Custom tools and workflows that turn OpenWebUI into a personal and team operating layer for conversations, knowledge, and recurring work.",
+    summary:
+      "A collection of Docker-based deployments, API investigations, custom tools, and knowledge workflows built around an open-source AI platform.",
+    problem:
+      "AI conversations accumulate useful context, but normal chat interfaces make it difficult to organise, review, summarise, and turn that context into recurring operational workflows.",
+    solution:
+      "Extend OpenWebUI with custom tools for chat organisation, time-bounded analysis, folder summaries, Markdown knowledge management, monthly notes, and daily task workflows.",
+    outcome:
+      "Built an experimental operating layer for organising conversations and producing reusable knowledge, while evaluating the limits of platform APIs, plugins, local environments, and hosted deployment.",
+    role: "AI platform engineer and workflow designer",
+    stack: ["OpenWebUI", "Python", "Docker", "OpenWebUI APIs", "Markdown", "Automation workflows"],
+    responsibilities: [
+      "OpenWebUI deployment, administration, API exploration, and open-source platform evaluation.",
+      "Tools for moving chats into folders and analysing the previous seven days of conversations.",
+      "Folder-level summarisation and Markdown knowledge-file creation, editing, and deletion.",
+      "Monthly-note updates, daily task summaries, and progress or completion checks.",
+      "Experiments across local and hosted AI environments.",
+    ],
+    roadmap: [
+      "SharePoint-backed knowledge and document workflows.",
+      "Telegram-triggered automations and external event handling.",
+      "Calendar-aware planning and folder-level persistent context.",
+      "A more explicit personal and team operations control layer.",
+    ],
+    architecture: [
+      "A user or scheduled workflow initiates an action through OpenWebUI.",
+      "A custom tool reads approved chat, folder, or task context through platform APIs.",
+      "The workflow analyses conversations and produces structured summaries or actions.",
+      "Markdown files and folder organisation persist reusable knowledge.",
+      "Daily and monthly outputs feed back into planning and progress-review workflows.",
+    ],
+    constraints: [
+      "Chat and knowledge data requires clear boundaries, permissions, and privacy handling.",
+      "Open-source platform APIs and plugin behaviour can change across versions.",
+      "Scheduled automation must remain understandable and correct when context is incomplete.",
+      "Local and hosted environments have different deployment, access, and maintenance trade-offs.",
+    ],
+    decisions: [
+      "Build small single-purpose tools instead of one opaque autonomous agent.",
+      "Use folders as an explicit context and organisation boundary.",
+      "Store reusable knowledge in readable Markdown rather than hidden application state.",
+      "Keep external triggers and enterprise integrations as planned extensions until core workflows are dependable.",
+    ],
+    learnings: [
+      "A useful AI operating system depends more on context organisation than on autonomous behaviour.",
+      "Readable knowledge artifacts make automated workflows easier to trust and maintain.",
+      "Open-source platforms accelerate experimentation but require careful API and deployment evaluation.",
+    ],
+  },
+  {
+    id: "cs-05",
     slug: "arya",
     heading: "Arya",
     category: "Applied AI System",
@@ -299,6 +449,112 @@ export const caseStudies = [
 
 export const profolio = caseStudies;
 
+export const featuredWorkSlugs = [
+  "enterprise-ai",
+  "explaingithub",
+  "reqbeam",
+  "repoflicks",
+  "openwebui-operating-system",
+];
+
+export const otherProducts = [
+  {
+    name: "Boansel",
+    status: "Launched product",
+    summary:
+      "A one-link booking and payments platform for experts and creators, covering appointment scheduling, payment collection, monthly payouts, and Indian payment-gateway evaluation.",
+    focus: ["Creator monetisation", "Scheduling", "Payments", "Founder-led product development"],
+  },
+  {
+    name: "SageRai",
+    status: "Product exploration",
+    summary:
+      "A privacy-sensitive personal-finance assistant for extracting UPI and SMS transaction data, categorising expenses, and turning financial activity into understandable insights.",
+    focus: ["Indian fintech", "Transaction analysis", "Expense categorisation", "Privacy"],
+  },
+  {
+    name: "Instant EduDoc",
+    status: "Applied AI project",
+    summary:
+      "An AI-powered educational document generator for structured CBSE notes, combining Gemini, automated content formatting, PDF generation, and student-facing workflows.",
+    focus: ["Gemini", "Document generation", "WeasyPrint", "Education"],
+  },
+  {
+    name: "Arya",
+    status: "Shipped · 2023",
+    summary:
+      "A multilingual conversational AI product combining retrieval, speech interfaces, messaging platforms, APIs, and production deployment for a specialised knowledge domain.",
+    focus: ["Retrieval", "Multilingual AI", "Speech", "Backend architecture"],
+    href: "/work/arya",
+  },
+];
+
+export const capabilityAreas = [
+  {
+    title: "Enterprise AI infrastructure",
+    detail: "Multi-provider gateways, model routing, identity, permissions, security, observability, cost, latency, and production deployment.",
+  },
+  {
+    title: "AI agents and tool calling",
+    detail: "Native tool use, provider compatibility, MCP research, orchestration, permission-aware workflows, and automation boundaries.",
+  },
+  {
+    title: "Cloud and backend systems",
+    detail: "Python, FastAPI, Next.js, APIs, OAuth, Docker, Azure, AWS, Google Cloud, CI/CD, environments, and operational debugging.",
+  },
+  {
+    title: "Developer products",
+    detail: "Repository intelligence, API testing, authentication, ingestion, product workflows, onboarding, analytics, and developer experience.",
+  },
+  {
+    title: "Secure AI delivery",
+    detail: "Data privacy, authentication, authorisation, prompt and data exposure risks, production security, and enterprise deployment constraints.",
+  },
+];
+
+export const researchAreas = [
+  {
+    title: "Model gateways and provider behaviour",
+    summary: "How abstraction layers preserve portability without obscuring provider-specific capabilities and failures.",
+    topics: ["LiteLLM and AWS Bedrock", "Claude native tool calling", "OpenAI-compatible APIs", "Cost and latency trade-offs"],
+  },
+  {
+    title: "Permission-aware AI systems",
+    summary: "How agents, tools, and retrieval systems should handle identity, data boundaries, and enterprise security.",
+    topics: ["Agent permissions", "Enterprise AI security", "Secure RAG", "Data-governance practices"],
+  },
+  {
+    title: "Open-source AI platforms",
+    summary: "Evaluating self-hosted interfaces and extensibility models for internal AI products and knowledge workflows.",
+    topics: ["OpenWebUI APIs", "Plugin architecture", "Local-model environments", "Hosted versus self-managed systems"],
+  },
+  {
+    title: "AI deployment and operations",
+    summary: "Exploring ways to move AI applications from local development into secure, shareable, supportable environments.",
+    topics: ["One-click AI deployment", "Customer cloud connections", "Agent operations control planes", "Secure AI workspaces"],
+  },
+  {
+    title: "Developer workflow intelligence",
+    summary: "Research around repository understanding, API testing, evaluation, and AI-native software-development workflows.",
+    topics: ["Repository context", "API-testing agents", "Evaluation methodology", "AI-native software lifecycle"],
+  },
+];
+
+export const communityHighlights = [
+  {
+    title: "Programming With Maurya",
+    detail: "Founded and operated a programming-education initiative covering Python, data science, applied AI, internships, and learner support.",
+  },
+  {
+    title: "Teaching and mentoring",
+    detail: "Delivered workshops, live courses, technical mentoring, career guidance, educational content, books, and beginner-focused explanations.",
+  },
+  {
+    title: "Technical leadership",
+    detail: "Owned work across AI, backend, DevOps, product, documentation, technical reviews, stakeholder communication, and solution research.",
+  },
+];
+
 export const proofPoints = [
   {
     title: "Enterprise AI",
@@ -351,7 +607,7 @@ export const companiesData = [
     activeYears: "2024 - Present",
     position: "Senior AI Engineer",
     description:
-      "Developing and optimizing AI models for financial services applications, with collaboration across teams to integrate tools like WebUI, Traefik, and LiteLLM for reliable delivery. Working across Azure OpenAI, Azure DevOps, storage, and SSO integrations with a focus on secure and scalable enterprise architecture.",
+      "Building secure enterprise AI platforms and internal products for financial-services organisations. Work spans multi-provider model integration, LiteLLM gateways, OpenWebUI, native tool calling, identity and access, backend services, cloud delivery, provider-specific debugging, technical reviews, and architecture decisions with product, DevOps, IT, security, and engineering stakeholders.",
   },
   {
     id: "C-02",
