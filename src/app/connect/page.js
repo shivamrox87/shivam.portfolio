@@ -28,6 +28,18 @@ export default function ContactPage() {
               <p>Based in Varanasi, India</p>
               <a href="https://www.linkedin.com/in/shivam--maurya" target="_blank" rel="noreferrer" className="text-link mt-3">LinkedIn</a>
             </div>
+            <div className="mt-10 border-t border-[#171714]">
+              {[
+                ["AI architecture", "Production AI platforms, model gateways, identity, and deployment strategy."],
+                ["Developer products", "Technical and product review for tools around repositories, APIs, and engineering workflows."],
+                ["Speaking", "Workshops and conversations on enterprise AI, applied AI systems, and production delivery."],
+              ].map(([title, detail]) => (
+                <div key={title} className="border-b border-[#d8d5cc] py-5">
+                  <h2 className="font-serif text-xl">{title}</h2>
+                  <p className="mt-2 text-xs leading-6 text-[#68675f]">{detail}</p>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="min-h-[760px] border-t border-[#171714] pt-6">
             <div

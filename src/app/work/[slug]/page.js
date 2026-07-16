@@ -1,3 +1,4 @@
+import ArchitectureFlow from "@/components/ArchitectureFlow";
 import Header from "@/components/Header";
 import { caseStudies } from "@/server/data";
 import Link from "next/link";
@@ -47,19 +48,51 @@ export default async function WorkDetailPage({ params }) {
         </div>
       </section>
 
+      <section id="architecture" className="border-t border-[#d8d5cc]">
+        <div className="site-shell page-section">
+          <p className="eyebrow">Architecture</p>
+          <h2 className="section-title mt-3 max-w-[700px]">How the system is separated into responsibilities</h2>
+          <ArchitectureFlow title={project.heading} steps={project.architecture} />
+        </div>
+      </section>
+
       <section className="border-t border-[#d8d5cc]">
-        <div className="site-shell page-section grid gap-10 md:grid-cols-2 md:gap-16">
+        <div className="site-shell page-section grid gap-12 md:grid-cols-2 md:gap-16">
           <div>
-            <p className="eyebrow">System outline</p>
+            <p className="eyebrow">Constraints</p>
             <div className="mt-5 border-t border-[#171714]">
-              {project.architecture.map((item, index) => <p key={item} className="border-b border-[#d8d5cc] py-5 text-sm leading-7 text-[#4f4e48]"><span className="mr-4 text-[#b84a2b]">0{index + 1}</span>{item}</p>)}
+              {project.constraints.map((item, index) => (
+                <div key={item} className="grid grid-cols-[32px_1fr] gap-3 border-b border-[#d8d5cc] py-5">
+                  <span className="text-xs text-[#b84a2b]">0{index + 1}</span>
+                  <p className="text-sm leading-7 text-[#4f4e48]">{item}</p>
+                </div>
+              ))}
             </div>
           </div>
           <div>
-            <p className="eyebrow">What I learned</p>
+            <p className="eyebrow">Technical decisions</p>
             <div className="mt-5 border-t border-[#171714]">
-              {project.learnings.map((item, index) => <p key={item} className="border-b border-[#d8d5cc] py-5 text-sm leading-7 text-[#4f4e48]"><span className="mr-4 text-[#b84a2b]">0{index + 1}</span>{item}</p>)}
+              {project.decisions.map((item, index) => (
+                <div key={item} className="grid grid-cols-[32px_1fr] gap-3 border-b border-[#d8d5cc] py-5">
+                  <span className="text-xs text-[#b84a2b]">0{index + 1}</span>
+                  <p className="text-sm leading-7 text-[#4f4e48]">{item}</p>
+                </div>
+              ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#d8d5cc]">
+        <div className="site-shell page-section grid gap-10 md:grid-cols-[0.32fr_1fr] md:gap-16">
+          <div><p className="eyebrow">Reflection</p><h2 className="section-title mt-3">What the work taught me</h2></div>
+          <div className="border-t border-[#171714]">
+            {project.learnings.map((item, index) => (
+              <div key={item} className="grid grid-cols-[40px_1fr] gap-4 border-b border-[#d8d5cc] py-6">
+                <span className="text-xs text-[#b84a2b]">0{index + 1}</span>
+                <p className="font-serif text-2xl leading-snug text-[#302f2b]">{item}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

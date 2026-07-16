@@ -55,6 +55,30 @@ export default function Home() {
         <div className="site-shell page-section">
           <div className="grid gap-10 md:grid-cols-[0.35fr_1fr] md:gap-16">
             <div>
+              <p className="eyebrow">Now</p>
+              <h2 className="section-title mt-3">Current direction</h2>
+            </div>
+            <div className="border-t border-[#171714]">
+              {[
+                ["At work", "Building secure enterprise AI infrastructure and internal systems for financial-services organisations."],
+                ["Independently", "Developing ExplainGitHub and exploring better workflows for understanding repositories and software systems."],
+                ["Researching", "Model gateways, agent permissions, evaluation, context quality, and dependable deployment patterns."],
+              ].map(([label, detail]) => (
+                <div key={label} className="grid gap-3 border-b border-[#d8d5cc] py-6 sm:grid-cols-[0.25fr_0.75fr] sm:gap-8">
+                  <h3 className="font-serif text-2xl">{label}</h3>
+                  <p className="text-sm leading-7 text-[#4f4e48]">{detail}</p>
+                </div>
+              ))}
+              <Link href="/building" className="text-link mt-7">Full current focus</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#d8d5cc]">
+        <div className="site-shell page-section">
+          <div className="grid gap-10 md:grid-cols-[0.35fr_1fr] md:gap-16">
+            <div>
               <p className="eyebrow">Selected work</p>
               <h2 className="section-title mt-3">Systems and products</h2>
             </div>

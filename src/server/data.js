@@ -31,7 +31,7 @@ export const selectedWork = [
     description:
       "Building and integrating secure AI infrastructure across model access, identity, storage, routing, and internal application workflows.",
     scope: ["Azure OpenAI", "LiteLLM", "SSO", "Cloud delivery"],
-    href: "/about#experience",
+    href: "/work/enterprise-ai",
   },
   {
     name: "Arya",
@@ -98,6 +98,50 @@ export const currentBuilds = [
 
 export const caseStudies = [
   {
+    id: "cs-00",
+    slug: "enterprise-ai",
+    heading: "Enterprise AI Delivery",
+    category: "Enterprise AI",
+    status: "Professional work",
+    date: "2024 - Present",
+    subHeading:
+      "Secure AI infrastructure and internal application delivery for financial-services environments at AlphaFMC.",
+    summary:
+      "A public, non-confidential view of the platform patterns and engineering responsibilities involved in making AI usable inside enterprise teams.",
+    problem:
+      "Enterprise teams need dependable access to AI models without creating fragmented authentication, provider integrations, routing logic, and deployment practices across every internal application.",
+    solution:
+      "Build shared infrastructure around model access, identity, traffic routing, storage integrations, internal interfaces, and repeatable cloud delivery using established enterprise controls.",
+    outcome:
+      "Created and improved reusable foundations for internal AI applications, with model access and operational concerns handled as platform responsibilities rather than duplicated application code.",
+    role: "Senior AI Engineer",
+    stack: ["Azure OpenAI", "LiteLLM", "SSO", "Traefik", "Azure DevOps"],
+    architecture: [
+      "Internal users and applications initiate requests through approved interfaces.",
+      "Identity and access controls establish who can use the system.",
+      "Shared application services apply product and workflow context.",
+      "A model gateway centralises routing and provider access.",
+      "Cloud services support model execution, storage, and repeatable delivery.",
+    ],
+    constraints: [
+      "Financial-services security and governance expectations shape every integration.",
+      "The platform must support multiple internal workflows without coupling them to one interface.",
+      "Provider abstraction must not hide operational failures or make debugging harder.",
+      "Public discussion must protect employer, client, and implementation confidentiality.",
+    ],
+    decisions: [
+      "Treat model access as shared infrastructure rather than application-specific integration.",
+      "Keep identity and permissions at the system boundary instead of relying on prompt-level controls.",
+      "Separate user interfaces, application workflows, routing, and model providers into distinct responsibilities.",
+      "Use repeatable deployment practices so environments can be operated consistently.",
+    ],
+    learnings: [
+      "Enterprise AI adoption is usually an infrastructure and integration problem before it is a model problem.",
+      "Identity, failure handling, and operational ownership determine whether internal AI earns trust.",
+      "A useful abstraction reduces duplicated work while preserving enough visibility to diagnose the system.",
+    ],
+  },
+  {
     id: "cs-01",
     slug: "explaingithub",
     heading: "ExplainGitHub",
@@ -121,6 +165,18 @@ export const caseStudies = [
       "Classify and prioritize code paths for explanation.",
       "Generate summaries, architecture context, and developer-facing guidance.",
       "Present outputs in a way that reduces onboarding time and search cost.",
+    ],
+    constraints: [
+      "Repositories contain more context than can be sent to a model at once.",
+      "Generated explanations need traceability back to files and code paths.",
+      "Different repository structures require flexible ingestion rather than fixed assumptions.",
+      "The product must reduce search effort without replacing normal engineering judgement.",
+    ],
+    decisions: [
+      "Prioritise repository structure and important code paths before generating explanations.",
+      "Build context in stages instead of relying on one large prompt.",
+      "Keep outputs scoped to concrete developer questions and navigational tasks.",
+      "Design for source visibility so developers can verify generated context.",
     ],
     learnings: [
       "Useful AI products need sharp scoping, not maximal generation.",
@@ -162,6 +218,16 @@ export const caseStudies = [
       "Reduce handoff ambiguity through better visibility and state tracking.",
       "Support iteration without fragmenting product knowledge.",
     ],
+    constraints: [
+      "Requirements and implementation context are distributed across tools and conversations.",
+      "The product must support iteration without becoming another documentation burden.",
+      "Ownership and state need to remain visible across product and engineering roles.",
+    ],
+    decisions: [
+      "Make shared artifacts the centre of collaboration rather than chat threads.",
+      "Represent state and ownership explicitly in the workflow.",
+      "Keep the early product narrow until the core handoff problem is validated.",
+    ],
     learnings: [
       "Workflow tools win when they remove ambiguity, not when they add features.",
       "Clear state and ownership are product advantages.",
@@ -201,6 +267,18 @@ export const caseStudies = [
       "Retrieve relevant context for spiritual and knowledge queries.",
       "Support multilingual text and audio interaction.",
       "Distribute through Telegram, WhatsApp, and API interfaces.",
+    ],
+    constraints: [
+      "Answers depend on a specialised knowledge domain where retrieval quality affects trust.",
+      "Users need both multilingual and multimodal access.",
+      "The same assistant experience must work across messaging platforms and APIs.",
+      "Speech and messaging channels introduce different latency and interaction expectations.",
+    ],
+    decisions: [
+      "Ground responses in retrieved domain material rather than model memory alone.",
+      "Keep the core knowledge workflow independent from channel-specific integrations.",
+      "Support text and speech at the interface layer while sharing backend services.",
+      "Use familiar messaging channels to reduce adoption friction.",
     ],
     learnings: [
       "Domain-specific trust depends heavily on retrieval quality.",

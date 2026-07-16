@@ -3,7 +3,7 @@ import { caseStudies, selectedWork } from "@/server/data";
 import Link from "next/link";
 
 export default function WorkSide() {
-  const independent = caseStudies.slice(0, 2);
+  const independent = caseStudies.filter((study) => ["explaingithub", "reqbeam"].includes(study.slug));
 
   return (
     <main>

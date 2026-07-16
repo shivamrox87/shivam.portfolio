@@ -9,6 +9,13 @@ const focusAreas = [
   ["Developer workflows", "Tools that help engineers understand complex systems and act on technical context with greater confidence."],
 ];
 
+const principles = [
+  ["Production before demos", "A model response is only one part of a system. Identity, permissions, failure handling, cost, evaluation, and operations determine whether it is useful."],
+  ["Reduce cognitive load", "AI should help people understand repositories, workflows, and decisions. Generating more output is not the same as reducing complexity."],
+  ["Design for real constraints", "Security, latency, budgets, unreliable model behaviour, and adoption are product inputs rather than problems to postpone."],
+  ["Own the whole system", "The strongest solutions connect product intent, AI behaviour, backend services, cloud infrastructure, and the user workflow."],
+];
+
 export default function AboutSide() {
   return (
     <main className="w-full">
@@ -59,6 +66,24 @@ export default function AboutSide() {
           <div className="border-t border-[#171714]">
             {focusAreas.map(([title, detail]) => (
               <div key={title} className="grid gap-3 border-b border-[#d8d5cc] py-7 sm:grid-cols-[0.42fr_1fr] sm:gap-8">
+                <h3 className="font-serif text-2xl">{title}</h3>
+                <p className="text-sm leading-7 text-[#4f4e48]">{detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#d8d5cc]">
+        <div className="site-shell page-section grid gap-10 md:grid-cols-[0.35fr_1fr] md:gap-16">
+          <div>
+            <p className="eyebrow">Principles</p>
+            <h2 className="section-title mt-3">How I think about the work</h2>
+          </div>
+          <div className="border-t border-[#171714]">
+            {principles.map(([title, detail], index) => (
+              <div key={title} className="grid gap-3 border-b border-[#d8d5cc] py-7 sm:grid-cols-[40px_0.38fr_0.62fr] sm:gap-6">
+                <span className="text-xs text-[#b84a2b]">0{index + 1}</span>
                 <h3 className="font-serif text-2xl">{title}</h3>
                 <p className="text-sm leading-7 text-[#4f4e48]">{detail}</p>
               </div>
