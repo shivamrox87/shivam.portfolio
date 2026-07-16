@@ -65,8 +65,6 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,13,13,0.94)_0%,rgba(13,13,13,0.72)_48%,rgba(13,13,13,0.2)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(13,13,13,0.75)_0%,transparent_55%)]" />
-        <div className="absolute inset-0 bg-[url('/grain.png')] opacity-[0.06]" />
-
         <div className="relative mx-auto w-full max-w-[1200px]">
           <div className="max-w-[760px]">
             <p className="text-xs font-medium uppercase tracking-[0.22em] text-[#EB5939] md:text-sm">
