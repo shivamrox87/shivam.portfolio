@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Link from "next/link";
-import { caseStudies, currentBuilds } from "@/server/data";
+import { caseStudies, selectedWork } from "@/server/data";
+import { useEffect, useState } from "react";
 
 const WorkSide = () => {
-  const [headerColor, setHeaderColor] = useState("#e9e9e7");
+  const [headerColor, setHeaderColor] = useState("#0d0d0d");
 
   useEffect(() => {
     const sections = [
-      { id: "work-hero", color: "#e9e9e7" },
-      { id: "case-studies", color: "#e9e9e7" },
-      { id: "active-builds", color: "#0d0d0d" },
+      { id: "work-hero", color: "#0d0d0d" },
+      { id: "professional-work", color: "#e9e9e7" },
+      { id: "independent-work", color: "#0d0d0d" },
     ];
 
     const handleScroll = () => {
@@ -46,169 +46,85 @@ const WorkSide = () => {
     <>
       <Header textColor={headerColor} />
 
-      <section
-        id="work-hero"
-        className="relative overflow-hidden bg-[#0d0d0d] px-5 pb-20 pt-28 md:px-10 md:pb-28 md:pt-36"
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(235,89,57,0.28),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(69,123,157,0.2),_transparent_30%)]" />
-        <div className="absolute inset-0 bg-[url('/grain.png')] opacity-[0.08]" />
-        <div className="relative mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-          <div>
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#EB5939]">
-              Work
+      <section id="work-hero" className="bg-[#f4f2ed] px-5 pb-20 pt-32 md:px-10 md:pb-28 md:pt-40">
+        <div className="mx-auto max-w-[1200px]">
+          <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#EB5939]">Selected work</p>
+          <h1 className="mt-5 max-w-5xl text-5xl font-medium leading-[1.04] text-[#0d0d0d] md:text-7xl">
+            AI systems and products built under real constraints.
+          </h1>
+          <div className="mt-10 grid gap-6 border-t border-[#0d0d0d] pt-7 md:grid-cols-[0.7fr_1.3fr]">
+            <p className="text-sm uppercase tracking-[0.16em] text-[#0d0d0d]/50">Scope</p>
+            <p className="max-w-2xl text-lg leading-8 text-[#0d0d0d]/70">
+              Professional delivery across enterprise AI, applied AI products, backend systems,
+              and cloud infrastructure, alongside independent developer-tool work.
             </p>
-            <h1 className="mt-4 text-4xl font-medium leading-tight text-[#e9e9e7] md:text-6xl">
-              Case studies that show how I think about AI, products, and system design.
-            </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#e9e9e7]/75">
-              These stories cover the problem, the product decision, and the system behind it.
-              Together they show how I move from an ambiguous opportunity to a useful working
-              product.
-            </p>
-          </div>
-
-          <div className="rounded-[32px] border border-white/10 bg-white/5 p-8">
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#EB5939]">
-              How I Approach the Work
-            </p>
-            <div className="mt-6 space-y-5">
-              <div>
-                <h2 className="text-xl font-medium text-[#e9e9e7]">Builder narrative</h2>
-                <p className="mt-2 text-sm leading-6 text-[#e9e9e7]/70">
-                  Products and systems are the primary story, not just roles or skill labels.
-                </p>
-              </div>
-              <div>
-                <h2 className="text-xl font-medium text-[#e9e9e7]">Technical depth</h2>
-                <p className="mt-2 text-sm leading-6 text-[#e9e9e7]/70">
-                  Each case study includes problem framing, architecture thinking, and applied
-                  stack decisions.
-                </p>
-              </div>
-              <div>
-                <h2 className="text-xl font-medium text-[#e9e9e7]">Range</h2>
-                <p className="mt-2 text-sm leading-6 text-[#e9e9e7]/70">
-                  The portfolio spans developer tooling, enterprise AI, workflows, and product
-                  execution.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      <section id="case-studies" className="bg-[#0d0d0d] px-5 py-20 md:px-10 md:py-28">
-        <div className="mx-auto flex max-w-[1200px] flex-col gap-8">
-          {caseStudies.map((study, index) => (
-            <div
-              key={study.slug}
-              className="grid gap-8 border-t border-white/10 py-8 first:border-t-0 first:pt-0 lg:grid-cols-[0.9fr_1.1fr]"
-            >
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-wrap items-center gap-4">
-                  <span className="text-sm font-medium uppercase tracking-[0.2em] text-[#EB5939]">
-                    {study.category}
-                  </span>
-                  <span className="text-sm uppercase tracking-[0.16em] text-[#e9e9e7]/50">
-                    0{index + 1}
-                  </span>
-                </div>
-                <div>
-                  <h2 className="text-3xl font-medium text-[#e9e9e7] md:text-4xl">
-                    {study.heading}
-                  </h2>
-                  <p className="mt-4 text-lg leading-8 text-[#e9e9e7]/75">{study.subHeading}</p>
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  <span className="rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.14em] text-[#e9e9e7]/70">
-                    {study.status}
-                  </span>
-                  <span className="rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.14em] text-[#e9e9e7]/70">
-                    {study.date}
-                  </span>
-                </div>
-                <Link
-                  href={`/work/${study.slug}`}
-                  className="inline-flex w-fit items-center justify-center bg-[#E9E9E7] px-5 py-3 text-sm font-medium uppercase tracking-[0.16em] text-[#0d0d0d] transition hover:bg-[#EB5939] hover:text-[#E9E9E7]"
-                >
-                  Read Case Study
-                </Link>
-              </div>
-
-              <div className="rounded-[32px] border border-white/10 bg-[#141414] p-7">
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#EB5939]">
-                      Problem
-                    </p>
-                    <p className="mt-3 text-sm leading-7 text-[#e9e9e7]/75">{study.problem}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#EB5939]">
-                      Outcome
-                    </p>
-                    <p className="mt-3 text-sm leading-7 text-[#e9e9e7]/75">{study.outcome}</p>
-                  </div>
-                </div>
-                <div className="mt-6">
-                  <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#EB5939]">
-                    Stack + Focus
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-3">
-                    {study.stack.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.14em] text-[#e9e9e7]/75"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="active-builds" className="bg-[#e9e9e7] px-5 py-20 md:px-10 md:py-28">
-        <div className="mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-          <div>
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#EB5939]">
-              Product Universe
-            </p>
-            <h2 className="mt-4 text-3xl font-medium leading-tight text-[#0d0d0d] md:text-5xl">
-              Different products, one consistent direction.
+      <section id="professional-work" className="bg-[#0d0d0d] px-5 py-20 md:px-10 md:py-28">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="grid gap-6 border-b border-white/20 pb-8 md:grid-cols-[0.7fr_1.3fr] md:items-end">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#EB5939]">Professional delivery</p>
+            <h2 className="text-3xl font-medium leading-tight text-[#e9e9e7] md:text-5xl">
+              Work delivered inside operating teams and production environments.
             </h2>
-            <p className="mt-5 text-base leading-7 text-[#0d0d0d]/75">
-              The products span developer productivity, AI workflows, collaboration, and
-              operational software. The common thread is removing friction from complex work.
-            </p>
           </div>
 
-          <div className="grid gap-4">
-            {currentBuilds.map((build) => (
-              <div key={build.slug} className="rounded-[28px] border border-[#0d0d0d]/10 bg-white p-6">
-                <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                  <h3 className="text-2xl font-medium text-[#0d0d0d]">{build.name}</h3>
-                  <span className="text-sm uppercase tracking-[0.16em] text-[#EB5939]">
-                    {build.stage}
-                  </span>
-                </div>
-                <p className="mt-4 text-base leading-7 text-[#0d0d0d]/75">{build.summary}</p>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  {build.focus.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-[#0d0d0d]/10 px-4 py-2 text-xs uppercase tracking-[0.14em] text-[#0d0d0d]/60"
-                    >
-                      {item}
-                    </span>
+          {selectedWork.slice(0, 2).map((item, index) => (
+            <article key={item.name} className="grid gap-8 border-b border-white/20 py-10 md:grid-cols-[0.12fr_0.58fr_1.3fr] md:gap-10 md:py-12">
+              <p className="text-sm text-[#e9e9e7]/50">0{index + 1}</p>
+              <div>
+                <p className="text-xs uppercase tracking-[0.16em] text-[#EB5939]">{item.status}</p>
+                <h3 className="mt-3 text-2xl font-medium text-[#e9e9e7] md:text-3xl">{item.name}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#e9e9e7]/60">{item.context}</p>
+              </div>
+              <div>
+                <p className="max-w-2xl text-lg leading-8 text-[#e9e9e7]/70">{item.description}</p>
+                <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+                  {item.scope.map((scope) => (
+                    <span key={scope} className="text-xs uppercase tracking-[0.14em] text-[#e9e9e7]/50">{scope}</span>
                   ))}
                 </div>
+                <Link href={item.href} className="mt-7 inline-flex border-b border-[#e9e9e7] pb-1 text-sm font-medium text-[#e9e9e7] transition hover:border-[#EB5939] hover:text-[#EB5939]">
+                  {item.name === "Enterprise AI delivery" ? "View professional background" : "Read case study"}
+                </Link>
               </div>
-            ))}
+            </article>
+          ))}
+
+          <p className="mt-8 max-w-2xl text-sm leading-6 text-[#e9e9e7]/50">
+            Some implementation details from client and employer work are intentionally omitted.
+          </p>
+        </div>
+      </section>
+
+      <section id="independent-work" className="bg-[#f4f2ed] px-5 py-20 md:px-10 md:py-28">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="grid gap-6 border-b border-[#0d0d0d] pb-8 md:grid-cols-[0.7fr_1.3fr] md:items-end">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#EB5939]">Independent products</p>
+            <h2 className="text-3xl font-medium leading-tight text-[#0d0d0d] md:text-5xl">
+              Current product development, labelled by stage.
+            </h2>
           </div>
+
+          {caseStudies.slice(0, 2).map((study, index) => (
+            <article key={study.slug} className="grid gap-8 border-b border-[#0d0d0d]/20 py-10 md:grid-cols-[0.12fr_0.58fr_1.3fr] md:gap-10 md:py-12">
+              <p className="text-sm text-[#0d0d0d]/50">0{index + 1}</p>
+              <div>
+                <p className="text-xs uppercase tracking-[0.16em] text-[#EB5939]">{study.status} · {study.date}</p>
+                <h3 className="mt-3 text-2xl font-medium text-[#0d0d0d] md:text-3xl">{study.heading}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#0d0d0d]/60">{study.category}</p>
+              </div>
+              <div>
+                <p className="max-w-2xl text-lg leading-8 text-[#0d0d0d]/70">{study.summary}</p>
+                <p className="mt-5 max-w-2xl text-sm leading-7 text-[#0d0d0d]/60">{study.outcome}</p>
+                <Link href={`/work/${study.slug}`} className="mt-7 inline-flex border-b border-[#0d0d0d] pb-1 text-sm font-medium text-[#0d0d0d] transition hover:border-[#EB5939] hover:text-[#EB5939]">
+                  View product notes
+                </Link>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
     </>

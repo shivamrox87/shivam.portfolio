@@ -4,10 +4,9 @@ import Link from "next/link";
 import { useState } from "react";
 
 const navigation = [
-  { href: "/about", label: "About" },
   { href: "/work", label: "Work" },
-  { href: "/building", label: "Building" },
-  { href: "/blog", label: "Field Notes" },
+  { href: "/blog", label: "Writing" },
+  { href: "/about", label: "About" },
 ];
 
 const Header = ({ textColor = "#0d0d0d" }) => {
@@ -47,7 +46,7 @@ const Header = ({ textColor = "#0d0d0d" }) => {
           className="hidden rounded-full px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] transition hover:bg-[#EB5939] hover:text-white md:inline-flex"
           style={{ backgroundColor: textColor, color: isLight ? "#0d0d0d" : "#e9e9e7" }}
         >
-          Let&apos;s talk
+          Contact
         </Link>
 
         <button
@@ -84,7 +83,7 @@ const Header = ({ textColor = "#0d0d0d" }) => {
             className="mt-4 rounded-full bg-[#EB5939] px-5 py-4 text-center text-sm font-semibold uppercase tracking-[0.14em] text-white"
             onClick={() => setIsOpen(false)}
           >
-            Let&apos;s talk
+            Contact
           </Link>
         </nav>
       ) : null}

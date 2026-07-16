@@ -23,25 +23,55 @@ export const builderPrinciples = [
   "Simple workflows win when they survive real usage and real constraints.",
 ];
 
+export const selectedWork = [
+  {
+    name: "Enterprise AI delivery",
+    context: "AlphaFMC (Lionpoint Group) · Financial services",
+    status: "Professional work · 2024–present",
+    description:
+      "Building and integrating secure AI infrastructure across model access, identity, storage, routing, and internal application workflows.",
+    scope: ["Azure OpenAI", "LiteLLM", "SSO", "Cloud delivery"],
+    href: "/about#experience",
+  },
+  {
+    name: "Arya",
+    context: "Applied AI system · Mokx",
+    status: "Shipped · 2023",
+    description:
+      "A multilingual conversational product combining retrieval, speech interfaces, APIs, and messaging-platform distribution for a specialised knowledge domain.",
+    scope: ["OpenAI", "LangChain", "Python", "Speech interfaces"],
+    href: "/work/arya",
+  },
+  {
+    name: "ExplainGitHub",
+    context: "Independent developer tool",
+    status: "In development",
+    description:
+      "A repository-understanding product focused on helping engineers trace architecture, intent, and important code paths in unfamiliar codebases.",
+    scope: ["Repository parsing", "LLM workflows", "Developer UX"],
+    href: "/work/explaingithub",
+  },
+];
+
 export const currentBuilds = [
   {
     name: "ExplainGitHub",
     slug: "explaingithub",
-    stage: "Flagship build",
+    stage: "In development",
     summary:
       "Repository understanding with AI, designed to help developers move from unfamiliar codebases to useful context faster.",
     focus: ["Repository intelligence", "LLM workflows", "Developer UX"],
-    statusNote: "The core developer-tooling product in the portfolio.",
+    statusNote: "Active independent product development.",
     accent: "from-[#EB5939] via-[#c64a30] to-[#0d0d0d]",
   },
   {
     name: "ReqBeam",
     slug: "reqbeam",
-    stage: "In progress",
+    stage: "Exploration",
     summary:
       "An API collaboration and workflow product aimed at making requirements, requests, and iteration loops easier to manage.",
     focus: ["Product workflows", "Collaboration", "Backend systems"],
-    statusNote: "Represents the product-builder side of the narrative.",
+    statusNote: "Early product and workflow exploration.",
     accent: "from-[#0d0d0d] via-[#1d3557] to-[#457b9d]",
   },
   {
@@ -51,7 +81,7 @@ export const currentBuilds = [
     summary:
       "A more visual way to discover repositories and understand what makes them interesting before diving into the code.",
     focus: ["Open source discovery", "Product design", "Developer discovery"],
-    statusNote: "Useful for showing range beyond enterprise consulting.",
+    statusNote: "Concept-stage product research.",
     accent: "from-[#16213e] via-[#533483] to-[#EB5939]",
   },
   {
@@ -61,7 +91,7 @@ export const currentBuilds = [
     summary:
       "A booking and payments platform direction that broadens the portfolio beyond AI-native internal tooling.",
     focus: ["Transactions", "Operations", "Product execution"],
-    statusNote: "Shows commercial product breadth, not just AI experiments.",
+    statusNote: "Booking and payments product work.",
     accent: "from-[#1b4332] via-[#2d6a4f] to-[#40916c]",
   },
 ];
@@ -72,18 +102,18 @@ export const caseStudies = [
     slug: "explaingithub",
     heading: "ExplainGitHub",
     category: "Developer AI",
-    status: "Flagship build",
-    date: "Current build",
+    status: "In development",
+    date: "Current",
     subHeading:
       "Repository understanding using AI so engineers can move from raw code to useful product and architecture context faster.",
     summary:
-      "ExplainGitHub is the strongest articulation of your builder narrative: AI applied to a concrete developer pain point with clear product value.",
+      "An independent developer tool exploring how repository context can make unfamiliar codebases easier to navigate and understand.",
     problem:
       "Developers waste time understanding unfamiliar repositories, tracing system intent, and reconstructing architecture from scattered files and conventions.",
     solution:
       "Build a repository intelligence workflow that turns source code into navigable explanations, product context, and actionable summaries.",
     outcome:
-      "A product story that demonstrates AI application design, developer experience thinking, and the ability to build tools around real engineering workflows.",
+      "The current work is focused on context quality, traceability, and the developer experience around generated repository explanations.",
     role: "Founder, product builder, and AI engineer",
     stack: ["LLM orchestration", "Repository parsing", "Backend workflows", "Product UX"],
     architecture: [
@@ -104,7 +134,7 @@ export const caseStudies = [
     imageLinkSec:
       "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80",
     textsec:
-      "ExplainGitHub is where AI meets a tangible developer problem. It is the kind of product that shows product sense, systems thinking, and engineering depth in one story.",
+      "ExplainGitHub applies repository parsing and language models to a concrete developer workflow: understanding an unfamiliar codebase.",
     link: "explaingithub",
   },
   {
@@ -112,18 +142,18 @@ export const caseStudies = [
     slug: "reqbeam",
     heading: "ReqBeam",
     category: "Workflow Product",
-    status: "In progress",
-    date: "Active concept",
+    status: "Exploration",
+    date: "Early stage",
     subHeading:
       "A modern collaboration layer for requirements and API workflows, designed to reduce confusion between product and engineering teams.",
     summary:
-      "ReqBeam represents the product-operations side of your work: taking messy collaboration loops and turning them into structured workflows.",
+      "An early-stage exploration of structured requirements and API collaboration workflows.",
     problem:
       "Requirements, API iterations, and product feedback loops often break down across tools, threads, and handoffs.",
     solution:
       "Design a workflow-first product that captures intent, structures collaboration, and keeps iteration connected to implementation.",
     outcome:
-      "A case study that proves you are not only shipping AI experiences, but also thinking about how teams work and make decisions.",
+      "The exploration is testing whether clearer state, ownership, and shared context can reduce ambiguity across product and engineering handoffs.",
     role: "Product builder and technical lead",
     stack: ["Next.js", "Backend APIs", "Workflow design", "Product systems"],
     architecture: [
@@ -144,7 +174,7 @@ export const caseStudies = [
     imageLinkSec:
       "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1600&q=80",
     textsec:
-      "ReqBeam expands the story from pure AI into product workflow infrastructure. It helps position you as someone who builds systems around how teams actually operate.",
+      "ReqBeam examines a common product-engineering problem: requirements and implementation context becoming fragmented across tools.",
     link: "reqbeam",
   },
   {
@@ -157,13 +187,13 @@ export const caseStudies = [
     subHeading:
       "An AI Acharya designed to deliver Vedic guidance through multilingual conversational experiences across modern channels.",
     summary:
-      "Arya is a concrete shipped AI system and one of the strongest examples of turning a niche domain into a working product experience.",
+      "A shipped multilingual AI product built around retrieval, speech, and messaging-platform access for a specialised knowledge domain.",
     problem:
       "Traditional spiritual and cultural guidance is often hard to access in interactive, always-available, and multilingual digital formats.",
     solution:
       "Build an AI assistant that combines domain knowledge retrieval, speech interfaces, and messaging-platform accessibility.",
     outcome:
-      "A strong example of applying LLMs, retrieval, deployment, and multimodal interaction to a real product use case.",
+      "Delivered as a working product across text, audio, messaging channels, and APIs, with retrieval quality central to the user experience.",
     role: "AI and backend engineer",
     stack: ["OpenAI", "LangChain", "Python", "Azure VM", "Speech interfaces"],
     architecture: [
