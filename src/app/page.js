@@ -7,8 +7,6 @@ import {
   builderPrinciples,
   companiesData,
   currentBuilds,
-  heroMetrics,
-  proofPoints,
   timelineHighlights,
   writingFocus,
 } from "@/server/data";
@@ -58,78 +56,43 @@ export default function Home() {
 
       <section
         id="hero"
-        className="relative overflow-hidden bg-[#0d0d0d] px-5 pb-20 pt-28 md:px-10 md:pb-28 md:pt-36"
+        className="relative flex min-h-[82vh] items-end overflow-hidden bg-[#0d0d0d] px-5 pb-14 pt-28 md:min-h-[88vh] md:px-10 md:pb-20 md:pt-36"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(235,89,57,0.3),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(69,123,157,0.25),_transparent_30%)]" />
-        <div className="absolute inset-0 bg-[url('/grain.png')] opacity-[0.08]" />
-        <div className="relative mx-auto flex max-w-[1200px] flex-col gap-14">
-          <div className="grid gap-12 lg:grid-cols-[1.4fr_0.8fr] lg:items-end">
-            <div className="flex flex-col gap-8">
-              <div className="flex flex-wrap gap-3">
-                <span className="rounded-full border border-[#e9e9e7]/20 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-[#EB5939]">
-                  AI Engineer
-                </span>
-                <span className="rounded-full border border-[#e9e9e7]/20 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-[#e9e9e7]">
-                  Product Builder
-                </span>
-                <span className="rounded-full border border-[#e9e9e7]/20 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-[#e9e9e7]">
-                  Founder
-                </span>
-              </div>
-              <div className="max-w-4xl">
-                <h1 className="text-4xl font-medium leading-tight text-[#e9e9e7] md:text-6xl">
-                  Building AI products, developer tools, and workflow systems that solve real problems.
-                </h1>
-              </div>
-              <div className="max-w-3xl">
-                <p className="text-lg leading-8 text-[#e9e9e7]/75 md:text-xl">
-                  I design, build, and ship applied AI systems across enterprise delivery,
-                  independent products, and developer tooling. I work from product framing and
-                  architecture through to the details required to put a useful system in production.
-                </p>
-              </div>
-              <div className="flex flex-col gap-4 sm:flex-row">
-                <Link
-                  href="/work"
-                  className="inline-flex items-center justify-center bg-[#E9E9E7] px-6 py-4 text-sm font-medium uppercase tracking-[0.16em] text-[#0d0d0d] transition hover:bg-[#EB5939] hover:text-[#E9E9E7]"
-                >
-                  Explore Case Studies
-                </Link>
-                <Link
-                  href="/building"
-                  className="inline-flex items-center justify-center border border-[#e9e9e7]/30 px-6 py-4 text-sm font-medium uppercase tracking-[0.16em] text-[#e9e9e7] transition hover:border-[#EB5939] hover:bg-[#EB5939] hover:text-[#E9E9E7]"
-                >
-                  See What I&apos;m Building
-                </Link>
-              </div>
-            </div>
+        <img
+          src="https://res.cloudinary.com/ddtfebvov/image/upload/v1735629588/uoGweUB1Hmu5gOVlOQ7RI0QXup8_rf6xoh.avif"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,13,13,0.94)_0%,rgba(13,13,13,0.72)_48%,rgba(13,13,13,0.2)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(13,13,13,0.75)_0%,transparent_55%)]" />
+        <div className="absolute inset-0 bg-[url('/grain.png')] opacity-[0.06]" />
 
-            <div className="grid gap-4">
-              {heroMetrics.map((metric) => (
-                <div
-                  key={metric.label}
-                  className="rounded-3xl border border-[#e9e9e7]/10 bg-white/5 p-6 backdrop-blur"
-                >
-                  <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#EB5939]">
-                    {metric.label}
-                  </p>
-                  <p className="mt-4 text-2xl font-medium text-[#e9e9e7]">{metric.value}</p>
-                  <p className="mt-2 text-sm leading-6 text-[#e9e9e7]/70">{metric.detail}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            {proofPoints.map((point) => (
-              <div
-                key={point.title}
-                className="rounded-3xl border border-[#e9e9e7]/10 bg-[#111111] p-6"
+        <div className="relative mx-auto w-full max-w-[1200px]">
+          <div className="max-w-[760px]">
+            <p className="text-xs font-medium uppercase tracking-[0.22em] text-[#EB5939] md:text-sm">
+              AI Engineer · Product Builder · Founder
+            </p>
+            <h1 className="mt-5 text-5xl font-medium leading-[1.04] text-[#e9e9e7] md:text-7xl">
+              I build useful AI products.
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-7 text-[#e9e9e7]/75 md:text-lg md:leading-8">
+              From developer tools to enterprise systems, I turn complex AI capabilities into
+              products people can understand, trust, and use.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/work"
+                className="inline-flex items-center justify-center bg-[#E9E9E7] px-6 py-4 text-sm font-medium uppercase tracking-[0.16em] text-[#0d0d0d] transition hover:bg-[#EB5939] hover:text-[#E9E9E7]"
               >
-                <h2 className="text-xl font-medium text-[#e9e9e7]">{point.title}</h2>
-                <p className="mt-3 text-sm leading-6 text-[#e9e9e7]/70">{point.detail}</p>
-              </div>
-            ))}
+                Explore My Work
+              </Link>
+              <Link
+                href="/building"
+                className="inline-flex items-center justify-center border border-[#e9e9e7]/40 bg-[#0d0d0d]/20 px-6 py-4 text-sm font-medium uppercase tracking-[0.16em] text-[#e9e9e7] backdrop-blur-sm transition hover:border-[#EB5939] hover:bg-[#EB5939]"
+              >
+                What I&apos;m Building
+              </Link>
+            </div>
           </div>
         </div>
       </section>
