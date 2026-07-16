@@ -42,7 +42,7 @@ const AboutSide = () => {
               About Shivam
             </p>
             <h1 className="mt-5 max-w-4xl text-5xl font-medium leading-[1.04] text-[#0d0d0d] md:text-7xl">
-              AI engineer working across systems, infrastructure, and product delivery.
+              Senior AI engineer working across systems, infrastructure, and product delivery.
             </h1>
             <p className="mt-7 max-w-3xl text-lg leading-8 text-[#0d0d0d]/70 md:text-xl">
               Based in Varanasi, India, I build production AI systems spanning model access,

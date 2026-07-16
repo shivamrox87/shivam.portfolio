@@ -271,7 +271,7 @@ export const companiesData = [
     id: "C-01",
     companyName: "AlphaFMC (Lionpoint Group)",
     activeYears: "2024 - Present",
-    position: "AI Engineer",
+    position: "Senior AI Engineer",
     description:
       "Developing and optimizing AI models for financial services applications, with collaboration across teams to integrate tools like WebUI, Traefik, and LiteLLM for reliable delivery. Working across Azure OpenAI, Azure DevOps, storage, and SSO integrations with a focus on secure and scalable enterprise architecture.",
   },

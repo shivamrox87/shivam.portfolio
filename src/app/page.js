@@ -57,7 +57,7 @@ export default function Home() {
         <div className="relative mx-auto w-full max-w-[1200px]">
           <div className="max-w-[820px]">
             <p className="text-xs font-medium uppercase tracking-[0.22em] text-[#EB5939] md:text-sm">
-              Shivam Maurya · AI Engineer
+              Shivam Maurya · Senior AI Engineer
             </p>
             <h1 className="mt-5 text-4xl font-medium leading-[1.08] text-[#e9e9e7] sm:text-5xl md:text-7xl">
               AI systems for financial services and developer workflows.
@@ -87,7 +87,7 @@ export default function Home() {
       <section id="context" className="border-b border-[#0d0d0d]/20 bg-[#f4f2ed] px-5 md:px-10">
         <div className="mx-auto grid max-w-[1200px] divide-y divide-[#0d0d0d]/20 md:grid-cols-3 md:divide-x md:divide-y-0">
           {[
-            ["Current", "AI Engineer at AlphaFMC (Lionpoint Group)"],
+            ["Current", "Senior AI Engineer at AlphaFMC (Lionpoint Group)"],
             ["Domain", "Enterprise AI and financial services"],
             ["Based", "Varanasi, India"],
           ].map(([label, value]) => (

@@ -10,7 +10,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata = {
   title: {
-    default: "Shivam Maurya | AI Engineer",
+    default: "Shivam Maurya | Senior AI Engineer",
     template: "%s | Shivam Maurya",
   },
   description: "Shivam Maurya builds production AI systems across enterprise infrastructure, applied AI products, and developer workflows.",
