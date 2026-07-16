@@ -60,7 +60,7 @@ const WorkSide = () => {
             <h1 className="mt-4 text-4xl font-medium leading-tight text-[#e9e9e7] md:text-6xl">
               Case studies that show how I think about AI, products, and system design.
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#e9e9e7]/72">
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-[#e9e9e7]/75">
               These stories cover the problem, the product decision, and the system behind it.
               Together they show how I move from an ambiguous opportunity to a useful working
               product.
@@ -109,7 +109,7 @@ const WorkSide = () => {
                   <span className="text-sm font-medium uppercase tracking-[0.2em] text-[#EB5939]">
                     {study.category}
                   </span>
-                  <span className="text-sm uppercase tracking-[0.16em] text-[#e9e9e7]/45">
+                  <span className="text-sm uppercase tracking-[0.16em] text-[#e9e9e7]/50">
                     0{index + 1}
                   </span>
                 </div>
@@ -117,7 +117,7 @@ const WorkSide = () => {
                   <h2 className="text-3xl font-medium text-[#e9e9e7] md:text-4xl">
                     {study.heading}
                   </h2>
-                  <p className="mt-4 text-lg leading-8 text-[#e9e9e7]/72">{study.subHeading}</p>
+                  <p className="mt-4 text-lg leading-8 text-[#e9e9e7]/75">{study.subHeading}</p>
                 </div>
                 <div className="flex flex-wrap gap-3">
                   <span className="rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.14em] text-[#e9e9e7]/70">
@@ -158,7 +158,7 @@ const WorkSide = () => {
                     {study.stack.map((item) => (
                       <span
                         key={item}
-                        className="rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.14em] text-[#e9e9e7]/72"
+                        className="rounded-full border border-white/10 px-4 py-2 text-xs uppercase tracking-[0.14em] text-[#e9e9e7]/75"
                       >
                         {item}
                       </span>
@@ -200,7 +200,7 @@ const WorkSide = () => {
                   {build.focus.map((item) => (
                     <span
                       key={item}
-                      className="rounded-full border border-[#0d0d0d]/10 px-4 py-2 text-xs uppercase tracking-[0.14em] text-[#0d0d0d]/65"
+                      className="rounded-full border border-[#0d0d0d]/10 px-4 py-2 text-xs uppercase tracking-[0.14em] text-[#0d0d0d]/60"
                     >
                       {item}
                     </span>

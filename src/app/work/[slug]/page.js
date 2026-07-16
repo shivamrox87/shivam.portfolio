@@ -174,7 +174,7 @@ export default async function WorkDetailPage({ params }) {
           <div className="grid gap-4">
             {project.architecture.map((item, index) => (
               <div key={item} className="rounded-[28px] border border-[#0d0d0d]/10 bg-white p-6">
-                <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#0d0d0d]/45">
+                <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#0d0d0d]/50">
                   0{index + 1}
                 </p>
                 <p className="mt-4 text-lg leading-7 text-[#0d0d0d]">{item}</p>
@@ -197,7 +197,7 @@ export default async function WorkDetailPage({ params }) {
           <div className="grid gap-4">
             {project.learnings.map((item, index) => (
               <div key={item} className="rounded-[28px] border border-[#0d0d0d]/10 bg-white p-6">
-                <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#0d0d0d]/45">
+                <p className="text-sm font-medium uppercase tracking-[0.2em] text-[#0d0d0d]/50">
                   0{index + 1}
                 </p>
                 <p className="mt-4 text-lg leading-7 text-[#0d0d0d]">{item}</p>
