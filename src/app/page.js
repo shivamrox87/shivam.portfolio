@@ -57,11 +57,7 @@ export default function Home() {
       <article className="mx-auto w-full max-w-[820px] px-5 py-12 md:px-8 md:py-20">
         <h1 className="sr-only">Shivam Maurya, Senior AI Engineer</h1>
 
-        <p className="font-serif text-4xl leading-[1.08] tracking-[-0.025em] md:text-6xl">
-          I build secure AI platforms, developer tools, and production systems.
-        </p>
-
-        <div className="mt-8 space-y-5 body-copy">
+        <div className="space-y-5 body-copy">
           <p>
             I am a Senior AI Engineer at AlphaFMC, where I build enterprise AI infrastructure
             and internal systems for financial-services organisations.
