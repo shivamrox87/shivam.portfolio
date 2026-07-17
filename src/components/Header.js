@@ -12,18 +12,22 @@ const navigation = [
   { href: "/connect", label: "Contact" },
 ];
 
-export default function Header() {
+export default function Header({ singlePage = false }) {
   const [isOpen, setIsOpen] = useState(false);
+  const homeHref = singlePage ? "#top" : "/";
+  const links = singlePage
+    ? navigation.map((item) => ({ ...item, href: `#${item.label.toLowerCase()}` }))
+    : navigation;
 
   return (
     <header className="sticky inset-x-0 top-0 z-50 border-b border-[#d8d5cc] bg-[#fbfaf7]/95 backdrop-blur-md">
       <div className="site-shell flex h-20 items-center justify-between gap-8">
-        <Link href="/" className="font-serif text-2xl tracking-[-0.02em]" aria-label="Shivam Maurya home">
+        <Link href={homeHref} className="font-serif text-2xl tracking-[-0.02em]" aria-label="Shivam Maurya home">
           Shivam Maurya
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex lg:gap-8" aria-label="Primary navigation">
-          {navigation.map((item) => (
+          {links.map((item) => (
             <Link key={item.href} href={item.href} className="text-xs font-semibold uppercase tracking-[0.16em] text-[#55544e] transition hover:text-[#b84a2b]">
               {item.label}
             </Link>
@@ -44,7 +48,7 @@ export default function Header() {
 
       {isOpen ? (
         <nav id="mobile-navigation" className="site-shell flex flex-col border-t border-[#d8d5cc] bg-[#fbfaf7] pb-5 md:hidden" aria-label="Mobile navigation">
-          {navigation.map((item) => (
+          {links.map((item) => (
             <Link key={item.href} href={item.href} className="border-b border-[#d8d5cc] py-4 text-sm font-semibold uppercase tracking-[0.14em]" onClick={() => setIsOpen(false)}>
               {item.label}
             </Link>
