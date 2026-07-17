@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import { blogs, selectedWork } from "@/server/data";
+import { blogs, featuredWork } from "@/server/data";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,12 +12,12 @@ export default function Home() {
         <div className="grid gap-10 md:grid-cols-[300px_1fr] md:gap-16 lg:grid-cols-[340px_1fr] lg:gap-20">
           <div>
             <Image
-              src="https://res.cloudinary.com/ddtfebvov/image/upload/v1735989459/IMG_8531_aerspw.webp"
+              src="/shivam-maurya-profile.png"
               alt="Shivam Maurya"
-              width={720}
-              height={900}
+              width={800}
+              height={800}
               priority
-              className="aspect-[4/5] w-full max-w-[360px] object-cover object-center"
+              className="aspect-square w-full max-w-[360px] object-cover object-center"
             />
             <div className="mt-5 flex gap-5 text-sm text-[#68675f]">
               <Link href="https://www.linkedin.com/in/shivam--maurya" target="_blank" className="hover:text-[#b84a2b]">LinkedIn</Link>
@@ -26,9 +26,8 @@ export default function Home() {
           </div>
 
           <div className="md:pt-3">
-            <p className="eyebrow">Senior AI Engineer</p>
-            <h1 className="display-title mt-4">Shivam Maurya</h1>
-            <div className="mt-8 max-w-[720px] space-y-5 body-copy">
+            <h1 className="sr-only">Shivam Maurya, Senior AI Engineer</h1>
+            <div className="max-w-[720px] space-y-5 body-copy">
               <p>
                 I am a Senior AI Engineer at AlphaFMC, where I build secure AI infrastructure
                 and internal systems for financial-services organisations.
@@ -79,11 +78,11 @@ export default function Home() {
         <div className="site-shell page-section">
           <div className="grid gap-10 md:grid-cols-[0.35fr_1fr] md:gap-16">
             <div>
-              <p className="eyebrow">Selected work</p>
+              <p className="eyebrow">Featured work</p>
               <h2 className="section-title mt-3">Systems and products</h2>
             </div>
             <div className="border-t border-[#171714]">
-              {selectedWork.map((item) => (
+              {featuredWork.map((item) => (
                 <article key={item.name} className="grid gap-4 border-b border-[#d8d5cc] py-7 sm:grid-cols-[0.42fr_1fr] sm:gap-8">
                   <div>
                     <p className="font-serif text-2xl">{item.name}</p>

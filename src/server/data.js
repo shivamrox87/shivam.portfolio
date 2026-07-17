@@ -23,7 +23,7 @@ export const builderPrinciples = [
   "Simple workflows win when they survive real usage and real constraints.",
 ];
 
-export const selectedWork = [
+export const featuredWork = [
   {
     name: "Enterprise AI delivery",
     context: "AlphaFMC (Lionpoint Group) · Financial services",
