@@ -47,8 +47,8 @@ function Rule() {
   return <hr className="my-12 border-0 border-t border-[#d8d5cc] md:my-16" />;
 }
 
-function SectionTitle({ children }) {
-  return <h2 className="font-serif text-4xl leading-tight tracking-[-0.02em] md:text-5xl">{children}</h2>;
+function SectionTitle({ id, children }) {
+  return <h2 id={id} className="scroll-mt-8 font-serif text-4xl leading-tight tracking-[-0.02em] md:text-5xl">{children}</h2>;
 }
 
 export default function Home() {
@@ -66,7 +66,7 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,transparent_35%,#fbfaf7_100%)]" />
       </section>
 
-      <article className="relative z-10 mx-auto -mt-24 w-full max-w-[820px] px-5 pb-12 md:-mt-40 md:px-8 md:pb-20">
+      <article id="about" className="relative z-10 mx-auto -mt-24 w-full max-w-[820px] px-5 pb-12 md:-mt-40 md:px-8 md:pb-20">
         <h1 className="sr-only">Shivam Maurya, Senior AI Engineer</h1>
 
         <div className="space-y-5 body-copy">
@@ -92,7 +92,7 @@ export default function Home() {
 
         <Rule />
 
-        <SectionTitle>What I&apos;m working on right now</SectionTitle>
+        <SectionTitle id="now">What I&apos;m working on right now</SectionTitle>
         <div className="mt-8 space-y-6">
           {currentFocus.map(([label, detail]) => (
             <div key={label}>
@@ -124,7 +124,7 @@ export default function Home() {
 
         <Rule />
 
-        <SectionTitle>Things I&apos;ve been building</SectionTitle>
+        <SectionTitle id="featured-work">Things I&apos;ve been building</SectionTitle>
         <p className="mt-5 body-copy">
           Some of these are serious product explorations, some are shipped, and some are systems I
           have been improving over time. They are all things I have cared enough about to take beyond an idea.
@@ -181,7 +181,7 @@ export default function Home() {
 
         <Rule />
 
-        <SectionTitle>Things I&apos;m curious about</SectionTitle>
+        <SectionTitle id="research">Things I&apos;m curious about</SectionTitle>
         <p className="mt-5 body-copy">
           These are questions I keep exploring through research, prototypes, and conversations.
           They are not all shipped products, just areas where I am trying to form better opinions.
@@ -209,7 +209,7 @@ export default function Home() {
 
         <Rule />
 
-        <SectionTitle>Things I&apos;ve written about</SectionTitle>
+        <SectionTitle id="writing">Things I&apos;ve written about</SectionTitle>
         <p className="mt-5 body-copy">
           I write when I have something practical to share, usually from the overlap of AI engineering, developer tools, and trying to make a product useful.
         </p>
@@ -226,7 +226,7 @@ export default function Home() {
 
         <Rule />
 
-        <SectionTitle>Teaching and conversations</SectionTitle>
+        <SectionTitle id="speaking">Teaching and conversations</SectionTitle>
         <p className="mt-5 body-copy">
           Teaching has been part of my journey from the beginning. I enjoy making technical ideas less intimidating and helping people see a path into the work.
         </p>
@@ -262,16 +262,26 @@ export default function Home() {
 
         <Rule />
 
-        <SectionTitle>Contact</SectionTitle>
+        <SectionTitle id="contact">Contact</SectionTitle>
         <p className="mt-6 font-serif text-3xl leading-tight md:text-4xl">
           If something here resonates, let&apos;s talk.
         </p>
         <p className="mt-5 body-copy">
           Whether you are building something, organising a workshop, or just want to compare notes on AI and products, I would be glad to hear from you.
         </p>
-        <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-          <Link href="/connect" className="text-link">Contact me</Link>
-          <Link href="https://www.linkedin.com/in/shivam--maurya" target="_blank" className="text-link">LinkedIn</Link>
+        <div className="mt-8 flex items-end justify-between gap-8">
+          <div className="flex flex-wrap gap-x-6 gap-y-3">
+            <Link href="/connect" className="text-link">Contact me</Link>
+            <a href="mailto:connect@shivammaurya.com" className="text-link">connect@shivammaurya.com</a>
+            <Link href="https://www.linkedin.com/in/shivam--maurya" target="_blank" className="text-link">LinkedIn</Link>
+          </div>
+          <Image
+            src="/icon.png"
+            alt="Black-and-white illustration of Shivam Maurya"
+            width={112}
+            height={112}
+            className="shrink-0"
+          />
         </div>
 
       </article>

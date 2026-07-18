@@ -14,13 +14,32 @@ const newsreader = Newsreader({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://www.shivammaurya.com"),
   title: {
     default: "Shivam Maurya | Senior AI Engineer",
     template: "%s | Shivam Maurya",
   },
   description: "Shivam Maurya builds production AI systems across enterprise infrastructure, applied AI products, and developer workflows.",
-  icons: {
-    icon: '/favicon.ico',
+  openGraph: {
+    title: "Shivam Maurya | AI Systems and Developer Tools",
+    description: "AI systems, developer tools, and practical learning by Shivam Maurya.",
+    siteName: "Shivam Maurya",
+    type: "website",
+    url: "/",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Shivam Maurya - AI systems, developer tools, and practical learning",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shivam Maurya | AI Systems and Developer Tools",
+    description: "AI systems, developer tools, and practical learning by Shivam Maurya.",
+    images: ["/opengraph-image"],
   },
 };
 
