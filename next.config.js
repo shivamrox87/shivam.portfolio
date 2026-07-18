@@ -8,7 +8,7 @@ const nextConfig = {
       { source: '/work/:slug*', destination: '/#featured-work', permanent: true },
       { source: '/research', destination: '/#research', permanent: true },
       { source: '/blog', destination: '/#writing', permanent: true },
-      { source: '/blog/:slug*', destination: '/#writing', permanent: true },
+      { source: '/blog/:slug', destination: '/writing/:slug', permanent: true },
       { source: '/sessions', destination: '/#speaking', permanent: true },
       { source: '/connect', destination: '/#contact', permanent: true },
       { source: '/ebooks', destination: '/#writing', permanent: true },

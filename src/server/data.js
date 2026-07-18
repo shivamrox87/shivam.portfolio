@@ -774,6 +774,43 @@ export const blogs = [
     postedAt: "Engineering",
     content:
       "The best developer AI tools do not start with generation. They start with context, trust, and workflow fit. If a system cannot show why it produced an answer or where the answer came from, developers will treat it like a toy. The real challenge is turning messy repository state into usable product and architecture understanding.",
+    sections: [
+      {
+        heading: "A clever demo is not the finish line",
+        paragraphs: [
+          "Developer AI has no shortage of impressive demos. A model can explain a function, write a test, or generate a pull request description in seconds. That first interaction is useful, but it is not enough to earn a place in a developer's everyday workflow.",
+          "The question I keep coming back to is simpler: does the tool reduce the amount of thinking a developer has to repeat? A useful tool helps someone orient themselves in an unfamiliar repository, trace a decision through code, or move from a failed request to a credible next step.",
+        ],
+      },
+      {
+        heading: "Context is the product",
+        paragraphs: [
+          "Most engineering work happens inside a web of context: files, services, conventions, issues, deployment history, and decisions that were never written down. A response that looks plausible but ignores that context creates more verification work than it removes.",
+          "This is why repository-aware tools are interesting to me. They have to decide what to retrieve, how to keep that context current, and how to show their sources. The hard problem is not asking a model a question. It is turning a living codebase into context that is relevant, bounded, and inspectable.",
+        ],
+      },
+      {
+        heading: "Trust should be visible",
+        paragraphs: [
+          "Developers do not need an AI system to sound certain. They need it to be honest about what it knows. A good answer should point to the files, symbols, or assumptions behind it. When the evidence is weak, the product should make that obvious instead of filling the gap with confidence.",
+          "That changes the interface. Citations, links into code, a clear scope for each answer, and useful fallbacks are not cosmetic details. They are what let a developer decide whether to use the answer, investigate it, or ignore it.",
+        ],
+      },
+      {
+        heading: "Fit the workflow that already exists",
+        paragraphs: [
+          "The best developer tools do not ask people to abandon their habits. They meet work where it already happens: while reading a pull request, debugging an API, opening an unfamiliar repository, or trying to understand why a service behaves a certain way.",
+          "A product earns repeat use when it saves time at one of those moments without adding a new process to manage. That is a higher bar than producing an interesting answer, but it is the difference between a novelty and a dependable tool.",
+        ],
+      },
+      {
+        heading: "What I am building toward",
+        paragraphs: [
+          "When I work on developer AI products, I care less about making the model look magical and more about making complex software easier to understand. That means designing for context, traceability, permissions, and the actual moment a developer needs help.",
+          "Useful developer AI should leave people with more confidence in the system they are working on, not less. That is the standard worth building toward.",
+        ],
+      },
+    ],
   },
   {
     image:
@@ -785,6 +822,43 @@ export const blogs = [
     postedAt: "AI Infrastructure",
     content:
       "Most enterprise AI challenges are not model-selection problems. They are integration, governance, security, and reliability problems. The model matters, but the adoption curve is usually determined by how well the system fits operational reality.",
+    sections: [
+      {
+        heading: "The model is only one component",
+        paragraphs: [
+          "It is easy to frame enterprise AI as a model-selection exercise: choose the strongest model, write a prompt, and put a chat interface in front of it. In practice, that is usually the smallest part of the work.",
+          "The difficult questions are operational. Who can use the system? Which data can reach a provider? How are models routed? What happens when a provider is unavailable? How do teams observe cost, latency, failures, and quality over time? Those constraints define whether an AI capability can be used responsibly.",
+        ],
+      },
+      {
+        heading: "Integration is where the work begins",
+        paragraphs: [
+          "A useful internal AI system has to fit the organisation around it. That means identity, permissions, backend services, existing knowledge sources, and the workflows people already trust. A model response without those connections is usually an isolated demo.",
+          "This is why gateways and provider abstractions matter. They create a deliberate place to handle authentication, model access, routing, policy, usage controls, and provider-specific differences instead of rebuilding those concerns in every application.",
+        ],
+      },
+      {
+        heading: "Security is product design",
+        paragraphs: [
+          "Security is not something that gets added after the prompt works. It shapes what a product can do from the first architecture decision. Data classification, auditability, access boundaries, and the ability to explain where information went are all part of the user experience in an enterprise environment.",
+          "The same is true for agents and tool calling. An agent that can take action needs a permission model that is as intentional as the model choice. Capability without clear boundaries is not useful in a production setting.",
+        ],
+      },
+      {
+        heading: "Reliability earns adoption",
+        paragraphs: [
+          "People will forgive an early interface that is slightly rough. They will not repeatedly return to a system that is slow, inconsistent, or impossible to understand when it fails. Production AI needs sensible fallbacks, good logs, evaluation habits, and clear ownership.",
+          "This is also where multi-provider work becomes real. Providers differ in API behaviour, tool calling, rate limits, latency, and failure modes. The goal is not to hide every difference. It is to handle those differences deliberately so the product remains dependable.",
+        ],
+      },
+      {
+        heading: "Constraints are useful",
+        paragraphs: [
+          "Constraints can sound like friction, but they force better engineering. They make teams decide what data is truly needed, which actions should be allowed, how quality will be measured, and what a safe failure looks like.",
+          "The organisations that get value from AI will not be the ones with the most impressive demo. They will be the ones that turn capability into a system people can trust, operate, and improve.",
+        ],
+      },
+    ],
   },
   {
     image:
@@ -796,6 +870,43 @@ export const blogs = [
     postedAt: "Product",
     content:
       "Shipping AI products requires a narrower loop than most teams expect. Start with one painful user problem, define the decision quality needed, and design for traceability early. If the product depends on trust, your architecture has to make trust visible.",
+    sections: [
+      {
+        heading: "Start with one painful moment",
+        paragraphs: [
+          "AI makes it tempting to begin with a broad promise: help people code faster, automate their work, understand their data, or build a personal assistant. Those promises are hard to test because they contain too many different jobs.",
+          "A better starting point is one painful moment. A developer joins an unfamiliar repository. A team needs to understand a failing API response. Someone needs to turn messy source material into a first useful draft. The narrower the problem, the easier it is to decide whether the product is genuinely helping.",
+        ],
+      },
+      {
+        heading: "Define what a good answer means",
+        paragraphs: [
+          "An AI product does not only need an output. It needs a definition of quality. Is the response factually grounded? Is it useful in the user's next decision? Does it preserve the right constraints? Can the user see enough evidence to trust it?",
+          "Without that definition, teams optimise for whatever is easiest to notice: a fluent demo, a fast response, or a high volume of generated text. Those are poor substitutes for a product that helps someone complete real work.",
+        ],
+      },
+      {
+        heading: "Build the smallest believable loop",
+        paragraphs: [
+          "The first version should cover one end-to-end loop. It should let a real user bring in the minimum useful context, ask or trigger something meaningful, understand the result, and decide what to do next. That loop teaches more than a large feature list ever will.",
+          "For AI products, the surrounding pieces matter immediately: authentication, context ingestion, error handling, observability, and a way to capture feedback. They may not make the launch video, but they are what turn a capability into a product.",
+        ],
+      },
+      {
+        heading: "Make trust visible early",
+        paragraphs: [
+          "If the user has to make a decision based on the output, the product needs to show its work. That can mean sources, explicit assumptions, confidence boundaries, or an easy path back to the original material.",
+          "Traceability is especially important in technical and enterprise products. It reduces the cost of verifying an answer and gives users a way to correct the system when it is wrong. That feedback becomes part of the product's learning loop.",
+        ],
+      },
+      {
+        heading: "Keep the loop tight after launch",
+        paragraphs: [
+          "Launching is where the useful work starts. Watch where people stop, what they ask repeatedly, which answers they distrust, and where the product creates more work than it removes. Then improve the narrowest part of the loop that is blocking value.",
+          "The AI products I want to build are not defined by a single model release. They get better because the product, infrastructure, and understanding of the user problem keep improving together.",
+        ],
+      },
+    ],
   },
 ];
 

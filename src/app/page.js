@@ -216,7 +216,7 @@ export default function Home() {
         <div className="mt-8 space-y-7">
           {blogs.map((post) => (
             <section key={post.slug}>
-              <Link href={`/blog/${post.slug}`} className="group">
+              <Link href={`/writing/${post.slug}`} className="group">
                 <h3 className="font-serif text-2xl leading-tight transition-colors group-hover:text-[#b84a2b]">{post.blogHeading}</h3>
               </Link>
               <p className="mt-2 text-sm text-[#68675f]">{post.postedAt} · {post.postedOn}</p>
