@@ -766,6 +766,77 @@ export const playGround = [
 export const blogs = [
   {
     image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Jul 20, 2026",
+    blogHeading: "An Agent Should Ask for Permission When It Needs It",
+    slug: "an-agent-should-ask-for-permission-when-it-needs-it",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "The useful question is not whether an agent is allowed to act. It is whether it has the smallest permission it needs for this action, on this resource, at this moment. Treating permission as part of the interaction makes ambitious automation easier to trust and easier to operate.",
+    sections: [
+      {
+        heading: "A role is too broad for a moving task",
+        paragraphs: [
+          "An agent rarely does one fixed job. In a single session it might read a repository, inspect a production incident, open a ticket, draft a change, and ask to deploy it. Giving that whole sequence one permanent level of access is convenient at the beginning and hard to defend later.",
+          "I find it more useful to think in terms of a concrete request: read these logs, create this pull request, send this message, or change this setting. The permission should describe the action and the target, not just the name of the agent that happened to ask.",
+        ],
+      },
+      {
+        heading: "Keep planning separate from authority",
+        paragraphs: [
+          "A model can propose a useful next step without being the component that authorises it. That separation is important. The model can interpret context and form a plan; a policy layer can decide whether the requested tool, resource, and parameters are allowed; a person can be brought in when the consequence is material.",
+          "This also makes failures easier to understand. If an action is denied, the system can say whether the problem was an unavailable capability, an invalid target, a missing scope, or an approval requirement. That is much better than treating every denied tool call as a mysterious model failure.",
+        ],
+      },
+      {
+        heading: "Start small and escalate deliberately",
+        paragraphs: [
+          "Read-only access is often enough to help someone orient themselves. A draft can usually be created in a reversible workspace. The request for a production change, an external message, or a deletion is the moment to ask for more. This is not about adding friction everywhere; it is about placing friction where recovery becomes expensive.",
+          "The current Model Context Protocol authorization specification reflects this direction: it supports incremental scope consent and requires tokens to be bound to the intended MCP resource. Those details matter because a broad or reusable token turns a local approval into a much larger boundary than the user may have intended.",
+        ],
+        sources: [
+          {
+            label: "Model Context Protocol: Authorization specification (2025-11-25)",
+            href: "https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization",
+          },
+          {
+            label: "Model Context Protocol: 2025-11-25 key changes",
+            href: "https://modelcontextprotocol.io/specification/2025-11-25/changelog",
+          },
+        ],
+      },
+      {
+        heading: "Make the approval meaningful",
+        paragraphs: [
+          "An approval prompt should answer the questions a careful teammate would ask: what will happen, where will it happen, which identity will be used, and what can be changed or sent? “Allow tool access” hides the decision. “Create a pull request in this repository with these files” gives someone a real choice.",
+          "For recurring work, expiry matters too. A narrowly scoped permission that lasts for one task has a very different risk profile from a standing grant that survives indefinitely. Good defaults make the safe path the easy one without forcing people to re-authorise harmless reads all day.",
+        ],
+      },
+      {
+        heading: "The audit trail is part of the product",
+        paragraphs: [
+          "When an agent takes action, I want a compact record of the actor, requested capability, target, decision, and result. It should be useful to the person debugging an incident as well as the person asking why an action did not run. That means retaining decision metadata while being disciplined about not logging secrets or unnecessary sensitive content.",
+          "The same record improves evaluation. Teams can test whether an agent asks at the right boundary, whether it reaches for tools it does not need, and whether an approval actually constrained the final action. OWASP's agent-security guidance makes a similar practical case for least privilege, explicit authorisation for sensitive operations, and testing around tool access.",
+        ],
+        sources: [
+          {
+            label: "OWASP: AI Agent Security Cheat Sheet",
+            href: "https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html",
+          },
+        ],
+      },
+      {
+        heading: "Permission design is product design",
+        paragraphs: [
+          "The goal is not to make agents timid. It is to let them be genuinely useful without silently accumulating power. A system that can show its intended action, request the minimum additional authority, and leave a clear record gives people a reason to use it for consequential work.",
+          "That is the standard I want for production AI systems: capability that expands carefully, stays legible, and can be improved after every real interaction.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
       "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Jul 13, 2026",
     blogHeading: "What Makes Developer AI Tools Useful Instead of Impressive",

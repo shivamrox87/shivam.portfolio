@@ -44,6 +44,22 @@ export default async function WritingPage({ params }) {
               <h2 className="font-serif text-3xl leading-tight md:text-4xl">{section.heading}</h2>
               <div className="mt-5 space-y-5 text-base leading-8 text-[#4f4e48] md:text-lg">
                 {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                {section.sources?.length ? (
+                  <ul className="space-y-2 pt-1 text-sm leading-6">
+                    {section.sources.map((source) => (
+                      <li key={source.href}>
+                        <a
+                          className="text-link"
+                          href={source.href}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          {source.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </div>
             </section>
           ))}
