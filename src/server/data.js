@@ -767,6 +767,74 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Jul 22, 2026",
+    blogHeading: "An Agent Eval Needs a Map, Not a Grade",
+    slug: "an-agent-eval-needs-a-map-not-a-grade",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "A single pass rate can make an agent look ready long before it is dependable. Production evaluation should show where the system succeeds, where it becomes brittle, and what it spent to get there. That turns an impressive demo into an engineering decision.",
+    sections: [
+      {
+        heading: "The final answer hides the system that produced it",
+        paragraphs: [
+          "An agent can return the right answer for the wrong reasons. It may have retrieved an irrelevant document, retried until a lucky response appeared, used a tool it should not have touched, or consumed far more time and tokens than the product can afford. A final-answer-only score flattens all of that into a pass.",
+          "That is a weak basis for a release decision. What users experience is the whole run: the context the agent saw, the choices it made, the actions it took, and the way it recovered when something failed. The evaluation should preserve enough of that path to tell us whether a success is worth trusting.",
+        ],
+      },
+      {
+        heading: "Turn a benchmark into a capability map",
+        paragraphs: [
+          "I prefer to slice a task set by the conditions that change the work. For a repository assistant, that might mean a well-named service versus an ambiguous one, a local change versus one that crosses a dependency boundary, or a request with complete context versus a request that requires careful retrieval.",
+          "Each slice should have a reason to exist: a user job, an operational constraint, or a known failure mode. The useful question becomes, \"where does this system stop being reliable enough for this workflow?\" That answer is more actionable than one blended percentage.",
+          "Google Cloud recently described this same shift in evaluation thinking: rather than a fixed pass/fail benchmark, use variations in task difficulty to understand where an agent's capability falls away. The mechanism will differ by product, but the design instinct is broadly useful.",
+        ],
+        sources: [
+          {
+            label: "Google Cloud: Who evaluates the evaluations?",
+            href: "https://cloud.google.com/blog/products/data-analytics/evaluate-agent-performance",
+          },
+        ],
+      },
+      {
+        heading: "Measure the trajectory, not only the outcome",
+        paragraphs: [
+          "For every case, I want to record an outcome and a small set of run-level signals: whether the agent selected the right source or tool, whether it stayed inside its permission boundary, how many attempts it needed, where it escalated, and whether a human had to repair the result. These are not vanity metrics. They explain why the outcome happened.",
+          "This is especially important for agents that act across systems. A response can look harmless while the sequence that produced it shows unnecessary exploration, an avoidable write, or a slow drift from the user's original constraint. A trace gives the team something concrete to review and improve.",
+        ],
+      },
+      {
+        heading: "Make the budget part of the contract",
+        paragraphs: [
+          "Reliability without a budget is incomplete. A system that solves a task after fifteen retries may be acceptable for an internal research job and unusable in a customer-facing workflow. The same is true of latency, tool calls, and inference cost. They belong in the acceptance criteria before the model is switched or the prompt is changed.",
+          "OpenAI's recent guidance on trustworthy evaluations makes this explicit: the evaluated system includes its model settings, tool access, and harness, while the reported budget includes turns, tokens, retries, time, and cost. That is a helpful reminder that the wrapper around a model is not an implementation detail; it materially changes the result.",
+        ],
+        sources: [
+          {
+            label: "OpenAI: A shared playbook for trustworthy third party evaluations",
+            href: "https://openai.com/index/trustworthy-third-party-evaluations-foundations/",
+          },
+        ],
+      },
+      {
+        heading: "Let production teach the next evaluation",
+        paragraphs: [
+          "The first evaluation set will always be incomplete. When a user reports a weak answer, a tool call times out, or a fallback produces a confusing response, the goal is not only to patch that instance. Capture the smallest reproducible version of the situation, decide the expected behaviour, and add it to the relevant slice.",
+          "Over time, that creates a living release gate instead of a ceremonial benchmark. It also makes product conversations sharper: we can decide which user journeys deserve higher reliability, which failures are safe to recover from, and where the system should ask for help rather than pretend it knows.",
+        ],
+      },
+      {
+        heading: "The score is a starting point",
+        paragraphs: [
+          "A score still has value. It tells us whether a change moved in the right direction. But I do not want a score to be the whole story. I want a compact map of task slices, success and failure traces, budget, and the specific behaviours we are willing to ship.",
+          "That is how evaluation becomes part of operating an AI product: not a demo checkpoint, but a shared way to make tradeoffs visible before users have to discover them for us.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Jul 20, 2026",
     blogHeading: "An Agent Should Ask for Permission When It Needs It",
     slug: "an-agent-should-ask-for-permission-when-it-needs-it",
