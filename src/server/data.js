@@ -767,6 +767,72 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Jul 24, 2026",
+    blogHeading: "A Model Alias Is Not a Release Strategy",
+    slug: "a-model-alias-is-not-a-release-strategy",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "A model name can look like a stable configuration while its behaviour, lifecycle, or supporting API changes underneath it. Production teams need a way to adopt better models without turning every provider update into an unreviewed product change.",
+    sections: [
+      {
+        heading: "The model name hides a deployment decision",
+        paragraphs: [
+          "It is tempting to treat a model identifier as a harmless line of configuration. Put a familiar name behind an environment variable and the application seems neatly decoupled from any provider. But the name sits at the point where product behaviour becomes real: it affects reasoning, output shape, tool use, latency, cost, and the failure modes a user sees.",
+          "That means changing a model is closer to changing a dependency than changing a label. The request may still be valid; the response may now choose a different tool; a structured output may become more or less reliable. None of those changes are necessarily bad. They simply deserve the same deliberate release path as the rest of the system.",
+        ],
+      },
+      {
+        heading: "Aliases are useful, but they are movable",
+        paragraphs: [
+          "Aliases solve a real operational problem. They give a team a friendly way to refer to an approved version, and they make rollback possible without editing every service. The mistake is treating an alias as proof that nothing material changed. An alias is specifically designed to move.",
+          "Google's Model Registry documentation calls an alias a mutable reference and compares it to a Docker tag or Git branch. That is the right mental model: useful for promotion, but not a substitute for knowing which version production actually ran. I want the release record to resolve the alias to a concrete provider, endpoint or region, and version identifier.",
+        ],
+        sources: [
+          {
+            label: "Google Cloud: How to use model version aliases",
+            href: "https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/model-alias",
+          },
+        ],
+      },
+      {
+        heading: "Define a model contract around the identifier",
+        paragraphs: [
+          "For each production capability, I like a small model contract next to the configuration. It records the exact model reference, the provider and deployment location, the API and SDK version, expected input and output modes, enabled tools, fallback behaviour, and the latency and cost budget. It also links to the evaluation slice that protects the user journey.",
+          "This is not bureaucracy for its own sake. When a response looks different in an incident review, the team can answer a basic question quickly: what system did this request actually use? A model contract turns that answer from scattered environment variables and release notes into one inspectable object.",
+        ],
+      },
+      {
+        heading: "Give upgrades a separate lane",
+        paragraphs: [
+          "I prefer two explicit lanes: a pinned production configuration and a candidate configuration. New models, snapshots, prompts, or tool schemas enter the candidate lane first. Run the relevant evaluation cases, compare trace-level behaviour and budget, then expose the candidate to a small, reversible slice of traffic when the risk warrants it. Promotion should change a named release configuration, not quietly replace the meaning of a generic model name.",
+          "That discipline is consistent with OpenAI's current API guidance: prompting behaviour can change between snapshots, and the documentation recommends pinned versions plus application-level evaluations for consistent behaviour. Pinning is not a reason to stop improving. It is what makes the improvement measurable and reversible.",
+        ],
+        sources: [
+          {
+            label: "OpenAI API: Backwards compatibility and model snapshots",
+            href: "https://developers.openai.com/api/reference/overview#backwards-compatibility",
+          },
+        ],
+      },
+      {
+        heading: "Treat lifecycle notices as engineering input",
+        paragraphs: [
+          "Provider lifecycle changes are a reminder that model operations need an owner. Google Cloud's current release notes include retired models, announced shutdown dates, and endpoint migrations with disruption deadlines. The exact vendors will differ, but the operating pattern does not: watch the lifecycle feed, create a candidate replacement early, and test the particular capabilities your product relies on before the deadline becomes an outage.",
+          "The goal is not to freeze an AI product in time. It is to make change legible. When model selection is a release decision with a contract, an evaluation trail, and a rollback path, the team can adopt new capability with confidence instead of hoping a configuration update behaves like a no-op.",
+        ],
+        sources: [
+          {
+            label: "Google Cloud: Vertex AI release notes",
+            href: "https://docs.cloud.google.com/vertex-ai/docs/release-notes",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Jul 22, 2026",
     blogHeading: "An Agent Eval Needs a Map, Not a Grade",
     slug: "an-agent-eval-needs-a-map-not-a-grade",
