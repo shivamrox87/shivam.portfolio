@@ -767,6 +767,79 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Jul 27, 2026",
+    blogHeading: "An Agent Tool Is an API Contract",
+    slug: "an-agent-tool-is-an-api-contract",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "The moment an agent can call a tool, its prompt has become an integration surface. The schema, result shape, failure behaviour, and rollout path deserve the same care as any other production API—not because models are fragile, but because real systems change.",
+    sections: [
+      {
+        heading: "A tool definition is a promise to several systems",
+        paragraphs: [
+          "A tool description can look like a small prompt detail: a name, a sentence of guidance, and a few parameters. In practice it connects a model, an application, an API, and often a person who will have to understand a surprising result later. Every field is a promise about what the caller may ask for and what the service will accept.",
+          "That is why I treat a tool definition as an API contract. The model is one client of that contract, but it is not the only concern. The service still needs a clear input boundary, predictable semantics, useful errors, and a way to evolve without making an old workflow silently mean something new.",
+        ],
+      },
+      {
+        heading: "Make the valid call smaller than the plausible call",
+        paragraphs: [
+          "Natural language is deliberately flexible; an action interface should not be. A good tool has a narrow verb, a small set of typed arguments, constrained values where possible, and defaults that are safe to explain. I would rather expose read_issue with a repository and issue number than a single broad execute_operation tool with a paragraph of instructions inside it.",
+          "Schema discipline is useful here because it turns assumptions into checks. OpenAI's current function-calling guidance recommends strict mode, which requires every object to disallow additional properties and every declared property to be required. The exact implementation will vary by provider, but the broader lesson holds: reject ambiguity at the boundary instead of hoping downstream code interprets it safely.",
+        ],
+        sources: [
+          {
+            label: "OpenAI: Function calling guide",
+            href: "https://developers.openai.com/api/docs/guides/function-calling",
+          },
+        ],
+      },
+      {
+        heading: "Version the meaning, not only the code",
+        paragraphs: [
+          "Changing a parameter can be a product change even when the endpoint still returns 200. Renaming a status, widening a query, changing a default, or returning a different identifier may change what an agent decides to do next. Those are compatibility questions, not just implementation details.",
+          "For a consequential tool, I want an owner, a documented schema version, example requests and results, and a deprecation path. Additive changes are usually easier to absorb; semantic changes deserve a new tool name or version until callers have moved. That makes it possible to test a candidate agent against the contract it will actually meet in production.",
+        ],
+      },
+      {
+        heading: "Design the result for the next decision",
+        paragraphs: [
+          "Tool output is not an internal log line. It becomes context for the next model step and often evidence for a human reviewer. Return the facts needed for the next decision, stable identifiers for follow-up work, and a bounded error shape that distinguishes an invalid request from a permission denial, missing record, or temporary dependency failure.",
+          "This is one place where structured output pays for itself. The Model Context Protocol's current tools specification gives tools both an input schema and an optional output schema; servers must conform to an advertised output schema and clients are encouraged to validate it. A shared result shape reduces the chance that a recovery path is built on a convenient but incorrect reading of free text.",
+        ],
+        sources: [
+          {
+            label: "Model Context Protocol: Tools specification",
+            href: "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+          },
+        ],
+      },
+      {
+        heading: "Keep the available surface intentional",
+        paragraphs: [
+          "More tools do not automatically make an agent more capable. They create more choices, more prompt context, and more ways to reach for an action that is technically available but irrelevant. The useful question before a turn is not, 'what could this agent ever do?' It is, 'what does this job need right now?'",
+          "That has practical benefits beyond safety. OpenAI notes that callable function definitions consume input context and recommends keeping the initially available set small, evaluating the effect of tool count, and deferring rarely used tools when appropriate. A smaller, task-relevant surface is easier to reason about, cheaper to send, and easier to evaluate when behaviour drifts.",
+        ],
+        sources: [
+          {
+            label: "OpenAI: Function calling guidance on tool count and token use",
+            href: "https://developers.openai.com/api/docs/guides/function-calling",
+          },
+        ],
+      },
+      {
+        heading: "Test the contract at the boundary",
+        paragraphs: [
+          "Agent evaluations should include the tool boundary, not only the final answer. I would test valid calls, missing and extra fields, stale identifiers, policy denials, timeouts, duplicate requests, and changed result shapes. For every failure, define what the agent should tell the user and whether it may retry, choose another read-only path, or ask for help.",
+          "The benefit is not merely fewer malformed calls. A versioned, observable tool contract gives product, platform, and security work the same object to discuss. When an agent behaves unexpectedly, the team can inspect the request, the policy decision, the service result, and the schema version together. That is a much stronger starting point than asking whether the prompt was good enough.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Jul 24, 2026",
     blogHeading: "A Model Alias Is Not a Release Strategy",
     slug: "a-model-alias-is-not-a-release-strategy",
