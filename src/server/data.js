@@ -767,6 +767,66 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Jul 29, 2026",
+    blogHeading: "Long-Running Agents Need Checkpoints, Not Longer Timeouts",
+    slug: "long-running-agents-need-checkpoints-not-longer-timeouts",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "As agents take on work that can pause for people, tools, and outside systems, a long timeout is not a reliability strategy. The useful unit of engineering is a checkpoint: a clear, inspectable point from which the work can safely continue—or stop.",
+    sections: [
+      {
+        heading: "A long task is a different kind of system",
+        paragraphs: [
+          "A request that finishes during one response can often be treated like a single interaction. A request that lasts for hours cannot. A browser session can disconnect, a tool can stall, a user can need to approve a step, and the underlying data can change while the agent is waiting. Treating that whole run as one uninterrupted thread makes a temporary interruption look like a failure—or, worse, encourages a blind restart.",
+          "The recent discussion around durable agent runtimes makes this practical rather than theoretical. Google describes long-running workflows as fragile in production and calls out resumption after outages and human-in-the-loop confirmations as a native concern. The important takeaway is not a particular runtime. It is that waiting, reconnecting, and resuming belong in the design of the job itself.",
+        ],
+        sources: [
+          {
+            label: "Google Cloud: Introducing Agent Executor, a distributed agent runtime",
+            href: "https://cloud.google.com/blog/products/ai-machine-learning/agent-executor-googles-distributed-agent-runtime/",
+          },
+        ],
+      },
+      {
+        heading: "Checkpoint the facts, not a vague conversation",
+        paragraphs: [
+          "A useful checkpoint is more than a saved chat transcript. It records what the agent was trying to achieve, the work item and stable resource identifiers it touched, the last completed step, the inputs and policy version that governed the run, and the evidence needed to choose the next action. If the system cannot reconstruct that state, it cannot reliably tell whether it should continue, ask, or begin again.",
+          "This is also where I want to make external effects explicit. A draft created in a workspace, a ticket submitted to another system, and a deployment request are not interchangeable events. Record the idempotency key or resulting identifier before the agent moves on. On resume, inspect that record first; do not let a fresh model turn uncertainty into a duplicate write.",
+        ],
+      },
+      {
+        heading: "Use checkpoints as decision boundaries",
+        paragraphs: [
+          "The best time to request approval is often between two phases of work. An agent can gather evidence, prepare a proposed change, and present the exact target and consequence before it crosses into a write, send, or production action. That keeps planning useful without treating a plan as authority.",
+          "A pause can also be a safety control. OpenAI's recent account of long-horizon model deployment describes why examining single actions is not enough when a sequence unfolds over time; its monitoring can pause a session and surface it to a user. For product teams, the general pattern is valuable: define the states that require a human decision, and make resumption conditional on a fresh, recorded decision rather than an old assumption.",
+        ],
+        sources: [
+          {
+            label: "OpenAI: Safety and alignment in an era of long-horizon models",
+            href: "https://openai.com/index/safety-alignment-long-horizon-models/",
+          },
+        ],
+      },
+      {
+        heading: "Resume with a reconciliation step",
+        paragraphs: [
+          "Resuming should not mean replaying the last few messages and hoping the world is unchanged. Before the next tool call, re-check the resource version, permission, and side-effect status that matter to the next decision. If a document changed, a request expired, or someone else completed the work, the right outcome may be a concise explanation instead of more automation.",
+          "I like to make that reconciliation visible in the trace: checkpoint loaded, current state verified, next action selected. It gives an operator a straightforward answer when a user asks what happened during a gap, and it gives the evaluation suite a concrete place to test stale state, revoked access, and duplicate-request behaviour.",
+        ],
+      },
+      {
+        heading: "Design for stop, inspect, and branch",
+        paragraphs: [
+          "A checkpoint is useful even when the run never resumes. It lets a person inspect the work so far, hand it to another system, or end it cleanly without losing the reasoning that led to the current state. It also makes controlled experimentation possible: branch from the same known state to compare a new tool policy, a new model configuration, or a safer recovery path.",
+          "That changes the question from 'can the agent keep going?' to 'can we understand and control where it is?' For production AI, that is the more durable capability. A system that can stop safely and continue deliberately will earn more trust than one that merely appears tireless.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Jul 27, 2026",
     blogHeading: "An Agent Tool Is an API Contract",
     slug: "an-agent-tool-is-an-api-contract",
