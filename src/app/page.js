@@ -53,7 +53,7 @@ function SectionTitle({ id, children }) {
 
 export default function Home() {
   return (
-    <main>
+    <main id="main-content">
       <section className="relative h-[400px] overflow-hidden md:h-[580px]">
         <Image
           src="https://res.cloudinary.com/ddtfebvov/image/upload/v1735629588/uoGweUB1Hmu5gOVlOQ7RI0QXup8_rf6xoh.avif"

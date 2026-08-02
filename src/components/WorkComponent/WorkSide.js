@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import {
   capabilityAreas,
   caseStudies,
@@ -13,8 +12,7 @@ export default function WorkSide() {
     .filter(Boolean);
 
   return (
-    <main>
-      <Header />
+    <main id="main-content">
 
       <section className="site-shell page-section">
         <p className="eyebrow">Work</p>

@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/Header";
 import { useEffect, useState } from "react";
 
 export default function NewslettersPage() {
@@ -16,8 +15,7 @@ export default function NewslettersPage() {
   }, []);
 
   return (
-    <main>
-      <Header />
+    <main id="main-content">
       <section className="site-shell page-section">
         <p className="eyebrow">Newsletter archive</p>
         <h1 className="display-title mt-4 max-w-[780px]">AI and automation notes.</h1>

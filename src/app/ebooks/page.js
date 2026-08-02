@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import { books } from "@/server/data";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,8 +6,7 @@ export const metadata = { title: "Books", description: "Beginner-friendly books 
 
 export default function EbooksPage() {
   return (
-    <main>
-      <Header />
+    <main id="main-content">
       <section className="site-shell page-section">
         <p className="eyebrow">Books</p>
         <h1 className="display-title mt-4 max-w-[760px]">Practical introductions to programming and AI.</h1>

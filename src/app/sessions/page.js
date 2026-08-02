@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -30,8 +29,7 @@ const sessions = [
 
 export default function SessionsPage() {
   return (
-    <main>
-      <Header />
+    <main id="main-content">
       <section className="site-shell page-section">
         <p className="eyebrow">Speaking</p>
         <h1 className="display-title mt-4 max-w-[780px]">Teaching and conversations about applied AI.</h1>

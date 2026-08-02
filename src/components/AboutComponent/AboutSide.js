@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import { communityHighlights, companiesData } from "@/server/data";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,8 +17,7 @@ const principles = [
 
 export default function AboutSide() {
   return (
-    <main className="w-full">
-      <Header />
+    <main id="main-content" className="w-full">
 
       <section className="site-shell page-section">
         <div className="grid gap-10 md:grid-cols-[1fr_300px] md:items-start md:gap-16 lg:grid-cols-[1fr_340px]">

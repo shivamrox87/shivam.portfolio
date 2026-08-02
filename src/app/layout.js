@@ -1,5 +1,6 @@
 import "./globals.css";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import { Manrope, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -53,6 +54,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${manrope.variable} ${newsreader.variable} bg-[#fbfaf7] font-sans text-[#171714] antialiased`}>
+        <a href="#main-content" className="sr-only z-[100] bg-[#171714] px-4 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
+          Skip to content
+        </a>
+        <Header />
         {children}
         <Footer />
         <Analytics />

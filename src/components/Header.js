@@ -1,59 +1,105 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const navigation = [
   { href: "/about", label: "About" },
   { href: "/work", label: "Work" },
   { href: "/research", label: "Research" },
-  { href: "/blog", label: "Writing" },
+  { href: "/writing", label: "Writing" },
   { href: "/sessions", label: "Speaking" },
-  { href: "/connect", label: "Contact" },
 ];
 
-export default function Header({ singlePage = false }) {
+export default function Header() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const homeHref = singlePage ? "#top" : "/";
-  const links = singlePage
-    ? navigation.map((item) => ({ ...item, href: `#${item.label.toLowerCase()}` }))
-    : navigation;
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!isOpen) return undefined;
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [isOpen]);
+
+  const isActive = (href) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header className="sticky inset-x-0 top-0 z-50 border-b border-[#d8d5cc] bg-[#fbfaf7]/95 backdrop-blur-md">
-      <div className="site-shell flex h-20 items-center justify-between gap-8">
-        <Link href={homeHref} className="font-serif text-2xl tracking-[-0.02em]" aria-label="Shivam Maurya home">
-          Shivam Maurya
+    <header className="sticky inset-x-0 top-0 z-50 border-b border-[#d8d5cc]/80 bg-[#fbfaf7]/90 backdrop-blur-xl">
+      <div className="site-shell flex h-[72px] items-center justify-between gap-6">
+        <Link href="/" className="group inline-flex items-center" aria-label="Shivam Maurya, home">
+          <span className="font-serif text-xl tracking-[-0.02em] sm:text-[22px]">Shivam Maurya</span>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex lg:gap-8" aria-label="Primary navigation">
-          {links.map((item) => (
-            <Link key={item.href} href={item.href} className="text-xs font-semibold uppercase tracking-[0.16em] text-[#55544e] transition hover:text-[#b84a2b]">
+        <div className="hidden items-center gap-7 md:flex lg:gap-9">
+          <nav className="flex items-center gap-5 lg:gap-7" aria-label="Primary navigation">
+          {navigation.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={isActive(item.href) ? "page" : undefined}
+              className={`relative py-2 text-[11px] font-semibold uppercase tracking-[0.16em] transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:bg-[#b84a2b] after:transition-transform ${
+                isActive(item.href)
+                  ? "text-[#171714] after:scale-x-100"
+                  : "text-[#68675f] after:scale-x-0 hover:text-[#171714] hover:after:scale-x-100"
+              }`}
+            >
               {item.label}
             </Link>
           ))}
-        </nav>
+          </nav>
+          <Link
+            href="/connect"
+            aria-current={isActive("/connect") ? "page" : undefined}
+            className="rounded-full bg-[#171714] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-[#fbfaf7] transition-colors hover:bg-[#b84a2b]"
+          >
+            Let&apos;s talk
+          </Link>
+        </div>
 
         <button
           type="button"
-          className="flex h-10 w-10 items-center justify-center border border-[#d8d5cc] text-[#171714] md:hidden"
+          className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[#d8d5cc] text-[#171714] transition-colors hover:border-[#171714] md:hidden"
           onClick={() => setIsOpen((open) => !open)}
           aria-expanded={isOpen}
           aria-controls="mobile-navigation"
-          aria-label="Toggle navigation"
+          aria-label={isOpen ? "Close navigation" : "Open navigation"}
         >
-          <span className="text-lg leading-none">{isOpen ? "×" : "≡"}</span>
+          <span className="sr-only">{isOpen ? "Close navigation" : "Open navigation"}</span>
+          <span aria-hidden="true" className="flex w-4 flex-col gap-1.5">
+            <span className={`h-px w-4 bg-current transition-transform ${isOpen ? "translate-y-[3.5px] rotate-45" : ""}`} />
+            <span className={`h-px w-4 bg-current transition-transform ${isOpen ? "-translate-y-[3.5px] -rotate-45" : ""}`} />
+          </span>
         </button>
       </div>
 
       {isOpen ? (
-        <nav id="mobile-navigation" className="site-shell flex flex-col border-t border-[#d8d5cc] bg-[#fbfaf7] pb-5 md:hidden" aria-label="Mobile navigation">
-          {links.map((item) => (
-            <Link key={item.href} href={item.href} className="border-b border-[#d8d5cc] py-4 text-sm font-semibold uppercase tracking-[0.14em]" onClick={() => setIsOpen(false)}>
-              {item.label}
+        <div id="mobile-navigation" className="border-t border-[#d8d5cc]/80 bg-[#fbfaf7] md:hidden">
+          <nav className="site-shell grid grid-cols-2 gap-x-5 py-4" aria-label="Mobile navigation">
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive(item.href) ? "page" : undefined}
+                className={`border-b border-[#d8d5cc] py-4 font-serif text-2xl transition-colors ${isActive(item.href) ? "text-[#b84a2b]" : "hover:text-[#b84a2b]"}`}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link href="/connect" className="col-span-2 mt-5 flex items-center justify-between rounded-full bg-[#171714] px-5 py-3.5 text-sm font-semibold text-[#fbfaf7]">
+              Let&apos;s work together <span aria-hidden="true">↗</span>
             </Link>
-          ))}
-        </nav>
+          </nav>
+        </div>
       ) : null}
     </header>
   );

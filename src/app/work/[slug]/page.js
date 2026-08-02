@@ -1,5 +1,4 @@
 import ArchitectureFlow from "@/components/ArchitectureFlow";
-import Header from "@/components/Header";
 import { caseStudies } from "@/server/data";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -20,8 +19,7 @@ export default async function WorkDetailPage({ params }) {
   if (!project) notFound();
 
   return (
-    <main>
-      <Header />
+    <main id="main-content">
       <section className="site-shell page-section">
         <Link href="/work" className="text-link">Back to work</Link>
         <p className="eyebrow mt-12">{project.category} · {project.status}</p>

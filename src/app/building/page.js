@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import { currentBuilds, playGround } from "@/server/data";
 import Link from "next/link";
 
@@ -6,8 +5,7 @@ export const metadata = { title: "Now", description: "What Shivam Maurya is curr
 
 export default function BuildingPage() {
   return (
-    <main>
-      <Header />
+    <main id="main-content">
       <section className="site-shell page-section">
         <p className="eyebrow">Now · July 2026</p>
         <h1 className="display-title mt-4 max-w-[800px]">What I am building and studying.</h1>

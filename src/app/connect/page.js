@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/Header";
 import { useEffect } from "react";
 
 export default function ContactPage() {
@@ -13,8 +12,7 @@ export default function ContactPage() {
   }, []);
 
   return (
-    <main>
-      <Header />
+    <main id="main-content">
       <section className="site-shell page-section">
         <div className="grid gap-12 md:grid-cols-[0.42fr_1fr] md:gap-16">
           <div>

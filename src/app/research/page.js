@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import { researchAreas } from "@/server/data";
 import Link from "next/link";
 
@@ -9,8 +8,7 @@ export const metadata = {
 
 export default function ResearchPage() {
   return (
-    <main>
-      <Header />
+    <main id="main-content">
       <section className="site-shell page-section">
         <p className="eyebrow">Technical research</p>
         <h1 className="display-title mt-4 max-w-[900px]">Investigations behind production AI decisions.</h1>
@@ -39,7 +37,7 @@ export default function ResearchPage() {
             ))}
           </div>
           <div className="mt-10 flex flex-wrap gap-5">
-            <Link href="/blog" className="text-link">Read technical writing</Link>
+            <Link href="/writing" className="text-link">Read technical writing</Link>
             <Link href="/work" className="text-link">See applied work</Link>
           </div>
         </div>

@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import { blogs } from "@/server/data";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,11 +21,10 @@ export default async function BlogReadPage({ params }) {
   const related = blogs.filter((post) => post.slug !== slug).slice(0, 2);
 
   return (
-    <main>
-      <Header />
+    <main id="main-content">
       <article>
         <header className="site-shell page-section">
-          <Link href="/blog" className="text-link">Back to writing</Link>
+          <Link href="/writing" className="text-link">Back to writing</Link>
           <p className="eyebrow mt-12">{blog.postedAt} · {blog.postedOn}</p>
           <h1 className="display-title mt-4 max-w-[900px]">{blog.blogHeading}</h1>
           <p className="mt-7 text-sm text-[#68675f]">By {blog.postedBy}</p>
@@ -51,7 +49,7 @@ export default async function BlogReadPage({ params }) {
           <p className="eyebrow">Continue reading</p>
           <div className="mt-5 border-t border-[#171714]">
             {related.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="group grid gap-2 border-b border-[#d8d5cc] py-6 sm:grid-cols-[1fr_auto] sm:items-baseline">
+              <Link key={post.slug} href={`/writing/${post.slug}`} className="group grid gap-2 border-b border-[#d8d5cc] py-6 sm:grid-cols-[1fr_auto] sm:items-baseline">
                 <h2 className="font-serif text-2xl group-hover:text-[#b84a2b]">{post.blogHeading}</h2>
                 <span className="text-sm text-[#68675f]">{post.postedOn}</span>
               </Link>
