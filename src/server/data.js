@@ -767,6 +767,70 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Aug 2, 2026",
+    blogHeading: "Retrieval Is a Production Interface, Not a Prompt Feature",
+    slug: "retrieval-is-a-production-interface-not-a-prompt-feature",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "Adding company context to an agent is not a matter of pointing a model at more documents. Retrieval is an interface with callers, permissions, freshness rules, and failure modes—and it needs to be designed with the same care as any other production dependency.",
+    sections: [
+      {
+        heading: "Context begins with a read path",
+        paragraphs: [
+          "Teams often describe retrieval as a data-preparation problem: chunk the documents, create embeddings, and tune a prompt. That work matters, but it leaves out the more important production question: who is asking, what are they trying to do, and which source material are they allowed to see right now? A useful answer is only one that reaches the right person through a defensible path.",
+          "I think of that path as a small interface between an agent and the organisation's knowledge. It should accept a verified caller identity and a bounded task, apply the relevant access and freshness rules, return a limited set of evidence, and make clear enough what it did for someone to investigate later. The model can reason over the result; it should not be asked to infer its own data boundary.",
+        ],
+      },
+      {
+        heading: "Carry identity into the query",
+        paragraphs: [
+          "A service account that can read every indexed document is a tempting shortcut. It also turns each generated answer into a question of whether the application remembered to filter correctly after the fact. The safer shape is to establish the user's identity before retrieval and let that identity participate in the query itself.",
+          "The details depend on the platform, but the principle is increasingly concrete. Azure AI Search documents document-level checks from ingestion through query execution, matching a caller's token claims against stored permission metadata. Amazon Bedrock's ACL-aware retrieval makes the complementary boundary explicit: the application must authenticate the user and pass verified identity context; the retrieval service can then filter results. Authentication and retrieval belong in the same design conversation.",
+        ],
+        sources: [
+          {
+            label: "Microsoft Learn: Document-level access control in Azure AI Search",
+            href: "https://learn.microsoft.com/en-us/azure/search/search-document-level-access-overview",
+          },
+          {
+            label: "Amazon Bedrock: ACL-aware retrieval on managed knowledge bases",
+            href: "https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-retrieve-acl.html",
+          },
+        ],
+      },
+      {
+        heading: "Make freshness a visible rule",
+        paragraphs: [
+          "Permission metadata and content are both moving targets. A policy can change, a project can be archived, or a document can be corrected while an index still holds an older representation. That does not make retrieval unusable; it means the system needs a stated synchronization model and a sensible response when the evidence may be stale.",
+          "For material decisions, I want the retrieval response to include source identifiers, source update or index times, and the rule that selected each item. If the source is outside its freshness budget, the agent should say so, retrieve again, or hand the question back rather than presenting old context as current. Freshness is not a property the model can reliably recover from fluent text.",
+        ],
+        sources: [
+          {
+            label: "Microsoft Learn: Query-time ACL and RBAC enforcement in Azure AI Search",
+            href: "https://learn.microsoft.com/en-us/azure/search/search-query-access-control-rbac-enforcement",
+          },
+        ],
+      },
+      {
+        heading: "Return evidence, not a document dump",
+        paragraphs: [
+          "A broad retrieval result may feel more capable, but it often creates a worse decision surface. It consumes context, buries the most relevant evidence, and makes it harder for a person—or an evaluator—to understand why an answer was produced. The result should be narrow enough to inspect: a source, a stable reference, the relevant excerpt, and the metadata needed to judge its authority and age.",
+          "This is also where product design meets infrastructure. A developer investigating an answer does not need a promise that the agent searched everything. They need a direct route to the evidence, an honest indication of what was excluded, and a way to ask a more precise follow-up. Retrieval earns trust when it reduces verification work instead of moving it downstream.",
+        ],
+      },
+      {
+        heading: "Evaluate the read path before the answer",
+        paragraphs: [
+          "Retrieval evaluation should cover more than whether the right paragraph appeared somewhere in a top-k list. Test the full boundary: an authorized user gets the necessary evidence; an unauthorized user gets none; a changed ACL or source is reflected within its promised window; and a vague request produces a clarification instead of an over-broad search.",
+          "I would keep a trace for each consequential retrieval with the caller type, query purpose, policy or index version, selected source identifiers, timestamps, and the final outcome. That trace gives engineering, security, and product teams the same object to inspect. It turns 'the agent knew this' into a question the system can answer: what did it read, why was it allowed, and was it current enough for this decision?",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Jul 29, 2026",
     blogHeading: "Long-Running Agents Need Checkpoints, Not Longer Timeouts",
     slug: "long-running-agents-need-checkpoints-not-longer-timeouts",
