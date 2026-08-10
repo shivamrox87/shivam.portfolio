@@ -767,6 +767,70 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Aug 10, 2026",
+    blogHeading: "A Model Gateway Needs an Admission Policy, Not Just Fallbacks",
+    slug: "a-model-gateway-needs-an-admission-policy-not-just-fallbacks",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "A model gateway becomes useful when traffic is under pressure, not when every request succeeds. Routing is only part of the job. The gateway also needs to decide what may start now, what can wait, what can use a cheaper path, and what should fail clearly instead of failing late.",
+    sections: [
+      {
+        heading: "Fallback is not a capacity plan",
+        paragraphs: [
+          "It is easy to describe a gateway as a layer that sends a request to one model and tries another if the first one fails. That is helpful for a narrow outage, but it is not enough when a shared quota is saturated. If every caller retries, then falls back, then retries again, the gateway has multiplied demand at exactly the moment the system has the least room for it.",
+          "I prefer to make an admission decision before a model call begins. The gateway should know the workload class, its latency expectation, its maximum token budget, and whether delaying or degrading the request is acceptable. An interactive answer, an overnight evaluation run, and a bulk document job should not compete as if they are the same request merely because they use the same provider.",
+        ],
+      },
+      {
+        heading: "Reserve for the request you are about to make",
+        paragraphs: [
+          "Token usage is not only a bill that arrives after the response. It is often a capacity decision made at the start of a request. Azure OpenAI documents that its TPM calculation includes estimated prompt tokens and the configured maximum output; Amazon Bedrock similarly reserves input tokens plus max_tokens before later adjusting for the completed response. A generous output ceiling can therefore reduce concurrency even when most answers finish early.",
+          "That makes max_tokens a product control, not a harmless default. The gateway can assign a realistic budget for each route: short for classification or extraction, larger for a deliberate analysis, and bounded again for a repair attempt. It should also record the requested budget alongside actual use. Without both numbers, a team cannot tell whether throughput pressure comes from valuable work, oversized reservations, or an unexpected change in prompt size.",
+        ],
+        sources: [
+          {
+            label: "Microsoft Learn: Manage Azure OpenAI quota and rate limits",
+            href: "https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/quota",
+          },
+          {
+            label: "Amazon Bedrock: How tokens are counted",
+            href: "https://docs.aws.amazon.com/bedrock/latest/userguide/quotas-token-burndown.html",
+          },
+        ],
+      },
+      {
+        heading: "Queue by user promise, not by arrival time",
+        paragraphs: [
+          "First-in, first-out feels neutral, but it often lets a large background job make an interactive workflow look broken. A practical gateway needs a few explicit lanes: perhaps user-facing work with a short queue deadline, background work with a per-tenant rate, and batch work that is allowed to wait. The names matter less than documenting the promise attached to each lane.",
+          "For each one, decide the behavior before an incident: reject with a retry time, queue and expose progress, switch to a smaller compatible route, or ask the user to narrow the task. A fallback is valid only when it still meets the route's quality, data-location, tool-use, and cost requirements. Sending an important workflow to any available model may turn a capacity problem into a correctness problem.",
+        ],
+      },
+      {
+        heading: "Make retries spend a bounded budget",
+        paragraphs: [
+          "A 429 or 503 is information about the system around the request, not proof that the request deserves unlimited attempts. Backoff with jitter is a sensible mechanism, but it needs an owner at the gateway. Otherwise an SDK retry, an application retry, and a fallback retry can stack invisibly and create duplicate calls or a retry storm.",
+          "I would give each request a small attempt and time budget, preserve its idempotency context where side effects are involved, and stop retrying when the remaining user deadline makes success implausible. Amazon Bedrock's throughput guidance makes the operational distinction clear: occasional transient errors can be retried with backoff, while sustained errors call for lower submission rates, client-side rate limiting, queues, and shedding lower-priority work. The gateway is the natural place to apply that policy consistently.",
+        ],
+        sources: [
+          {
+            label: "Amazon Bedrock: Scaling and throughput best practices",
+            href: "https://docs.aws.amazon.com/bedrock/latest/userguide/scaling-throughput-best-practices.html",
+          },
+        ],
+      },
+      {
+        heading: "Operate the decision, not only the request",
+        paragraphs: [
+          "A useful trace should show more than provider latency and an error code. Capture the chosen route, workload lane, estimated and actual tokens, queue time, retry count, fallback reason, and the policy version that made the decision. With that record, an operator can distinguish a provider issue from a noisy tenant, an oversized prompt, or a queue policy that no longer matches the product.",
+          "I would also test admission behavior directly: a burst of small requests, one oversized request, a depleted primary route, a fallback that is not semantically compatible, and a user-facing request arriving behind batch work. The best outcome is not that every request eventually reaches a model. It is that the system stays legible under pressure and spends scarce capacity on work it has explicitly chosen to protect.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Aug 2, 2026",
     blogHeading: "Retrieval Is a Production Interface, Not a Prompt Feature",
     slug: "retrieval-is-a-production-interface-not-a-prompt-feature",
