@@ -767,6 +767,66 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Aug 12, 2026",
+    blogHeading: "An Agent Trace Should Explain a Decision, Not Record a Transcript",
+    slug: "an-agent-trace-should-explain-a-decision-not-record-a-transcript",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "An agent trace is not useful merely because it is long. In a real incident, the important question is usually not what text the model produced. It is what it was allowed to do, what evidence it used, what policy applied, and why the system chose that action over another.",
+    sections: [
+      {
+        heading: "A span tree is not an explanation",
+        paragraphs: [
+          "A conventional trace can show that an agent called a model, then a search service, then a ticketing API. That is a good start, but it leaves the person investigating to reconstruct the decision from timing and raw payloads. Was the search scoped to the caller's project? Did the ticket creation need approval? Did a retry happen because a provider was slow or because the request was malformed? A long transcript may contain the answer without making it legible.",
+          "I would treat the agent's decision as a first-class event. It should say which job it was trying to complete, the action it proposed, the stable target it selected, the policy outcome, and the reason code for a denial, escalation, retry, or fallback. That record does not need to claim access to a model's private reasoning. It needs to describe the system decision in terms an operator can verify.",
+        ],
+      },
+      {
+        heading: "Log the boundary where consequence changes",
+        paragraphs: [
+          "The highest-value record is usually created just before the agent crosses a boundary: reading a protected source, sending a message, changing a record, starting a deployment, or using a different identity. At that point, capture the request ID, user or service identity, capability, resource identifier, approval state, policy version, and eventual result. Those fields make the decision inspectable without turning every intermediate thought into an audit object.",
+          "This fits the way production agent controls are maturing. OpenAI describes agent-aware telemetry that includes approval decisions, tool execution results, MCP usage, and network-policy allow or deny events alongside traditional logs. The useful lesson is broader than any one platform: a trace should preserve the connection between intent, control, and effect.",
+        ],
+        sources: [
+          {
+            label: "OpenAI: Running Codex safely at OpenAI",
+            href: "https://openai.com/index/running-codex-safely/",
+          },
+        ],
+      },
+      {
+        heading: "Content capture needs its own threat model",
+        paragraphs: [
+          "Prompts, retrieved documents, tool arguments, and tool results can be invaluable when debugging. They can also contain customer data, credentials, or the very instructions an attacker tried to smuggle into a workflow. Treating full-content tracing as the default makes an observability system into a second, often broader, data store.",
+          "OpenTelemetry's current GenAI guidance makes the trade-off concrete: its default telemetry captures metadata such as model names, token counts, and durations, while full prompt and tool content is an explicit opt-in because it can contain sensitive data. I would use the same posture in an application: structured metadata by default, tightly scoped content capture for a defined investigation, and retention and access rules that match the sensitivity of the work.",
+        ],
+        sources: [
+          {
+            label: "OpenTelemetry: Inside the LLM Call—GenAI Observability with OpenTelemetry",
+            href: "https://opentelemetry.io/blog/2026/genai-observability/",
+          },
+        ],
+      },
+      {
+        heading: "Keep the evidence close to the decision",
+        paragraphs: [
+          "A decision record should reference the evidence it relied on rather than copy an uncontrolled blob into every span. For retrieval, that might be document IDs, index version, ACL outcome, and source timestamps. For a tool call, it might be a validated argument summary, target ID, and idempotency key. The complete underlying evidence can live behind its own access boundary when it is needed for a review.",
+          "This makes a trace smaller and more useful. An operator can answer the first questions quickly—what happened, under which policy, and against which resource—then follow the references only when the incident requires it. It also gives product teams a clearer way to reason about data minimisation: record enough to explain the action, not every piece of context the model happened to see.",
+        ],
+      },
+      {
+        heading: "Test the trace like a production feature",
+        paragraphs: [
+          "I would add observability assertions to the same scenarios used for agent evaluation: an allowed read, a denied write, an approval request, a tool timeout, a duplicate submission, and a policy change during a long task. Each run should leave the expected decision record and should not leak protected content into a low-trust log sink. If an engineer cannot follow the action afterward, the telemetry is incomplete even if the agent reached the right answer.",
+          "Good agent observability is not a dashboard full of token charts. It is a reliable explanation path from a user request to a consequential action, with the right amount of evidence available to the right person. That is what lets a team improve an agent without making its operation opaque—or its logs another source of risk.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Aug 10, 2026",
     blogHeading: "A Model Gateway Needs an Admission Policy, Not Just Fallbacks",
     slug: "a-model-gateway-needs-an-admission-policy-not-just-fallbacks",
