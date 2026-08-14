@@ -767,6 +767,70 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Aug 14, 2026",
+    blogHeading: "An Agent Should Borrow Credentials for a Task, Not Inherit Them Forever",
+    slug: "an-agent-should-borrow-credentials-for-a-task-not-inherit-them-forever",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "An agent may need access to a ticket, repository, or customer record to complete a job. That does not mean its runtime should hold a broad, durable credential. The useful unit of authority is usually the task: a bounded purpose, a specific destination, and a short window to act.",
+    sections: [
+      {
+        heading: "The agent process is not the user",
+        paragraphs: [
+          "A common implementation shortcut is to give an agent service a standing integration token and let the prompt decide when to use it. That reverses the important boundary. The service has an identity as a workload; a user may have authorized a particular task; and the resulting action may need a narrower authority than either one alone. Those are different facts, and collapsing them into one long-lived secret makes every future tool call harder to explain and constrain.",
+          "I would make the task explicit before issuing any authority. Record the initiating user or system, the intended action, the target system, the resource scope, the approval state, and a deadline. The agent can then ask a credential broker for a grant that represents that one operation. The broker is where a product can enforce policy, rather than relying on a model to remember which credential is appropriate.",
+        ],
+      },
+      {
+        heading: "Bind a grant to where it can be used",
+        paragraphs: [
+          "A token that works at every internal API is a very large blast radius for something that may appear in a tool log, a crash dump, or an accidentally retained environment. OAuth's security best current practice recommends minimum privilege and audience restriction: a resource server should verify that a token was actually issued for it. The companion resource-indicators specification gives the authorization server a way to issue a token for a named resource rather than an undifferentiated collection of services.",
+          "In an agent system, that translates into a small request shape: this task may create one issue in this project, read these documents, or invoke this deployment action. A database administrator role, a broad cloud key, or a general-purpose bearer token is not a useful default simply because it is convenient for the first integration. If the agent needs a second destination, it should obtain a second, separately auditable grant.",
+        ],
+        sources: [
+          {
+            label: "IETF RFC 9700: Best Current Practice for OAuth 2.0 Security",
+            href: "https://datatracker.ietf.org/doc/html/rfc9700",
+          },
+          {
+            label: "IETF RFC 8707: Resource Indicators for OAuth 2.0",
+            href: "https://datatracker.ietf.org/doc/html/rfc8707",
+          },
+        ],
+      },
+      {
+        heading: "Expiry is part of the product design",
+        paragraphs: [
+          "A short expiry is not a substitute for authorization, but it changes the failure mode of a leaked credential. It also forces a useful question: is this agent still doing the work it was approved to do? If a long-running task must resume, the system can renew a narrow grant after checking the task state and any changed policy instead of treating yesterday's approval as permanent authority.",
+          "This is familiar territory in workload identity. SPIFFE describes issuing short-lived, automatically rotated credentials to authenticated workloads, and distinguishes the workload's identity from the permissions a destination grants it. An agent platform can use the same separation: prove which runtime is asking, then decide what that runtime may do for this task right now.",
+        ],
+        sources: [
+          {
+            label: "SPIFFE: Concepts and short-lived workload credentials",
+            href: "https://spiffe.io/docs/latest/spiffe/concepts/",
+          },
+        ],
+      },
+      {
+        heading: "Do not hand a bearer token to every tool",
+        paragraphs: [
+          "Some tools will only accept a bearer token, but an agent framework should avoid making that the normal handoff. A brokered tool call can keep the durable credential out of the model-facing environment, inject a task-scoped credential at execution time, and validate the destination and arguments before sending the request. Where the ecosystem supports it, sender-constrained tokens add another useful control: possession of the token alone is not enough to replay it from a different client.",
+          "The precise mechanism will vary. What matters is that the tool executor—not a text instruction—owns credential selection, token refresh, and revocation. The model proposes an operation. A deterministic layer validates the operation against the task grant and performs it with the minimum authority available.",
+        ],
+      },
+      {
+        heading: "Make the grant reviewable after the task ends",
+        paragraphs: [
+          "When an action is consequential, an operator should be able to answer a short chain of questions: who initiated the task, which workload ran it, what authority was issued, which resource accepted it, and whether the action succeeded. That is more useful than a raw transcript and less risky than copying credentials or full request bodies into every log.",
+          "I would test this path with the same care as the agent's happy path: an expired grant, a token presented to the wrong resource, a revoked approval during a long task, a retry after a partial failure, and a request for scope the task never received. The point is not to make agents powerless. It is to let them move through real systems with authority that is specific enough to trust and small enough to take back.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Aug 12, 2026",
     blogHeading: "An Agent Trace Should Explain a Decision, Not Record a Transcript",
     slug: "an-agent-trace-should-explain-a-decision-not-record-a-transcript",
