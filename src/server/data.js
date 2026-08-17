@@ -767,6 +767,73 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Aug 17, 2026",
+    blogHeading: "An Agent Harness Is a Security Boundary, Not a Convenience Layer",
+    slug: "an-agent-harness-is-a-security-boundary-not-a-convenience-layer",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "Giving a model tools does not simply add a loop around an API call. It creates a runtime with files, network paths, credentials, state, and side effects. The harness that owns those pieces is part of the product's security boundary—not plumbing to leave implicit until an agent reaches production.",
+    sections: [
+      {
+        heading: "The model proposes; the harness carries out",
+        paragraphs: [
+          "A useful mental model is that the model proposes an operation, while the harness decides how and whether to perform it. The distinction can sound academic until an agent can read a file, call an internal API, or write a change. At that point, the process running model-directed commands has become a meaningful part of the attack surface.",
+          "I would give that process a narrow, legible job: assemble the task context, expose a defined workspace and set of tools, validate calls at the boundary, and return bounded results. That keeps authority in deterministic components that can apply policy consistently. It also gives the model a predictable environment instead of an accidental collection of whatever the host machine happened to contain.",
+        ],
+      },
+      {
+        heading: "Describe the workspace before the run starts",
+        paragraphs: [
+          "A workspace should be treated as an input to a run, not an implementation detail. Which directories are mounted? Which ones are writable? Where may intermediate artifacts go? Which dependencies and network destinations are available? An explicit manifest makes these questions reviewable before a prompt is ever sent to a model.",
+          "That is also why a disposable sandbox is more useful than a generic container with broad mounts. OpenAI's recent Agents SDK update describes a manifest for mounting inputs and defining output directories, alongside controlled sandbox execution. The specific SDK is not the point; the design lesson is. A task should receive the smallest workspace that lets it do the work, with a clear place for the artifacts it is expected to produce.",
+        ],
+        sources: [
+          {
+            label: "OpenAI: The next evolution of the Agents SDK",
+            href: "https://openai.com/index/the-next-evolution-of-the-agents-sdk/",
+          },
+        ],
+      },
+      {
+        heading: "Keep durable state and credentials outside model-directed compute",
+        paragraphs: [
+          "An agent may need to resume tomorrow, but that does not mean yesterday's container should become its permanent home. Store task state, checkpoints, approvals, and final artifacts in services with their own access controls. A replacement sandbox can then be created from the declared inputs and a checkpoint, rather than being trusted as the only copy of the run's history.",
+          "Credentials deserve the same separation. A sandbox might receive a short-lived, task-specific capability at execution time, but the broker, durable secret, and approval record should remain outside it. This preserves a useful recovery path when a container expires or fails, and it reduces the value of a compromised work environment. It also makes revocation possible without trying to find every copied secret in an agent's filesystem.",
+        ],
+      },
+      {
+        heading: "Treat egress and side effects as mediation points",
+        paragraphs: [
+          "The important boundary is not only where the agent starts. It is where information leaves the workspace and where a proposal becomes a consequential action. Downloads, outbound HTTP requests, messages, deployments, and writes to a customer system should pass through a component that can inspect the destination, the task scope, and the required approval before it executes the request.",
+          "This matters because prompt injection is not a problem a model can be expected to solve perfectly. OpenAI describes the practical risk as a source of untrusted influence combined with a dangerous sink such as data transmission or tool use. A harness can reduce the consequence even when the model has been misled: restrict the network, require a confirmation for a sensitive transfer, and keep write paths separate from exploratory work.",
+        ],
+        sources: [
+          {
+            label: "OpenAI: Designing AI agents to resist prompt injection",
+            href: "https://openai.com/index/designing-agents-to-resist-prompt-injection/",
+          },
+        ],
+      },
+      {
+        heading: "Make the boundary testable",
+        paragraphs: [
+          "A harness design is only real if it survives the cases nobody intends to run: a tool result that tries to redirect the task, a malformed artifact, an expired grant, a denied destination, a restart after a partial write, or a request that fills the workspace. These should be ordinary integration tests with expected policy decisions and observable outcomes, not informal security aspirations.",
+          "I would record a compact run manifest with the workspace version, mounted inputs, tool set, network policy, approval state, and artifact locations. That record is useful for debugging as well as security review. If an agent produces a surprising result, a team should be able to reproduce the environment it was given without replaying every word of the conversation.",
+        ],
+      },
+      {
+        heading: "The harness is where reliability becomes product work",
+        paragraphs: [
+          "Teams often focus their agent iteration on prompts and models because those are the visible parts. But a dependable system is also shaped by the runtime around them: how it creates a clean workspace, carries state across failures, limits data movement, and proves what happened at a boundary.",
+          "That is encouraging, not restrictive. Once the harness owns these controls, the model can be given useful tools without inheriting the whole environment. The result is an agent that can do more than demonstrate a clever loop: it can take part in a real workflow with boundaries people can understand and improve.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Aug 14, 2026",
     blogHeading: "An Agent Should Borrow Credentials for a Task, Not Inherit Them Forever",
     slug: "an-agent-should-borrow-credentials-for-a-task-not-inherit-them-forever",
