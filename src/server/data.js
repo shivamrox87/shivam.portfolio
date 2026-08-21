@@ -767,6 +767,73 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Aug 21, 2026",
+    blogHeading: "A Prompt Change Is a Release, Not a Text Edit",
+    slug: "a-prompt-change-is-a-release-not-a-text-edit",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Product Execution",
+    content:
+      "A prompt is often treated as a few editable lines in a dashboard or source file. In production, it is part of a behaviour bundle: instructions, examples, tools, output rules, retrieval assumptions, and a model. When that bundle changes, the product has changed too—and it deserves a real release path.",
+    sections: [
+      {
+        heading: "Separate product policy from a user's request",
+        paragraphs: [
+          "A user asking to summarise a document should be able to change the subject, not the product's rules for evidence, tone, tool use, or escalation. That distinction becomes important as soon as an application has more than one workflow. The durable instructions and examples are product configuration; the document, question, identity, and task are run-time inputs.",
+          "Making that boundary explicit keeps an otherwise invisible change reviewable. If an edit changes whether the system cites sources, calls a tool, returns a schema, or asks for approval, it is not merely improving wording. It changes a user-facing and sometimes security-relevant behaviour. I would give that change the same deliberate treatment as an API or workflow change.",
+        ],
+      },
+      {
+        heading: "Version the complete behaviour bundle",
+        paragraphs: [
+          "A prompt string alone is not enough to reproduce a run. I want a release record that names the prompt revision, model or model snapshot, reasoning settings, tool definitions, output schema, retrieval configuration, and policy version. The exact shape will vary, but the point is stable: someone investigating an answer should be able to discover which configuration produced it without reconstructing the deployment from logs and memory.",
+          "Prompt-management products are moving in this direction. OpenAI's current prompt workflow publishes a new version and lets an integration either follow the latest version or request a pinned one. That is useful infrastructure, but the operational decision remains with the team: use a moving reference only when that is intentional, and retain a concrete release identifier for consequential traffic.",
+        ],
+        sources: [
+          {
+            label: "OpenAI: Prompt management in Playground",
+            href: "https://help.openai.com/en/articles/9824968-generate-prompts-function-definitions-and-structured-output-schemas-in-the-playground",
+          },
+        ],
+      },
+      {
+        heading: "Test a candidate against the work it will meet",
+        paragraphs: [
+          "A prompt edit should begin with a reason: a user journey that is weak, an ambiguity the product must resolve, a new output contract, or a known failure mode. Then compare the candidate with the current release on representative tasks. I would look at the outcome, required evidence, tool selection, approval behaviour, latency, and cost—not only whether the prose looks better in one happy-path conversation.",
+          "This does not require a giant benchmark to be useful. A small, maintained set of difficult real shapes is often enough to catch an accidental regression: the customer name that resembles an instruction, an incomplete record, an unavailable tool, an answer that must refuse a write, or a response that must match a downstream schema. The release note should say which behaviour is expected to improve and which checks still passed.",
+        ],
+      },
+      {
+        heading: "Treat a model move as part of the same release",
+        paragraphs: [
+          "Prompt changes and model changes are often planned by different people, but users experience their combination. An instruction that is clear on one model snapshot can behave differently on another. Tool calling, formatting, latency, and the value of a few-shot example can all shift at once. Releasing a new prompt through a changing model alias makes it harder to know which variable improved—or broke—the result.",
+          "OpenAI's API documentation makes the underlying constraint explicit: prompting behaviour can change between model snapshots, and pinning a model version plus running application evals is the route to more consistent behaviour. I take that as a release-design principle rather than a vendor-specific detail. Change one meaningful variable at a time when possible; when several must move together, record and test them as one candidate.",
+        ],
+        sources: [
+          {
+            label: "OpenAI API: Backwards compatibility",
+            href: "https://developers.openai.com/api/reference/overview#backwards-compatibility",
+          },
+        ],
+      },
+      {
+        heading: "Make rollback cheaper than diagnosis",
+        paragraphs: [
+          "The practical test of a release process is what happens after an unexpected answer appears. A team should be able to stop a candidate, route new traffic back to the previous known-good configuration, and identify affected runs by release ID. If the only rollback is an engineer editing text under pressure, the system has no dependable recovery path.",
+          "I prefer a small deployment interface that selects an approved configuration by identifier, with gradual exposure where the workflow justifies it. Keep the prior version available, bound each run to the chosen configuration, and avoid a half-updated state where the prompt, schema, and tool policy were changed independently. That is ordinary release engineering applied to a different kind of artifact.",
+        ],
+      },
+      {
+        heading: "The goal is faster learning with fewer surprises",
+        paragraphs: [
+          "Treating prompts as releases is not an argument for slowing every sentence-level improvement with ceremony. It is a way to make product iteration safe enough to continue. A small edit for a low-risk internal workflow may need only a lightweight check; an instruction that shapes a customer decision or an agent action needs stronger evidence and a clear rollback path.",
+          "Once the configuration is identifiable, teams can connect feedback to the release that caused it, keep the useful change, and turn the failure into a future test. That is the shift I find most valuable: prompts stop being hidden text that someone tuned last week and become product behaviour the team can explain, improve, and operate.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Aug 17, 2026",
     blogHeading: "An Agent Harness Is a Security Boundary, Not a Convenience Layer",
     slug: "an-agent-harness-is-a-security-boundary-not-a-convenience-layer",
