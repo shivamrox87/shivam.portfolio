@@ -7,7 +7,31 @@ export async function generateMetadata({ params }) {
   const article = blogs.find((post) => post.slug === slug);
 
   return article
-    ? { title: article.blogHeading, description: article.content }
+    ? {
+        title: article.blogHeading,
+        description: article.content,
+        openGraph: {
+          title: article.blogHeading,
+          description: article.content,
+          type: "article",
+          url: `/writing/${article.slug}`,
+          authors: [article.postedBy],
+          images: [
+            {
+              url: `/writing/${article.slug}/opengraph-image`,
+              width: 1200,
+              height: 630,
+              alt: article.blogHeading,
+            },
+          ],
+        },
+        twitter: {
+          card: "summary_large_image",
+          title: article.blogHeading,
+          description: article.content,
+          images: [`/writing/${article.slug}/opengraph-image`],
+        },
+      }
     : { title: "Article Not Found" };
 }
 
