@@ -767,6 +767,73 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Aug 24, 2026",
+    blogHeading: "A Retry Is a Recovery Plan, Not an Agent's Second Guess",
+    slug: "a-retry-is-a-recovery-plan-not-an-agents-second-guess",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "A timeout after an agent attempts a write does not tell us whether nothing happened or whether the result simply got lost on the way back. Treating that uncertainty as a prompt to try again can create duplicate tickets, messages, deployments, or records. Reliable agents need a recovery plan that preserves the original intent before they repeat an action.",
+    sections: [
+      {
+        heading: "A retry and a new decision are different operations",
+        paragraphs: [
+          "When a tool call fails, an agent has at least three possible next moves: repeat the same request because the outcome is unknown, revise the plan because new information arrived, or stop and ask for help. They should not share one generic 'retry' button. The first is a transport and workflow-recovery problem; the second creates a new intended action; the third is a product decision about risk.",
+          "That distinction is especially important for writes. Repeating 'create an issue with this title in this project' can be safe only if the system can recognise it as the same intended operation. Changing the title, project, recipients, or requested change should produce a new operation that may need fresh policy checks or approval. A model may describe both moves in similar words, but the runtime should keep their identities separate.",
+        ],
+      },
+      {
+        heading: "Create an operation identity before the side effect",
+        paragraphs: [
+          "Before invoking a consequential tool, I would create a durable operation record: a task ID, action type, authorised target, canonical arguments, and a stable idempotency key. That record belongs to the orchestration layer, not to the model's free-form context. Every attempt to complete the same action carries the same identity; a materially changed proposal gets a different one.",
+          "AWS's current Agentic AI Lens makes the same practical recommendation: derive deterministic keys from the workflow, task type, and request body, then use them throughout the workflow. The useful idea is not a particular hash or database. It is preserving the fact that these attempts all mean one thing, even if the network, worker, or model turn is interrupted.",
+        ],
+        sources: [
+          {
+            label: "AWS Well-Architected: idempotent task execution for agents",
+            href: "https://docs.aws.amazon.com/wellarchitected/latest/agentic-ai-lens/agentrel06-bp04.html",
+          },
+        ],
+      },
+      {
+        heading: "Reserve, execute, then record the outcome",
+        paragraphs: [
+          "The risky window is not only after a timeout. Two workers can resume the same task, or a queue can deliver a message twice. A reliable executor needs an atomic way to reserve an operation, record that it is in progress, and later store a result that another attempt can return instead of performing the action again. A simple check followed by an unconstrained write leaves a race for parallel retries to win.",
+          "The result should be more useful than a Boolean. Store the external resource identifier when there is one, the completion state, the timestamp, and a small safe-to-retain summary. Then an agent that wakes after a failure can say 'the issue was already created' or 'the request is still being reconciled' rather than confidently creating another one because it cannot see the first result.",
+        ],
+      },
+      {
+        heading: "Carry the identity to the final system",
+        paragraphs: [
+          "A gateway can deduplicate its own request and still duplicate the real-world outcome if it calls a downstream system without a stable identifier. Pass the same key—or a deterministic child key for a genuinely separate sub-operation—through queues, workers, and third-party APIs that support idempotency. Where the destination cannot accept one, keep a local reconciliation record tied to the external request or resource before declaring the operation safe to replay.",
+          "This is ordinary distributed-systems discipline applied to agent workflows. AWS's reliability guidance describes the same pattern for mutating operations: recognise a repeated token, return the earlier result, and test successful, failed, and duplicate requests. Agents increase the need for it because an execution can also be resumed by a scheduler, a human, or a model that has lost context—not only by an HTTP client.",
+        ],
+        sources: [
+          {
+            label: "AWS Well-Architected: make mutating operations idempotent",
+            href: "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_prevent_interaction_failure_idempotent.html",
+          },
+        ],
+      },
+      {
+        heading: "Make recovery policy part of the tool contract",
+        paragraphs: [
+          "Not every failure deserves another attempt. A tool contract should say which errors are plausibly transient, how long an attempt may wait, how many automated retries are allowed, and whether the operation is safe to replay. Rate limits and temporary availability may warrant bounded backoff; an invalid argument, a policy denial, or an ambiguous external write usually needs a different path.",
+          "The agent can still help interpret the situation, but it should not get to turn an unknown outcome into unlimited repeated writes. The executor can return a structured state such as completed, pending reconciliation, retryable without side effect, or needs approval. That gives the model enough information to communicate well while keeping retry semantics deterministic and reviewable.",
+        ],
+      },
+      {
+        heading: "Test the moment certainty disappears",
+        paragraphs: [
+          "The happy-path test proves that a tool can act once. The more revealing tests cut the connection after the downstream system accepts a request, deliver the same job twice, restart a worker mid-step, and submit a changed action with an old idempotency key. For each case, decide whether the expected result is a cached outcome, a safe retry, reconciliation, or an approval request.",
+          "This is not a reason to make agents cautious to the point of uselessness. It is what lets them recover from normal infrastructure failures without turning every uncertainty into another side effect. Once an operation has a durable identity and a bounded recovery policy, the agent can be helpful under failure as well as in a clean demo.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Aug 21, 2026",
     blogHeading: "A Prompt Change Is a Release, Not a Text Edit",
     slug: "a-prompt-change-is-a-release-not-a-text-edit",
