@@ -767,6 +767,72 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Aug 26, 2026",
+    blogHeading: "Context Needs Trust Boundaries, Not Just a Token Budget",
+    slug: "context-needs-trust-boundaries-not-just-a-token-budget",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "An agent's context window can contain a user request, a policy, a tool result, a web page, a repository file, and an instruction written by somebody else. Giving all of that text the same practical authority is a design mistake. Production systems need to preserve where context came from and keep untrusted content from silently becoming a plan.",
+    sections: [
+      {
+        heading: "Context is not one thing",
+        paragraphs: [
+          "A model sees tokens; a product has to see roles. The user's request, the product's rules, verified account state, a search result, and an email quoted by that search result do not deserve the same operational treatment. They answer different questions: what the user wants, what the system permits, what is known, and what someone outside the system is trying to say.",
+          "I would make those distinctions before assembling a prompt. Give each item a source, purpose, sensitivity label, freshness expectation, and a statement of whether it may influence an action. That metadata does not make the model perfectly resistant to manipulation. It gives the surrounding system a way to constrain consequences when misleading text is present.",
+        ],
+      },
+      {
+        heading: "Keep instructions out of evidence",
+        paragraphs: [
+          "Useful evidence can contain imperative language. A support ticket might ask for a refund; a repository comment might tell a coding agent to run a command; a web page might tell the reader to upload a file somewhere else. Those words may be relevant to the task, but they are not product policy and they should not acquire the authority of the user's request merely because they entered the context window.",
+          "The Model Context Protocol makes the boundary concrete: descriptions of tool behaviour from an untrusted server should themselves be treated as untrusted. I take the same approach to every external result. Preserve the content as evidence, make its origin visible in a trace or review screen, and require a separate policy decision before it can cause a new tool call, disclosure, or change of task.",
+        ],
+        sources: [
+          {
+            label: "Model Context Protocol: security and trust-and-safety principles",
+            href: "https://modelcontextprotocol.io/specification/2025-03-26/index",
+          },
+        ],
+      },
+      {
+        heading: "Use deterministic checks at the point of consequence",
+        paragraphs: [
+          "Trying to classify every suspicious sentence is not a dependable control plane. The more important question is what the agent can do after reading it. Before a consequential action, a deterministic boundary can validate the destination, the requested operation, the data category, the actor's grant, and whether a fresh approval is required. It can also reject an action that is unrelated to the original task even when the model's explanation sounds plausible.",
+          "This is the useful part of source-and-sink thinking. OpenAI describes the practical risk as untrusted external influence combined with a dangerous sink such as transmitting information, following a link, or using a tool. The goal is not to decide that every tool result is hostile. It is to make a manipulated result insufficient on its own to authorise an irreversible or sensitive action.",
+        ],
+        sources: [
+          {
+            label: "OpenAI: Designing AI agents to resist prompt injection",
+            href: "https://openai.com/index/designing-agents-to-resist-prompt-injection/",
+          },
+        ],
+      },
+      {
+        heading: "Make the trust boundary visible to the agent and the operator",
+        paragraphs: [
+          "A good runtime should return structured, bounded results rather than blending a tool's prose into a generic conversation. Alongside the useful facts, retain the source identifier, retrieval time, access decision, and allowed next operations. The model gets enough context to reason about the task; the operator gets enough evidence to understand why a proposed action appeared.",
+          "That also changes how a product asks for confirmation. Instead of presenting a vague warning after a long chain of work, it can say: this action was proposed after reading this external source; it will send these fields to this destination; this is the authority being used. If the context is stale, ambiguous, or from a low-trust source, the system can narrow the request or ask for clarification instead of escalating automatically.",
+        ],
+      },
+      {
+        heading: "Test provenance as a behaviour, not a label",
+        paragraphs: [
+          "I would add adversarial context cases to the ordinary agent test suite: a document that tries to redirect the job, a tool description that overstates its capability, a repository instruction from an untrusted dependency, and a source that asks the agent to disclose data. The expected result is not always refusal. It may be to quote the evidence, ignore the attempted instruction, request a specific approval, or stop at a policy boundary.",
+          "Google Cloud's recent guidance calls out both indirect prompt injection and tool poisoning as risks in multi-system agent workflows. The practical lesson is broader than any one platform: provenance has to survive the path from retrieval through planning to action. When it does, a team can make automation more useful without pretending every token in a context window came from a trusted teammate.",
+        ],
+        sources: [
+          {
+            label: "Google Cloud: Empowering autonomous agents with advanced security governance",
+            href: "https://cloud.google.com/blog/topics/ai-infrastructure/state-of-ai-infrastructure-report-agent-governance-and-security",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Aug 24, 2026",
     blogHeading: "A Retry Is a Recovery Plan, Not an Agent's Second Guess",
     slug: "a-retry-is-a-recovery-plan-not-an-agents-second-guess",
