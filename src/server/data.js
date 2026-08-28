@@ -767,6 +767,72 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Aug 28, 2026",
+    blogHeading: "A Handoff Needs a Task Contract, Not a Conversation Transfer",
+    slug: "a-handoff-needs-a-task-contract-not-a-conversation-transfer",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "Passing a conversation from one agent to another can make a demo feel seamless. In production, it can also transfer stale assumptions, unclear authority, and more context than the next system needs. A dependable handoff starts with a durable task contract: what is being requested, who authorised it, what may happen next, and what counts as a useful result.",
+    sections: [
+      {
+        heading: "A handoff is a change of responsibility",
+        paragraphs: [
+          "There is a meaningful difference between calling a specialist as a tool and letting a specialist take over a task. The first keeps orchestration in one place. The second changes who interprets the next step, which systems they can reach, and who must explain the result. Treating both as an invisible transfer of chat history makes that boundary hard to operate.",
+          "OpenAI's practical guidance distinguishes a manager pattern from decentralized handoffs for exactly this reason. I would make the transition explicit in the runtime: create a task with an owner, a parent request, a bounded objective, and a clear return path. Then a slow, failed, or interrupted delegate is not a mysterious silence in a transcript; it is a stateful piece of work with someone accountable for the next decision.",
+        ],
+        sources: [
+          {
+            label: "OpenAI: A practical guide to building agents",
+            href: "https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/",
+          },
+        ],
+      },
+      {
+        heading: "Send the smallest useful task package",
+        paragraphs: [
+          "The receiving agent rarely needs the entire conversation. It needs a stable objective, the facts or source references it is allowed to use, constraints that still apply, an output shape, a deadline or budget, and an authority boundary. For a deployment review, that might be a change identifier, approved environment, read-only evidence links, and a request for risks—not every speculative branch that led to the request.",
+          "This is partly about efficiency, but it is more importantly about correctness. A transcript blends evidence, rejected ideas, user preferences, and temporary instructions. A contract separates the current request from its history. If an upstream agent wants the delegate to act on a specific fact, it should provide a reference and provenance, not merely repeat the fact in prose and hope the delegate infers its status.",
+        ],
+      },
+      {
+        heading: "Make interruption a first-class answer",
+        paragraphs: [
+          "A delegate that needs missing input, fresh authentication, or a policy decision has not necessarily failed. It has discovered a condition the coordinator must resolve. The contract should therefore include more than working and completed states. It should let the delegate request a specific field, an approval for a named action, or a new credential scoped to the task, without inventing a workaround.",
+          "The A2A protocol makes this operational rather than conversational: its task lifecycle includes input-required and authentication-required states as well as completed, failed, cancelled, and rejected outcomes. That is a useful model even when a team uses no A2A implementation. A clear interrupted state keeps a system from translating a need for permission into a vague assistant message or, worse, an untracked retry.",
+        ],
+        sources: [
+          {
+            label: "A2A Protocol: task lifecycle and authentication",
+            href: "https://github.com/a2aproject/A2A/blob/main/docs/specification.md",
+          },
+        ],
+      },
+      {
+        heading: "Return artifacts, not just a plausible answer",
+        paragraphs: [
+          "The useful output of a delegation is often something another system can inspect: a structured recommendation, a patch, a validated record, or a list of unresolved risks. I would give that output an identifier, a schema, source references where appropriate, and a completion status. The coordinator can then validate it, present it to a user, or pass only the approved part to another step.",
+          "This also prevents a common integration mistake: using streaming status text as the system of record. Status updates are helpful for a person waiting on work, but the durable result should be retrievable after a reconnect. A2A separates messages from task artifacts and cautions that clients should not treat messages as reliable delivery for critical information. Production handoffs need the same discipline even when the wire format is home-grown.",
+        ],
+        sources: [
+          {
+            label: "A2A Protocol: tasks, messages, and artifacts",
+            href: "https://github.com/a2aproject/A2A/blob/main/docs/specification.md",
+          },
+        ],
+      },
+      {
+        heading: "Keep policy with the action boundary",
+        paragraphs: [
+          "A handoff should not become a permission escalator. The coordinator can state what was authorised, but the receiving system still needs to validate the caller, target, scope, and freshness of that authority before a consequential tool call. If the delegate is a separate service or a partner agent, its capability description is useful for routing, not a substitute for local policy.",
+          "I would test the boundary with the failures that happen between systems: a delegate receives an expired grant, requests a scope it was not given, finishes after the parent deadline, returns an artifact in the wrong shape, or sends the same completion notification twice. The goal is not to eliminate delegation. It is to make collaboration legible: each agent can be specialised without turning the user's original intent and approval into a travelling block of unstructured context.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Aug 26, 2026",
     blogHeading: "Context Needs Trust Boundaries, Not Just a Token Budget",
     slug: "context-needs-trust-boundaries-not-just-a-token-budget",
