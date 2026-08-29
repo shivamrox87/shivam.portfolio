@@ -59,6 +59,12 @@ export default async function WritingPage({ params }) {
           </h1>
           <p className="mt-8 max-w-[680px] font-serif text-2xl leading-[1.5] text-[#302f2b] md:text-3xl">
             {article.content}
+            {article.contentLink ? (
+              <Link href={article.contentLink.href} className="text-link align-baseline text-2xl md:text-3xl">
+                {article.contentLink.label}
+              </Link>
+            ) : null}
+            {article.contentAfter}
           </p>
         </header>
 

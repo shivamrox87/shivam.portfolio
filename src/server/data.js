@@ -773,7 +773,13 @@ export const blogs = [
     postedBy: "Shivam Maurya",
     postedAt: "AI Product Execution",
     content:
-      "This is the exact prompt I used for the assessment behind “AI Autonomy Needs a Workflow, Not Just a Bigger Brief.” It is designed to diagnose repeated behaviour, not reward the number of AI tools someone has tried.",
+      "This is the exact prompt I used for the assessment behind ",
+    contentLink: {
+      href: "/writing/ai-autonomy-needs-a-workflow-not-just-a-bigger-brief",
+      label: "“AI Autonomy Needs a Workflow, Not Just a Bigger Brief.”",
+    },
+    contentAfter:
+      " It is designed to diagnose repeated behaviour, not reward the number of AI tools someone has tried.",
     prompt: `Help me determine my current level of AI adoption using Every's Eight Levels of AI Adoption.
 
 This is not a competition, and a higher level is not necessarily better. I want an honest, evidence-based assessment of how I use AI in real work, where it helps me today, and the next useful behavior I should practice.
