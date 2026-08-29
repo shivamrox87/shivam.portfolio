@@ -8,6 +8,8 @@ export default function Footer() {
         <div className="flex flex-wrap gap-x-6 gap-y-3">
           <a href="mailto:connect@shivammaurya.com" className="hover:text-[#b84a2b]">Email</a>
           <a href="https://www.linkedin.com/in/shivam--maurya" target="_blank" rel="noreferrer" className="hover:text-[#b84a2b]">LinkedIn</a>
+          <a href="https://x.com/_shivammaurya__" target="_blank" rel="noreferrer" className="hover:text-[#b84a2b]">X</a>
+          <a href="https://medium.com/@shivam--maurya" target="_blank" rel="noreferrer" className="hover:text-[#b84a2b]">Medium</a>
         </div>
         <p>© {new Date().getFullYear()} Shivam Maurya</p>
       </div>

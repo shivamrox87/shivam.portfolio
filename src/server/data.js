@@ -25,12 +25,12 @@ export const builderPrinciples = [
 
 export const featuredWork = [
   {
-    name: "Enterprise AI delivery",
-    context: "AlphaFMC (Lionpoint Group) · Financial services",
-    status: "Professional work · 2024–present",
+    name: "Enterprise AI product and platform delivery",
+    context: "AlphaFMC · Financial services",
+    status: "Senior AI Engineer · 2024–present",
     description:
-      "Building and integrating secure AI infrastructure across model access, identity, storage, routing, and internal application workflows.",
-    scope: ["Azure OpenAI", "LiteLLM", "SSO", "Cloud delivery"],
+      "Leading hands-on delivery of internal AI products and the shared infrastructure behind them: model access, identity, evaluation, routing, deployment, and operational reliability.",
+    scope: ["Internal AI products", "Model gateways", "Identity", "Cloud delivery"],
     href: "/work/enterprise-ai",
   },
   {
@@ -54,6 +54,16 @@ export const featuredWork = [
 ];
 
 export const currentBuilds = [
+  {
+    name: "Personal AI Systems Lab",
+    slug: "personal-ai-systems-lab",
+    stage: "Ongoing experimentation",
+    summary:
+      "A practical personal AI environment for testing persistent agents, multi-model workflows, local inference, model routing, and coding delegation across local and cloud systems.",
+    focus: ["Persistent agents", "Local models", "Model routing", "Developer workflows"],
+    statusNote: "Active hands-on research and infrastructure experimentation.",
+    accent: "from-[#18181b] via-[#3f3f46] to-[#b84a2b]",
+  },
   {
     name: "ExplainGitHub",
     slug: "explaingithub",
@@ -110,58 +120,109 @@ export const caseStudies = [
   {
     id: "cs-00",
     slug: "enterprise-ai",
-    heading: "Enterprise AI Delivery",
+    heading: "Enterprise AI Product and Platform Delivery",
     category: "Enterprise AI",
     status: "Professional work",
     date: "2024 - Present",
     subHeading:
-      "Secure AI infrastructure and internal application delivery for financial-services environments at AlphaFMC.",
+      "Senior AI engineering across internal product delivery, shared platforms, and production operations for financial-services environments at AlphaFMC.",
     summary:
-      "A public, non-confidential view of the platform patterns and engineering responsibilities involved in making AI usable inside enterprise teams.",
+      "A public, non-confidential view of hands-on work delivering internal AI experiences and the shared foundations that make them secure, usable, and operable for enterprise teams.",
     problem:
-      "Enterprise teams need dependable access to AI models without creating fragmented authentication, provider integrations, routing logic, and deployment practices across every internal application.",
+      "Enterprise teams need useful AI products as well as dependable model access. Without shared foundations, each new workflow recreates authentication, provider integration, evaluation, routing, deployment, and operational support from scratch.",
     solution:
-      "Build shared infrastructure around model access, identity, traffic routing, storage integrations, internal interfaces, and repeatable cloud delivery using established enterprise controls.",
+      "Build internal AI product experiences on top of shared capabilities for model access, identity, routing, evaluation, observability, storage integrations, and repeatable cloud delivery using established enterprise controls.",
     outcome:
-      "Created and improved reusable foundations for internal AI applications, with model access and operational concerns handled as platform responsibilities rather than duplicated application code.",
+      "Delivered and improved internal AI capabilities while strengthening reusable platform foundations, so product teams can focus on useful workflows without duplicating core access, reliability, and operational concerns.",
     role: "Senior AI Engineer",
     stack: ["Azure OpenAI", "Claude", "Gemini", "AWS Bedrock", "LiteLLM", "OpenWebUI"],
     responsibilities: [
-      "Multi-provider model integration and model-gateway architecture.",
-      "Identity, authentication, access control, and enterprise data-protection considerations.",
-      "Backend AI services, cloud delivery, and provider-specific production debugging.",
-      "OpenWebUI customisation, integrations, and open-source platform evaluation.",
-      "Technical reviews and architecture decisions with product, DevOps, IT, and engineering stakeholders.",
+      "Hands-on delivery of internal AI products, model-enabled workflows, and shared platform services.",
+      "Multi-provider model integration, model-gateway architecture, and provider-specific production debugging.",
+      "Identity, authentication, access control, evaluation, and enterprise data-protection considerations.",
+      "Backend AI services, cloud releases, operational debugging, and observability-oriented delivery.",
+      "Technical mentoring, architecture reviews, and cross-functional decisions with product, DevOps, IT, and engineering stakeholders.",
     ],
     architecture: [
-      "Internal users and applications initiate requests through approved interfaces.",
+      "Internal users and product workflows initiate requests through approved AI interfaces.",
       "Identity and access controls establish who can use the system.",
-      "Shared application services apply product and workflow context.",
-      "A LiteLLM-based gateway centralises routing, model abstraction, and provider access.",
-      "Azure OpenAI, Claude, Gemini, and Bedrock-backed services execute model workloads.",
+      "Shared application services apply product context, workflow logic, and evaluation boundaries.",
+      "A model gateway centralises routing, model abstraction, provider access, and operational controls.",
+      "Approved model providers execute workloads while delivery systems retain visibility into failures, cost, and behaviour.",
     ],
     constraints: [
       "Financial-services security and governance expectations shape every integration.",
-      "The platform must support multiple internal workflows without coupling them to one interface.",
-      "Provider abstraction must not hide operational failures or make debugging harder.",
+      "The platform must support multiple internal products and workflows without coupling them to one interface.",
+      "Provider abstraction must not hide operational failures, evaluation gaps, or make debugging harder.",
       "Tool-calling behaviour and request formats differ across model providers.",
       "Public discussion must protect employer, client, and implementation confidentiality.",
     ],
     decisions: [
-      "Treat model access as shared infrastructure rather than application-specific integration.",
+      "Treat core AI capabilities as shared infrastructure rather than application-specific integration.",
       "Keep identity and permissions at the system boundary instead of relying on prompt-level controls.",
-      "Separate user interfaces, application workflows, routing, and model providers into distinct responsibilities.",
+      "Separate user interfaces, application workflows, evaluation, routing, and model providers into distinct responsibilities.",
       "Prefer native tool-calling patterns while handling provider-specific compatibility explicitly.",
-      "Use repeatable deployment practices so environments can be operated consistently.",
+      "Use repeatable deployment and release practices so environments can be operated consistently.",
     ],
     learnings: [
-      "Enterprise AI adoption is usually an infrastructure and integration problem before it is a model problem.",
-      "Identity, failure handling, and operational ownership determine whether internal AI earns trust.",
-      "A useful abstraction reduces duplicated work while preserving enough visibility to diagnose the system.",
+      "Enterprise AI adoption is a product, infrastructure, and integration problem—not only a model problem.",
+      "Identity, evaluation, failure handling, and operational ownership determine whether internal AI earns trust.",
+      "A useful abstraction lets product teams move faster while preserving enough visibility to diagnose the system.",
     ],
   },
   {
     id: "cs-01",
+    slug: "personal-ai-systems-lab",
+    heading: "Personal AI Systems Lab",
+    category: "AI Infrastructure",
+    status: "Ongoing experimentation",
+    date: "Current",
+    subHeading:
+      "A hands-on environment for testing what it takes to make personal AI systems useful across agents, local models, cloud providers, coding workflows, and recurring tasks.",
+    summary:
+      "An evolving engineering lab for persistent agents, multi-provider model routing, local inference, coding delegation, and the practical operating patterns behind useful personal AI systems.",
+    problem:
+      "Most personal AI setups are isolated chats or disconnected tools. The useful challenge is connecting models, context, tasks, local infrastructure, and coding workflows without creating a system that is harder to operate than the work it is meant to help with.",
+    solution:
+      "Experiment with a practical stack of persistent agents, local and hosted models, model gateways, AI interfaces, task context, and coding delegation. Treat each experiment as a way to learn which autonomy, observability, and review patterns actually hold up.",
+    outcome:
+      "Built a continuing environment for testing personal AI workflows in real conditions, with clearer opinions about model routing, local inference, agent autonomy, task handoff, and the limits of always-on automation.",
+    role: "Independent builder and AI engineer",
+    stack: ["Agents", "Local models", "LiteLLM", "OpenWebUI", "Docker", "OpenAI-compatible APIs"],
+    responsibilities: [
+      "Designing and operating persistent-agent and personal-workflow experiments.",
+      "Evaluating local and hosted models for latency, capability, cost, and operational fit.",
+      "Building model-routing and OpenAI-compatible interfaces across different backends.",
+      "Testing coding delegation, task handoffs, recurring work, and human-review boundaries.",
+      "Documenting failures and turning experiments into more dependable working patterns.",
+    ],
+    architecture: [
+      "A personal AI interface receives questions, tasks, and working context.",
+      "An orchestration layer routes work to agents, coding tools, or model backends.",
+      "A model gateway provides a common interface across hosted and local providers.",
+      "Local inference and cloud models handle workloads with different cost, latency, and capability needs.",
+      "Logs, task state, and human review make the system observable rather than merely autonomous.",
+    ],
+    constraints: [
+      "Personal systems need to stay useful without becoming another full-time operations burden.",
+      "Local hardware, model quality, and latency place real limits on always-on inference.",
+      "Agent autonomy needs clear permission and review boundaries for consequential actions.",
+      "Different providers and local runtimes expose inconsistent tools, formats, and operational behaviour.",
+    ],
+    decisions: [
+      "Use an OpenAI-compatible gateway boundary instead of coupling every experiment to one provider.",
+      "Treat persistent agents as an operating-systems problem involving state, monitoring, and recovery—not only prompting.",
+      "Keep human review at the boundary where an action becomes expensive, external, or difficult to reverse.",
+      "Use experiments to test a concrete workflow before adding more autonomy or tools.",
+    ],
+    learnings: [
+      "More agents do not automatically create more leverage; useful systems need clear ownership and review paths.",
+      "Local models are most valuable when they are part of a deliberate routing and privacy strategy, not a novelty layer.",
+      "The quality of task context, recovery behaviour, and handoffs matters as much as the model selected for a workflow.",
+    ],
+  },
+  {
+    id: "cs-02",
     slug: "explaingithub",
     heading: "ExplainGitHub",
     category: "Developer AI",
@@ -225,7 +286,7 @@ export const caseStudies = [
     link: "explaingithub",
   },
   {
-    id: "cs-02",
+    id: "cs-03",
     slug: "reqbeam",
     heading: "ReqBeam",
     category: "Workflow Product",
@@ -286,7 +347,7 @@ export const caseStudies = [
     link: "reqbeam",
   },
   {
-    id: "cs-03",
+    id: "cs-04",
     slug: "repoflicks",
     heading: "RepoFlicks",
     category: "Developer Product",
@@ -337,7 +398,7 @@ export const caseStudies = [
     ],
   },
   {
-    id: "cs-04",
+    id: "cs-05",
     slug: "openwebui-operating-system",
     heading: "OpenWebUI AI Operating System",
     category: "AI Platform Tooling",
@@ -394,7 +455,7 @@ export const caseStudies = [
     ],
   },
   {
-    id: "cs-05",
+    id: "cs-06",
     slug: "arya",
     heading: "Arya",
     category: "Applied AI System",
@@ -451,6 +512,7 @@ export const profolio = caseStudies;
 
 export const featuredWorkSlugs = [
   "enterprise-ai",
+  "personal-ai-systems-lab",
   "explaingithub",
   "reqbeam",
   "repoflicks",
@@ -458,6 +520,27 @@ export const featuredWorkSlugs = [
 ];
 
 export const otherProducts = [
+  {
+    name: "LaunchRail",
+    status: "Exploration",
+    summary:
+      "An exploration into reducing the gap between a working local application and a deployable cloud service, with infrastructure setup and repeatable delivery treated as part of the product experience.",
+    focus: ["Cloud deployment", "Developer experience", "Infrastructure automation"],
+  },
+  {
+    name: "Sarkari Samadhan",
+    status: "Civic-tech exploration",
+    summary:
+      "A citizen-help product direction for making public-service processes, grievance routes, rights information, and government guidance easier to understand and act on.",
+    focus: ["Civic tech", "Public information", "Knowledge systems"],
+  },
+  {
+    name: "Personal AI Systems Lab",
+    status: "Ongoing experimentation",
+    summary:
+      "A hands-on environment for experimenting with persistent personal agents, local models, multi-provider routing, coding delegation, and the operating patterns that make AI systems useful over time.",
+    focus: ["Agents", "Local inference", "Model routing", "AI infrastructure"],
+  },
   {
     name: "Boansel",
     status: "Launched product",
@@ -467,14 +550,14 @@ export const otherProducts = [
   },
   {
     name: "SageRai",
-    status: "Product exploration",
+    status: "Exploration",
     summary:
       "A privacy-sensitive personal-finance assistant for extracting UPI and SMS transaction data, categorising expenses, and turning financial activity into understandable insights.",
     focus: ["Indian fintech", "Transaction analysis", "Expense categorisation", "Privacy"],
   },
   {
     name: "Instant EduDoc",
-    status: "Applied AI project",
+    status: "Shipped project",
     summary:
       "An AI-powered educational document generator for structured CBSE notes, combining Gemini, automated content formatting, PDF generation, and student-facing workflows.",
     focus: ["Gemini", "Document generation", "WeasyPrint", "Education"],
@@ -603,11 +686,11 @@ export const timelineHighlights = [
 export const companiesData = [
   {
     id: "C-01",
-    companyName: "AlphaFMC (Lionpoint Group)",
+    companyName: "AlphaFMC",
     activeYears: "2024 - Present",
     position: "Senior AI Engineer",
     description:
-      "Building secure enterprise AI platforms and internal products for financial-services organisations. Work spans multi-provider model integration, LiteLLM gateways, OpenWebUI, native tool calling, identity and access, backend services, cloud delivery, provider-specific debugging, technical reviews, and architecture decisions with product, DevOps, IT, security, and engineering stakeholders.",
+      "Leading and contributing to internal AI product delivery and shared enterprise AI platforms for financial-services organisations. Work spans model-enabled workflows, multi-provider model integration, model gateways, identity and access, evaluation, backend services, cloud delivery, production debugging, technical mentoring, and architecture decisions with product, DevOps, IT, security, and engineering stakeholders.",
   },
   {
     id: "C-02",

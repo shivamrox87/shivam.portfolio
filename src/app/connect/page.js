@@ -19,16 +19,20 @@ export default function ContactPage() {
             <p className="eyebrow">Contact</p>
             <h1 className="display-title mt-4">Let&apos;s talk.</h1>
             <p className="mt-8 body-copy">
-              For conversations about enterprise AI, developer tools, technical architecture,
-              speaking, or collaboration, send a short note below.
+              For enterprise AI product and platform delivery, developer tools, technical architecture
+              reviews, speaking, or collaboration, send a short note below.
             </p>
             <div className="mt-8 border-t border-[#d8d5cc] pt-5 text-sm leading-7 text-[#68675f]">
               <p>Based in Varanasi, India</p>
-              <a href="https://www.linkedin.com/in/shivam--maurya" target="_blank" rel="noreferrer" className="text-link mt-3">LinkedIn</a>
+              <div className="mt-3 flex flex-wrap gap-4">
+                <a href="https://www.linkedin.com/in/shivam--maurya" target="_blank" rel="noreferrer" className="text-link">LinkedIn</a>
+                <a href="https://x.com/_shivammaurya__" target="_blank" rel="noreferrer" className="text-link">X</a>
+                <a href="https://medium.com/@shivam--maurya" target="_blank" rel="noreferrer" className="text-link">Medium</a>
+              </div>
             </div>
             <div className="mt-10 border-t border-[#171714]">
               {[
-                ["AI architecture", "Production AI platforms, model gateways, identity, and deployment strategy."],
+                ["AI products and platforms", "Production AI products, model gateways, identity, evaluation, and deployment strategy."],
                 ["Developer products", "Technical and product review for tools around repositories, APIs, and engineering workflows."],
                 ["Speaking", "Workshops and conversations on enterprise AI, applied AI systems, and production delivery."],
               ].map(([title, detail]) => (

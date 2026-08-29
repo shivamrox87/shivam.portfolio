@@ -27,7 +27,7 @@ export default function WorkSide() {
         <div className="site-shell page-section grid gap-10 md:grid-cols-[0.28fr_1fr] md:gap-16">
           <div>
             <p className="eyebrow">Featured work</p>
-            <h2 className="section-title mt-3">Five areas of depth</h2>
+            <h2 className="section-title mt-3">Selected areas of depth</h2>
           </div>
           <div className="border-t border-[#171714]">
             {featuredWork.map((study, index) => (

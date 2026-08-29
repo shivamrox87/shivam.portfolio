@@ -7,9 +7,9 @@ export default function BuildingPage() {
   return (
     <main id="main-content">
       <section className="site-shell page-section">
-        <p className="eyebrow">Now · July 2026</p>
+        <p className="eyebrow">Now · August 2026</p>
         <h1 className="display-title mt-4 max-w-[800px]">What I am building and studying.</h1>
-        <p className="mt-8 max-w-[680px] body-copy">A concise record of independent product development and current technical research.</p>
+        <p className="mt-8 max-w-[680px] body-copy">A concise record of current enterprise AI delivery, independent product work, and technical research.</p>
       </section>
       <section className="border-t border-[#d8d5cc]">
         <div className="site-shell page-section grid gap-10 md:grid-cols-[0.3fr_1fr] md:gap-16">
@@ -22,7 +22,7 @@ export default function BuildingPage() {
                   <p className="text-xs uppercase tracking-[0.14em] text-[#b84a2b]">{item.stage}</p>
                 </div>
                 <p className="mt-4 max-w-[680px] text-sm leading-7 text-[#4f4e48]">{item.summary}</p>
-                {["explaingithub", "reqbeam", "repoflicks", "openwebui-operating-system"].includes(item.slug) ? <Link href={`/work/${item.slug}`} className="text-link mt-4">Product notes</Link> : null}
+                {["personal-ai-systems-lab", "explaingithub", "reqbeam", "repoflicks", "openwebui-operating-system"].includes(item.slug) ? <Link href={`/work/${item.slug}`} className="text-link mt-4">Product notes</Link> : null}
               </article>
             ))}
           </div>

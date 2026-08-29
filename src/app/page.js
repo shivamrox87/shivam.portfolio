@@ -13,9 +13,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const currentFocus = [
-  ["At work", "I am building secure AI infrastructure and internal tools for financial-services teams at AlphaFMC."],
-  ["Outside work", "I am developing ExplainGitHub, evolving ReqBeam, and experimenting with OpenWebUI-based knowledge and automation workflows."],
-  ["Lately", "I have been spending time on model gateways, agent permissions, evaluation, context quality, and what makes an AI system dependable."],
+  ["At work", "I lead and contribute to secure internal AI products and platform work for financial-services teams at AlphaFMC."],
+  ["Outside work", "I am developing ExplainGitHub, evolving ReqBeam, and building personal AI systems around agents, local models, and model routing."],
+  ["Lately", "I have been spending time on model gateways, agent permissions, evaluation, context quality, local AI infrastructure, and what makes an AI system dependable."],
 ];
 
 const speaking = [
@@ -71,13 +71,13 @@ export default function Home() {
 
         <div className="space-y-5 body-copy">
           <p>
-            Hi, I am Shivam. I work as a Senior AI Engineer at AlphaFMC, where I build enterprise
-            AI infrastructure and internal systems for financial-services organisations.
+            Hi, I am Shivam. I am a Senior AI Engineer at AlphaFMC, where I build and operate
+            enterprise AI infrastructure and internal products for financial-services organisations.
           </p>
           <p>
             Most days, I am thinking about the less glamorous parts of AI: model access, identity,
-            cloud delivery, backend services, and the workflows that make a system genuinely useful
-            for a team.
+            evaluation, cloud delivery, backend services, and the workflows that make a system
+            genuinely useful for a team.
           </p>
           <p>
             Outside work, I build products, write down what I am learning, teach, and run
@@ -267,13 +267,15 @@ export default function Home() {
           If something here resonates, let&apos;s talk.
         </p>
         <p className="mt-5 body-copy">
-          Whether you are building something, organising a workshop, or just want to compare notes on AI and products, I would be glad to hear from you.
+          Whether you are building an AI product or platform, want a technical architecture review, are organising a workshop, or just want to compare notes on AI and products, I would be glad to hear from you.
         </p>
         <div className="mt-8 flex items-end justify-between gap-8">
           <div className="flex flex-wrap gap-x-6 gap-y-3">
             <Link href="/connect" className="text-link">Contact me</Link>
             <a href="mailto:connect@shivammaurya.com" className="text-link">connect@shivammaurya.com</a>
             <Link href="https://www.linkedin.com/in/shivam--maurya" target="_blank" className="text-link">LinkedIn</Link>
+            <Link href="https://x.com/_shivammaurya__" target="_blank" className="text-link">X</Link>
+            <Link href="https://medium.com/@shivam--maurya" target="_blank" className="text-link">Medium</Link>
           </div>
           <Image
             src="/icon.png"

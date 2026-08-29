@@ -26,9 +26,9 @@ export default function AboutSide() {
             <h1 className="display-title mt-4 max-w-[760px]">Engineering AI systems that can survive real operations.</h1>
             <div className="mt-9 max-w-[720px] space-y-5 body-copy">
               <p>
-                I am a Senior AI Engineer at AlphaFMC, part of Lionpoint Group. I work on AI
-                systems for financial-services environments, where security, reliability,
-                identity, and integration matter as much as model capability.
+                I am a Senior AI Engineer at AlphaFMC. I lead and contribute to internal AI
+                products and platform work for financial-services environments, where security,
+                reliability, identity, and integration matter as much as model capability.
               </p>
               <p>
                 My path into AI started through teaching. From 2020 to 2023, I ran the MSME-registered
@@ -37,7 +37,9 @@ export default function AboutSide() {
               </p>
               <p>
                 I later worked across startup AI products and automation-heavy operations before
-                moving deeper into enterprise AI infrastructure. I am based in Varanasi, India.
+                moving deeper into enterprise AI infrastructure. Alongside hands-on engineering,
+                I enjoy mentoring, technical leadership, and turning complex systems into useful
+                working tools. I am based in Varanasi, India.
               </p>
             </div>
             <div className="mt-8 flex gap-5">
@@ -77,7 +79,7 @@ export default function AboutSide() {
         <div className="site-shell page-section grid gap-10 md:grid-cols-[0.35fr_1fr] md:gap-16">
           <div>
             <p className="eyebrow">Principles</p>
-            <h2 className="section-title mt-3">How I think about the work</h2>
+            <h2 className="section-title mt-3">How I work</h2>
           </div>
           <div className="border-t border-[#171714]">
             {principles.map(([title, detail], index) => (
