@@ -767,6 +767,54 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Aug 29, 2026",
+    blogHeading: "AI Autonomy Needs a Workflow, Not Just a Bigger Brief",
+    slug: "ai-autonomy-needs-a-workflow-not-just-a-bigger-brief",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Product Execution",
+    content:
+      "I am comfortable giving an AI agent a broad outcome—build the thing, debug it, test it, and come back when it is ready. That looks advanced on a capability ladder, but it has taught me a more useful lesson: autonomy is only as dependable as the workflow around it. The next improvement is not another agent. It is a repeatable way to delegate, verify, and recover.",
+    sections: [
+      {
+        heading: "Using more AI is not the same as using it well",
+        paragraphs: [
+          "I have been using AI heavily for development, research, product experiments, and a few ongoing monitoring ideas. Sometimes I start with a clear problem. Sometimes I ask the model to help me find the problem worth working on, react to its suggestion, and let the direction emerge through conversation. Once something feels promising, I increasingly hand over an outcome instead of a narrow implementation task.",
+          "That is a real change in how I work. I am no longer only asking for a function, a fix, or an endpoint. I might ask an agent to build a product idea, work through implementation details, debug failures, and run the available checks. It can often get surprisingly far without me steering every decision. But the number of tools I can use, or the size of the brief I can give, does not tell me whether that process is mature.",
+        ],
+      },
+      {
+        heading: "Autopilot is useful; reliability is the hard part",
+        paragraphs: [
+          "When an agent works from a broad objective, I am operating closer to autopilot than to copilot. I give it room to decide how to approach the work and usually intervene only when it needs a decision or returns a result. That can be enormously useful for experimentation because it lets me test what the system can actually execute rather than micromanaging every step.",
+          "The catch is that a convincing completion message is not the same as a finished product. I still manually test the result and find issues the agent did not catch. It may fix one defect while introducing another, choose a plausible but weak implementation direction, or decide it is done before the work has met reality. The agent can be capable and still be unreliable. Those are separate properties, and confusing them is how an impressive demo turns into a frustrating loop.",
+        ],
+      },
+      {
+        heading: "My delegation is ahead of my system for delegation",
+        paragraphs: [
+          "The biggest weakness is not a lack of autonomy. It is that I have not consistently built structure around it. My real process is still very conversational: dump in an idea, explore it together, change the direction, then tell the agent to start building. That openness is valuable when the product is still unclear. It helps turn vague thoughts into something concrete.",
+          "But it also means every project invents its own rules. The agent has to infer what success means, what it should inspect before changing code, which assumptions are risky, and how much evidence is enough to call the task complete. I am comfortable delegating substantial work, yet I have not always given that work a stable contract. My willingness to delegate is ahead of my system for delegation.",
+        ],
+      },
+      {
+        heading: "A better workflow creates useful boundaries",
+        paragraphs: [
+          "The practical improvement is deliberately unglamorous. Before implementation, define the outcome and the constraints. Ask the agent to inspect the repository and state its plan. Make uncertainty explicit, especially around product behaviour, existing conventions, and risky changes. During the work, require the checks that matter: tests, linting, type checks, builds, or a documented reason why a check could not run.",
+          "At the end, review the diff rather than relying on the summary alone. The handoff should say what changed, what was verified, what remains uncertain, and what needs human testing. This does not make an agent less autonomous. It makes autonomy easier to trust because the agent's work arrives with evidence and clear boundaries instead of a single claim that it is finished.",
+        ],
+      },
+      {
+        heading: "More autonomy is not automatically the goal",
+        paragraphs: [
+          "I have also experimented with always-on agents, scheduled monitoring, and local systems that keep working when I am not actively prompting them. Those are interesting capabilities, but experimenting with them is different from depending on them. If I have to rediscover whether an automation is still running, it is not yet a dependable part of how I work.",
+          "Adding schedules, tools, and more agents creates more state to understand and more failures to monitor. That can be worth it when the work is repeatable, the cost of a mistake is controlled, and the result can be verified efficiently. Otherwise, more autonomy simply becomes another system to manage. The point is not to climb a ladder of AI adoption. It is to use the right amount of autonomy for the task and build enough process around it that the result is genuinely useful.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Aug 28, 2026",
     blogHeading: "A Handoff Needs a Task Contract, Not a Conversation Transfer",
     slug: "a-handoff-needs-a-task-contract-not-a-conversation-transfer",
