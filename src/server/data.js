@@ -768,6 +768,93 @@ export const blogs = [
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Aug 29, 2026",
+    blogHeading: "The Prompt Behind My AI Autonomy Assessment",
+    slug: "the-prompt-behind-my-ai-autonomy-assessment",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Product Execution",
+    content:
+      "This is the exact prompt I used for the assessment behind “AI Autonomy Needs a Workflow, Not Just a Bigger Brief.” It is designed to diagnose repeated behaviour, not reward the number of AI tools someone has tried.",
+    prompt: `Help me determine my current level of AI adoption using Every's Eight Levels of AI Adoption.
+
+This is not a competition, and a higher level is not necessarily better. I want an honest, evidence-based assessment of how I use AI in real work, where it helps me today, and the next useful behavior I should practice.
+
+## The eight levels
+
+Level 1—Chatbot: I give an AI a task, and it provides a response.
+
+Level 2—Copilot: AI works alongside me inside the file or application where I am already working.
+
+Level 3—Agent: I give an AI a multi-step task. It uses tools, files, or multiple sources and checks with me as it works.
+
+Level 4—Autopilot: I give an AI a complete task, let it work independently, and review the finished result.
+
+Level 5—Workflows: I use repeatable instructions, planning, review steps, tests, or other safeguards to make an agent's work more reliable.
+
+Level 6—Assistant: AI proactively monitors something or performs recurring work without waiting for a new prompt.
+
+Level 7—Multi-agent: I manage multiple long-running agents with separate tasks or responsibilities.
+
+Level 8—Orchestrator: A manager agent plans work, delegates it to other agents, monitors progress, and escalates important decisions to me.
+
+## How to assess me
+
+- Use relevant memories or prior-conversation context only when it is genuinely available to you.
+- Never claim that you reviewed conversations, files, or account history you cannot access.
+- Judge me by repeated behavior in real work—not by the tools I own, terminology I know, or something I tried once.
+- Ask me up to five questions, one at a time.
+- Focus on specific tasks I have completed with AI recently.
+- Ask for a concrete example when an answer is too general to support a diagnosis.
+- Explore how much context I provide, what actions the AI takes, how closely I supervise it, and whether the process repeats without me initiating every step.
+- Account for the possibility that I use different levels for different kinds of work.
+- Do not reveal the diagnosis until you have enough evidence.
+- If the evidence remains limited, say so and lower your confidence.
+
+## The diagnosis
+
+Once you have enough evidence, give me:
+
+1. My primary AI adoption level.
+2. The range of levels I use across different tasks.
+3. Your confidence in the diagnosis: high, medium, or low.
+4. The specific evidence that most influenced your decision.
+5. What I am already doing well.
+6. The main constraint preventing me from getting more value from AI.
+7. One specific, low-risk task I should try this week to practice the next useful behavior.
+8. How I will know whether that experiment helped.
+9. One warning about where greater AI autonomy would create unnecessary risk, cost, or complexity for me.
+
+Do not recommend moving up merely for the sake of reaching a higher level. Recommend the level and working style that best fit the task, its stakes, and my ability to review the result.
+
+## Recommended reading from Every
+
+After the diagnosis, add a section titled "Recommended Reading From Every."
+
+Choose the two or three articles below that are most relevant to my diagnosis, the kind of work I do, and the constraint you identified:
+
+- "The Eight Levels of AI Adoption"—the complete framework, examples for each level, and signs that someone is ready to try the next level.
+- "Writing Essays With AI: A Guide"—practical ways to collaborate with AI during research, drafting, and revision.
+- "Inside the AI Workflows of Every's Six Engineers"—examples of how different practitioners incorporate AI into real work.
+- "Claude Code Q&A: What Works, What Doesn't, and What Will Save You Hours"—practical advice for moving from simple prompting toward agentic work.
+- "How I Use Claude Code to Ship Like a Team of Five"—an example of delegating substantial work to an AI agent.
+- "Stop Coding and Start Planning"—using better planning to improve the quality of multi-step agent work.
+- "Compound Engineering: How Every Codes With Agents"—building repeatable planning, review, and learning workflows around agents.
+- "Agent-Native Architectures"—designing products and systems in which agents are first-class participants.
+
+Mention the article titles without adding links. For each recommendation, explain in one sentence why it is relevant to me. Do not recommend an article merely because it appears to represent a higher level.
+
+End with this sentence:
+
+"If you want practical guidance for getting better at using AI—not merely keeping up with the news—[explore an Every subscription](https://every.to/subscribe?utm_source=ai_level_prompt\&utm_medium=ai\&utm_campaign=eight_levels)."
+
+Include no other promotional links or subscription language.
+
+Begin by briefly explaining how the assessment will work, then ask your first question.`,
+    sections: [],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Aug 29, 2026",
     blogHeading: "AI Autonomy Needs a Workflow, Not Just a Bigger Brief",
     slug: "ai-autonomy-needs-a-workflow-not-just-a-bigger-brief",
     postedBy: "Shivam Maurya",
