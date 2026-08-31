@@ -850,6 +850,66 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Aug 31, 2026",
+    blogHeading: "An MCP Connection Needs a Trust Record, Not Just a Server URL",
+    slug: "an-mcp-connection-needs-a-trust-record-not-just-a-server-url",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "Remote MCP makes it remarkably easy to give an AI system another capability. That convenience can hide the real integration decision: which server is being trusted, on whose behalf it may act, which resources it can reach, and how the connection changes over time. I would make those facts explicit before treating a connector as available to an agent.",
+    sections: [
+      {
+        heading: "A server URL is not the whole integration",
+        paragraphs: [
+          "Adding a remote MCP server can look like configuration: provide a URL, complete a sign-in flow, and expose a few more tools. OpenAI's Responses API support for remote MCP servers makes that path intentionally straightforward. But the server is not just another model feature. It is a separate system that can describe capabilities, receive requests, and often act against data or services outside the agent runtime.",
+          "I find it more useful to treat each connection as a trust relationship. The useful questions are simple but concrete: who owns the server, what identity is presented to it, which tools are enabled for this product, which resources may be affected, and who can change the connection later? If those answers only exist in a browser session or an environment variable, the integration will be hard to review when it matters.",
+        ],
+        sources: [
+          {
+            label: "OpenAI: New tools and features in the Responses API",
+            href: "https://openai.com/index/new-tools-and-features-in-the-responses-api/",
+          },
+        ],
+      },
+      {
+        heading: "Record the connection before exposing its tools",
+        paragraphs: [
+          "For every production connector, I would keep a small trust record outside the prompt: a stable server identifier and endpoint, owning team or vendor, approved environments, authentication method, enabled tool names, data classification, action class, and a review date. This is not documentation for documentation's sake. It gives operations, product, and security teams one object to discuss when a tool becomes unexpectedly powerful or a server changes behaviour.",
+          "The record should distinguish discovery from approval. A client may discover that a server offers ten tools; that does not mean an agent needs all ten for every task. Select the smallest useful set and attach the selection to the workflow or task. That preserves the flexibility of MCP without turning a broad vendor integration into a permanent, ambient capability.",
+        ],
+      },
+      {
+        heading: "Keep the user's authorization pointed at the right resource",
+        paragraphs: [
+          "The hardest part of a remote connection is often invisible: making sure a token issued for one resource is not casually relayed to another. The MCP authorization specification requires clients to include a resource indicator where supported and requires servers to validate that a presented token was issued for them. It also explicitly forbids token passthrough. Those details protect against a connector becoming an unexamined bridge for credentials intended elsewhere.",
+          "In product terms, the agent should not receive a general-purpose user token and decide where to send it. A broker or connector layer should request the right grant for the named server and resource, keep its audience clear, and reject a token that arrives at the wrong destination. The model can request an operation; deterministic infrastructure should own the identity exchange.",
+        ],
+        sources: [
+          {
+            label: "Model Context Protocol: Authorization specification",
+            href: "https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization",
+          },
+        ],
+      },
+      {
+        heading: "Connection changes deserve a release path",
+        paragraphs: [
+          "A connector is not static after its first approval. Its endpoint, advertised tools, scopes, OAuth client configuration, or data handling can change. A useful system notices that drift and treats material changes as a new review event, not as background configuration churn. This is particularly important for remote services because the application may not control their deployment cycle.",
+          "I would pin the information that matters, keep an owner for the connector, and require a deliberate update when its trust record changes. That can be lightweight for a read-only internal knowledge source and more formal for a server that can create tickets, move money, or alter infrastructure. The principle is the same: a changed capability should not quietly inherit an old approval.",
+        ],
+      },
+      {
+        heading: "Make the connection legible during an incident",
+        paragraphs: [
+          "When a tool call surprises someone, the first useful questions are rarely about the model's prose. Which connector did the request use? Which task selected it? Which user or workload authorized it? Which tool and resource were invoked? Was the call allowed, denied, or escalated? A compact event at that boundary gives an operator a faster explanation than a long transcript can.",
+          "That is why a trust record belongs alongside runtime evidence. One describes what the connection was approved to do; the other shows what it actually did. Together they make remote MCP useful without asking people to trust a growing list of server URLs on faith. The goal is not to make integrations harder to add. It is to make each new capability understandable enough to keep.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Aug 29, 2026",
     blogHeading: "The Prompt Behind My AI Autonomy Assessment",
     slug: "the-prompt-behind-my-ai-autonomy-assessment",
