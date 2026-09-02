@@ -850,6 +850,72 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Sep 2, 2026",
+    blogHeading: "Agent Tool Policy Needs a Composition Rule, Not Just Labels",
+    slug: "agent-tool-policy-needs-a-composition-rule-not-just-labels",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "A tool can be harmless when considered alone and risky in the next step. That is why I do not want an agent’s safety posture to be a catalogue of tool labels. It needs a policy that can see the sequence: what the agent has read, where it is about to send information, and whether that combination is actually allowed for this task.",
+    sections: [
+      {
+        heading: "A safe-looking tool can change the meaning of the next one",
+        paragraphs: [
+          "Tool metadata is valuable because it gives a client a compact way to describe behaviour. In MCP, annotations can indicate whether a tool is read-only, destructive, idempotent, or reaches an open world. Those are useful prompts for a product to show the right interface or require more care before an invocation.",
+          "But production risk often lives in the path rather than a single call. Reading an internal record is one kind of action. Posting a message to an external destination is another. Put them in the same task, and the system now has a potential disclosure path. Neither individual label answers whether that path was approved. The recent MCP discussion on tool annotations makes the same distinction: annotations help describe a tool, while the runtime and authorization layer need to enforce the guarantees.",
+        ],
+        sources: [
+          {
+            label: "Model Context Protocol: Tool annotations as risk vocabulary",
+            href: "https://blog.modelcontextprotocol.io/posts/2026-03-16-tool-annotations/",
+          },
+        ],
+      },
+      {
+        heading: "Treat capability pairs as a design surface",
+        paragraphs: [
+          "I would start a tool review by looking for pairs and short chains that change the stakes: private retrieval followed by external communication, a broad search followed by an irreversible write, or a planning tool followed by a deployment action. This does not mean every pair deserves a separate rule. It means the combinations that cross a data, identity, or consequence boundary deserve an explicit answer.",
+          "A small matrix is usually enough to begin. For each relevant source class and destination class, decide whether the workflow is allowed, needs a human approval, requires a redacted artifact, or is simply unavailable. This turns a vague instruction such as ‘do not leak sensitive data’ into a decision the surrounding system can make before it presents a send button or executes a call.",
+        ],
+      },
+      {
+        heading: "Make the policy depend on the actual task",
+        paragraphs: [
+          "The same two tools can be acceptable in one workflow and wrong in another. A support agent may be allowed to look up a customer’s ticket and draft a reply into that customer’s case, while an engineering assistant should not use the same ticket content as material for a public status update. The policy needs the task’s user, purpose, target, and data classification—not only the name of the tool the model selected.",
+          "That is also why I would keep the model’s description of intent separate from the authorizing decision. The model can propose a structured action with a stable target and a purpose. Deterministic code can check the current identity, task scope, connector, and policy version. A confirmation dialog is still useful for consequential work, but it is most meaningful when it describes a decision the system has already bounded.",
+        ],
+        sources: [
+          {
+            label: "Model Context Protocol: Tools specification",
+            href: "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+          },
+        ],
+      },
+      {
+        heading: "Carry provenance across the boundary",
+        paragraphs: [
+          "Once a tool result becomes input to another tool, the second decision should retain a small amount of provenance. I would attach source identifiers, sensitivity or trust class, the task that retrieved the material, and the policy outcome that permits its next use. The agent does not need a giant transcript to make that useful; it needs the facts that matter to the action boundary.",
+          "This matters for open-world tools in particular. The MCP guidance notes that an external tool can bring untrusted content back into a session. Treating that result as ordinary instruction text creates the opposite problem from data leakage: outside content can begin steering an internal action. Provenance helps a runtime say both ‘this may not be sent there’ and ‘this may not alter policy here.’",
+        ],
+        sources: [
+          {
+            label: "Model Context Protocol: Tool annotations as risk vocabulary",
+            href: "https://blog.modelcontextprotocol.io/posts/2026-03-16-tool-annotations/",
+          },
+        ],
+      },
+      {
+        heading: "Evaluate the chains you intend to permit",
+        paragraphs: [
+          "A tool-by-tool test suite will miss the most important failures. I would add representative chains to evaluation: retrieve protected material then request an external send; inspect infrastructure then attempt a change with an expired approval; receive untrusted web content then ask to alter a local configuration. The expected behaviour might be a clean denial, a scoped approval request, a redacted draft, or a safe read-only alternative. The point is to specify it before a fluent model finds an accidental route around it.",
+          "The evidence should describe the decision path, not private model reasoning: task identifier, source and destination classes, requested capability, policy version, approval state, and result. That gives an operator a way to understand a surprising outcome and gives the team a regression case when a connector, prompt, or model changes. Good tool metadata still improves the experience. A composition rule is what keeps that experience from becoming the safety boundary.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Aug 31, 2026",
     blogHeading: "An MCP Connection Needs a Trust Record, Not Just a Server URL",
     slug: "an-mcp-connection-needs-a-trust-record-not-just-a-server-url",
