@@ -850,6 +850,78 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Sep 14, 2026",
+    blogHeading: "Agent Memory Needs an Eviction Policy, Not Just Summarization",
+    slug: "agent-memory-needs-an-eviction-policy-not-just-summarization",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "When an agent runs across dozens of tool calls, the default reaction to a growing context window is to run a periodic summary. But in production, naive summarization creates two persistent failure modes: it quietly drops exact invariants like negative constraints and IDs, and it allows stale environmental observations to poison later turns. If you want a long-running agent to remain reliable, its context needs an explicit eviction policy, not a fuzzy roll-up.",
+    sections: [
+      {
+        heading: "The hidden loss in rolling summarization",
+        paragraphs: [
+          "Most context compaction strategies treat prompt history as an append-only conversation transcript. When token usage crosses a threshold, the harness invokes a model to generate a concise summary of the turns so far, replaces early messages with that summary, and continues. In an open-ended conversational assistant, that feels seamless. In an autonomous engineering agent, it is often where reliability falls apart.",
+          "Production tasks depend on exact details: specific file paths, Git commit hashes, API response error codes, compiler output, and explicit user-specified negative constraints. A summarizer might condense three turns of debugging into \"investigated auth error and updated token handling.\" But it often drops that the user specifically insisted on not modifying the database schema, or it rounds off a subtle line-number offset. When the agent acts on that lossy narrative, it reintroduces bugs it previously solved or violates boundaries it was explicitly given.",
+        ],
+        sources: [
+          {
+            label: "OpenAI: Function calling and structured outputs in agent loops",
+            href: "https://developers.openai.com/api/docs/guides/function-calling",
+          },
+        ],
+      },
+      {
+        heading: "Stale observations are more dangerous than forgotten ones",
+        paragraphs: [
+          "In an interactive system, context is not just conversational history; it is a point-in-time snapshot of the external environment. If an agent inspects a configuration file in step 2, modifies it in step 5, and queries related code in step 8, keeping the raw step 2 observation in context introduces direct contradictions. The prompt now presents two competing versions of reality.",
+          "If a rolling summarizer attempts to reconcile those turns, it frequently produces a hallucinated blend of before-and-after states. An agent might see its earlier inspection and assume an old function signature still exists. To prevent this, the runtime needs mutation-aware eviction: when a tool call modifies a file, schema, or system record, any earlier read observations referencing that resource should be marked dirty or evicted from active working memory.",
+        ],
+        sources: [
+          {
+            label: "Model Context Protocol: Resources specification",
+            href: "https://modelcontextprotocol.io/specification/2025-06-18/server/resources",
+          },
+        ],
+      },
+      {
+        heading: "Separate invariant anchors from volatile scratchpads",
+        paragraphs: [
+          "The fix is not to build a more clever summarization prompt; it is to recognize that different pieces of context have fundamentally different lifecycles. Treating user intent, ephemeral tool stdout, and durable system state as a single stream of text is an architectural flaw. I think about context in three distinct tiers:",
+          "First, invariant anchors: the initial user prompt, top-level acceptance criteria, security boundaries, and negative constraints. These should be pinned and permanently exempt from compaction. Second, the working scratchpad: intermediate tool inputs and outputs used for short-term reasoning. This should be aggressively evicted as soon as a step completes. Third, durable checkpoint facts: explicit key-value assertions like \"checked out branch fix/auth\" or \"reproduction script failed with code 127\". These are deterministic truths that survive compaction without losing precision.",
+        ],
+      },
+      {
+        heading: "Evict raw payloads, retain structured assertions",
+        paragraphs: [
+          "The vast majority of tokens in an agent's context window do not come from conversation—they come from raw tool outputs. A single test run, a Git diff, or an API response can easily inject thousands of tokens. Leaving that raw text in the prompt for twenty subsequent turns provides zero incremental value once the agent has already extracted what it needed.",
+          "Rather than allowing raw payloads to accumulate until an emergency summarization triggered by context exhaustion, a production harness should evict tool output immediately upon consumption. When a test command finishes, replace the 500-line terminal dump with a verified assertion: \"test suite ran 34 tests, 0 failures, exit code 0.\" If the full output is ever needed for human review or deep auditing, it should be logged out-of-band in durable telemetry, not carried along in the model's active reasoning buffer.",
+        ],
+        sources: [
+          {
+            label: "Model Context Protocol: Tools specification",
+            href: "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+          },
+        ],
+      },
+      {
+        heading: "Coordinate eviction with prompt caching",
+        paragraphs: [
+          "Eviction design cannot be separated from inference economics. Modern model APIs rely heavily on prompt caching to deliver responsive agent interactions and reasonable costs. But prompt caching is prefix-based: the moment you rewrite or truncate tokens in the middle of a prompt, you invalidate the cache for all subsequent tokens, spiking latency and cost on every subsequent step.",
+          "If an eviction policy cleans up history unpredictably on every single turn, it destroys cache hits across the entire loop. A production agent architecture must align its eviction cadence with cache stability: keep invariant system instructions and tools strictly static at the head, append working scratchpad turns at the tail, and execute compaction at predictable epochs. You keep context lean, avoid stale drift, and preserve cache performance at the same time.",
+        ],
+        sources: [
+          {
+            label: "Claude documentation: Prompt caching architecture",
+            href: "https://platform.claude.com/docs/en/build-with-claude/prompt-caching",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Sep 2, 2026",
     blogHeading: "Agent Tool Policy Needs a Composition Rule, Not Just Labels",
     slug: "agent-tool-policy-needs-a-composition-rule-not-just-labels",
