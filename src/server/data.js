@@ -850,6 +850,68 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Sep 16, 2026",
+    blogHeading:
+      "A Coding Agent Needs an Isolated Worktree, Not a Shared Working Directory",
+    slug: "a-coding-agent-needs-an-isolated-worktree-not-a-shared-working-directory",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "When an autonomous coding agent edits files directly in your active project folder, it collides with uncommitted work, trips local hot reloads, and makes rollbacks messy. If you want multi-turn agent runs to be safe, fast, and concurrent, the execution harness needs to operate inside isolated Git worktrees rather than mutating the developer's working directory.",
+    sections: [
+      {
+        heading: "The collision course of the in-place working directory",
+        paragraphs: [
+          "The default mental model for a developer AI tool is an interactive shell or editor plugin operating directly on the current directory. When an agent only inspects files or answers questions, running in-place is harmless. But the moment you grant it authority to refactor modules, edit configuration files, and run test suites, executing directly inside the developer's working tree becomes a liability.",
+          "Real engineering workspaces are rarely pristine. Developers have half-finished edits in progress, untracked scratch notes, and running development servers. When an agent begins applying partial edits across files, hot module reload (HMR) watchers immediately fire on broken syntax, crashing local dev servers or spamming logs. Language servers trigger frantic AST re-indexing mid-turn. Worse, if the agent fails or gets interrupted five turns into a complex migration, the developer is left with a contaminated workspace and no clean line between human intent and agent missteps.",
+        ],
+      },
+      {
+        heading: "Independent indexes without the weight of full clones",
+        paragraphs: [
+          "The naive fix for workspace pollution is cloning the repository into an ephemeral temporary folder. But for medium-to-large codebases, a full clone is hopelessly inefficient: it duplicates the entire object database, wastes gigabytes of disk space, and incurs noticeable startup latency before the agent can even inspect its first file.",
+          "Git worktrees solve this with native repository-level isolation. By running git worktree add, the agent harness spins up an independent working directory and branch while sharing the parent repository's object store and packfiles. The agent receives its own dedicated index and working tree, completely decoupled from the developer's active branch and unstaged changes. The developer can keep coding, testing, and switching branches on their primary checkout without any risk of stepping on the agent's work.",
+        ],
+        sources: [
+          {
+            label: "Git documentation: git-worktree specification and usage",
+            href: "https://git-scm.com/docs/git-worktree",
+          },
+        ],
+      },
+      {
+        heading: "Taming dependency overhead and environment drift",
+        paragraphs: [
+          "While worktrees isolate files and Git references cheaply, language runtimes present practical friction. If an agent has to execute a full dependency installation like npm install, bundle install, or a Python virtual environment build on every single task run, the latency penalty kills developer adoption.",
+          "A robust agent harness handles runtime state pragmatically. For node-based projects, sharing dependencies through content-addressable package caches or symlinking node_modules from the primary checkout allows the agent to immediately run test suites and linters without re-downloading packages. Similarly, environment configurations like .env.local or tool configs require a deliberate isolation policy: rather than blindly mirroring all untracked files—which might leak local secrets—the harness should explicitly provision task-scoped environment variables and validated fixtures into the worktree sandbox.",
+        ],
+      },
+      {
+        heading: "Concurrency and the shared repository lock bottleneck",
+        paragraphs: [
+          "Because worktrees share the underlying .git storage directory, they do not provide unlimited write concurrency at the Git metadata layer. Git protects internal references and metadata using advisory lockfiles such as index.lock and packed-refs.lock.",
+          "If an orchestrator attempts to launch multiple parallel subagents—for example, assigning one agent to write unit tests, another to refactor an API route, and a third to update documentation—concurrent Git operations like branch creation, ref fetches, or commits can easily trigger lock contention. Production agent harnesses must treat Git operations as critical sections: wrap repository metadata updates with short exponential backoffs and jitter, or coordinate ref writes through a centralized lock manager in the harness runtime.",
+        ],
+        sources: [
+          {
+            label:
+              "Git documentation: gitrepository-layout and shared repository architecture",
+            href: "https://git-scm.com/docs/gitrepository-layout",
+          },
+        ],
+      },
+      {
+        heading: "Disposability turns failure into a no-op",
+        paragraphs: [
+          "The greatest architectural dividend of worktree isolation is that recovery from failure becomes trivial. In an in-place execution model, canceling a run or rejecting an agent's proposal requires complex rollbacks, fragile stashes, or risky checkout commands that might accidentally discard legitimate human edits.",
+          "With a worktree, disposability is the default. If an agent wanders off course or hits a token limit, the harness simply removes the worktree and deletes the temporary branch. The developer's workspace remains perfectly intact, as if the run never happened. When an agent succeeds, the outcome is not an untracked mess—it is a clean, verified branch ready for a three-way diff, interactive patch cherry-picking, or a draft pull request. Reliable autonomy begins by making experimentation completely safe to throw away.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Sep 14, 2026",
     blogHeading: "Agent Memory Needs an Eviction Policy, Not Just Summarization",
     slug: "agent-memory-needs-an-eviction-policy-not-just-summarization",
