@@ -850,6 +850,65 @@ export const blogs = [
   {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
+    postedOn: "Sep 28, 2026",
+    blogHeading:
+      "Prompt Caching Needs Prefix Discipline, Not Just a Provider Toggle",
+    slug: "prompt-caching-needs-prefix-discipline-not-just-a-provider-toggle",
+    postedBy: "Shivam Maurya",
+    postedAt: "AI Infrastructure",
+    content:
+      "Most engineering teams enable prompt caching expecting an immediate 70 to 80 percent drop in inference latency and token bills, only to find their production agent loops barely registering a 15 percent cache hit rate. Prompt caching is not an ambient infrastructure switch that magically optimizes arbitrary agent runs; it is a strict prefix-matching contract. If an agent harness does not structure its prompt layers with deliberate prefix discipline, ordinary runtime practices like dynamic timestamps, unstable tool serialization, and eager rolling summarization will silently reset the KV cache on every turn.",
+    sections: [
+      {
+        heading: "The silent invalidation of the KV cache",
+        paragraphs: [
+          "Modern LLM inference engines—whether hosted APIs like Anthropic and OpenAI or self-hosted engines using vLLM—rely on Key-Value (KV) caching to avoid recomputing attention keys and values for tokens already processed in previous requests. The economic and latency benefits are dramatic: reading from the KV cache routinely cuts token costs by 50 to 90 percent and slashes Time to First Token (TTFT) from multi-second pauses down to hundreds of milliseconds.",
+          "However, prompt caching operates on an exact prefix match starting from token position zero. The cache functions like a deterministic trie: the engine reuses cached states only as long as every token in the prompt identically matches the stored sequence. The moment a single token diverges—whether an altered word, an extra space, or a swapped key—the entire downstream cache is invalidated. In an agent loop processing tens of thousands of context tokens across 20 turns, a tiny mutation near the beginning of the prompt forces the provider GPUs to re-evaluate the full sequence from scratch.",
+        ],
+      },
+      {
+        heading: "Common agent anti-patterns that destroy cache hits",
+        paragraphs: [
+          "Most cache misses in agentic systems are self-inflicted by well-intentioned application code. The most ubiquitous offender is injecting dynamic runtime metadata into the system prompt. Adding lines like \"Current time: 2026-09-28 09:14:02 UTC\" or including an ephemeral request UUID at the head of the system prompt guarantees that every single turn has a completely unique prefix, reducing the global cache hit rate to zero.",
+          "A second common culprit is non-deterministic tool schema serialization. When tool definitions are generated dynamically, assembled from reflection, or serialized from dictionary iterations without canonical key sorting, the resulting JSON string can shuffle parameter descriptions or property orders between requests. Even if the underlying capabilities are identical, the token representation shifts, busting the cache. Similarly, injecting dynamic user permissions, tenant-specific switches, or volatile feature flags at the top of the prompt fractures cache reuse across sessions.",
+        ],
+      },
+      {
+        heading: "The layered prompt stack: ordering by rate of change",
+        paragraphs: [
+          "To achieve reliable 80-plus percent cache hit rates across iterative workflows, an agent harness must design its prompt structure as a layered stack ordered strictly by mutability. Content that never changes must sit at the absolute root, while highly dynamic variables must be pushed to the very leaf.",
+          "A production harness should enforce five discrete layers in sequence: First, the static system instructions, role definitions, and immutable security policies common to all runs. Second, canonically sorted, frozen tool definitions and JSON schemas. Third, stable grounding context—such as architectural guidelines, pinned repository documentation, or cached retrieval artifacts. Fourth, the monotonic conversation trajectory, where past user queries, tool invocations, and tool results remain append-only and strictly immutable. Finally, dynamic turn ephemera—current timestamps, volatile environment scratchpads, or per-turn user overrides—placed exclusively at the very end of the final message.",
+        ],
+        sources: [
+          {
+            label: "Anthropic: Prompt Caching Documentation",
+            href: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching",
+          },
+          {
+            label: "OpenAI: Prompt Caching Guide",
+            href: "https://developers.openai.com/api/docs/guides/prompt-caching",
+          },
+        ],
+      },
+      {
+        heading: "The tension between context compaction and prefix caching",
+        paragraphs: [
+          "As autonomous agents tackle long-horizon tasks, engineering teams naturally implement context compression: sliding window truncation, rolling summarization, or removing early tool outputs to stay within token budgets. But naive context eviction directly wars with prompt caching. If your harness summarizes turns three through six to reclaim 2,000 tokens, it rewrites the prompt prefix at turn three. That single edit invalidates the cached KV states for turns seven through twenty.",
+          "The compute cost and TTFT latency penalty of re-evaluating 40,000 downstream tokens usually dwarfs the minor token cost saved by micro-summarization. Instead of continuous, rolling compaction, production harnesses should adopt milestone-based checkpointing or epochal rollups. The agent appends turns monotonically to maximize KV cache reuse until a predetermined context threshold is crossed. Only then does the harness execute a scheduled, structured compaction, intentionally resetting the prefix at a stable milestone and establishing a fresh cache baseline.",
+        ],
+      },
+      {
+        heading: "Gateway routing and the operational economics of speed",
+        paragraphs: [
+          "Prefix discipline inside the application code is only half the equation; the underlying infrastructure routing must support it. In multi-node deployments or private clusters running vLLM, prompt caches reside in the physical GPU memory of specific instances. If an API gateway uses naive round-robin load balancing, turn one may hit worker A and turn two worker B, resulting in cold cache misses despite perfectly formatted prefixes. Production model gateways must implement session-affinity routing, directing consecutive steps of an agent run to the same inference node.",
+          "In modern AI engineering, prompt caching is not merely a tactic to lower provider invoices; it fundamentally alters what agent applications can feel like. When an agent reading a 100,000-token repository context responds in under 800 milliseconds rather than twelve seconds per turn, autonomy shifts from an asynchronous batch pipeline into a seamless, interactive developer partner. Building that responsiveness does not require waiting for faster foundation models—it requires treating prompt prefix layout as an architectural invariant.",
+        ],
+      },
+    ],
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Sep 18, 2026",
     blogHeading:
       "A Coding Agent Needs a Language Server, Not Just Grep and File Dumps",
