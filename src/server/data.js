@@ -848,6 +848,67 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Oct 05, 2026",
+    "blogHeading": "Before You Blame the Model, Check the Eval Sandbox",
+    "slug": "before-you-blame-the-model-check-the-eval-sandbox",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "AI Infrastructure",
+    "content": "A coding agent can lose a task because its patch is wrong, or because its test process never had enough memory to finish. Those failures need different fixes. I want evaluation reports to make that distinction before a team changes models, prompts, or budgets.",
+    "sections": [
+      {
+        "heading": "The runtime is part of the experiment",
+        "paragraphs": [
+          "Imagine comparing two coding agents on the same repository tasks. One batch runs overnight on quiet workers. The other runs during a busy deployment window. The second batch times out more often. It is tempting to explain the gap through model behaviour, but the comparison has changed more than the model.",
+          "Anthropic’s February 2026 investigation into infrastructure noise makes this a concrete concern: changing sandbox resource configuration changed coding-agent benchmark results while the model and harness stayed fixed. That is useful evidence for teams choosing agents today, even though it is not a new model announcement. My takeaway is to treat the execution environment as a versioned input to the evaluation."
+        ],
+        "sources": [
+          {
+            "label": "Anthropic: Quantifying infrastructure noise in agentic coding evals",
+            "href": "https://www.anthropic.com/engineering/infrastructure-noise"
+          }
+        ]
+      },
+      {
+        "heading": "Record what the worker actually allows",
+        "paragraphs": [
+          "A container image digest is a good start, but it does not describe the whole environment. I would also record CPU and memory requests and limits, architecture, task concurrency, command timeouts, network policy, dependency cache state, and the repository revision. Keep the task budget separate from the resources available to execute each command.",
+          "Kubernetes makes one distinction especially relevant here: resource requests guide scheduling, while limits constrain usage. CPU limits can cause throttling; memory limits can lead to an out-of-memory kill. Two workers described as having the same requested resources can therefore behave differently if their limits or available capacity differ.",
+          "For a concrete failure, retain the command, exit status, elapsed time, and available runtime evidence such as OOM events or CPU throttling metrics. A generic tool-error string is too little information to tell whether the agent chose a bad command or the worker could not run a reasonable one."
+        ],
+        "sources": [
+          {
+            "label": "Kubernetes: Resource management for Pods and containers",
+            "href": "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+          }
+        ]
+      },
+      {
+        "heading": "Keep two views of failure",
+        "paragraphs": [
+          "I would keep an end-to-end completion rate that includes infrastructure failures. If a user asks for a patch and receives nothing, the product failed to deliver, regardless of which team owns the cause. Removing inconvenient runs from that number makes the product look more dependable than it is.",
+          "Alongside it, keep a diagnostic breakdown: incorrect result, agent-caused resource exhaustion, environment failure, grader failure, and unresolved cause. These are investigation labels, not automatic excuses. An OOM event alone cannot decide the label: the agent may have launched an unnecessarily large job, or an ordinary test command may have exceeded an undersized worker.",
+          "Where a failure is independently confirmed to be environmental, report the count and a separately labelled analysis of valid runs. Preserve the original denominator and explain any reruns. This gives the infrastructure team something to fix without quietly giving the agent a better score."
+        ]
+      },
+      {
+        "heading": "Use reruns to answer a specific question",
+        "paragraphs": [
+          "For a release comparison, I would interleave baseline and candidate runs across the same worker pool, reset each task to a clean starting state, and repeat enough trials to see whether a small apparent improvement is stable. Running all baseline tasks first and all candidate tasks later leaves time-dependent load as an avoidable confounder.",
+          "For diagnosis, change one condition deliberately. Re-run the failing test command from the saved patch on a fresh worker under the original limits. Then, if needed, repeat with more memory. Keep these diagnostic runs separate from the release score: they answer why a failure happened, not what the shipped configuration achieves.",
+          "Extra resources are not a universal correction. They can allow a computationally expensive strategy that was impossible under the intended budget. If the candidate only wins with a larger worker, that may still be a worthwhile product change, but the decision now includes compute cost and deployment capacity."
+        ]
+      },
+      {
+        "heading": "Make the release decision reproducible",
+        "paragraphs": [
+          "The report I want is small enough to read and detailed enough to reproduce: model and harness versions, task and grader revisions, environment configuration, completion results, failure counts, and the rerun policy. Link the few traces that explain the important differences. Keep repeated trials grouped by task when estimating uncertainty, so they are not mistaken for independent new tasks.",
+          "Before switching models, ask whether the improvement survives the environment the product will actually use. Before expanding the worker pool, ask whether the failures come from capacity or from the agent’s choices. That separation saves teams from tuning prompts around broken infrastructure and from buying infrastructure to hide a weak workflow.",
+          "A useful evaluation should lead to a concrete next action. Sometimes that action is a model change. Sometimes it is fixing the test runner. The report should help us tell the difference."
+        ]
+      }
+    ]
+  },
+  {
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80",
     postedOn: "Oct 02, 2026",

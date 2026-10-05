@@ -32,6 +32,8 @@ export default function Header() {
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, [isOpen]);
 
+  if (pathname.startsWith("/writing/")) return null;
+
   const isActive = (href) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
