@@ -1,6 +1,7 @@
 import HomeHero from "@/components/HomeComponent/HomeHero";
 import SystemLayer from "@/components/HomeComponent/SystemLayer";
 import ProductRecord from "@/components/HomeComponent/ProductRecord";
+import ArgumentLadder from "@/components/HomeComponent/ArgumentLadder";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <HomeHero />
       <SystemLayer />
       <ProductRecord />
+      <ArgumentLadder />
     </main>
   );
 }

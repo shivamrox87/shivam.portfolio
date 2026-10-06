@@ -1,4 +1,11 @@
-import { caseStudies, currentBuilds, otherProducts } from "@/server/data";
+import {
+  blogs,
+  books,
+  caseStudies,
+  communityHighlights,
+  currentBuilds,
+  otherProducts,
+} from "@/server/data";
 
 /**
  * Authored framing for the home page.
@@ -110,3 +117,43 @@ export function resolveProduct(key) {
   }
   return { key, ...resolved };
 }
+
+export const argumentsBand = {
+  label: "03 · The arguments",
+  heading: "Why any of it matters, argued in public.",
+  essaySlugs: [
+    "agent-tool-policy-needs-a-composition-rule-not-just-labels",
+    "before-you-blame-the-model-check-the-eval-sandbox",
+    "structured-outputs-need-semantic-invariants-not-just-a-strict-schema",
+    "prompt-caching-needs-prefix-discipline-not-just-a-provider-toggle",
+    "an-mcp-connection-needs-a-trust-record-not-just-a-server-url",
+  ],
+  teachingIntro:
+    "I have been teaching since before I did this professionally — three years of workshops and live courses across India and Ghana, three books, and sessions on applied AI for people starting out.",
+  flowsTo: [
+    { label: "All writing", href: "/writing" },
+    { label: "Speaking", href: "/sessions" },
+    { label: "Books", href: "/ebooks" },
+  ],
+};
+
+/**
+ * Resolves selected slugs against blogs, so a renamed slug fails the build
+ * loudly instead of rendering an empty band.
+ */
+export function resolveEssays() {
+  return argumentsBand.essaySlugs.map((slug) => {
+    const post = blogs.find((entry) => entry.slug === slug);
+    if (!post) {
+      throw new Error(
+        `home-data: essay slug "${slug}" is not in blogs. Fix the slug or remove it from essaySlugs.`,
+      );
+    }
+    return { slug, title: post.blogHeading, href: `/writing/${post.slug}` };
+  });
+}
+
+export const teaching = {
+  community: communityHighlights.map((entry) => ({ title: entry.title, detail: entry.detail })),
+  books: books.map((book) => ({ id: book.id, title: book.bookHeading, href: book.slug })),
+};

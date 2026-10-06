@@ -189,3 +189,20 @@ test("band 02 does not link to products that have no case study", () => {
   // this, but this names the specific regression.
   assert.ok(!html.includes('href="/work/boansel"'), "band 02 links to a nonexistent case study");
 });
+
+test("band 03 renders essay titles and the teaching record", () => {
+  const text = homeText();
+  assert.ok(text.includes("03 · The arguments"), "band 03 label is missing");
+  assert.ok(
+    text.includes("Agent Tool Policy Needs a Composition Rule, Not Just Labels"),
+    "band 03 is not rendering essay titles from blogs",
+  );
+  assert.ok(text.includes("Programming With Maurya"), "band 03 is missing the teaching record");
+  // Two routes deep-link to /#writing: src/app/writing/[slug]/page.js:51 and
+  // :108. The page that used to define that anchor was retired in Task 2, so
+  // without this the links resolve to / with nothing to scroll to.
+  assert.ok(
+    homeHtml().includes('id="writing"'),
+    "the /#writing anchor is missing, so the two links in writing/[slug] have no target",
+  );
+});
