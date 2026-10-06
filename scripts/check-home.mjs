@@ -206,3 +206,14 @@ test("band 03 renders essay titles and the teaching record", () => {
     "the /#writing anchor is missing, so the two links in writing/[slug] have no target",
   );
 });
+
+test("the page closes with exactly one call to action", () => {
+  const text = homeText();
+  const html = homeHtml();
+  assert.ok(text.includes("Which of those brought you here?"), "the closing heading is missing");
+  assert.ok(html.includes('href="/connect"'), "the call to action does not link to /connect");
+  assert.ok(
+    text.includes("connect@shivammaurya.com"),
+    "the email alternative is missing from the call to action",
+  );
+});

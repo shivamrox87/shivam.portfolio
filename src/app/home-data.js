@@ -157,3 +157,14 @@ export const teaching = {
   community: communityHighlights.map((entry) => ({ title: entry.title, detail: entry.detail })),
   books: books.map((book) => ({ id: book.id, title: book.bookHeading, href: book.slug })),
 };
+
+export const conversation = {
+  heading: "Which of those brought you here?",
+  intro:
+    "Any of the three is a good reason to write. A short note is enough — I answer all of them.",
+  openings: [
+    { label: "The systems", body: "You are building internal AI and want help with the layer." },
+    { label: "The products", body: "You want to know whether I finish what I start." },
+    { label: "The arguments", body: "You want to talk about the ideas, or have me teach them." },
+  ],
+};
