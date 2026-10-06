@@ -23,6 +23,11 @@ body { background: var(--paper); color: var(--ink); }
   .body-copy { @apply text-base leading-8 text-[#4f4e48] md:text-[17px]; }
   .text-link { @apply inline-flex border-b border-[#171714] pb-0.5 text-sm font-semibold transition-colors hover:border-[#b84a2b] hover:text-[#b84a2b]; }
   .fieldHeader { @apply border-[#d8d5cc] bg-[#fbfaf7]/95; }
+
+  /* Console primitives. The site presents itself as a service console, so labels
+     are set in mono to read as machine output while body copy stays serif/sans. */
+  .mono { @apply font-mono text-[11px] uppercase tracking-[0.16em]; }
+  .mono-row { @apply grid gap-2 border-b border-[#d8d5cc] py-5 sm:grid-cols-[150px_1fr] sm:gap-8; }
 }
 
 .custom-scrollbar {

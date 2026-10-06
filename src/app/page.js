@@ -1,17 +1,26 @@
-import HomeHero from "@/components/HomeComponent/HomeHero";
-import SystemLayer from "@/components/HomeComponent/SystemLayer";
-import ProductRecord from "@/components/HomeComponent/ProductRecord";
-import ArgumentLadder from "@/components/HomeComponent/ArgumentLadder";
-import StartConversation from "@/components/HomeComponent/StartConversation";
+import ConsoleHero from "@/components/ConsoleComponent/ConsoleHero";
+import StatusBoard from "@/components/ConsoleComponent/StatusBoard";
+import MetricsStrip from "@/components/ConsoleComponent/MetricsStrip";
+import Runbooks from "@/components/ConsoleComponent/Runbooks";
+import InvariantList from "@/components/ConsoleComponent/InvariantList";
+import Changelog from "@/components/ConsoleComponent/Changelog";
+import OpenTicket from "@/components/ConsoleComponent/OpenTicket";
 
+/**
+ * The home page is the operations console for a service: what is running, what
+ * was stopped and why, the numbers, the runbooks, the invariants, the
+ * changelog, and one door.
+ */
 export default function Home() {
   return (
     <main id="main-content">
-      <HomeHero />
-      <SystemLayer />
-      <ProductRecord />
-      <ArgumentLadder />
-      <StartConversation />
+      <ConsoleHero />
+      <StatusBoard />
+      <MetricsStrip />
+      <Runbooks />
+      <InvariantList />
+      <Changelog />
+      <OpenTicket />
     </main>
   );
 }

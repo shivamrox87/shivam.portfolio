@@ -16,11 +16,50 @@ export const heroMetrics = [
   },
 ];
 
-export const builderPrinciples = [
-  "AI should reduce friction, not add novelty for its own sake.",
-  "The fastest way to credibility is shipping useful systems in public.",
-  "Developer experience is part of the product, not an afterthought.",
-  "Simple workflows win when they survive real usage and real constraints.",
+// The seven invariants, each carrying where it was actually learned. This
+// replaces an unattributed four-line list that nothing rendered; the same array
+// now drives both the About page and the console's invariants section.
+export const invariants = [
+  {
+    title: "Production before demos",
+    detail:
+      "A model response is only one part of a system. Identity, permissions, failure handling, cost, evaluation, and operations determine whether it is useful.",
+    learned: "Enterprise AI delivery",
+  },
+  {
+    title: "Evidence over vibes",
+    detail:
+      "You cannot improve what you do not measure, and you cannot measure what you never defined. The definition of good has to exist before the output does.",
+    learned: "The work journal, and the essay that came out of it",
+  },
+  {
+    title: "Own the whole system",
+    detail:
+      "The strongest solutions connect product intent, AI behaviour, backend services, cloud infrastructure, and the user workflow.",
+    learned: "The document agent, end to end",
+  },
+  {
+    title: "Curation over accumulation",
+    detail:
+      "Fewer inputs, deeper processing. Automation should serve judgement, not replace it.",
+    learned: "Replacing a twenty-feed firehose with a curated desk",
+  },
+  {
+    title: "Know your data before you generate",
+    detail:
+      "Generation quality is decided upstream of the model. Audit the source before you tune the prompt.",
+    learned: "The 14,000-row question-bank audit",
+  },
+  {
+    title: "Sunset without sentiment",
+    detail: "Killing a product on purpose is a skill, not a failure.",
+    learned: "ReqBeam and Boansel, September 2026",
+  },
+  {
+    title: "Explain like a teacher",
+    detail: "If a system cannot be explained, it cannot be trusted.",
+    learned: "Three years of teaching across India and Ghana",
+  },
 ];
 
 export const featuredWork = [
