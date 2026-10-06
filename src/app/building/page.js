@@ -25,17 +25,17 @@ const reading = [
 
 function Snapshot({ eyebrow, title, rows }) {
   return (
-    <section className="border-t border-[#d8d5cc]">
+    <section className="border-t border-[#C7C9C4]">
       <div className="site-shell page-section grid gap-10 md:grid-cols-[0.3fr_1fr] md:gap-16">
         <div>
           <p className="eyebrow">{eyebrow}</p>
           <h2 className="section-title mt-3">{title}</h2>
         </div>
-        <div className="border-t border-[#171714]">
+        <div className="border-t border-[#16181B]">
           {rows.map(([heading, detail]) => (
-            <div key={heading} className="grid gap-2 border-b border-[#d8d5cc] py-6 sm:grid-cols-[0.36fr_0.64fr] sm:gap-8">
+            <div key={heading} className="grid gap-2 border-b border-[#C7C9C4] py-6 sm:grid-cols-[0.36fr_0.64fr] sm:gap-8">
               <h3 className="font-serif text-xl">{heading}</h3>
-              <p className="text-sm leading-7 text-[#4f4e48]">{detail}</p>
+              <p className="text-sm leading-7 text-[#3A3F45]">{detail}</p>
             </div>
           ))}
         </div>
@@ -56,7 +56,7 @@ export default function BuildingPage() {
         </p>
       </section>
 
-      <section className="border-t border-[#d8d5cc]">
+      <section className="border-t border-[#C7C9C4]">
         <div className="site-shell grid gap-4 py-10 md:grid-cols-[0.3fr_1fr] md:gap-16">
           <p className="eyebrow">Working rhythm</p>
           <p className="body-copy">
@@ -69,31 +69,31 @@ export default function BuildingPage() {
         </div>
       </section>
 
-      <section className="border-t border-[#d8d5cc]">
+      <section className="border-t border-[#C7C9C4]">
         <div className="site-shell page-section grid gap-10 md:grid-cols-[0.3fr_1fr] md:gap-16">
           <div>
             <p className="eyebrow">Products</p>
             <h2 className="section-title mt-3">Current status</h2>
           </div>
-          <div className="border-t border-[#171714]">
+          <div className="border-t border-[#16181B]">
             {currentBuilds.map((item) => (
-              <article key={item.slug} className="border-b border-[#d8d5cc] py-7">
+              <article key={item.slug} className="border-b border-[#C7C9C4] py-7">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
                   <h3 className="font-serif text-3xl">{item.name}</h3>
-                  <p className="text-xs uppercase tracking-[0.14em] text-[#b84a2b]">{item.stage}</p>
+                  <p className="text-xs uppercase tracking-[0.14em] text-[#1F4FD8]">{item.stage}</p>
                 </div>
-                <p className="mt-4 max-w-[680px] text-sm leading-7 text-[#4f4e48]">{item.summary}</p>
+                <p className="mt-4 max-w-[680px] text-sm leading-7 text-[#3A3F45]">{item.summary}</p>
                 {["personal-ai-systems-lab", "explaingithub", "reqbeam", "repoflicks", "openwebui-operating-system"].includes(item.slug) ? (
                   <Link href={`/work/${item.slug}`} className="text-link mt-4">Product notes</Link>
                 ) : null}
               </article>
             ))}
-            <article className="border-b border-[#d8d5cc] py-7">
+            <article className="border-b border-[#C7C9C4] py-7">
               <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
                 <h3 className="font-serif text-3xl">Hiring portal</h3>
-                <p className="text-xs uppercase tracking-[0.14em] text-[#68675f]">In build</p>
+                <p className="text-xs uppercase tracking-[0.14em] text-[#6B7076]">In build</p>
               </div>
-              <p className="mt-4 max-w-[680px] text-sm leading-7 text-[#4f4e48]">
+              <p className="mt-4 max-w-[680px] text-sm leading-7 text-[#3A3F45]">
                 The next product launch, in final build. Details when it is live.
               </p>
             </article>
@@ -105,16 +105,16 @@ export default function BuildingPage() {
       <Snapshot eyebrow="Work" title="What I am paid to do" rows={atWork} />
       <Snapshot eyebrow="Reading" title="What I am studying" rows={reading} />
 
-      <section className="border-t border-[#d8d5cc]">
+      <section className="border-t border-[#C7C9C4]">
         <div className="site-shell page-section grid gap-10 md:grid-cols-[0.3fr_1fr] md:gap-16">
           <div>
             <p className="eyebrow">Research</p>
             <h2 className="section-title mt-3">Open questions</h2>
           </div>
-          <div className="border-t border-[#171714]">
+          <div className="border-t border-[#16181B]">
             {playGround.map((item) => (
-              <div key={item.name} className="grid gap-2 border-b border-[#d8d5cc] py-5 sm:grid-cols-[140px_1fr]">
-                <p className="text-xs uppercase tracking-[0.14em] text-[#b84a2b]">{item.category}</p>
+              <div key={item.name} className="grid gap-2 border-b border-[#C7C9C4] py-5 sm:grid-cols-[140px_1fr]">
+                <p className="text-xs uppercase tracking-[0.14em] text-[#1F4FD8]">{item.category}</p>
                 <p className="font-serif text-2xl">{item.name}</p>
               </div>
             ))}
@@ -122,7 +122,7 @@ export default function BuildingPage() {
         </div>
       </section>
 
-      <section className="border-t border-[#d8d5cc]">
+      <section className="border-t border-[#C7C9C4]">
         <div className="site-shell py-10 grid gap-4 md:grid-cols-[0.3fr_1fr] md:gap-16">
           <p className="eyebrow">Sunset</p>
           <p className="body-copy">

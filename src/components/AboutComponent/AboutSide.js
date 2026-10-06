@@ -54,59 +54,59 @@ export default function AboutSide() {
         </div>
       </section>
 
-      <section className="border-t border-[#d8d5cc]">
+      <section className="border-t border-[#C7C9C4]">
         <div className="site-shell page-section grid gap-10 md:grid-cols-[0.35fr_1fr] md:gap-16">
           <div>
             <p className="eyebrow">Focus</p>
             <h2 className="section-title mt-3">What I work on</h2>
           </div>
-          <div className="border-t border-[#171714]">
+          <div className="border-t border-[#16181B]">
             {focusAreas.map(([title, detail]) => (
-              <div key={title} className="grid gap-3 border-b border-[#d8d5cc] py-7 sm:grid-cols-[0.42fr_1fr] sm:gap-8">
+              <div key={title} className="grid gap-3 border-b border-[#C7C9C4] py-7 sm:grid-cols-[0.42fr_1fr] sm:gap-8">
                 <h3 className="font-serif text-2xl">{title}</h3>
-                <p className="text-sm leading-7 text-[#4f4e48]">{detail}</p>
+                <p className="text-sm leading-7 text-[#3A3F45]">{detail}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-[#d8d5cc]">
+      <section className="border-t border-[#C7C9C4]">
         <div className="site-shell page-section grid gap-10 md:grid-cols-[0.35fr_1fr] md:gap-16">
           <div>
             <p className="eyebrow">Invariants</p>
             <h2 className="section-title mt-3">How I work</h2>
           </div>
-          <div className="border-t border-[#171714]">
+          <div className="border-t border-[#16181B]">
             {invariants.map(({ title, detail, learned }, index) => (
-              <div key={title} className="grid gap-3 border-b border-[#d8d5cc] py-7 sm:grid-cols-[40px_0.38fr_0.62fr] sm:gap-6">
-                <span className="text-xs text-[#b84a2b]">0{index + 1}</span>
+              <div key={title} className="grid gap-3 border-b border-[#C7C9C4] py-7 sm:grid-cols-[40px_0.38fr_0.62fr] sm:gap-6">
+                <span className="text-xs text-[#1F4FD8]">0{index + 1}</span>
                 <div>
                   <h3 className="font-serif text-2xl">{title}</h3>
-                  <p className="mt-2 text-xs uppercase tracking-[0.12em] text-[#68675f]">Learned in {learned}</p>
+                  <p className="mt-2 text-xs uppercase tracking-[0.12em] text-[#6B7076]">Learned in {learned}</p>
                 </div>
-                <p className="text-sm leading-7 text-[#4f4e48]">{detail}</p>
+                <p className="text-sm leading-7 text-[#3A3F45]">{detail}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="experience" className="border-t border-[#d8d5cc]">
+      <section id="experience" className="border-t border-[#C7C9C4]">
         <div className="site-shell page-section grid gap-10 md:grid-cols-[0.35fr_1fr] md:gap-16">
           <div>
             <p className="eyebrow">Experience</p>
             <h2 className="section-title mt-3">Professional background</h2>
           </div>
-          <div className="border-t border-[#171714]">
+          <div className="border-t border-[#16181B]">
             {companiesData.map((company) => (
-              <article key={company.id} className="border-b border-[#d8d5cc] py-7">
+              <article key={company.id} className="border-b border-[#C7C9C4] py-7">
                 <div className="grid gap-2 sm:grid-cols-[1fr_auto] sm:items-baseline">
                   <h3 className="font-serif text-2xl">{company.companyName}</h3>
-                  <p className="text-sm text-[#68675f]">{company.activeYears}</p>
+                  <p className="text-sm text-[#6B7076]">{company.activeYears}</p>
                 </div>
-                <p className="mt-1 text-sm font-semibold text-[#b84a2b]">{company.position}</p>
-                <p className="mt-4 max-w-[720px] text-sm leading-7 text-[#4f4e48]">{company.description}</p>
+                <p className="mt-1 text-sm font-semibold text-[#1F4FD8]">{company.position}</p>
+                <p className="mt-4 max-w-[720px] text-sm leading-7 text-[#3A3F45]">{company.description}</p>
               </article>
             ))}
           </div>

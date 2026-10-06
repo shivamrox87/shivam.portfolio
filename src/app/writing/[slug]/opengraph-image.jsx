@@ -19,8 +19,8 @@ export default async function OpenGraphImage({ params }) {
       <div
         style={{
           alignItems: "stretch",
-          background: "#fbfaf7",
-          color: "#171714",
+          background: "#EDEEEA",
+          color: "#16181B",
           display: "flex",
           height: "100%",
           overflow: "hidden",
@@ -30,7 +30,7 @@ export default async function OpenGraphImage({ params }) {
       >
         <div
           style={{
-            background: "linear-gradient(135deg, #fbfaf7 0%, #f1eee6 58%, #dfd9ce 100%)",
+            background: "linear-gradient(135deg, #EDEEEA 0%, #f1eee6 58%, #dfd9ce 100%)",
             display: "flex",
             height: "100%",
             left: 0,
@@ -41,7 +41,7 @@ export default async function OpenGraphImage({ params }) {
         />
         <div
           style={{
-            border: "1px solid #d8d5cc",
+            border: "1px solid #C7C9C4",
             display: "flex",
             height: 420,
             opacity: 0.75,
@@ -54,7 +54,7 @@ export default async function OpenGraphImage({ params }) {
         />
         <div
           style={{
-            border: "1px solid #d8d5cc",
+            border: "1px solid #C7C9C4",
             display: "flex",
             height: 290,
             opacity: 0.75,
@@ -66,7 +66,7 @@ export default async function OpenGraphImage({ params }) {
         />
         <div
           style={{
-            background: "#b84a2b",
+            background: "#1F4FD8",
             borderRadius: 999,
             display: "flex",
             height: 16,
@@ -111,7 +111,7 @@ export default async function OpenGraphImage({ params }) {
           </div>
           <div
             style={{
-              color: "#b84a2b",
+              color: "#1F4FD8",
               display: "flex",
               fontFamily: "Arial, sans-serif",
               fontSize: 24,

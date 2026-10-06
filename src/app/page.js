@@ -1,28 +1,27 @@
-import ConsoleHero from "@/components/ConsoleComponent/ConsoleHero";
-import StatusBoard from "@/components/ConsoleComponent/StatusBoard";
-import LayerSchematic from "@/components/ConsoleComponent/LayerSchematic";
-import MetricsStrip from "@/components/ConsoleComponent/MetricsStrip";
-import Timeline from "@/components/ConsoleComponent/Timeline";
-import Runbooks from "@/components/ConsoleComponent/Runbooks";
-import InvariantList from "@/components/ConsoleComponent/InvariantList";
-import OpenTicket from "@/components/ConsoleComponent/OpenTicket";
+import Hero from "@/components/HomeComponent/Hero";
+import Services from "@/components/HomeComponent/Services";
+import Layer from "@/components/HomeComponent/Layer";
+import Readouts from "@/components/HomeComponent/Readouts";
+import History from "@/components/HomeComponent/History";
+import Runbooks from "@/components/HomeComponent/Runbooks";
+import Invariants from "@/components/HomeComponent/Invariants";
+import Contact from "@/components/HomeComponent/Contact";
 
 /**
- * The home page is an instrument panel for a service: an inverted status band,
- * then what is running and what was stopped, the request path, the readouts,
- * the service history, the runbooks, the invariants, and one door.
+ * The page opens with what was killed, because that decision is the most
+ * differentiating thing on it, and everything after is the evidence.
  */
 export default function Home() {
   return (
     <main id="main-content">
-      <ConsoleHero />
-      <StatusBoard />
-      <LayerSchematic />
-      <MetricsStrip />
-      <Timeline />
+      <Hero />
+      <Services />
+      <Layer />
+      <Readouts />
+      <History />
       <Runbooks />
-      <InvariantList />
-      <OpenTicket />
+      <Invariants />
+      <Contact />
     </main>
   );
 }

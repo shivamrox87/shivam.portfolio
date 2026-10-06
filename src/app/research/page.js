@@ -18,19 +18,19 @@ export default function ResearchPage() {
         </p>
       </section>
 
-      <section className="border-t border-[#d8d5cc]">
+      <section className="border-t border-[#C7C9C4]">
         <div className="site-shell page-section">
-          <div className="border-t border-[#171714]">
+          <div className="border-t border-[#16181B]">
             {researchAreas.map((area, index) => (
-              <article key={area.title} className="grid gap-5 border-b border-[#d8d5cc] py-8 md:grid-cols-[40px_0.4fr_0.6fr] md:gap-7">
-                <span className="text-xs text-[#b84a2b]">0{index + 1}</span>
+              <article key={area.title} className="grid gap-5 border-b border-[#C7C9C4] py-8 md:grid-cols-[40px_0.4fr_0.6fr] md:gap-7">
+                <span className="text-xs text-[#1F4FD8]">0{index + 1}</span>
                 <div>
                   <h2 className="font-serif text-3xl leading-tight">{area.title}</h2>
-                  <p className="mt-4 text-sm leading-7 text-[#4f4e48]">{area.summary}</p>
+                  <p className="mt-4 text-sm leading-7 text-[#3A3F45]">{area.summary}</p>
                 </div>
-                <div className="border-t border-[#d8d5cc]">
+                <div className="border-t border-[#C7C9C4]">
                   {area.topics.map((topic) => (
-                    <p key={topic} className="border-b border-[#d8d5cc] py-4 text-sm text-[#4f4e48] last:border-b-0">{topic}</p>
+                    <p key={topic} className="border-b border-[#C7C9C4] py-4 text-sm text-[#3A3F45] last:border-b-0">{topic}</p>
                   ))}
                 </div>
               </article>

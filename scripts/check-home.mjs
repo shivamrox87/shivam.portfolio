@@ -173,7 +173,7 @@ test("the random-shuffle feed is no longer on the home page", () => {
   assert.ok(!text.includes("A NEW ORDER EACH VISIT"), "the retired feed is still rendering on /");
   // Otherwise this passes on a page that rendered nothing at all.
   assert.ok(
-    text.includes("service: senior ai engineer"),
+    text.includes("founder of ExplainGitHub"),
     "the page rendered no hero, so the absence check proves nothing",
   );
 });
@@ -187,27 +187,29 @@ test("every /work link on the home page points at a slug that exists", () => {
   assert.deepEqual(missing, [], `home links to case studies that do not exist: ${missing.join(", ")}`);
 });
 
-test("the console declares its own service status", () => {
-  const text = homeText();
-  assert.ok(text.includes("I work on the parts of AI that don't demo well."), "the headline is missing");
-  assert.ok(
-    text.includes("The model is the smallest part of a production AI system."),
-    "the thesis note is missing",
-  );
-  assert.ok(text.includes("service: senior ai engineer"), "the service line is missing");
+test("the hero opens with what was killed", () => {
+  const { text } = homeSection("hero-headline");
+  assert.ok(/are dead\./.test(text), "the hero does not open with the kill statement");
+  // The struck names are the whole point of the opening, so assert they are on
+  // the page AND carrying the class that does the striking.
+  for (const name of sunsetNames()) {
+    assert.ok(text.includes(name), `the hero does not name ${name}, which data.js marks sunset`);
+  }
+  assert.ok(homeSection("hero-headline").markup.includes("struck"), "the names are not struck through");
+  assert.ok(text.includes("ExplainGitHub"), "the hero does not say what is still running");
 });
 
-test("the status board reports every product the data says was sunset", () => {
-  const { markup, text } = homeSection("status-heading");
+test("the services list reports every product the data says was sunset", () => {
+  const { markup, text } = homeSection("services-heading");
   const live = (markup.match(/led-live/g) ?? []).length;
   const dead = (markup.match(/led-dead/g) ?? []).length;
-  assert.ok(live > 0 && dead > 0, `the status board shows ${live} running and ${dead} stopped lamps, expected both`);
+  assert.ok(live > 0 && dead > 0, `the services list shows ${live} running and ${dead} stopped lamps, expected both`);
   for (const name of sunsetNames()) {
-    assert.ok(text.includes(name), `the status board does not report ${name}, which data.js marks sunset`);
+    assert.ok(text.includes(name), `the services list does not report ${name}, which data.js marks sunset`);
   }
 });
 
-test("the metrics band derives its counts rather than hardcoding them", () => {
+test("the readouts band derives its counts rather than hardcoding them", () => {
   // The value and its label sit in sibling elements, so this needs tag-stripped
   // text rather than homeText().
   const text = homePlainText();
@@ -245,10 +247,10 @@ test("the invariants band renders every invariant from data.js", () => {
   assert.ok(text.includes("learned in"), "invariants render without where they were learned");
 });
 
-test("the service history renders the employment record from data.js", () => {
-  const { text } = homeSection("timeline-heading");
+test("the history band renders the employment record from data.js", () => {
+  const { text } = homeSection("history-heading");
   for (const org of companyNames()) {
-    assert.ok(text.includes(org), `the service history is missing ${org} from data.js`);
+    assert.ok(text.includes(org), `the history band is missing ${org} from data.js`);
   }
 });
 
@@ -265,10 +267,10 @@ test("facts are not re-typed into home-data.js", () => {
   }
 });
 
-test("the page closes with one ticket, scoped to its own section", () => {
-  const { markup, text } = homeSection("ticket-heading");
+test("the page closes with one way in, scoped to its own section", () => {
+  const { markup, text } = homeSection("contact-heading");
   assert.ok(text.includes("What brought you here?"), "the closing heading is missing");
-  assert.ok(text.includes("Open a ticket"), "the ticket button is missing");
+  assert.ok(text.includes("Write to me"), "the contact button is missing");
   const connects = (markup.match(/href="\/connect"/g) ?? []).length;
   assert.equal(connects, 1, `the ticket section has ${connects} /connect links, expected exactly 1`);
   assert.ok(

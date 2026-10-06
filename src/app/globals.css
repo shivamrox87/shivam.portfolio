@@ -2,74 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Cool paper rather than warm cream, and a pen-blue signal rather than a
+   terracotta accent. Warm cream + high-contrast serif + terracotta is the
+   cluster generated pages land in by default; this is a document, and the
+   blue is the colour of a mark someone made on it by hand. */
 :root {
-  --paper: #fbfaf7;
-  --ink: #171714;
-  --muted: #68675f;
-  --line: #d8d5cc;
-  --accent: #b84a2b;
+  --paper: #EDEEEA;
+  --ink: #16181B;
+  --body: #3A3F45;
+  --muted: #6B7076;
+  --line: #C7C9C4;
+  --signal: #1F4FD8;
+  --struck: #B3261E;
 }
 
 html { scroll-behavior: smooth; }
 body { background: var(--paper); color: var(--ink); }
-::selection { background: #e8c9bc; color: var(--ink); }
+::selection { background: #c9d4f5; color: var(--ink); }
 
 @layer components {
   .site-shell { @apply mx-auto w-full max-w-[1120px] px-5 md:px-8; }
   .page-section { @apply py-16 md:py-24; }
-  .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.2em] text-[#b84a2b]; }
+
+  /* A heading does not need a label above it announcing that it is a heading.
+     This was a tracked-out all-caps eyebrow on every section of every page,
+     which is one of the commonest generated-design tells. It is now a plain
+     sentence-case qualifier — which is what those labels were actually for. */
+  .eyebrow { @apply text-[13px] leading-6 text-[#6B7076]; }
+
   .display-title { @apply font-serif text-5xl font-normal leading-[0.98] tracking-[-0.025em] md:text-7xl; }
   .section-title { @apply font-serif text-4xl font-normal leading-[1.05] tracking-[-0.02em] md:text-5xl; }
-  .body-copy { @apply text-base leading-8 text-[#4f4e48] md:text-[17px]; }
-  .text-link { @apply inline-flex border-b border-[#171714] pb-0.5 text-sm font-semibold transition-colors hover:border-[#b84a2b] hover:text-[#b84a2b]; }
-  .fieldHeader { @apply border-[#d8d5cc] bg-[#fbfaf7]/95; }
+  .body-copy { @apply text-base leading-8 text-[#3A3F45] md:text-[17px]; }
+  .text-link { @apply inline-flex border-b border-[#16181B] pb-0.5 text-sm font-semibold transition-colors hover:border-[#1F4FD8] hover:text-[#1F4FD8]; }
+  .fieldHeader { @apply border-[#C7C9C4] bg-[#EDEEEA]/95; }
 
-  /* Console primitives. The site presents itself as a service console, so labels
-     are set in mono to read as machine output while body copy stays serif/sans. */
-  .mono { @apply font-mono text-[11px] uppercase tracking-[0.16em]; }
-  .mono-row { @apply grid gap-2 border-b border-[#d8d5cc] py-5 sm:grid-cols-[150px_1fr] sm:gap-8; }
-
-  /* Console chrome. The page is a dense instrument panel rather than a sparse
-     editorial column, so structure is visible: every block is a bordered pane
-     with a header bar carrying its identifier. */
-  .panel { @apply border border-[#cfcabf] bg-[#fdfdfb]; }
-  .panel-head { @apply flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-[#cfcabf] bg-[#f4f2ec] px-4 py-2; }
-  .panel-body { @apply p-4 md:p-6; }
-  .panel-id { @apply font-mono text-[10px] uppercase tracking-[0.18em] text-[#8a857a]; }
-  .dense { @apply font-mono text-[12px] leading-relaxed text-[#3f3d37]; }
-
-  /* Status lamps. The pulse is what makes the panel read as live rather than
-     printed, and it is suppressed for anyone who asked for less motion. */
-  .led { @apply inline-block h-[8px] w-[8px] shrink-0 rounded-full; }
-  .led-live { background: #2f7d4f; box-shadow: 0 0 0 0 rgba(47,125,79,.6); animation: ledPulse 2.4s infinite; }
-  .led-dead { background: #b84a2b; }
-  .led-idle { background: #b5b0a4; }
-
-  .grain { position: relative; }
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: .5;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
+  /* The one loud element on the page. Everything else stays quiet around it. */
+  .struck {
+    @apply font-serif line-through;
+    color: #B3261E;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.08em;
   }
 
-  .inverted { @apply border border-[#171714] bg-[#1b1a17] text-[#e8e4d8]; }
+  /* Status lamps carry real state, so they stay — but they are indicators,
+     not decoration, and the pulse is suppressed for reduced motion. */
+  .led { @apply inline-block h-[8px] w-[8px] shrink-0 rounded-full; }
+  .led-live { background: #2f7d4f; box-shadow: 0 0 0 0 rgba(47, 125, 79, .6); animation: ledPulse 2.4s infinite; }
+  .led-dead { background: #B3261E; }
 
   @keyframes ledPulse {
-    0%   { box-shadow: 0 0 0 0 rgba(47,125,79,.55); }
-    70%  { box-shadow: 0 0 0 7px rgba(47,125,79,0); }
-    100% { box-shadow: 0 0 0 0 rgba(47,125,79,0); }
+    0%   { box-shadow: 0 0 0 0 rgba(47, 125, 79, .55); }
+    70%  { box-shadow: 0 0 0 7px rgba(47, 125, 79, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(47, 125, 79, 0); }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .led-live { animation: none; }
   }
-
-  /* Measurements drawn straight from a value, so a bar chart can be laid out
-     without shipping a charting library. */
-  .bar { @apply h-[10px] bg-[#b84a2b]; }
 }
 
 .custom-scrollbar {
@@ -97,7 +86,7 @@ body { background: var(--paper); color: var(--ink); }
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;

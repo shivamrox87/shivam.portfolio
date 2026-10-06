@@ -53,8 +53,8 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${newsreader.variable} bg-[#fbfaf7] font-sans text-[#171714] antialiased`}>
-        <a href="#main-content" className="sr-only z-[100] bg-[#171714] px-4 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
+      <body className={`${manrope.variable} ${newsreader.variable} bg-[#EDEEEA] font-sans text-[#16181B] antialiased`}>
+        <a href="#main-content" className="sr-only z-[100] bg-[#16181B] px-4 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           Skip to content
         </a>
         <Header />

@@ -27,21 +27,21 @@ export default function WritingPage() {
           I write when I have something practical to share, usually from the overlap of AI
           engineering, developer tools, and trying to make a product useful.
         </p>
-        <p className="mt-5 max-w-[650px] text-sm leading-7 text-[#68675f]">
+        <p className="mt-5 max-w-[650px] text-sm leading-7 text-[#6B7076]">
           {blogs.length} essays. Most follow a thesis pattern — the consistent shape is the
           series identity, not a template. The exceptions are where the story is.
         </p>
 
         {series.map((group) => (
-          <section key={group.title} className="mt-14 border-t border-[#d8d5cc] pt-8">
+          <section key={group.title} className="mt-14 border-t border-[#C7C9C4] pt-8">
             <h2 className="font-serif text-3xl">{group.title}</h2>
             <div className="mt-8 space-y-7">
               {group.posts.map((post) => (
                 <article key={post.slug}>
                   <Link href={`/writing/${post.slug}`} className="group">
-                    <h3 className="font-serif text-2xl leading-tight transition-colors group-hover:text-[#b84a2b]">{post.blogHeading}</h3>
+                    <h3 className="font-serif text-2xl leading-tight transition-colors group-hover:text-[#1F4FD8]">{post.blogHeading}</h3>
                   </Link>
-                  <p className="mt-2 text-sm text-[#68675f]">{post.postedOn}</p>
+                  <p className="mt-2 text-sm text-[#6B7076]">{post.postedOn}</p>
                 </article>
               ))}
             </div>

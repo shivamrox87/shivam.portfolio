@@ -8,7 +8,7 @@ export const metadata = {
 
 const page = () => {
   return (
-    <div className="bg-[#fbfaf7]">
+    <div className="bg-[#EDEEEA]">
       <WorkSide />
     </div>
   )

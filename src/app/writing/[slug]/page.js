@@ -50,8 +50,8 @@ export default async function WritingPage({ params }) {
       <article className="mx-auto w-full max-w-[820px] px-5 py-12 md:px-8 md:py-20">
         <Link href="/#writing" className="text-link">Back to home</Link>
 
-        <header className="mt-12 border-b border-[#d8d5cc] pb-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#b84a2b]">
+        <header className="mt-12 border-b border-[#C7C9C4] pb-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1F4FD8]">
             {article.postedAt} · {article.postedOn}
           </p>
           <h1 className="mt-5 font-serif text-5xl leading-[1.03] tracking-[-0.03em] md:text-7xl">
@@ -71,7 +71,7 @@ export default async function WritingPage({ params }) {
         {article.prompt ? (
           <section className="mt-12 md:mt-16">
             <h2 className="font-serif text-3xl leading-tight md:text-4xl">Prompt</h2>
-            <pre className="mt-5 overflow-x-auto whitespace-pre-wrap border border-[#d8d5cc] bg-[#f3f0e9] p-5 font-mono text-sm leading-7 text-[#302f2b] md:p-7">
+            <pre className="mt-5 overflow-x-auto whitespace-pre-wrap border border-[#C7C9C4] bg-[#f3f0e9] p-5 font-mono text-sm leading-7 text-[#302f2b] md:p-7">
               {article.prompt}
             </pre>
           </section>
@@ -81,7 +81,7 @@ export default async function WritingPage({ params }) {
           {article.sections.map((section) => (
             <section key={section.heading}>
               <h2 className="font-serif text-3xl leading-tight md:text-4xl">{section.heading}</h2>
-              <div className="mt-5 space-y-5 text-base leading-8 text-[#4f4e48] md:text-lg">
+              <div className="mt-5 space-y-5 text-base leading-8 text-[#3A3F45] md:text-lg">
                 {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                 {section.sources?.length ? (
                   <ul className="space-y-2 pt-1 text-sm leading-6">
@@ -104,7 +104,7 @@ export default async function WritingPage({ params }) {
           ))}
         </div>
 
-        <div className="mt-16 border-t border-[#d8d5cc] pt-8 text-sm text-[#68675f]">
+        <div className="mt-16 border-t border-[#C7C9C4] pt-8 text-sm text-[#6B7076]">
           Written by Shivam Maurya. <Link href="/#writing" className="text-link">More writing</Link>
         </div>
       </article>

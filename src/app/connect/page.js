@@ -22,7 +22,7 @@ export default function ContactPage() {
               For enterprise AI product and platform delivery, developer tools, technical architecture
               reviews, speaking, or collaboration, send a short note below.
             </p>
-            <div className="mt-8 border-t border-[#d8d5cc] pt-5 text-sm leading-7 text-[#68675f]">
+            <div className="mt-8 border-t border-[#C7C9C4] pt-5 text-sm leading-7 text-[#6B7076]">
               <p>Based in Varanasi, India</p>
               <a href="mailto:connect@shivammaurya.com" className="text-link mt-2">connect@shivammaurya.com</a>
               <div className="mt-3 flex flex-wrap gap-4">
@@ -31,20 +31,20 @@ export default function ContactPage() {
                 <a href="https://medium.com/@shivam--maurya" target="_blank" rel="noreferrer" className="text-link">Medium</a>
               </div>
             </div>
-            <div className="mt-10 border-t border-[#171714]">
+            <div className="mt-10 border-t border-[#16181B]">
               {[
                 ["AI products and platforms", "Production AI products, model gateways, identity, evaluation, and deployment strategy."],
                 ["Developer products", "Technical and product review for tools around repositories, APIs, and engineering workflows."],
                 ["Speaking", "Workshops and conversations on enterprise AI, applied AI systems, and production delivery."],
               ].map(([title, detail]) => (
-                <div key={title} className="border-b border-[#d8d5cc] py-5">
+                <div key={title} className="border-b border-[#C7C9C4] py-5">
                   <h2 className="font-serif text-xl">{title}</h2>
-                  <p className="mt-2 text-xs leading-6 text-[#68675f]">{detail}</p>
+                  <p className="mt-2 text-xs leading-6 text-[#6B7076]">{detail}</p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="min-h-[760px] border-t border-[#171714] pt-6">
+          <div className="min-h-[760px] border-t border-[#16181B] pt-6">
             <div
               style={{ width: "100%", height: "740px" }}
               data-fillout-id="e6kGwZrh12us"

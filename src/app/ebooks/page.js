@@ -12,16 +12,16 @@ export default function EbooksPage() {
         <h1 className="display-title mt-4 max-w-[760px]">Practical introductions to programming and AI.</h1>
         <p className="mt-8 max-w-[650px] body-copy">Beginner-friendly guides written during my work in technical education.</p>
       </section>
-      <section className="border-t border-[#d8d5cc]">
+      <section className="border-t border-[#C7C9C4]">
         <div className="site-shell page-section">
           {books.map((book) => (
-            <article key={book.id} className="grid gap-7 border-t border-[#d8d5cc] py-8 first:border-[#171714] md:grid-cols-[180px_1fr_auto] md:gap-10">
+            <article key={book.id} className="grid gap-7 border-t border-[#C7C9C4] py-8 first:border-[#16181B] md:grid-cols-[180px_1fr_auto] md:gap-10">
               <Image src={book.images[0]} alt="" width={600} height={800} className="aspect-[3/4] w-full object-cover" />
               <div>
                 <p className="eyebrow">{book.postedOn}</p>
                 <h2 className="mt-2 font-serif text-3xl">{book.bookHeading}</h2>
-                <p className="mt-2 text-sm font-semibold text-[#68675f]">{book.bookSubHeading}</p>
-                <p className="mt-4 max-w-[600px] text-sm leading-7 text-[#4f4e48]">{book.description}</p>
+                <p className="mt-2 text-sm font-semibold text-[#6B7076]">{book.bookSubHeading}</p>
+                <p className="mt-4 max-w-[600px] text-sm leading-7 text-[#3A3F45]">{book.description}</p>
               </div>
               <Link href={book.slug} target="_blank" className="text-link h-fit whitespace-nowrap">View book</Link>
             </article>
