@@ -101,7 +101,7 @@ export const currentBuilds = [
       "A practical personal AI environment for testing persistent agents, multi-model workflows, local inference, model routing, and coding delegation across local and cloud systems.",
     focus: ["Persistent agents", "Local models", "Model routing", "Developer workflows"],
     statusNote: "Active hands-on research and infrastructure experimentation.",
-    accent: "from-[#18181b] via-[#3f3f46] to-[#b84a2b]",
+    accent: "from-[#18181b] via-[#3f3f46] to-[#1F4FD8]",
   },
   {
     name: "ExplainGitHub",
@@ -131,7 +131,7 @@ export const currentBuilds = [
       "Custom tools and knowledge workflows for organising conversations, analysing recent work, managing Markdown knowledge, and producing recurring task summaries.",
     focus: ["OpenWebUI", "Custom tools", "Knowledge workflows"],
     statusNote: "Active platform and workflow experimentation.",
-    accent: "from-[#1f2937] via-[#374151] to-[#b84a2b]",
+    accent: "from-[#1f2937] via-[#374151] to-[#1F4FD8]",
   },
   {
     name: "RepoFlicks",
