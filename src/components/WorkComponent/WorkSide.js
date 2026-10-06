@@ -54,6 +54,10 @@ export default function WorkSide() {
           <div>
             <p className="eyebrow">Other products</p>
             <h2 className="section-title mt-3">Additional product work</h2>
+            <p className="mt-5 max-w-[360px] text-sm leading-7 text-[#4f4e48]">
+              Not every idea deserves to live. I have shipped some, killed some, and learned
+              from all of them. Two products were sunset in 2026 on purpose — to go all-in on one.
+            </p>
           </div>
           <div className="border-t border-[#171714]">
             {otherProducts.map((product) => (
@@ -64,6 +68,11 @@ export default function WorkSide() {
                 </div>
                 <div>
                   <p className="text-sm leading-7 text-[#4f4e48]">{product.summary}</p>
+                  {product.lesson ? (
+                    <p className="mt-4 border-l-2 border-[#b84a2b] pl-4 font-serif text-lg leading-7 text-[#171714]">
+                      {product.lesson}
+                    </p>
+                  ) : null}
                   <p className="mt-3 text-xs uppercase leading-6 tracking-[0.12em] text-[#68675f]">{product.focus.join(" · ")}</p>
                   {product.href ? <Link href={product.href} className="text-link mt-4">View details</Link> : null}
                 </div>

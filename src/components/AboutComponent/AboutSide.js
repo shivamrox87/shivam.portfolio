@@ -8,11 +8,17 @@ const focusAreas = [
   ["Developer workflows", "Tools that help engineers understand complex systems and act on technical context with greater confidence."],
 ];
 
+// Third element is where each one was actually learned. The source-of-truth
+// content doc is explicit that these carry no generic filler, so every entry
+// is tied to a specific piece of work rather than stated as a value.
 const principles = [
-  ["Production before demos", "A model response is only one part of a system. Identity, permissions, failure handling, cost, evaluation, and operations determine whether it is useful."],
-  ["Reduce cognitive load", "AI should help people understand repositories, workflows, and decisions. Generating more output is not the same as reducing complexity."],
-  ["Design for real constraints", "Security, latency, budgets, unreliable model behaviour, and adoption are product inputs rather than problems to postpone."],
-  ["Own the whole system", "The strongest solutions connect product intent, AI behaviour, backend services, cloud infrastructure, and the user workflow."],
+  ["Production before demos", "A model response is only one part of a system. Identity, permissions, failure handling, cost, evaluation, and operations determine whether it is useful.", "Enterprise AI delivery"],
+  ["Evidence over vibes", "You cannot improve what you do not measure, and you cannot measure what you never defined. The definition of good has to exist before the output does.", "The work journal, and the essay that came out of it"],
+  ["Own the whole system", "The strongest solutions connect product intent, AI behaviour, backend services, cloud infrastructure, and the user workflow.", "The document agent, end to end"],
+  ["Curation over accumulation", "Fewer inputs, deeper processing. Automation should serve judgement, not replace it.", "Replacing a twenty-feed firehose with a curated desk"],
+  ["Know your data before you generate", "Generation quality is decided upstream of the model. Audit the source before you tune the prompt.", "The 14,000-row question-bank audit"],
+  ["Sunset without sentiment", "Killing a product on purpose is a skill, not a failure.", "ReqBeam and Boansel, September 2026"],
+  ["Explain like a teacher", "If a system cannot be explained, it cannot be trusted.", "Three years of teaching across India and Ghana"],
 ];
 
 export default function AboutSide() {
@@ -82,10 +88,13 @@ export default function AboutSide() {
             <h2 className="section-title mt-3">How I work</h2>
           </div>
           <div className="border-t border-[#171714]">
-            {principles.map(([title, detail], index) => (
+            {principles.map(([title, detail, learned], index) => (
               <div key={title} className="grid gap-3 border-b border-[#d8d5cc] py-7 sm:grid-cols-[40px_0.38fr_0.62fr] sm:gap-6">
                 <span className="text-xs text-[#b84a2b]">0{index + 1}</span>
-                <h3 className="font-serif text-2xl">{title}</h3>
+                <div>
+                  <h3 className="font-serif text-2xl">{title}</h3>
+                  <p className="mt-2 text-xs uppercase tracking-[0.12em] text-[#68675f]">Learned in {learned}</p>
+                </div>
                 <p className="text-sm leading-7 text-[#4f4e48]">{detail}</p>
               </div>
             ))}

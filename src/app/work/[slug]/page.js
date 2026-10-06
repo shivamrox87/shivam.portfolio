@@ -30,6 +30,17 @@ export default async function WorkDetailPage({ params }) {
           <div><p className="eyebrow">Stage</p><p className="mt-2 text-[#4f4e48]">{project.status} · {project.date}</p></div>
           <div><p className="eyebrow">Focus</p><p className="mt-2 text-[#4f4e48]">{project.stack.join(", ")}</p></div>
         </div>
+
+        {project.metrics ? (
+          <div className="mt-12 grid gap-8 border-t border-[#d8d5cc] pt-8 md:grid-cols-3 md:gap-12">
+            {project.metrics.map((metric) => (
+              <div key={metric.value}>
+                <p className="font-serif text-3xl leading-tight tracking-[-0.02em] text-[#b84a2b]">{metric.value}</p>
+                <p className="mt-3 text-sm leading-7 text-[#4f4e48]">{metric.label}</p>
+              </div>
+            ))}
+          </div>
+        ) : null}
       </section>
 
       <section className="border-t border-[#d8d5cc]">

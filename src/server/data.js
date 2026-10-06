@@ -134,6 +134,11 @@ export const caseStudies = [
       "Build internal AI product experiences on top of shared capabilities for model access, identity, routing, evaluation, observability, storage integrations, and repeatable cloud delivery using established enterprise controls.",
     outcome:
       "Delivered and improved internal AI capabilities while strengthening reusable platform foundations, so product teams can focus on useful workflows without duplicating core access, reliability, and operational concerns.",
+    metrics: [
+      { value: "4–6 weeks → minutes/hours", label: "Document turnaround. Domain experts drafted proposals and statements of work by hand; the agent produces a first draft in minutes and expert iteration takes it to final in hours." },
+      { value: "14,000 rows", label: "Question bank audited before generation work began. Roughly 3% were flagged as absurd or low quality before they could contaminate output." },
+      { value: "5 dimensions", label: "Expert evaluation scorecard — section coverage, question quality, metadata correctness, no fabrication, format compliance — on a 1–4 scale with anchors, turning freeform feedback into calibrated data for an LLM-as-judge." },
+    ],
     role: "Senior AI Engineer",
     stack: ["Azure OpenAI", "Claude", "Gemini", "AWS Bedrock", "LiteLLM", "OpenWebUI"],
     responsibilities: [
@@ -526,6 +531,7 @@ export const otherProducts = [
     summary:
       "An exploration into reducing the gap between a working local application and a deployable cloud service, with infrastructure setup and repeatable delivery treated as part of the product experience.",
     focus: ["Cloud deployment", "Developer experience", "Infrastructure automation"],
+    lesson: "Infrastructure setup is part of the product experience, not a step after it."
   },
   {
     name: "Sarkari Samadhan",
@@ -533,6 +539,7 @@ export const otherProducts = [
     summary:
       "A citizen-help product direction for making public-service processes, grievance routes, rights information, and government guidance easier to understand and act on.",
     focus: ["Civic tech", "Public information", "Knowledge systems"],
+    lesson: "Civic tech needs distribution more than it needs features."
   },
   {
     name: "Personal AI Systems Lab",
@@ -547,6 +554,7 @@ export const otherProducts = [
     summary:
       "A one-link booking and payments platform for experts and creators, covering appointment scheduling, payment collection, monthly payouts, and Indian payment-gateway evaluation.",
     focus: ["Creator monetisation", "Scheduling", "Payments", "Founder-led product development"],
+    lesson: "Payment mechanics teach you what users actually value."
   },
   {
     name: "SageRai",
@@ -554,6 +562,7 @@ export const otherProducts = [
     summary:
       "A privacy-sensitive personal-finance assistant for extracting UPI and SMS transaction data, categorising expenses, and turning financial activity into understandable insights.",
     focus: ["Indian fintech", "Transaction analysis", "Expense categorisation", "Privacy"],
+    lesson: "In fintech, data trust is the product."
   },
   {
     name: "Instant EduDoc",
@@ -561,6 +570,7 @@ export const otherProducts = [
     summary:
       "An AI-powered educational document generator for structured CBSE notes, combining Gemini, automated content formatting, PDF generation, and student-facing workflows.",
     focus: ["Gemini", "Document generation", "WeasyPrint", "Education"],
+    lesson: "Content quality beats generation speed."
   },
   {
     name: "Arya",

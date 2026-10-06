@@ -7,10 +7,14 @@ export const metadata = {
 };
 
 export default function WritingPage() {
-  const series = [
-    { title: "Agent Infrastructure", posts: blogs.filter((post) => post.postedAt === "AI Infrastructure") },
-    { title: "Product Execution", posts: blogs.filter((post) => post.postedAt !== "AI Infrastructure") },
-  ];
+  // Section names are derived from the tags the posts actually carry, with the
+  // infrastructure series pinned first. Deriving them means a post can never be
+  // filed under a heading that misdescribes it, and a new tag appears on its own.
+  const tags = [...new Set(blogs.map((post) => post.postedAt))];
+  const orderedTags = ["AI Infrastructure", ...tags.filter((tag) => tag !== "AI Infrastructure")];
+  const series = orderedTags
+    .map((tag) => ({ title: tag, posts: blogs.filter((post) => post.postedAt === tag) }))
+    .filter((group) => group.posts.length > 0);
 
   return (
     <main id="main-content">
@@ -22,7 +26,10 @@ export default function WritingPage() {
           I write when I have something practical to share, usually from the overlap of AI
           engineering, developer tools, and trying to make a product useful.
         </p>
-        <p className="mt-5 max-w-[650px] text-sm leading-7 text-[#68675f]">Most of these essays follow a thesis pattern. The exceptions are where the story is.</p>
+        <p className="mt-5 max-w-[650px] text-sm leading-7 text-[#68675f]">
+          {blogs.length} essays. Most follow a thesis pattern — the consistent shape is the
+          series identity, not a template. The exceptions are where the story is.
+        </p>
 
         {series.map((group) => (
           <section key={group.title} className="mt-14 border-t border-[#d8d5cc] pt-8">

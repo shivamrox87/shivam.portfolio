@@ -23,8 +23,34 @@ export default function SessionsPage() {
         </div>
       </section>
       <section className="border-t border-[#d8d5cc]">
+        <div className="site-shell page-section grid gap-10 md:grid-cols-[0.3fr_1fr] md:gap-16">
+          <div>
+            <p className="eyebrow">Earlier</p>
+            <h2 className="section-title mt-3">Workshops and courses</h2>
+          </div>
+          <div className="border-t border-[#171714]">
+            <div className="grid gap-2 border-b border-[#d8d5cc] py-6 sm:grid-cols-[110px_0.4fr_0.6fr] sm:gap-8">
+              <p className="text-sm text-[#68675f]">2023</p>
+              <h3 className="font-serif text-xl">Get Started with AI</h3>
+              <p className="text-sm leading-7 text-[#4f4e48]">
+                A three-day practical workshop covering AI fundamentals, building GPT-based
+                applications, and hands-on development. 60+ participants.
+              </p>
+            </div>
+            <div className="grid gap-2 border-b border-[#d8d5cc] py-6 sm:grid-cols-[110px_0.4fr_0.6fr] sm:gap-8">
+              <p className="text-sm text-[#68675f]">2022</p>
+              <h3 className="font-serif text-xl">Python 101, Ghana</h3>
+              <p className="text-sm leading-7 text-[#4f4e48]">
+                A three-month live course taking students from Python fundamentals through
+                project work and an introduction to machine learning.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="border-t border-[#d8d5cc]">
         <div className="site-shell py-10">
-          <p className="text-base leading-8 text-[#4f4e48]">Teaching background: three years of workshops, including a three-month Python course for students in Ghana. <Link href="/about#experience" className="font-semibold underline underline-offset-4">Read more on About</Link>.</p>
+          <p className="text-base leading-8 text-[#4f4e48]">Three years of teaching and workshops across India and Ghana. <Link href="/about#experience" className="font-semibold underline underline-offset-4">Read more on About</Link>.</p>
         </div>
       </section>
     </main>
