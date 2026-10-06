@@ -17,7 +17,7 @@
 - All commits go on the branch `home-thesis-redesign`, which exists before Task 1 begins. **Never commit to `main`.**
 - **Never `git add -A` or `git add .`.** Commit only the files the step names. The working tree carries unrelated uncommitted work from before this plan started; a blanket `git add` would sweep it into these commits.
 - The page must render with JavaScript disabled. All five home components are server components — no `"use client"`, no `useState`, no `useEffect`.
-- Colour values come only from the existing tokens: paper `#fbfaf7`, ink `#171714`, muted `#68675f`, line `#d8d5cc`, accent `#b84a2b`. No new palette.
+- Colour values come only from the existing site palette: paper `#fbfaf7`, ink `#171714`, body `#4f4e48`, muted `#68675f`, line `#d8d5cc`, accent `#b84a2b`. No new palette. `#4f4e48` is included because it is what `.body-copy` resolves to and what every existing sub-page uses for body text — it is de-facto palette, not an invention of this page.
 - Prefer the existing component classes from `globals.css` (`.site-shell`, `.page-section`, `.eyebrow`, `.display-title`, `.section-title`, `.body-copy`, `.text-link`) over re-deriving the same styles in Tailwind utilities.
 - Facts (names, statuses, dates, titles, slugs, stacks) are imported from `src/server/data.js`. They are never re-typed into `home-data.js`. `home-data.js` holds only copy, ordering, and selection.
 - Copy rules: the hero headline and bridge sentence are exact strings — see Task 3. Product statuses render exactly as `data.js` spells them.
@@ -871,6 +871,8 @@ git commit -m "Add band 02, the product record"
 
 Serves the reader who decides by conviction. Essay titles are the argument, so they are the design: set large in serif rather than as a dated list.
 
+This band also owns the `#writing` anchor. `src/app/writing/[slug]/page.js:51` ("Back to home") and `:108` ("More writing") both link to `/#writing`, and the page that used to define that target was retired in Task 2. Carrying the id on this section restores both links, since this is the page's writing section. `scroll-mt-20` clears the 64px sticky header so the heading is not hidden underneath it after the jump.
+
 **Files:**
 - Modify: `src/app/home-data.js` (add `arguments` and `resolveEssays`)
 - Create: `src/components/HomeComponent/ArgumentLadder.js`
@@ -896,6 +898,13 @@ test("band 03 renders essay titles and the teaching record", () => {
     "band 03 is not rendering essay titles from blogs",
   );
   assert.ok(text.includes("Programming With Maurya"), "band 03 is missing the teaching record");
+  // Two routes deep-link to /#writing: src/app/writing/[slug]/page.js:51 and
+  // :108. The page that used to define that anchor was retired in Task 2, so
+  // without this the links resolve to / with nothing to scroll to.
+  assert.ok(
+    homeHtml().includes('id="writing"'),
+    "the /#writing anchor is missing, so the two links in writing/[slug] have no target",
+  );
 });
 ```
 
@@ -976,7 +985,11 @@ export default function ArgumentLadder() {
   const essays = resolveEssays();
 
   return (
-    <section className="border-t border-[#d8d5cc]" aria-labelledby="arguments-heading">
+    <section
+      id="writing"
+      className="scroll-mt-20 border-t border-[#d8d5cc]"
+      aria-labelledby="arguments-heading"
+    >
       <div className="site-shell page-section">
         <p className="eyebrow">{argumentsBand.label}</p>
         <h2 id="arguments-heading" className="section-title mt-3 max-w-[760px]">
