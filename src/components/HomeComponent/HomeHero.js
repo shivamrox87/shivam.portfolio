@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { hero, identity } from "@/app/home-data";
 
 export default function HomeHero() {
@@ -27,9 +26,9 @@ export default function HomeHero() {
             {link.label}
           </a>
         ))}
-        <Link href="/connect" className="hover:text-[#171714]">
-          Contact
-        </Link>
+        <a href={`mailto:${identity.email}`} className="hover:text-[#171714]">
+          Email
+        </a>
       </div>
     </section>
   );

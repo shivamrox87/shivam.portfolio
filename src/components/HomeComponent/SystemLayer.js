@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { researchAreas } from "@/server/data";
 import { systems } from "@/app/home-data";
 
 function Arrow() {
@@ -53,14 +52,14 @@ export default function SystemLayer() {
         </p>
 
         <div className="mt-12 border-t border-[#171714]">
-          {researchAreas.map((area, index) => (
+          {systems.entries.map((entry, index) => (
             <article
-              key={area.title}
+              key={entry.title}
               className="grid gap-4 border-b border-[#d8d5cc] py-7 sm:grid-cols-[40px_0.42fr_0.58fr] sm:gap-8"
             >
               <span className="text-xs text-[#b84a2b]">{String(index + 1).padStart(2, "0")}</span>
-              <h3 className="font-serif text-2xl leading-tight">{area.title}</h3>
-              <p className="text-sm leading-7 text-[#4f4e48]">{area.summary}</p>
+              <h3 className="font-serif text-2xl leading-tight">{entry.title}</h3>
+              <p className="text-sm leading-7 text-[#4f4e48]">{entry.body}</p>
             </article>
           ))}
         </div>

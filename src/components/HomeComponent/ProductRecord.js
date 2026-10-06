@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { products, resolveProduct } from "@/app/home-data";
+import { products, productsBand, resolveExplorations, resolveProduct } from "@/app/home-data";
 
 const STATUS_STYLES = {
   sunset: "border-[#b84a2b] text-[#b84a2b]",
@@ -14,13 +14,14 @@ function statusStyle(status) {
 
 export default function ProductRecord() {
   const rows = products.map((product) => ({ ...resolveProduct(product.key), note: product.note }));
+  const explorations = resolveExplorations();
 
   return (
     <section className="border-t border-[#d8d5cc]" aria-labelledby="products-heading">
       <div className="site-shell page-section">
-        <p className="eyebrow">02 · The products</p>
+        <p className="eyebrow">{productsBand.label}</p>
         <h2 id="products-heading" className="section-title mt-3 max-w-[760px]">
-          What the plumbing is for.
+          {productsBand.heading}
         </h2>
 
         <div className="mt-12 border-t border-[#171714]">
@@ -53,14 +54,15 @@ export default function ProductRecord() {
           ))}
         </div>
 
-        <p className="mt-8 max-w-[680px] text-xs leading-6 text-[#68675f]">
-          Also explored and shelved: LaunchRail, Sarkari Samadhan, SageRai, Personal AI Systems Lab,
-          and a custom OpenWebUI setup.
-        </p>
+        {explorations.length > 0 ? (
+          <p className="mt-8 max-w-[680px] text-xs leading-6 text-[#68675f]">
+            Also explored: {explorations.join(", ")}.
+          </p>
+        ) : null}
 
         <div className="mt-8">
           <Link href="/work" className="text-link">
-            All work
+            {productsBand.linkLabel}
           </Link>
         </div>
       </div>

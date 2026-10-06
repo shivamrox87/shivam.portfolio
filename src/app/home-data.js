@@ -59,6 +59,28 @@ export const systems = {
     "Evaluation",
     "Observability",
   ],
+  entries: [
+    {
+      title: "Model access",
+      body: "Every provider behaves differently. The work is making them interchangeable without pretending they are the same, so a provider that fails is a routing decision rather than an outage.",
+    },
+    {
+      title: "Identity and permission",
+      body: "Who may use which model, against which data, for how long. Enforced at the system boundary rather than inside a prompt.",
+    },
+    {
+      title: "Routing and admission",
+      body: "What gets through, on whose budget, and what happens when the answer should be no. A gateway without an admission policy is a shared vulnerability.",
+    },
+    {
+      title: "Evaluation",
+      body: "Whether the output was good, measured against a definition of good that existed before the output did. This is what decides whether the rest of the layer can be trusted.",
+    },
+    {
+      title: "Deployment and operations",
+      body: "Environments that someone who did not build them can still operate. Releases, observability, and debugging that survive contact with a regulated production environment.",
+    },
+  ],
   stack: enterpriseStudy.stack,
   flowsTo: [
     { label: "Enterprise AI case study", href: `/work/${enterpriseStudy.slug}` },
@@ -82,6 +104,12 @@ export const products = [
   { key: "boansel", note: "Killed in September 2026 for the same reason. Payments was a different business than the one I wanted." },
 ];
 
+export const productsBand = {
+  label: "02 · The products",
+  heading: "What the plumbing is for.",
+  linkLabel: "All work",
+};
+
 function findByKey(key) {
   const study = caseStudies.find((entry) => entry.slug === key);
   if (study) {
@@ -93,9 +121,7 @@ function findByKey(key) {
     return { name: build.name, status: build.stage, date: null, href: null };
   }
 
-  const other = otherProducts.find(
-    (entry) => entry.name.toLowerCase() === String(key).toLowerCase(),
-  );
+  const other = otherProducts.find((entry) => entry.name === String(key));
   if (other) {
     return { name: other.name, status: other.status, date: null, href: null };
   }
@@ -116,6 +142,23 @@ export function resolveProduct(key) {
     );
   }
   return { key, ...resolved };
+}
+
+/**
+ * The explorations that still have no home of their own: otherProducts marked
+ * "Exploration" that are not already a row in this band and do not have a case
+ * study at /work/[slug]. Derived, never retyped, so the line cannot repeat a
+ * product or contradict a sub-page.
+ */
+export function resolveExplorations() {
+  const renderedNames = new Set(products.map((row) => resolveProduct(row.key).name));
+  const caseStudyHeadings = new Set(caseStudies.map((entry) => entry.heading));
+  return otherProducts
+    .filter((entry) => entry.status === "Exploration")
+    .filter(
+      (entry) => !renderedNames.has(entry.name) && !caseStudyHeadings.has(entry.name),
+    )
+    .map((entry) => entry.name);
 }
 
 export const argumentsBand = {
@@ -155,7 +198,7 @@ export function resolveEssays() {
 
 export const teaching = {
   community: communityHighlights.map((entry) => ({ title: entry.title, detail: entry.detail })),
-  books: books.map((book) => ({ id: book.id, title: book.bookHeading, href: book.slug })),
+  books: books.map((book) => ({ id: book.id, title: book.bookHeading, url: book.slug })),
 };
 
 export const conversation = {

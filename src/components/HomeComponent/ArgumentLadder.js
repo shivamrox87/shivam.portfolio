@@ -45,7 +45,7 @@ export default function ArgumentLadder() {
               {teaching.books.map((book) => (
                 <div key={book.id} className="border-b border-[#d8d5cc] py-5">
                   <a
-                    href={book.href}
+                    href={book.url}
                     target="_blank"
                     rel="noreferrer"
                     className="text-sm text-[#4f4e48] hover:text-[#b84a2b]"

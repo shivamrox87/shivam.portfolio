@@ -6,7 +6,7 @@ export default function StartConversation() {
     <section className="border-t border-[#d8d5cc]" aria-labelledby="conversation-heading">
       <div className="site-shell page-section">
         <p className="eyebrow">Contact</p>
-        <h2 id="conversation-heading" className="display-title mt-3 max-w-[760px]">
+        <h2 id="conversation-heading" className="section-title mt-3 max-w-[760px]">
           {conversation.heading}
         </h2>
         <p className="mt-8 max-w-[620px] body-copy">{conversation.intro}</p>

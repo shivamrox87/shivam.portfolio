@@ -45,6 +45,17 @@ function homeText() {
 }
 
 /**
+ * The rendered markup only — script blocks stripped. The page ships React's
+ * serialized flight payload in inline <script> tags, so a copy string appears
+ * twice in the raw HTML: once rendered, once in that payload. Counts (unlike
+ * presence checks) must run against the rendered markup, or every "exactly
+ * one" assertion would see the payload's duplicate.
+ */
+function homeMarkup() {
+  return homeHtml().replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "");
+}
+
+/**
  * Every emitted stylesheet, concatenated. Palette assertions belong here rather
  * than against the HTML: a stylesheet that is still imported puts its colours
  * in this bundle, never in the markup, so an HTML check could not catch it.
@@ -105,6 +116,16 @@ function researchAreaTitles() {
   return titles;
 }
 
+/**
+ * Whether a data.js value is re-typed verbatim (single- or double-quoted) in
+ * the given source. Matches both quote styles so a re-typing cannot evade the
+ * guard by switching quotes.
+ */
+function quotedInSource(source, value) {
+  const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`["']${escaped}["']`).test(source);
+}
+
 test("home page is prerendered rather than dynamic", () => {
   homeHtml();
 });
@@ -113,6 +134,8 @@ test("every /work link on the home page points at a slug that exists", () => {
   const html = homeHtml();
   const slugs = caseStudySlugs();
   const hrefs = [...html.matchAll(/href="\/work\/([^"]+)"/g)].map((m) => m[1]);
+  // Without this, the test passes vacuously if the page emits no /work links.
+  assert.ok(hrefs.length > 0, "no /work links found on the page — this check would pass on nothing");
   const missing = [...new Set(hrefs.filter((href) => !slugs.has(href)))];
   assert.deepEqual(
     missing,
@@ -128,6 +151,12 @@ test("the random-shuffle feed is no longer on the home page", () => {
   assert.ok(
     !html.includes("A NEW ORDER EACH VISIT"),
     "the retired feed is still rendering on /",
+  );
+  // The absence above would also hold on a blank document, so pin that the real
+  // page rendered.
+  assert.ok(
+    homeText().includes("I work on the parts of AI that don't demo well."),
+    "the page did not render at all — the feed-absence check would pass on an empty document",
   );
 });
 
@@ -147,11 +176,19 @@ test("band 01 renders the layer and its entries", () => {
   const text = homeText();
   assert.ok(text.includes("The layer between a request and a model."), "band 01 heading is missing");
   assert.ok(text.includes("Routing & admission"), "the layer diagram is missing a stage");
+  // Band 01 renders authored entries about the components in the diagram, not
+  // the researchAreas strings /research already publishes. These two titles are
+  // the first and last of those entries.
+  assert.ok(
+    text.includes("Identity and permission"),
+    "band 01 is missing its authored component entries",
+  );
+  assert.ok(
+    text.includes("Deployment and operations"),
+    "band 01 is missing its authored component entries",
+  );
   // Compare against the values data.js actually declares, so a change there
   // that the page does not follow fails the build.
-  for (const title of researchAreaTitles()) {
-    assert.ok(text.includes(title), `band 01 is missing the research area "${title}" from data.js`);
-  }
   for (const name of enterpriseStack()) {
     assert.ok(text.includes(name), `band 01 is missing the stack value "${name}" from data.js`);
   }
@@ -161,13 +198,16 @@ test("facts are not re-typed into home-data.js", () => {
   const homeData = readFileSync(path.join(ROOT, "src", "app", "home-data.js"), "utf8");
   for (const name of enterpriseStack()) {
     assert.ok(
-      !homeData.includes(`"${name}"`),
+      !quotedInSource(homeData, name),
       `home-data.js re-types the stack value "${name}" from data.js instead of deriving it`,
     );
   }
+  // The research-area titles no longer render on the page, but they must still
+  // not be re-typed here — the guard stays as the reason the band reads from
+  // its own authored entries, not from /research's strings.
   for (const title of researchAreaTitles()) {
     assert.ok(
-      !homeData.includes(`"${title}"`),
+      !quotedInSource(homeData, title),
       `home-data.js re-types the research area "${title}" from data.js instead of deriving it`,
     );
   }
@@ -184,10 +224,22 @@ test("band 02 lists the products and reports the sunsets", () => {
 
 test("band 02 does not link to products that have no case study", () => {
   const html = homeHtml();
+  const text = homeText();
   // boansel and Instant EduDoc exist in data.js but not in caseStudies, so
-  // /work/boansel would 404. The link-integrity test above would also catch
-  // this, but this names the specific regression.
-  assert.ok(!html.includes('href="/work/boansel"'), "band 02 links to a nonexistent case study");
+  // /work/boansel or /work/instant-edudoc would 404. The link-integrity test
+  // above would also catch a stale slug, but this names the specific
+  // regression — and checks the two products, not just boansel.
+  const linked = [...html.matchAll(/href="\/work\/([^"]+)"/g)].map((m) => m[1]);
+  assert.ok(linked.length > 0, "band 02 rendered no /work links at all — it may be empty");
+  for (const slug of linked) {
+    assert.ok(
+      !/boansel|instant|edudoc|edu-doc/i.test(slug),
+      `band 02 links to "${slug}", which has no case study and would 404`,
+    );
+  }
+  // The band actually rendered, so an empty band cannot pass this test.
+  assert.ok(text.includes("Boansel"), "band 02 did not render Boansel");
+  assert.ok(text.includes("Instant EduDoc"), "band 02 did not render Instant EduDoc");
 });
 
 test("band 03 renders essay titles and the teaching record", () => {
@@ -200,21 +252,46 @@ test("band 03 renders essay titles and the teaching record", () => {
   assert.ok(text.includes("Programming With Maurya"), "band 03 is missing the teaching record");
   // Two routes deep-link to /#writing: src/app/writing/[slug]/page.js:51 and
   // :108. The page that used to define that anchor was retired in Task 2, so
-  // without this the links resolve to / with nothing to scroll to.
+  // without this the links resolve to / with nothing to scroll to. Pin the
+  // element, not the bare substring, so "id=writing" elsewhere cannot satisfy it.
   assert.ok(
-    homeHtml().includes('id="writing"'),
+    homeHtml().includes('<section id="writing"'),
     "the /#writing anchor is missing, so the two links in writing/[slug] have no target",
   );
 });
 
 test("the page closes with exactly one call to action", () => {
+  const html = homeMarkup();
   const text = homeText();
-  const html = homeHtml();
   assert.ok(text.includes("Which of those brought you here?"), "the closing heading is missing");
-  assert.ok(html.includes('href="/connect"'), "the call to action does not link to /connect");
+
+  // Slice the closing section, so the header's /connect nav link and the
+  // footer's mailto cannot stand in for the section's own CTA. The section is
+  // labelled by conversation-heading and is not nested, so its first
+  // </section> closes it.
+  const start = html.indexOf('id="conversation-heading"');
+  assert.notEqual(start, -1, "the closing section (conversation-heading) is missing");
+  const end = html.indexOf("</section>", start);
+  const section = end === -1 ? html.slice(start) : html.slice(start, end);
+
+  // The CTA button itself, not just any /connect link on the page.
   assert.ok(
-    text.includes("connect@shivammaurya.com"),
-    "the email alternative is missing from the call to action",
+    section.includes('href="/connect"'),
+    "the closing section has no /connect call to action — a header or footer link is not enough",
+  );
+
+  // Exactly one door: a duplicated "Start a conversation" would fail here.
+  const ctas = html.match(/Start a conversation/g) ?? [];
+  assert.equal(
+    ctas.length,
+    1,
+    `expected exactly one "Start a conversation" link, found ${ctas.length}`,
+  );
+
+  // The email alternative, scoped to the closing section.
+  assert.ok(
+    section.includes("connect@shivammaurya.com"),
+    "the email alternative is missing from the closing section",
   );
 });
 
@@ -225,6 +302,10 @@ test("the home page is built on the site palette, not the retired one", () => {
   // that is still imported lands its colours here and never in the markup.
   assert.ok(!css.includes("#f6f7f4"), "the retired home palette is still in the CSS bundle");
   assert.ok(!css.includes("#658665"), "the retired home palette is still in the CSS bundle");
+  // #fafaf8 and #e4e8e1 are the two colours the old .fieldHeader actually wore,
+  // so they are the most likely to reappear if that rule is ever restored.
+  assert.ok(!css.includes("#fafaf8"), "the retired fieldHeader background (#fafaf8) is still in the CSS bundle");
+  assert.ok(!css.includes("#e4e8e1"), "the retired fieldHeader border (#e4e8e1) is still in the CSS bundle");
   // The header's home variant must survive on site tokens.
   assert.ok(css.includes("fieldHeader"), "the home header variant was dropped instead of moved");
 });
