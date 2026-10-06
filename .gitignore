@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Cache directories
 public/cache/
+
+# SDD plan workspaces (scratch: ledgers, briefs, review packages)
+.superpowers/
