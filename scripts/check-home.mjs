@@ -172,7 +172,10 @@ test("the random-shuffle feed is no longer on the home page", () => {
   const text = homeText();
   assert.ok(!text.includes("A NEW ORDER EACH VISIT"), "the retired feed is still rendering on /");
   // Otherwise this passes on a page that rendered nothing at all.
-  assert.ok(text.includes("OPERATIONAL"), "the page rendered no hero, so the absence check proves nothing");
+  assert.ok(
+    text.includes("service: senior ai engineer"),
+    "the page rendered no hero, so the absence check proves nothing",
+  );
 });
 
 test("every /work link on the home page points at a slug that exists", () => {
@@ -196,12 +199,12 @@ test("the console declares its own service status", () => {
 
 test("the status board reports every product the data says was sunset", () => {
   const { markup, text } = homeSection("status-heading");
-  assert.ok(text.includes("running") && text.includes("stopped"), "the status board shows no states");
+  const live = (markup.match(/led-live/g) ?? []).length;
+  const dead = (markup.match(/led-dead/g) ?? []).length;
+  assert.ok(live > 0 && dead > 0, `the status board shows ${live} running and ${dead} stopped lamps, expected both`);
   for (const name of sunsetNames()) {
     assert.ok(text.includes(name), `the status board does not report ${name}, which data.js marks sunset`);
   }
-  const stopped = (markup.match(/bg-\[#b84a2b\]/g) ?? []).length;
-  assert.ok(stopped > 0, "no decommissioned service is marked as stopped");
 });
 
 test("the metrics band derives its counts rather than hardcoding them", () => {
@@ -242,10 +245,10 @@ test("the invariants band renders every invariant from data.js", () => {
   assert.ok(text.includes("learned in"), "invariants render without where they were learned");
 });
 
-test("the changelog renders the employment record from data.js", () => {
-  const { text } = homeSection("changelog-heading");
+test("the service history renders the employment record from data.js", () => {
+  const { text } = homeSection("timeline-heading");
   for (const org of companyNames()) {
-    assert.ok(text.includes(org), `the changelog is missing ${org} from data.js`);
+    assert.ok(text.includes(org), `the service history is missing ${org} from data.js`);
   }
 });
 

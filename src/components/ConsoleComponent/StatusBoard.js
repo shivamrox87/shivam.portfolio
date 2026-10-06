@@ -1,61 +1,76 @@
 import Link from "next/link";
 import { decommissioned, operational, proposed } from "@/app/home-data";
 
-function StatusRow({ state, name, status, note, href }) {
-  const live = state === "operational";
+function Row({ live, name, status, note, href }) {
   return (
-    <div className="mono-row">
-      <p className="mono flex items-center gap-2">
-        <span
-          aria-hidden="true"
-          className={`inline-block h-[7px] w-[7px] shrink-0 rounded-full ${live ? "bg-[#3f7d4e]" : "bg-[#b84a2b]"}`}
-        />
-        <span className={live ? "text-[#3f7d4e]" : "text-[#b84a2b]"}>{live ? "running" : "stopped"}</span>
-      </p>
-      <div>
-        <h3 className="font-serif text-2xl leading-tight">
+    <tr className="border-t border-[#e4e0d5] align-top">
+      <td className="whitespace-nowrap py-3.5 pr-5">
+        <span className={`font-mono text-[10px] uppercase tracking-[0.16em] ${live ? "text-[#2f7d4f]" : "text-[#b84a2b]"}`}>
+          <span aria-hidden="true" className={`led mr-2 ${live ? "led-live" : "led-dead"}`} />
+          {live ? "run" : "stop"}
+        </span>
+      </td>
+      <td className="py-3.5 pr-5">
+        <span className="font-mono text-[13px] text-[#171714]">
           {href ? (
-            <Link href={href} className="hover:text-[#b84a2b]">
+            <Link href={href} className="border-b border-transparent transition-colors hover:border-[#b84a2b] hover:text-[#b84a2b]">
               {name}
             </Link>
           ) : (
             name
           )}
-        </h3>
-        <p className="mono mt-2 text-[#68675f]">{status}</p>
-        {note ? <p className="mt-3 max-w-[620px] text-sm leading-7 text-[#4f4e48]">{note}</p> : null}
-      </div>
-    </div>
+        </span>
+        {note ? <p className="mt-1.5 max-w-[520px] text-[12px] leading-6 text-[#6e6a60]">{note}</p> : null}
+      </td>
+      <td className="whitespace-nowrap py-3.5 font-mono text-[10px] uppercase tracking-[0.14em] text-[#8a857a]">
+        {status}
+      </td>
+    </tr>
   );
 }
 
 export default function StatusBoard() {
   return (
-    <section className="border-t border-[#d8d5cc]" aria-labelledby="status-heading">
+    <section className="border-t border-[#cfcabf]" aria-labelledby="status-heading">
       <div className="site-shell page-section">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3">
-          <h2 id="status-heading" className="section-title">Status</h2>
-          <p className="mono text-[#68675f]">
-            {operational.length} running / {decommissioned.length} decommissioned
-          </p>
-        </div>
+        <div className="panel">
+          <div className="panel-head">
+            <p className="panel-id">services</p>
+            <p className="panel-id">
+              <span className="text-[#2f7d4f]">{operational.length} running</span>
+              <span className="mx-2 text-[#cfcabf]">·</span>
+              <span className="text-[#b84a2b]">{decommissioned.length} decommissioned</span>
+            </p>
+          </div>
 
-        <div className="mt-10 border-t border-[#171714]">
-          {operational.map((entry) => (
-            <StatusRow key={`run-${entry.name}`} state="operational" {...entry} />
-          ))}
-          {decommissioned.map((entry) => (
-            <StatusRow key={`stop-${entry.name}`} state="stopped" {...entry} />
-          ))}
-        </div>
+          <div className="panel-body pt-0 md:pt-0">
+            <h2 id="status-heading" className="sr-only">Services</h2>
+            <table className="w-full border-collapse text-left">
+              <caption className="sr-only">
+                Services currently running and services decommissioned, with their status.
+              </caption>
+              <tbody>
+                {operational.map((entry) => (
+                  <Row key={`run-${entry.name}`} live {...entry} />
+                ))}
+                {decommissioned.map((entry) => (
+                  <Row key={`stop-${entry.name}`} live={false} {...entry} />
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-        <p className="mono mt-10 text-[#68675f]">
-          Shelved, not promoted: {proposed.join(" · ")}
-        </p>
-        <p className="mt-3 max-w-[620px] text-xs leading-6 text-[#68675f]">
-          Two services were shut down in September 2026 on purpose, to put everything behind one
-          product instead of three.
-        </p>
+          <div className="border-t border-[#cfcabf] bg-[#f4f2ec] px-4 py-3">
+            <p className="panel-id">shelved, not promoted</p>
+            <p className="mt-1.5 font-mono text-[11px] leading-6 text-[#6e6a60]">
+              {proposed.join("  ·  ")}
+            </p>
+            <p className="mt-2 max-w-[600px] text-[11px] leading-5 text-[#8a857a]">
+              Two services were shut down in September 2026 on purpose, to put everything behind
+              one product instead of three.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -6,39 +6,50 @@ export default function Runbooks() {
   const list = runbooks();
 
   return (
-    <section
-      id="writing"
-      className="scroll-mt-20 border-t border-[#d8d5cc]"
-      aria-labelledby="runbooks-heading"
-    >
+    <section id="writing" className="scroll-mt-20 border-t border-[#cfcabf]" aria-labelledby="runbooks-heading">
       <div className="site-shell page-section">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3">
-          <h2 id="runbooks-heading" className="section-title">Runbooks</h2>
-          <p className="mono text-[#68675f]">{blogs.length} published</p>
-        </div>
+        <div className="panel">
+          <div className="panel-head">
+            <p className="panel-id">runbooks</p>
+            <p className="panel-id">{blogs.length} published · most one thesis each</p>
+          </div>
 
-        <p className="mt-6 max-w-[620px] body-copy">
-          The essays were already written as runbooks — &ldquo;a model gateway needs an admission
-          policy&rdquo; is a procedure, not a headline — so that is how they are filed.
-        </p>
+          <div className="panel-body pt-0 md:pt-0">
+            <h2 id="runbooks-heading" className="sr-only">Runbooks</h2>
+            <p className="max-w-[620px] py-5 text-[12px] leading-6 text-[#6e6a60]">
+              &ldquo;A model gateway needs an admission policy&rdquo; is a procedure, not a
+              headline, so the essays are filed as what they already are.
+            </p>
+            <ol className="border-t border-[#e4e0d5]">
+              {list.map((runbook) => (
+                <li key={runbook.slug} className="border-b border-[#e4e0d5] last:border-b-0">
+                  <Link
+                    href={runbook.href}
+                    className="grid gap-1 py-3.5 transition-colors hover:bg-[#f4f2ec] sm:grid-cols-[104px_1fr] sm:items-baseline sm:gap-5"
+                  >
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#8a857a]">
+                      {runbook.date}
+                    </span>
+                    <span className="font-serif text-[19px] leading-snug text-[#171714] md:text-[21px]">
+                      {runbook.title}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </div>
 
-        <ol className="mt-10 border-t border-[#171714]">
-          {list.map((runbook) => (
-            <li key={runbook.slug} className="border-b border-[#d8d5cc]">
-              <Link href={runbook.href} className="group grid gap-2 py-7 sm:grid-cols-[120px_1fr] sm:gap-8">
-                <span className="mono text-[#68675f]">{runbook.date}</span>
-                <h3 className="max-w-[760px] font-serif text-2xl leading-[1.15] transition-colors group-hover:text-[#b84a2b] md:text-3xl">
-                  {runbook.title}
-                </h3>
-              </Link>
-            </li>
-          ))}
-        </ol>
-
-        <div className="mt-10 flex flex-wrap gap-7">
-          <Link href="/writing" className="text-link">All {blogs.length} runbooks</Link>
-          <Link href="/research" className="text-link">Research</Link>
-          <Link href="/sessions" className="text-link">Teaching</Link>
+          <div className="flex flex-wrap gap-x-7 gap-y-2 border-t border-[#cfcabf] bg-[#f4f2ec] px-4 py-3">
+            <Link href="/writing" className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#6e6a60] hover:text-[#b84a2b]">
+              all {blogs.length} runbooks
+            </Link>
+            <Link href="/research" className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#6e6a60] hover:text-[#b84a2b]">
+              investigations
+            </Link>
+            <Link href="/sessions" className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#6e6a60] hover:text-[#b84a2b]">
+              teaching
+            </Link>
+          </div>
         </div>
       </div>
     </section>
