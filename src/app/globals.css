@@ -22,6 +22,7 @@ body { background: var(--paper); color: var(--ink); }
   .section-title { @apply font-serif text-4xl font-normal leading-[1.05] tracking-[-0.02em] md:text-5xl; }
   .body-copy { @apply text-base leading-8 text-[#4f4e48] md:text-[17px]; }
   .text-link { @apply inline-flex border-b border-[#171714] pb-0.5 text-sm font-semibold transition-colors hover:border-[#b84a2b] hover:text-[#b84a2b]; }
+  .fieldHeader { @apply border-[#d8d5cc] bg-[#fbfaf7]/95; }
 }
 
 .custom-scrollbar {

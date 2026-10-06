@@ -217,3 +217,14 @@ test("the page closes with exactly one call to action", () => {
     "the email alternative is missing from the call to action",
   );
 });
+
+test("the home page is built on the site palette, not the retired one", () => {
+  const css = builtCss();
+  // #f6f7f4 and #658665 belonged to home.css, which is retired. These are
+  // asserted against the emitted stylesheets, not the HTML: a stylesheet
+  // that is still imported lands its colours here and never in the markup.
+  assert.ok(!css.includes("#f6f7f4"), "the retired home palette is still in the CSS bundle");
+  assert.ok(!css.includes("#658665"), "the retired home palette is still in the CSS bundle");
+  // The header's home variant must survive on site tokens.
+  assert.ok(css.includes("fieldHeader"), "the home header variant was dropped instead of moved");
+});
