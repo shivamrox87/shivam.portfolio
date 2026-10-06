@@ -1,4 +1,4 @@
-import { caseStudies } from "@/server/data";
+import { caseStudies, currentBuilds, otherProducts } from "@/server/data";
 
 /**
  * Authored framing for the home page.
@@ -58,3 +58,55 @@ export const systems = {
     { label: "Research", href: "/research" },
   ],
 };
+
+/**
+ * The products band, in the order they appear.
+ *
+ * `key` resolves against data.js and `note` is the only authored field — the
+ * line answering "what did this teach me", which is what turns a portfolio
+ * grid into a record. Names, statuses, and dates are never retyped here.
+ */
+export const products = [
+  { key: "explaingithub", note: "Repository intelligence. The first product of mine that someone paid for." },
+  { key: "repoflicks", note: "Shipped and deployed. Taught me what a launch actually costs after the build." },
+  { key: "arya", note: "Multilingual retrieval and speech, delivered across messaging platforms and APIs." },
+  { key: "Instant EduDoc", note: "Structured document generation end to end, from model output to a printable file." },
+  { key: "reqbeam", note: "Killed in September 2026 to put everything behind ExplainGitHub." },
+  { key: "boansel", note: "Killed in September 2026 for the same reason. Payments was a different business than the one I wanted." },
+];
+
+function findByKey(key) {
+  const study = caseStudies.find((entry) => entry.slug === key);
+  if (study) {
+    return { name: study.heading, status: study.status, date: study.date, href: `/work/${study.slug}` };
+  }
+
+  const build = currentBuilds.find((entry) => entry.slug === key);
+  if (build) {
+    return { name: build.name, status: build.stage, date: null, href: null };
+  }
+
+  const other = otherProducts.find(
+    (entry) => entry.name.toLowerCase() === String(key).toLowerCase(),
+  );
+  if (other) {
+    return { name: other.name, status: other.status, date: null, href: null };
+  }
+
+  return null;
+}
+
+/**
+ * Resolves a product key to display fields. Throws rather than returning null
+ * so a stale key fails the build loudly instead of silently dropping a row.
+ */
+export function resolveProduct(key) {
+  const resolved = findByKey(key);
+  if (!resolved) {
+    throw new Error(
+      `home-data: product key "${key}" matches no slug in caseStudies or ` +
+        `currentBuilds, and no name in otherProducts. Fix the key or remove the row.`,
+    );
+  }
+  return { key, ...resolved };
+}

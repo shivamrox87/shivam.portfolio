@@ -172,3 +172,20 @@ test("facts are not re-typed into home-data.js", () => {
     );
   }
 });
+
+test("band 02 lists the products and reports the sunsets", () => {
+  const text = homeText();
+  assert.ok(text.includes("02 · The products"), "band 02 label is missing");
+  for (const name of ["ExplainGitHub", "RepoFlicks", "Arya", "Instant EduDoc", "ReqBeam", "Boansel"]) {
+    assert.ok(text.includes(name), `band 02 is missing ${name}`);
+  }
+  assert.ok(text.includes("Sunset"), "band 02 does not report the sunset products");
+});
+
+test("band 02 does not link to products that have no case study", () => {
+  const html = homeHtml();
+  // boansel and Instant EduDoc exist in data.js but not in caseStudies, so
+  // /work/boansel would 404. The link-integrity test above would also catch
+  // this, but this names the specific regression.
+  assert.ok(!html.includes('href="/work/boansel"'), "band 02 links to a nonexistent case study");
+});
