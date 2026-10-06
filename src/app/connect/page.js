@@ -16,7 +16,7 @@ export default function ContactPage() {
       <section className="site-shell page-section">
         <div className="grid gap-12 md:grid-cols-[0.42fr_1fr] md:gap-16">
           <div>
-            <p className="eyebrow">Contact</p>
+            <p className="eyebrow">Open a ticket</p>
             <h1 className="display-title mt-4">Let&apos;s talk.</h1>
             <p className="mt-8 body-copy">
               For enterprise AI product and platform delivery, developer tools, technical architecture

@@ -19,7 +19,8 @@ export default function WritingPage() {
   return (
     <main id="main-content">
       <section className="mx-auto w-full max-w-[820px] px-5 pb-16 pt-24 md:px-8 md:pb-24 md:pt-32">
-        <h1 className="font-serif text-4xl font-normal leading-tight tracking-[-0.02em] md:text-5xl">
+        <p className="eyebrow">Runbooks</p>
+        <h1 className="mt-4 font-serif text-4xl font-normal leading-tight tracking-[-0.02em] md:text-5xl">
           Things I&apos;ve written about
         </h1>
         <p className="mt-5 body-copy">

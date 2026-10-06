@@ -74,7 +74,7 @@ export default function AboutSide() {
       <section className="border-t border-[#d8d5cc]">
         <div className="site-shell page-section grid gap-10 md:grid-cols-[0.35fr_1fr] md:gap-16">
           <div>
-            <p className="eyebrow">Principles</p>
+            <p className="eyebrow">Invariants</p>
             <h2 className="section-title mt-3">How I work</h2>
           </div>
           <div className="border-t border-[#171714]">

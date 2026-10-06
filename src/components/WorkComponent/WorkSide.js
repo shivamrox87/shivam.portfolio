@@ -15,7 +15,7 @@ export default function WorkSide() {
     <main id="main-content">
 
       <section className="site-shell page-section">
-        <p className="eyebrow">Work</p>
+        <p className="eyebrow">Deployments</p>
         <h1 className="display-title mt-4 max-w-[900px]">Enterprise AI, developer tools, and products taken into the real world.</h1>
         <p className="mt-8 max-w-[720px] body-copy">
           A selective view of professional platforms, shipped products, and active product work.

@@ -10,7 +10,7 @@ export default function ResearchPage() {
   return (
     <main id="main-content">
       <section className="site-shell page-section">
-        <p className="eyebrow">Technical research</p>
+        <p className="eyebrow">Investigations</p>
         <h1 className="display-title mt-4 max-w-[900px]">Investigations behind production AI decisions.</h1>
         <p className="mt-8 max-w-[720px] body-copy">
           Focused research used to evaluate architectures, provider behaviour, security models,
