@@ -91,3 +91,13 @@ test("every /work link on the home page points at a slug that exists", () => {
     `home links to case studies that do not exist: ${missing.join(", ")}`,
   );
 });
+
+test("the random-shuffle feed is no longer on the home page", () => {
+  const html = homeHtml();
+  // The string the retired feed rendered above its stream. Its presence means
+  // FeedHome is still routed, which is what this task removes.
+  assert.ok(
+    !html.includes("A NEW ORDER EACH VISIT"),
+    "the retired feed is still rendering on /",
+  );
+});
