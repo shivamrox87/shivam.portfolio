@@ -101,3 +101,15 @@ test("the random-shuffle feed is no longer on the home page", () => {
     "the retired feed is still rendering on /",
   );
 });
+
+test("the hero states the thesis and the bridge line", () => {
+  const text = homeText();
+  assert.ok(
+    text.includes("I work on the parts of AI that don't demo well."),
+    "hero headline is missing from the page",
+  );
+  assert.ok(
+    text.includes("The model is the smallest part of a production AI system."),
+    "the bridge line that states the thesis is missing from the page",
+  );
+});
