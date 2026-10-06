@@ -36,7 +36,7 @@ export const featuredWork = [
   {
     name: "ExplainGitHub",
     context: "Independent developer tool",
-    status: "In development",
+    status: "In development — first paying users",
     description:
       "An AI repository intelligence platform for understanding unfamiliar codebases, architecture, and implementation decisions.",
     scope: ["Repository ingestion", "Codebase Q&A", "Developer UX"],
@@ -45,9 +45,9 @@ export const featuredWork = [
   {
     name: "ReqBeam",
     context: "Independent developer product",
-    status: "Active exploration",
+    status: "Sunset",
     description:
-      "An AI-native workspace for understanding, testing, documenting, and debugging APIs.",
+      "AI-assisted API workspace — sunset in September 2026 to focus on ExplainGitHub.",
     scope: ["API testing", "Response analysis", "Agent workflows"],
     href: "/work/reqbeam",
   },
@@ -57,7 +57,7 @@ export const currentBuilds = [
   {
     name: "Personal AI Systems Lab",
     slug: "personal-ai-systems-lab",
-    stage: "Ongoing experimentation",
+    stage: "Exploration",
     summary:
       "A practical personal AI environment for testing persistent agents, multi-model workflows, local inference, model routing, and coding delegation across local and cloud systems.",
     focus: ["Persistent agents", "Local models", "Model routing", "Developer workflows"],
@@ -67,7 +67,7 @@ export const currentBuilds = [
   {
     name: "ExplainGitHub",
     slug: "explaingithub",
-    stage: "In development",
+    stage: "In development — first paying users",
     summary:
       "Repository understanding with AI, designed to help developers move from unfamiliar codebases to useful context faster.",
     focus: ["Repository intelligence", "LLM workflows", "Developer UX"],
@@ -77,9 +77,9 @@ export const currentBuilds = [
   {
     name: "ReqBeam",
     slug: "reqbeam",
-    stage: "Exploration",
+    stage: "Sunset",
     summary:
-      "An API collaboration and workflow product aimed at making requirements, requests, and iteration loops easier to manage.",
+      "AI-assisted API workspace — sunset in September 2026 to focus on ExplainGitHub.",
     focus: ["Product workflows", "Collaboration", "Backend systems"],
     statusNote: "Early product and workflow exploration.",
     accent: "from-[#0d0d0d] via-[#1d3557] to-[#457b9d]",
@@ -87,7 +87,7 @@ export const currentBuilds = [
   {
     name: "OpenWebUI AI Operating System",
     slug: "openwebui-operating-system",
-    stage: "Ongoing internal tooling",
+    stage: "In development",
     summary:
       "Custom tools and knowledge workflows for organising conversations, analysing recent work, managing Markdown knowledge, and producing recurring task summaries.",
     focus: ["OpenWebUI", "Custom tools", "Knowledge workflows"],
@@ -97,7 +97,7 @@ export const currentBuilds = [
   {
     name: "RepoFlicks",
     slug: "repoflicks",
-    stage: "Shipped product",
+    stage: "Shipped",
     summary:
       "A social-feed-style product for discovering open-source repositories, built and deployed with production and development environments.",
     focus: ["Open-source discovery", "Next.js", "Cloud Run"],
@@ -107,9 +107,9 @@ export const currentBuilds = [
   {
     name: "Boansel",
     slug: "boansel",
-    stage: "Operating product",
+    stage: "Sunset",
     summary:
-      "A booking and payments platform direction that broadens the portfolio beyond AI-native internal tooling.",
+      "A booking and payments platform sunset in September 2026 to focus on ExplainGitHub.",
     focus: ["Transactions", "Operations", "Product execution"],
     statusNote: "Booking and payments product work.",
     accent: "from-[#1b4332] via-[#2d6a4f] to-[#40916c]",
@@ -226,7 +226,7 @@ export const caseStudies = [
     slug: "explaingithub",
     heading: "ExplainGitHub",
     category: "Developer AI",
-    status: "In development",
+    status: "In development — first paying users",
     date: "Current",
     subHeading:
       "Repository understanding using AI so engineers can move from raw code to useful product and architecture context faster.",
@@ -290,12 +290,12 @@ export const caseStudies = [
     slug: "reqbeam",
     heading: "ReqBeam",
     category: "Workflow Product",
-    status: "Active exploration",
-    date: "Evolving product",
+    status: "Sunset",
+    date: "September 2026",
     subHeading:
       "An AI-native workspace for understanding, testing, documenting, and debugging APIs.",
     summary:
-      "An evolving developer product combining API understanding, request creation, test generation, response analysis, and collaboration workflows.",
+      "An AI-assisted API workspace sunset in September 2026 to focus on ExplainGitHub.",
     problem:
       "Requirements, API iterations, and product feedback loops often break down across tools, threads, and handoffs.",
     solution:
@@ -351,7 +351,7 @@ export const caseStudies = [
     slug: "repoflicks",
     heading: "RepoFlicks",
     category: "Developer Product",
-    status: "Shipped product",
+    status: "Shipped",
     date: "Launched",
     subHeading:
       "A social-feed-style product for discovering open-source repositories and exploring what makes them useful.",
@@ -529,21 +529,21 @@ export const otherProducts = [
   },
   {
     name: "Sarkari Samadhan",
-    status: "Civic-tech exploration",
+    status: "Exploration",
     summary:
       "A citizen-help product direction for making public-service processes, grievance routes, rights information, and government guidance easier to understand and act on.",
     focus: ["Civic tech", "Public information", "Knowledge systems"],
   },
   {
     name: "Personal AI Systems Lab",
-    status: "Ongoing experimentation",
+    status: "Exploration",
     summary:
       "A hands-on environment for experimenting with persistent personal agents, local models, multi-provider routing, coding delegation, and the operating patterns that make AI systems useful over time.",
     focus: ["Agents", "Local inference", "Model routing", "AI infrastructure"],
   },
   {
     name: "Boansel",
-    status: "Launched product",
+    status: "Sunset · September 2026",
     summary:
       "A one-link booking and payments platform for experts and creators, covering appointment scheduling, payment collection, monthly payouts, and Indian payment-gateway evaluation.",
     focus: ["Creator monetisation", "Scheduling", "Payments", "Founder-led product development"],
@@ -557,7 +557,7 @@ export const otherProducts = [
   },
   {
     name: "Instant EduDoc",
-    status: "Shipped project",
+    status: "Shipped",
     summary:
       "An AI-powered educational document generator for structured CBSE notes, combining Gemini, automated content formatting, PDF generation, and student-facing workflows.",
     focus: ["Gemini", "Document generation", "WeasyPrint", "Education"],
@@ -690,7 +690,7 @@ export const companiesData = [
     activeYears: "2024 - Present",
     position: "Senior AI Engineer",
     description:
-      "Leading and contributing to internal AI product delivery and shared enterprise AI platforms for financial-services organisations. Work spans model-enabled workflows, multi-provider model integration, model gateways, identity and access, evaluation, backend services, cloud delivery, production debugging, technical mentoring, and architecture decisions with product, DevOps, IT, security, and engineering stakeholders.",
+      "Leading and contributing to internal AI product delivery and shared enterprise AI platforms for financial-services organisations. Work spans model-enabled workflows, multi-provider model integration, model gateways, identity and access, evaluation, backend services, cloud delivery, production debugging, technical mentoring, and architecture decisions with product, DevOps, IT, security, and engineering stakeholders. Currently leading evaluation methodology for AI product delivery.",
   },
   {
     id: "C-02",
@@ -820,6 +820,10 @@ export const skills = [
 ];
 
 export const playGround = [
+  {
+    category: "Evaluation",
+    name: "Evaluation methodology for LLM products",
+  },
   {
     image:
       "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
