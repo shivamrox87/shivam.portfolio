@@ -1,4 +1,4 @@
-import { communityHighlights, companiesData } from "@/server/data";
+import { companiesData } from "@/server/data";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -114,22 +114,6 @@ export default function AboutSide() {
         </div>
       </section>
 
-      <section className="border-t border-[#d8d5cc]">
-        <div className="site-shell page-section grid gap-10 md:grid-cols-[0.35fr_1fr] md:gap-16">
-          <div>
-            <p className="eyebrow">Community and leadership</p>
-            <h2 className="section-title mt-3">Teaching, ownership, and collaboration</h2>
-          </div>
-          <div className="border-t border-[#171714]">
-            {communityHighlights.map((item) => (
-              <div key={item.title} className="grid gap-3 border-b border-[#d8d5cc] py-7 sm:grid-cols-[0.38fr_0.62fr] sm:gap-8">
-                <h3 className="font-serif text-2xl">{item.title}</h3>
-                <p className="text-sm leading-7 text-[#4f4e48]">{item.detail}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

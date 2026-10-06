@@ -7,9 +7,15 @@ export default function BuildingPage() {
   return (
     <main id="main-content">
       <section className="site-shell page-section">
-        <p className="eyebrow">Now · August 2026</p>
-        <h1 className="display-title mt-4 max-w-[800px]">What I am building and studying.</h1>
+        <p className="eyebrow">Now · October 2026</p>
+        <h1 className="display-title mt-4 max-w-[800px]">Now</h1>
         <p className="mt-8 max-w-[680px] body-copy">A concise record of current enterprise AI delivery, independent product work, and technical research.</p>
+      </section>
+      <section className="border-t border-[#d8d5cc]">
+        <div className="site-shell grid gap-4 py-10 md:grid-cols-[0.3fr_1fr] md:gap-16">
+          <p className="eyebrow">Working rhythm</p>
+          <p className="body-copy">Running my workday through a personal AI agent (Hermes) on Slack for journaling, evidence tracking, and daily operations. I am also publishing a production infrastructure essay series. <Link href="/writing/agent-streaming-needs-typed-lifecycle-events-not-just-a-raw-token-pipe" className="text-link">Read the latest essay</Link></p>
+        </div>
       </section>
       <section className="border-t border-[#d8d5cc]">
         <div className="site-shell page-section grid gap-10 md:grid-cols-[0.3fr_1fr] md:gap-16">

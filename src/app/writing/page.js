@@ -7,6 +7,11 @@ export const metadata = {
 };
 
 export default function WritingPage() {
+  const series = [
+    { title: "Agent Infrastructure", posts: blogs.filter((post) => post.postedAt === "AI Infrastructure") },
+    { title: "Product Execution", posts: blogs.filter((post) => post.postedAt !== "AI Infrastructure") },
+  ];
+
   return (
     <main id="main-content">
       <section className="mx-auto w-full max-w-[820px] px-5 pb-16 pt-24 md:px-8 md:pb-24 md:pt-32">
@@ -17,21 +22,23 @@ export default function WritingPage() {
           I write when I have something practical to share, usually from the overlap of AI
           engineering, developer tools, and trying to make a product useful.
         </p>
+        <p className="mt-5 max-w-[650px] text-sm leading-7 text-[#68675f]">Most of these essays follow a thesis pattern. The exceptions are where the story is.</p>
 
-        <div className="mt-10 space-y-7 border-t border-[#d8d5cc] pt-8">
-          {blogs.map((post) => (
-            <article key={post.slug}>
-              <Link href={`/writing/${post.slug}`} className="group">
-                <h2 className="font-serif text-2xl leading-tight transition-colors group-hover:text-[#b84a2b]">
-                  {post.blogHeading}
-                </h2>
-              </Link>
-              <p className="mt-2 text-sm text-[#68675f]">
-                {post.postedAt} · {post.postedOn}
-              </p>
-            </article>
-          ))}
-        </div>
+        {series.map((group) => (
+          <section key={group.title} className="mt-14 border-t border-[#d8d5cc] pt-8">
+            <h2 className="font-serif text-3xl">{group.title}</h2>
+            <div className="mt-8 space-y-7">
+              {group.posts.map((post) => (
+                <article key={post.slug}>
+                  <Link href={`/writing/${post.slug}`} className="group">
+                    <h3 className="font-serif text-2xl leading-tight transition-colors group-hover:text-[#b84a2b]">{post.blogHeading}</h3>
+                  </Link>
+                  <p className="mt-2 text-sm text-[#68675f]">{post.postedOn}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
       </section>
     </main>
   );

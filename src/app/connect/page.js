@@ -24,6 +24,7 @@ export default function ContactPage() {
             </p>
             <div className="mt-8 border-t border-[#d8d5cc] pt-5 text-sm leading-7 text-[#68675f]">
               <p>Based in Varanasi, India</p>
+              <a href="mailto:connect@shivammaurya.com" className="text-link mt-2">connect@shivammaurya.com</a>
               <div className="mt-3 flex flex-wrap gap-4">
                 <a href="https://www.linkedin.com/in/shivam--maurya" target="_blank" rel="noreferrer" className="text-link">LinkedIn</a>
                 <a href="https://x.com/_shivammaurya__" target="_blank" rel="noreferrer" className="text-link">X</a>
