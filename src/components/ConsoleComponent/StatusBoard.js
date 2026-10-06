@@ -4,13 +4,13 @@ import { decommissioned, operational, proposed } from "@/app/home-data";
 function Row({ live, name, status, note, href }) {
   return (
     <tr className="border-t border-[#e4e0d5] align-top">
-      <td className="whitespace-nowrap py-3.5 pr-5">
+      <td className="w-[58px] py-3.5 pr-4 sm:w-[74px] sm:pr-5">
         <span className={`font-mono text-[10px] uppercase tracking-[0.16em] ${live ? "text-[#2f7d4f]" : "text-[#b84a2b]"}`}>
           <span aria-hidden="true" className={`led mr-2 ${live ? "led-live" : "led-dead"}`} />
           {live ? "run" : "stop"}
         </span>
       </td>
-      <td className="py-3.5 pr-5">
+      <td className="py-3.5">
         <span className="font-mono text-[13px] text-[#171714]">
           {href ? (
             <Link href={href} className="border-b border-transparent transition-colors hover:border-[#b84a2b] hover:text-[#b84a2b]">
@@ -20,10 +20,11 @@ function Row({ live, name, status, note, href }) {
             name
           )}
         </span>
+        {/* The lifecycle label sits under the name rather than in a third
+            column: at phone width a third column forced a 262px nowrap cell
+            and pushed the table to 452px, overflowing the viewport. */}
+        <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-[#8a857a]">{status}</p>
         {note ? <p className="mt-1.5 max-w-[520px] text-[12px] leading-6 text-[#6e6a60]">{note}</p> : null}
-      </td>
-      <td className="whitespace-nowrap py-3.5 font-mono text-[10px] uppercase tracking-[0.14em] text-[#8a857a]">
-        {status}
       </td>
     </tr>
   );
