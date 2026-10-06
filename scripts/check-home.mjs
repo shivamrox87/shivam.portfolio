@@ -76,6 +76,35 @@ function caseStudySlugs() {
   return new Set(slugs);
 }
 
+/**
+ * The stack values the enterprise-ai case study declares. Read from source for
+ * the same reason caseStudySlugs() is: data.js is ESM using the "@/..." alias
+ * and cannot be imported by plain node.
+ */
+function enterpriseStack() {
+  const src = readFileSync(DATA_JS, "utf8");
+  const start = src.indexOf('slug: "enterprise-ai"');
+  assert.notEqual(start, -1, "enterprise-ai entry not found in data.js — this check is stale");
+  const match = src.slice(start).match(/stack:\s*\[([^\]]*)\]/);
+  assert.ok(match, "no stack array found on the enterprise-ai entry in data.js");
+  const values = [...match[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]);
+  assert.ok(values.length > 0, "enterprise-ai stack parsed as empty in data.js");
+  return values;
+}
+
+/** Every research-area title declared in data.js. */
+function researchAreaTitles() {
+  const src = readFileSync(DATA_JS, "utf8");
+  const start = src.indexOf("export const researchAreas = [");
+  assert.notEqual(start, -1, "researchAreas export not found in data.js — this check is stale");
+  const rest = src.slice(start + 1);
+  const end = rest.indexOf("\nexport const ");
+  const block = end === -1 ? rest : rest.slice(0, end);
+  const titles = [...block.matchAll(/^\s*title:\s*"([^"]+)"/gm)].map((m) => m[1]);
+  assert.ok(titles.length > 0, "no titles parsed out of the researchAreas block");
+  return titles;
+}
+
 test("home page is prerendered rather than dynamic", () => {
   homeHtml();
 });
@@ -118,16 +147,28 @@ test("band 01 renders the layer and its entries", () => {
   const text = homeText();
   assert.ok(text.includes("The layer between a request and a model."), "band 01 heading is missing");
   assert.ok(text.includes("Routing & admission"), "the layer diagram is missing a stage");
-  // Entries are derived from researchAreas, so this also proves derivation,
-  // not just that some copy was pasted in.
-  assert.ok(
-    text.includes("Model gateways and provider behaviour"),
-    "band 01 entries are not being derived from researchAreas",
-  );
-  // The stack is derived from the enterprise-ai case study, not restated in
-  // home-data, so a value only that entry carries proves the derivation.
-  assert.ok(
-    text.includes("AWS Bedrock"),
-    "band 01 stack is not being derived from the enterprise-ai case study",
-  );
+  // Compare against the values data.js actually declares, so a change there
+  // that the page does not follow fails the build.
+  for (const title of researchAreaTitles()) {
+    assert.ok(text.includes(title), `band 01 is missing the research area "${title}" from data.js`);
+  }
+  for (const name of enterpriseStack()) {
+    assert.ok(text.includes(name), `band 01 is missing the stack value "${name}" from data.js`);
+  }
+});
+
+test("facts are not re-typed into home-data.js", () => {
+  const homeData = readFileSync(path.join(ROOT, "src", "app", "home-data.js"), "utf8");
+  for (const name of enterpriseStack()) {
+    assert.ok(
+      !homeData.includes(`"${name}"`),
+      `home-data.js re-types the stack value "${name}" from data.js instead of deriving it`,
+    );
+  }
+  for (const title of researchAreaTitles()) {
+    assert.ok(
+      !homeData.includes(`"${title}"`),
+      `home-data.js re-types the research area "${title}" from data.js instead of deriving it`,
+    );
+  }
 });

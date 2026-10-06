@@ -54,7 +54,7 @@ export const systems = {
   ],
   stack: enterpriseStudy.stack,
   flowsTo: [
-    { label: "Enterprise AI case study", href: "/work/enterprise-ai" },
+    { label: "Enterprise AI case study", href: `/work/${enterpriseStudy.slug}` },
     { label: "Research", href: "/research" },
   ],
 };
