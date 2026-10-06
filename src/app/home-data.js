@@ -1,3 +1,5 @@
+import { caseStudies } from "@/server/data";
+
 /**
  * Authored framing for the home page.
  *
@@ -21,5 +23,38 @@ export const identity = {
     { label: "X", href: "https://x.com/_shivammaurya__" },
     { label: "Medium", href: "https://medium.com/@shivam--maurya" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/shivam--maurya" },
+  ],
+};
+
+/**
+ * The enterprise case study owns the stack fact. Band 01 renders that array
+ * rather than restating it, so the diagram cannot drift from what
+ * /work/enterprise-ai already publishes. The list is providers plus one
+ * platform, which is why the row is labelled for both.
+ */
+const enterpriseStudy = caseStudies.find((entry) => entry.slug === "enterprise-ai");
+if (!enterpriseStudy) {
+  throw new Error(
+    'home-data: no caseStudy with slug "enterprise-ai". Band 01 derives its stack from that entry.',
+  );
+}
+
+export const systems = {
+  label: "01 · The systems",
+  heading: "The layer between a request and a model.",
+  intro:
+    "Most of the work is not in the model. It is in everything a request has to pass through before and after it — and every part of that has to hold up when the environment is regulated and the stakes are real.",
+  stages: [
+    "Application",
+    "Identity & access",
+    "Model gateway",
+    "Routing & admission",
+    "Evaluation",
+    "Observability",
+  ],
+  stack: enterpriseStudy.stack,
+  flowsTo: [
+    { label: "Enterprise AI case study", href: "/work/enterprise-ai" },
+    { label: "Research", href: "/research" },
   ],
 };

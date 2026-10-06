@@ -113,3 +113,21 @@ test("the hero states the thesis and the bridge line", () => {
     "the bridge line that states the thesis is missing from the page",
   );
 });
+
+test("band 01 renders the layer and its entries", () => {
+  const text = homeText();
+  assert.ok(text.includes("The layer between a request and a model."), "band 01 heading is missing");
+  assert.ok(text.includes("Routing & admission"), "the layer diagram is missing a stage");
+  // Entries are derived from researchAreas, so this also proves derivation,
+  // not just that some copy was pasted in.
+  assert.ok(
+    text.includes("Model gateways and provider behaviour"),
+    "band 01 entries are not being derived from researchAreas",
+  );
+  // The stack is derived from the enterprise-ai case study, not restated in
+  // home-data, so a value only that entry carries proves the derivation.
+  assert.ok(
+    text.includes("AWS Bedrock"),
+    "band 01 stack is not being derived from the enterprise-ai case study",
+  );
+});
