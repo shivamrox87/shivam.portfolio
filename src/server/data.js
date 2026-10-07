@@ -848,6 +848,72 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Oct 07, 2026",
+    "blogHeading": "What an Agent’s Stop Button Can Actually Promise",
+    "slug": "what-an-agents-stop-button-can-actually-promise",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "AI Infrastructure",
+    "content": "When an agent is only generating text, Stop feels straightforward. Once it can start builds, create records, or publish changes, stopping becomes a coordination problem. I want the product to explain what has stopped, what is still settling, and what already happened.",
+    "sections": [
+      {
+        "heading": "Start with the user’s expectation",
+        "paragraphs": [
+          "Imagine an agent preparing a release: it has started a build, queued a deployment, and drafted a notification. The user notices the wrong target environment and presses Stop. Freezing the transcript is immediate. Preventing the queued deployment and finding out whether anything has already reached the cloud are separate jobs.",
+          "The MCP Tasks Extension’s TypeScript documentation makes a useful distinction for builders working with remote tools today: an AbortSignal stops local waiting, while cancel() requests remote cancellation. That small API distinction has a large product consequence. A quiet interface is not evidence that the work behind it has stopped.",
+          "I would define the promise before designing the button: stop admitting new actions for this run, request cancellation of active work, and report any effects that remain. Each part needs evidence from the runtime."
+        ],
+        "sources": [
+          {
+            "label": "MCP Tasks Extension: cancellation and detachment",
+            "href": "https://tasks.extensions.modelcontextprotocol.io/typescript/troubleshooting#cancellation-and-detachment"
+          }
+        ]
+      },
+      {
+        "heading": "Keep cancellation intent separate from execution facts",
+        "paragraphs": [
+          "MCP’s versioned specifications show why one status field is too little. Ordinary request cancellation is a notification that a receiver may ignore if the work has finished or cannot be cancelled. In the experimental 2025-11-25 task design, a valid cancellation transitions the task to cancelled, but the specification explicitly allows underlying execution to continue. That is a protocol state, not proof that every downstream effect was prevented.",
+          "For the application, I would store three separate facts: when the user requested a stop, whether each worker acknowledged it, and the observed outcome of each external action. These are application records, not proposed additions to MCP. A task can have cancellation acknowledged while a deployment’s outcome remains unknown.",
+          "The interface can then say something concrete: “New actions blocked. Build cancellation requested. Deployment status being checked.” It should only say an operation stopped when the relevant executor can support that claim."
+        ],
+        "sources": [
+          {
+            "label": "MCP 2025-11-25: request cancellation",
+            "href": "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/cancellation"
+          },
+          {
+            "label": "MCP 2025-11-25: experimental task cancellation semantics",
+            "href": "https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/tasks#task-cancellation"
+          }
+        ]
+      },
+      {
+        "heading": "Close the gate before draining the workers",
+        "paragraphs": [
+          "My first implementation step would be a durable stop record checked by the component that admits tool actions. Stop and action admission need a shared ordering point, such as a transaction over the run record. Otherwise a worker can read “running,” the user can stop the run, and the worker can still dispatch its next action using the stale read.",
+          "An action admitted before that boundary belongs to the in-flight set, even if the external system has not accepted it yet. Try to cancel it, but preserve its identity and reconcile its outcome. Actions arriving after the boundary should be rejected. This makes the guarantee precise without pretending a local transaction can control a remote service.",
+          "Queued jobs, retries, child tasks, and delayed approval responses must all pass through the same gate. A restarted worker should reload the stop record before continuing. The model can explain the decision; enforcing it belongs in the executor."
+        ]
+      },
+      {
+        "heading": "Treat cleanup as a separate decision",
+        "paragraphs": [
+          "If the release was already created, stopping the agent cannot make that fact disappear. Deleting the release or rolling it back is another consequential action, with its own permissions and failure modes. I would not let a generic cancellation handler improvise that recovery.",
+          "For each tool, decide ahead of time what cleanup is safe: terminate a local process, request cancellation of a remote build, retain a generated draft, or ask the user to review a published change. Give cleanup a bounded execution path so it can finish after ordinary task actions have been blocked.",
+          "Keep external operation identifiers in the application’s own record. The experimental MCP task specification permits cancelled task records to be deleted immediately, so a remote task lookup should not be the only way to discover what needs attention. Reconciliation needs enough information to inspect the actual build or deployment."
+        ]
+      },
+      {
+        "heading": "Test the races behind the button",
+        "paragraphs": [
+          "I would test Stop while a job is queued, while a worker is dispatching it, after the remote service accepts it, and while an approval is pending. Then restart the worker and deliver the queued message again. The key assertion is that no new ordinary action is admitted after the recorded stop boundary.",
+          "Also simulate a remote service that ignores cancellation and a connection that drops before acknowledgement. The expected interface should preserve uncertainty and show which operation is being checked. A misleading success message is a product failure even when the cancellation request itself was sent correctly.",
+          "A useful Stop button leaves the user with a small, understandable account: what was prevented, what finished, and what still needs a decision. That is the standard I would use before trusting an agent with a workflow I might need to interrupt."
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Oct 05, 2026",
     "blogHeading": "Before You Blame the Model, Check the Eval Sandbox",
     "slug": "before-you-blame-the-model-check-the-eval-sandbox",
