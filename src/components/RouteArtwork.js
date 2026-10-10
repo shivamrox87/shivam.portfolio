@@ -137,22 +137,22 @@ export default function RouteArtwork() {
         >
           <button
             type="button"
-            className="writing-artwork-close"
+            className="writing-artwork-image-button"
+            aria-label="Hide article artwork"
             tabIndex={writingArtworkOpen ? 0 : -1}
             onClick={() => setWritingArtworkOpen(false)}
           >
-            Back to writing <span aria-hidden="true">×</span>
+            <Image
+              key={artwork}
+              src={artwork}
+              alt=""
+              width={1024}
+              height={1536}
+              sizes="50vw"
+              className="writing-artwork-image"
+              priority
+            />
           </button>
-          <Image
-            key={artwork}
-            src={artwork}
-            alt=""
-            width={1024}
-            height={1536}
-            sizes="50vw"
-            className="writing-artwork-image"
-            priority
-          />
         </aside>
       </>
     );
