@@ -20,6 +20,10 @@ const artworkByPage = {
 
 function artworkForPath(pathname) {
   if (artworkByPage[pathname]) return artworkByPage[pathname];
+  if (pathname.startsWith("/writing/")) {
+    const slug = pathname.slice("/writing/".length).replace(/\/$/, "");
+    return `/writing-artwork/${slug}.webp`;
+  }
   const pickForDetail = (options) => {
     let hash = 0;
     for (const character of pathname) hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
@@ -32,7 +36,7 @@ function artworkForPath(pathname) {
       "/engraving-india-about.png",
     ]);
   }
-  if (pathname.startsWith("/writing/") || pathname.startsWith("/blog/")) {
+  if (pathname.startsWith("/blog/")) {
     return pickForDetail([
       "/engraving-india-about.png",
       "/engraving-india-explore.png",
