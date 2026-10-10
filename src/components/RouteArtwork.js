@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 const artworkByPage = {
   "/": "/engraving-india-home.png",
@@ -73,7 +73,7 @@ export default function RouteArtwork() {
     return () => window.removeEventListener("pointermove", handlePointerMove);
   }, [isWritingPost]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.body.classList.toggle("writing-artwork-open", isWritingPost && writingArtworkOpen);
     return () => document.body.classList.remove("writing-artwork-open");
   }, [isWritingPost, writingArtworkOpen]);
@@ -92,20 +92,20 @@ export default function RouteArtwork() {
   if (isWritingPost) {
     return (
       <>
-        {!writingArtworkOpen && (
-          <button
-            type="button"
-            className="writing-artwork-edge"
-            aria-controls="writing-artwork-panel"
-            aria-expanded="false"
-            onPointerEnter={(event) => {
-              if (event.pointerType !== "touch") setWritingArtworkOpen(true);
-            }}
-            onClick={() => setWritingArtworkOpen(true)}
-          >
-            View artwork
-          </button>
-        )}
+        <button
+          type="button"
+          className={`writing-artwork-edge${writingArtworkOpen ? " is-hidden" : ""}`}
+          aria-controls="writing-artwork-panel"
+          aria-expanded={writingArtworkOpen}
+          aria-hidden={writingArtworkOpen}
+          tabIndex={writingArtworkOpen ? -1 : 0}
+          onPointerEnter={(event) => {
+            if (event.pointerType !== "touch") setWritingArtworkOpen(true);
+          }}
+          onClick={() => setWritingArtworkOpen(true)}
+        >
+          View artwork
+        </button>
         <aside
           id="writing-artwork-panel"
           className={`writing-artwork-panel${writingArtworkOpen ? " is-open" : ""}`}
