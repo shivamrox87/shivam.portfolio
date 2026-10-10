@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const artworkByPage = {
   "/": "/engraving-india-home.png",
@@ -51,18 +51,38 @@ export default function RouteArtwork() {
   const artwork = artworkForPath(pathname);
   const isWritingPost = pathname.startsWith("/writing/");
   const [footerIsNear, setFooterIsNear] = useState(false);
-  const [writingArtworkOpen, setWritingArtworkOpen] = useState(false);
+  const [writingArtworkOpen, setWritingArtworkOpen] = useState(isWritingPost);
+  const [isAutoPreviewing, setIsAutoPreviewing] = useState(isWritingPost);
+  const peekUntil = useRef(0);
+  const pointerAtEdge = useRef(false);
 
-  useEffect(() => {
-    setWritingArtworkOpen(false);
-  }, [pathname]);
+  useLayoutEffect(() => {
+    if (!isWritingPost) {
+      setWritingArtworkOpen(false);
+      setIsAutoPreviewing(false);
+      return;
+    }
+
+    pointerAtEdge.current = false;
+    peekUntil.current = Date.now() + 1000;
+    setIsAutoPreviewing(true);
+    setWritingArtworkOpen(true);
+    const timer = window.setTimeout(() => {
+      peekUntil.current = 0;
+      setIsAutoPreviewing(false);
+      if (!pointerAtEdge.current) setWritingArtworkOpen(false);
+    }, 1000);
+    return () => window.clearTimeout(timer);
+  }, [pathname, isWritingPost]);
 
   useEffect(() => {
     if (!isWritingPost) return;
 
     const handlePointerMove = (event) => {
       if (event.pointerType === "touch") return;
-      if (event.clientX >= window.innerWidth - Math.max(48, window.innerWidth * 0.06)) {
+      pointerAtEdge.current = event.clientX >= window.innerWidth - Math.max(48, window.innerWidth * 0.06);
+      if (peekUntil.current) return;
+      if (pointerAtEdge.current) {
         setWritingArtworkOpen(true);
       } else if (event.clientX < window.innerWidth / 2 || event.target.closest?.(".writing-detail article")) {
         setWritingArtworkOpen(false);
@@ -75,8 +95,12 @@ export default function RouteArtwork() {
 
   useLayoutEffect(() => {
     document.body.classList.toggle("writing-artwork-open", isWritingPost && writingArtworkOpen);
-    return () => document.body.classList.remove("writing-artwork-open");
-  }, [isWritingPost, writingArtworkOpen]);
+    document.body.classList.toggle("writing-artwork-preview", isWritingPost && isAutoPreviewing);
+    return () => {
+      document.body.classList.remove("writing-artwork-open");
+      document.body.classList.remove("writing-artwork-preview");
+    };
+  }, [isWritingPost, writingArtworkOpen, isAutoPreviewing]);
 
   useEffect(() => {
     const footerArtwork = document.querySelector(".footer-panorama");
@@ -96,6 +120,7 @@ export default function RouteArtwork() {
           type="button"
           className={`writing-artwork-edge${writingArtworkOpen ? " is-hidden" : ""}`}
           aria-controls="writing-artwork-panel"
+          aria-label="Show article artwork"
           aria-expanded={writingArtworkOpen}
           aria-hidden={writingArtworkOpen}
           tabIndex={writingArtworkOpen ? -1 : 0}
@@ -103,9 +128,7 @@ export default function RouteArtwork() {
             if (event.pointerType !== "touch") setWritingArtworkOpen(true);
           }}
           onClick={() => setWritingArtworkOpen(true)}
-        >
-          View artwork
-        </button>
+        />
         <aside
           id="writing-artwork-panel"
           className={`writing-artwork-panel${writingArtworkOpen ? " is-open" : ""}`}
@@ -128,6 +151,7 @@ export default function RouteArtwork() {
             height={1536}
             sizes="50vw"
             className="writing-artwork-image"
+            priority
           />
         </aside>
       </>
