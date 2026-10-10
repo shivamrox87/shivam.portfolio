@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const artworkByPage = {
   "/": "/engraving-india-home.png",
@@ -20,10 +20,6 @@ const artworkByPage = {
 
 function artworkForPath(pathname) {
   if (artworkByPage[pathname]) return artworkByPage[pathname];
-  if (pathname.startsWith("/writing/")) {
-    const slug = pathname.slice("/writing/".length).replace(/\/$/, "");
-    return `/writing-artwork/${slug}-light.webp`;
-  }
   const pickForDetail = (options) => {
     let hash = 0;
     for (const character of pathname) hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
@@ -51,58 +47,9 @@ export default function RouteArtwork() {
   const artwork = artworkForPath(pathname);
   const isWritingPost = pathname.startsWith("/writing/");
   const [footerIsNear, setFooterIsNear] = useState(false);
-  const [writingArtworkOpen, setWritingArtworkOpen] = useState(isWritingPost);
-  const [isAutoPreviewing, setIsAutoPreviewing] = useState(isWritingPost);
-  const peekUntil = useRef(0);
-  const pointerAtEdge = useRef(false);
-
-  useLayoutEffect(() => {
-    if (!isWritingPost) {
-      setWritingArtworkOpen(false);
-      setIsAutoPreviewing(false);
-      return;
-    }
-
-    pointerAtEdge.current = false;
-    peekUntil.current = Date.now() + 1000;
-    setIsAutoPreviewing(true);
-    setWritingArtworkOpen(true);
-    const timer = window.setTimeout(() => {
-      peekUntil.current = 0;
-      setIsAutoPreviewing(false);
-      if (!pointerAtEdge.current) setWritingArtworkOpen(false);
-    }, 1000);
-    return () => window.clearTimeout(timer);
-  }, [pathname, isWritingPost]);
 
   useEffect(() => {
-    if (!isWritingPost) return;
-
-    const handlePointerMove = (event) => {
-      if (event.pointerType === "touch") return;
-      pointerAtEdge.current = event.clientX >= window.innerWidth - Math.max(48, window.innerWidth * 0.06);
-      if (peekUntil.current) return;
-      if (pointerAtEdge.current) {
-        setWritingArtworkOpen(true);
-      } else if (event.clientX < window.innerWidth / 2 || event.target.closest?.(".writing-detail article")) {
-        setWritingArtworkOpen(false);
-      }
-    };
-
-    window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    return () => window.removeEventListener("pointermove", handlePointerMove);
-  }, [isWritingPost]);
-
-  useLayoutEffect(() => {
-    document.body.classList.toggle("writing-artwork-open", isWritingPost && writingArtworkOpen);
-    document.body.classList.toggle("writing-artwork-preview", isWritingPost && isAutoPreviewing);
-    return () => {
-      document.body.classList.remove("writing-artwork-open");
-      document.body.classList.remove("writing-artwork-preview");
-    };
-  }, [isWritingPost, writingArtworkOpen, isAutoPreviewing]);
-
-  useEffect(() => {
+    if (isWritingPost) return;
     const footerArtwork = document.querySelector(".footer-panorama");
     if (!footerArtwork) return;
     const observer = new IntersectionObserver(
@@ -111,52 +58,9 @@ export default function RouteArtwork() {
     );
     observer.observe(footerArtwork);
     return () => observer.disconnect();
-  }, [pathname]);
+  }, [pathname, isWritingPost]);
 
-  if (isWritingPost) {
-    return (
-      <>
-        <button
-          type="button"
-          className={`writing-artwork-edge${writingArtworkOpen ? " is-hidden" : ""}`}
-          aria-controls="writing-artwork-panel"
-          aria-label="Show article artwork"
-          aria-expanded={writingArtworkOpen}
-          aria-hidden={writingArtworkOpen}
-          tabIndex={writingArtworkOpen ? -1 : 0}
-          onPointerEnter={(event) => {
-            if (event.pointerType !== "touch") setWritingArtworkOpen(true);
-          }}
-          onClick={() => setWritingArtworkOpen(true)}
-        />
-        <aside
-          id="writing-artwork-panel"
-          className={`writing-artwork-panel${writingArtworkOpen ? " is-open" : ""}`}
-          aria-label="Article artwork"
-          aria-hidden={!writingArtworkOpen}
-        >
-          <button
-            type="button"
-            className="writing-artwork-image-button"
-            aria-label="Hide article artwork"
-            tabIndex={writingArtworkOpen ? 0 : -1}
-            onClick={() => setWritingArtworkOpen(false)}
-          >
-            <Image
-              key={artwork}
-              src={artwork}
-              alt=""
-              width={1024}
-              height={1536}
-              sizes="50vw"
-              className="writing-artwork-image"
-              priority
-            />
-          </button>
-        </aside>
-      </>
-    );
-  }
+  if (isWritingPost) return null;
 
   return (
     <div className={`margin-artwork${footerIsNear ? " is-footer-near" : ""}`} aria-hidden="true">

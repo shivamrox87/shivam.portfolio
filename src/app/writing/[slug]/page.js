@@ -1,4 +1,5 @@
 import { blogs } from "@/server/data";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -66,6 +67,15 @@ export default async function WritingPage({ params }) {
             ) : null}
             {article.contentAfter}
           </p>
+          <Image
+            src={`/writing-artwork/${article.slug}-light.webp`}
+            alt={`Illustration for ${article.blogHeading}`}
+            width={1024}
+            height={1536}
+            sizes="(max-width: 760px) min(100vw - 40px, 340px), 420px"
+            className="writing-inline-artwork"
+            priority
+          />
         </header>
 
         {article.prompt ? (
