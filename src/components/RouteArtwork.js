@@ -22,7 +22,7 @@ function artworkForPath(pathname) {
   if (artworkByPage[pathname]) return artworkByPage[pathname];
   if (pathname.startsWith("/writing/")) {
     const slug = pathname.slice("/writing/".length).replace(/\/$/, "");
-    return `/writing-artwork/${slug}.webp`;
+    return `/writing-artwork/${slug}-light.webp`;
   }
   const pickForDetail = (options) => {
     let hash = 0;
@@ -63,11 +63,7 @@ export default function RouteArtwork() {
   }, [pathname]);
 
   return (
-    <div
-      className={`margin-artwork${footerIsNear ? " is-footer-near" : ""}`}
-      aria-hidden="true"
-      style={pathname.startsWith("/writing/") ? { mixBlendMode: "multiply" } : undefined}
-    >
+    <div className={`margin-artwork${footerIsNear ? " is-footer-near" : ""}`} aria-hidden="true">
       <Image
         key={artwork}
         src={artwork}
@@ -77,7 +73,8 @@ export default function RouteArtwork() {
         sizes="(min-width: 1200px) 430px, 0px"
         priority={pathname === "/"}
         style={pathname.startsWith("/writing/") ? {
-          filter: "invert(1) hue-rotate(180deg)",
+          maskImage: "radial-gradient(ellipse 85% 75% at center, black 65%, transparent 100%)",
+          WebkitMaskImage: "radial-gradient(ellipse 85% 75% at center, black 65%, transparent 100%)",
         } : undefined}
       />
     </div>
