@@ -69,7 +69,7 @@ export default async function WritingPage({ params }) {
         </header>
 
         {article.prompt ? (
-          <section className="mt-12 md:mt-16">
+          <section className="mt-12 max-w-[650px] md:mt-16">
             <h2 className="font-serif text-3xl leading-tight md:text-4xl">Prompt</h2>
             <pre className="mt-5 overflow-x-auto whitespace-pre-wrap border border-[#C7C9C4] bg-[#f3f0e9] p-5 font-mono text-sm leading-7 text-[#302f2b] md:p-7">
               {article.prompt}
@@ -77,7 +77,7 @@ export default async function WritingPage({ params }) {
           </section>
         ) : null}
 
-        <div className="mt-12 space-y-12 md:mt-16 md:space-y-16">
+        <div className="mt-12 max-w-[650px] space-y-12 md:mt-16 md:space-y-16">
           {article.sections.map((section) => (
             <section key={section.heading}>
               <h2 className="font-serif text-3xl leading-tight md:text-4xl">{section.heading}</h2>
