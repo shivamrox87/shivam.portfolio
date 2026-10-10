@@ -2,10 +2,16 @@ import { blogs } from "@/server/data";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { existsSync } from "node:fs";
+import path from "node:path";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const article = blogs.find((post) => post.slug === slug);
+  const previewPath = `/social/writing/${slug}.jpg`;
+  const previewImage = existsSync(path.join(process.cwd(), "public", "social", "writing", `${slug}.jpg`))
+    ? previewPath
+    : "/opengraph-image";
 
   return article
     ? {
@@ -19,9 +25,10 @@ export async function generateMetadata({ params }) {
           authors: [article.postedBy],
           images: [
             {
-              url: `/writing/${article.slug}/opengraph-image`,
+              url: previewImage,
               width: 1200,
               height: 630,
+              type: previewImage.endsWith(".jpg") ? "image/jpeg" : "image/png",
               alt: article.blogHeading,
             },
           ],
@@ -30,7 +37,7 @@ export async function generateMetadata({ params }) {
           card: "summary_large_image",
           title: article.blogHeading,
           description: article.content,
-          images: [`/writing/${article.slug}/opengraph-image`],
+          images: [previewImage],
         },
       }
     : { title: "Article Not Found" };
