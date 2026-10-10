@@ -24,9 +24,9 @@ export const metadata = {
   },
   description: "Shivam Maurya builds production AI systems across enterprise infrastructure, applied AI products, and developer workflows.",
   openGraph: {
-    title: "Shivam Maurya | AI Systems and Developer Tools",
+    title: "AI systems for real work",
     description: "AI systems, developer tools, and practical learning by Shivam Maurya.",
-    siteName: "Shivam Maurya",
+    siteName: "AI systems · developer tools",
     type: "website",
     url: "/",
     images: [
@@ -34,13 +34,13 @@ export const metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Shivam Maurya, Senior AI Engineer, with engraved astrolabe artwork",
+        alt: "Engraved astrolabe artwork for AI systems and developer tools",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shivam Maurya | AI Systems and Developer Tools",
+    title: "AI systems for real work",
     description: "AI systems, developer tools, and practical learning by Shivam Maurya.",
     images: ["/opengraph-image"],
   },
