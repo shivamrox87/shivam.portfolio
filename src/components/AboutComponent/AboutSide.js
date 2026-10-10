@@ -19,6 +19,6 @@ export default function AboutSide() {
     </ul></section>
     <section className="reference-about-section"><h2>How I work</h2><ul>{invariants.map(({ title, detail }) => <li key={title}><strong>{title}</strong><span>{detail}</span></li>)}</ul></section>
     <section className="reference-about-section" id="experience"><h2>Experience</h2><ul>{companiesData.map((company) => <li key={company.id}><strong>{company.companyName}</strong><span>{company.position} · {company.activeYears}</span></li>)}</ul></section>
-    <div className="reference-index-links"><Link href="/work">Projects →</Link><Link href="/connect">Contact →</Link></div>
+    <div className="reference-index-links"><Link href="/work">Projects →</Link><Link href="/sessions">Speaking &amp; teaching →</Link><Link href="/connect">Contact →</Link></div>
   </main>;
 }
