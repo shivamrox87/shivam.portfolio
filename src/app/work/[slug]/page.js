@@ -19,7 +19,7 @@ export default async function WorkDetailPage({ params }) {
   if (!project) notFound();
 
   return (
-    <main id="main-content">
+    <main id="main-content" className="reference-detail">
       <section className="site-shell page-section">
         <Link href="/work" className="text-link">Back to work</Link>
         <p className="eyebrow mt-12">{project.category} · {project.status}</p>

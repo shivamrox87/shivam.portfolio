@@ -1,6 +1,8 @@
 import "./globals.css";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import "./portfolio-site.css";
+import "./editorial-home.css";
+import "./reference-site.css";
+import SiteFrame from "@/components/SiteFrame";
 import { Manrope, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -57,9 +59,7 @@ export default function RootLayout({ children }) {
         <a href="#main-content" className="sr-only z-[100] bg-[#16181B] px-4 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           Skip to content
         </a>
-        <Header />
-        {children}
-        <Footer />
+        <SiteFrame>{children}</SiteFrame>
         <Analytics />
       </body>
     </html>

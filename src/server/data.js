@@ -159,24 +159,24 @@ export const caseStudies = [
   {
     id: "cs-00",
     slug: "enterprise-ai",
-    heading: "Enterprise AI Product and Platform Delivery",
+    heading: "Enterprise AI at AlphaFMC",
     category: "Enterprise AI",
     status: "Professional work",
     date: "2024 - Present",
     subHeading:
-      "Senior AI engineering across internal product delivery, shared platforms, and production operations for financial-services environments at AlphaFMC.",
+      "I build internal AI tools for financial-services teams and the shared services that make those tools secure and maintainable.",
     summary:
-      "A public, non-confidential view of hands-on work delivering internal AI experiences and the shared foundations that make them secure, usable, and operable for enterprise teams.",
+      "As a Senior AI Engineer, I work across product workflows, model access, identity, evaluation, and cloud delivery. One document agent produces a first draft in minutes, with expert review taking it to final in hours instead of the previous 4–6 week manual turnaround.",
     problem:
-      "Enterprise teams need useful AI products as well as dependable model access. Without shared foundations, each new workflow recreates authentication, provider integration, evaluation, routing, deployment, and operational support from scratch.",
+      "Teams needed AI tools for real work, including proposal and statement-of-work drafting. Building each tool separately would repeat the same work on authentication, model access, evaluation, deployment, and support.",
     solution:
-      "Build internal AI product experiences on top of shared capabilities for model access, identity, routing, evaluation, observability, storage integrations, and repeatable cloud delivery using established enterprise controls.",
+      "I helped deliver internal products on shared services for identity, model routing, evaluation, storage integration, and cloud releases. For the document agent, I also audited a 14,000-row question bank before generation and defined a five-part expert evaluation scorecard.",
     outcome:
-      "Delivered and improved internal AI capabilities while strengthening reusable platform foundations, so product teams can focus on useful workflows without duplicating core access, reliability, and operational concerns.",
+      "Manual document turnaround previously took 4–6 weeks. The agent produces a first draft in minutes, and experts refine it to final in hours. Shared services also give new AI workflows a foundation for access, reliability, and operations.",
     metrics: [
-      { value: "4–6 weeks → minutes/hours", label: "Document turnaround. Domain experts drafted proposals and statements of work by hand; the agent produces a first draft in minutes and expert iteration takes it to final in hours." },
-      { value: "14,000 rows", label: "Question bank audited before generation work began. Roughly 3% were flagged as absurd or low quality before they could contaminate output." },
-      { value: "5 dimensions", label: "Expert evaluation scorecard — section coverage, question quality, metadata correctness, no fabrication, format compliance — on a 1–4 scale with anchors, turning freeform feedback into calibrated data for an LLM-as-judge." },
+      { value: "4–6 weeks → hours", label: "Document turnaround. The agent drafts in minutes; experts review and finish the work in hours." },
+      { value: "14,000 rows", label: "Audited before generation; about 3% were flagged as low quality." },
+      { value: "5 criteria", label: "An expert scorecard checks coverage, question quality, metadata, factual accuracy, and format." },
     ],
     role: "Senior AI Engineer",
     stack: ["Azure OpenAI", "Claude", "Gemini", "AWS Bedrock", "LiteLLM", "OpenWebUI"],
@@ -273,15 +273,15 @@ export const caseStudies = [
     status: "In development — first paying users",
     date: "Current",
     subHeading:
-      "Repository understanding using AI so engineers can move from raw code to useful product and architecture context faster.",
+      "I founded ExplainGitHub to help developers understand unfamiliar codebases without piecing the architecture together file by file.",
     summary:
-      "An independent developer tool exploring how repository context can make unfamiliar codebases easier to navigate and understand.",
+      "ExplainGitHub turns repository structure and source files into explanations developers can navigate and question. It is in active development and has its first paying users.",
     problem:
-      "Developers waste time understanding unfamiliar repositories, tracing system intent, and reconstructing architecture from scattered files and conventions.",
+      "When joining a project or opening a new repository, developers have to trace behavior across many files before they can make a confident change.",
     solution:
-      "Build a repository intelligence workflow that turns source code into navigable explanations, product context, and actionable summaries.",
+      "I built workflows for GitHub authentication, repository ingestion, multi-file questions, and source-aware explanations. The product builds context in stages so answers stay tied to relevant code paths.",
     outcome:
-      "The current work is focused on context quality, traceability, and the developer experience around generated repository explanations.",
+      "The product has its first paying users. Current development focuses on the accuracy and traceability of explanations, especially for larger repositories.",
     role: "Founder, product builder, and AI engineer",
     stack: ["GitHub OAuth", "Repository ingestion", "LLM orchestration", "Backend workflows", "Product UX"],
     responsibilities: [
@@ -345,7 +345,7 @@ export const caseStudies = [
     solution:
       "Design an AI-assisted API workspace that can understand an endpoint, help create requests, generate tests, analyse responses, and preserve debugging context.",
     outcome:
-      "The exploration is testing whether clearer state, ownership, and shared context can reduce ambiguity across product and engineering handoffs.",
+      "The product was sunset in September 2026 so I could focus on ExplainGitHub. The work clarified how much API debugging depends on visible state, ownership, and shared context.",
     role: "Product builder and technical lead",
     stack: ["Next.js", "Backend APIs", "AI test generation", "Response analysis", "Product systems"],
     responsibilities: [
@@ -398,15 +398,15 @@ export const caseStudies = [
     status: "Shipped",
     date: "Launched",
     subHeading:
-      "A social-feed-style product for discovering open-source repositories and exploring what makes them useful.",
+      "I built and launched a visual feed for discovering open-source repositories, from the first product flow through production deployment.",
     summary:
-      "A founder-led product taken through authentication, application development, cloud deployment, environment separation, launch, and early growth experiments.",
+      "RepoFlicks is a shipped repository-discovery product. I owned the design, GitHub sign-in, onboarding, application build, deployment, and early growth experiments.",
     problem:
-      "Open-source discovery is often driven by search results and static lists, making it difficult to browse interesting repositories in a lightweight, visual way.",
+      "Search results and static lists make it hard to browse unfamiliar open-source projects and decide which ones are worth exploring.",
     solution:
-      "Build a feed-based repository discovery experience with GitHub authentication, structured repository data, media handling, onboarding, and production deployment.",
+      "I built a feed-based experience with GitHub sign-in, structured repository data, media handling, and onboarding, then deployed it with separate development and production environments.",
     outcome:
-      "Launched a working product with separate development and production environments, then used it to learn about onboarding, acquisition, analytics, deployment operations, and infrastructure costs.",
+      "RepoFlicks launched as a working product. Running it brought practical lessons in onboarding, user acquisition, analytics, deployment, and infrastructure costs.",
     role: "Founder and product engineer",
     stack: ["Next.js", "GitHub OAuth", "Supabase", "Cloudinary", "Docker", "Google Cloud Run"],
     responsibilities: [

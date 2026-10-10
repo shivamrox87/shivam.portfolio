@@ -2,13 +2,13 @@ import WorkSide from '@/components/WorkComponent/WorkSide';
 
 
 export const metadata = {
-  title: "Work",
+  title: "Projects",
   description: "Selected enterprise AI, applied AI, and independent developer-product work by Shivam Maurya.",
 };
 
 const page = () => {
   return (
-    <div className="bg-[#EDEEEA]">
+    <div>
       <WorkSide />
     </div>
   )

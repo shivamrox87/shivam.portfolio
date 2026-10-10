@@ -46,9 +46,9 @@ export default async function WritingPage({ params }) {
   if (!article) notFound();
 
   return (
-    <main id="main-content">
+    <main id="main-content" className="reference-detail">
       <article className="mx-auto w-full max-w-[820px] px-5 py-12 md:px-8 md:py-20">
-        <Link href="/#writing" className="text-link">Back to home</Link>
+        <Link href="/writing" className="text-link">Back to writing</Link>
 
         <header className="mt-12 border-b border-[#C7C9C4] pb-12">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1F4FD8]">
@@ -105,7 +105,7 @@ export default async function WritingPage({ params }) {
         </div>
 
         <div className="mt-16 border-t border-[#C7C9C4] pt-8 text-sm text-[#6B7076]">
-          Written by Shivam Maurya. <Link href="/#writing" className="text-link">More writing</Link>
+          Written by Shivam Maurya. <Link href="/writing" className="text-link">More writing</Link>
         </div>
       </article>
     </main>

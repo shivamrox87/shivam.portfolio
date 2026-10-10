@@ -4,55 +4,32 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const navigation = [
-  { href: "/work", label: "Work" },
-  { href: "/about", label: "About" },
+const links = [
+  { href: "/work", label: "Projects" },
   { href: "/writing", label: "Writing" },
+  { href: "/about", label: "About" },
   { href: "/connect", label: "Contact" },
 ];
+const previousSite = "https://shivam-portfolio-git-main-shivam-mauryas-projects-8ee4e901.vercel.app/";
 
 export default function Header() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => setIsOpen(false), [pathname]);
-
+  const [open, setOpen] = useState(false);
+  useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
-    if (!isOpen) return undefined;
-    const closeOnEscape = (event) => {
-      if (event.key === "Escape") setIsOpen(false);
-    };
-    window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
-  }, [isOpen]);
-
-  if (pathname.startsWith("/writing/")) return null;
-
-  const isActive = (href) => pathname === href || pathname.startsWith(`${href}/`);
-  const isHome = pathname === "/";
-
-  return (
-    <header className={`sticky top-0 z-50 border-b backdrop-blur-xl ${isHome ? "fieldHeader" : "border-[#C7C9C4] bg-white/85"}`}>
-      <div className="site-shell flex h-[64px] items-center justify-between gap-6">
-        <Link href="/" className={isHome ? "font-serif text-2xl font-semibold tracking-[-0.05em]" : "text-[15px] font-semibold tracking-[-0.02em]"} aria-label="Shivam Maurya, home">{isHome ? "SM." : "Shivam Maurya"}</Link>
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary navigation">
-          {navigation.map((item) => (
-            <Link key={item.href} href={item.href} aria-current={isActive(item.href) ? "page" : undefined} className={`text-[13px] transition-colors hover:text-[#16181B] ${isActive(item.href) ? "font-semibold text-[#16181B]" : "text-[#6B7076]"}`}>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <button type="button" className="inline-flex h-10 items-center justify-center text-sm text-[#6B7076] md:hidden" onClick={() => setIsOpen((open) => !open)} aria-expanded={isOpen} aria-controls="mobile-navigation" aria-label={isOpen ? "Close navigation" : "Open navigation"}>
-          {isOpen ? "Close" : "Menu"}
-        </button>
-      </div>
-      {isOpen && (
-        <nav id="mobile-navigation" className="site-shell flex flex-col border-t border-[#C7C9C4] py-3 md:hidden" aria-label="Mobile navigation">
-          {navigation.map((item) => (
-              <Link key={item.href} href={item.href} aria-current={isActive(item.href) ? "page" : undefined} className="py-3 text-base text-[#6B7076]" onClick={() => setIsOpen(false)}>{item.label}</Link>
-          ))}
-        </nav>
-      )}
-    </header>
-  );
+    if (!open) return undefined;
+    const close = (event) => { if (event.key === "Escape") setOpen(false); };
+    document.addEventListener("keydown", close);
+    return () => document.removeEventListener("keydown", close);
+  }, [open]);
+  const active = (href) => pathname === href || pathname.startsWith(`${href}/`);
+  return <header className="portfolio-header on-light">
+    <div className="portfolio-width header-inner">
+      <Link href="/" className="header-brand" aria-label="Shivam Maurya, home">Shivam Maurya</Link>
+      <nav className="header-links" aria-label="Primary navigation">{links.map(link => <Link href={link.href} key={link.href} aria-current={active(link.href) ? "page" : undefined}>{link.label}</Link>)}</nav>
+      <a href={previousSite} className="header-previous" target="_blank" rel="noopener noreferrer" aria-label="Legacy portfolio, opens in a new tab">Legacy <span aria-hidden="true">↗</span></a>
+      <button type="button" className="header-menu-button" aria-expanded={open} aria-controls="portfolio-mobile-nav" onClick={() => setOpen(!open)}>{open ? "Close" : "Menu"}</button>
+    </div>
+    {open && <nav id="portfolio-mobile-nav" className="portfolio-width mobile-nav" aria-label="Mobile navigation">{links.map(link => <Link href={link.href} key={link.href} onClick={() => setOpen(false)}>{link.label}</Link>)}<a href={previousSite} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>Legacy <span aria-hidden="true">↗</span></a></nav>}
+  </header>;
 }

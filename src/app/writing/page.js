@@ -3,51 +3,22 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Writing",
-  description: "Practical writing on AI engineering, developer tools, and building useful products.",
+  description: "Notes on AI engineering, developer tools, and building useful products.",
 };
 
 export default function WritingPage() {
-  // Section names are derived from the tags the posts actually carry, with the
-  // infrastructure series pinned first. Deriving them means a post can never be
-  // filed under a heading that misdescribes it, and a new tag appears on its own.
-  const tags = [...new Set(blogs.map((post) => post.postedAt))];
-  const orderedTags = ["AI Infrastructure", ...tags.filter((tag) => tag !== "AI Infrastructure")];
-  const series = orderedTags
-    .map((tag) => ({ title: tag, posts: blogs.filter((post) => post.postedAt === tag) }))
-    .filter((group) => group.posts.length > 0);
-
-  return (
-    <main id="main-content">
-      <section className="mx-auto w-full max-w-[820px] px-5 pb-16 pt-24 md:px-8 md:pb-24 md:pt-32">
-        <p className="eyebrow">Runbooks</p>
-        <h1 className="mt-4 font-serif text-4xl font-normal leading-tight tracking-[-0.02em] md:text-5xl">
-          Things I&apos;ve written about
-        </h1>
-        <p className="mt-5 body-copy">
-          I write when I have something practical to share, usually from the overlap of AI
-          engineering, developer tools, and trying to make a product useful.
-        </p>
-        <p className="mt-5 max-w-[650px] text-sm leading-7 text-[#6B7076]">
-          {blogs.length} essays. Most follow a thesis pattern — the consistent shape is the
-          series identity, not a template. The exceptions are where the story is.
-        </p>
-
-        {series.map((group) => (
-          <section key={group.title} className="mt-14 border-t border-[#C7C9C4] pt-8">
-            <h2 className="font-serif text-3xl">{group.title}</h2>
-            <div className="mt-8 space-y-7">
-              {group.posts.map((post) => (
-                <article key={post.slug}>
-                  <Link href={`/writing/${post.slug}`} className="group">
-                    <h3 className="font-serif text-2xl leading-tight transition-colors group-hover:text-[#1F4FD8]">{post.blogHeading}</h3>
-                  </Link>
-                  <p className="mt-2 text-sm text-[#6B7076]">{post.postedOn}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-        ))}
-      </section>
-    </main>
-  );
+  const groups = blogs.reduce((result, post) => {
+    const year = post.postedOn.match(/20\d{2}/)?.[0] || "Earlier";
+    (result[year] ||= []).push(post);
+    return result;
+  }, {});
+  const years = Object.keys(groups).sort((a, b) => Number(b) - Number(a));
+  return <main id="main-content" className="reference-page reference-shell">
+    <h1>Writing</h1>
+    <p className="reference-page-lead">Notes on AI systems, product work, and what I learn along the way.</p>
+    {years.map((year) => <section className="reference-writing-group" key={year} aria-label={`Writing from ${year}`}>
+      <h2>{year}</h2>
+      <ul>{groups[year].map((post) => <li key={post.slug}><Link href={`/writing/${post.slug}`}>{post.blogHeading}</Link><time>{post.postedOn.replace(/,?\s*20\d{2}/, "")}</time></li>)}</ul>
+    </section>)}
+  </main>;
 }
