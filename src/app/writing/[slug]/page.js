@@ -46,7 +46,7 @@ export default async function WritingPage({ params }) {
   if (!article) notFound();
 
   return (
-    <main id="main-content" className="reference-detail">
+    <main id="main-content" className="reference-detail writing-detail">
       <article className="mx-auto w-full max-w-[820px] px-5 py-12 md:px-8 md:py-20">
         <Link href="/writing" className="text-link">Back to writing</Link>
 
