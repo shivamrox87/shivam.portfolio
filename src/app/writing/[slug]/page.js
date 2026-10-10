@@ -47,7 +47,7 @@ export default async function WritingPage({ params }) {
 
   return (
     <main id="main-content" className="reference-detail writing-detail">
-      <article className="mx-auto w-full max-w-[820px] px-5 py-12 md:px-8 md:py-20">
+      <article className="mx-auto w-full max-w-[900px] px-5 py-12 md:px-8 md:py-20">
         <Link href="/writing" className="text-link">Back to writing</Link>
 
         <header className="mt-12 border-b border-[#C7C9C4] pb-12">
@@ -57,7 +57,7 @@ export default async function WritingPage({ params }) {
           <h1 className="mt-5 font-serif text-5xl leading-[1.03] tracking-[-0.03em] md:text-7xl">
             {article.blogHeading}
           </h1>
-          <p className="mt-8 max-w-[680px] font-serif text-2xl leading-[1.5] text-[#302f2b] md:text-3xl">
+          <p className="mt-8 max-w-[820px] font-serif text-2xl leading-[1.5] text-[#302f2b] md:text-3xl">
             {article.content}
             {article.contentLink ? (
               <Link href={article.contentLink.href} className="text-link align-baseline text-2xl md:text-3xl">
@@ -69,7 +69,7 @@ export default async function WritingPage({ params }) {
         </header>
 
         {article.prompt ? (
-          <section className="mt-12 max-w-[720px] md:mt-16">
+          <section className="mt-12 max-w-[820px] md:mt-16">
             <h2 className="font-serif text-3xl leading-tight md:text-4xl">Prompt</h2>
             <pre className="mt-5 overflow-x-auto whitespace-pre-wrap border border-[#C7C9C4] bg-[#f3f0e9] p-5 font-mono text-sm leading-7 text-[#302f2b] md:p-7">
               {article.prompt}
@@ -77,7 +77,7 @@ export default async function WritingPage({ params }) {
           </section>
         ) : null}
 
-        <div className="mt-12 max-w-[720px] space-y-12 md:mt-16 md:space-y-16">
+        <div className="mt-12 max-w-[820px] space-y-12 md:mt-16 md:space-y-16">
           {article.sections.map((section) => (
             <section key={section.heading}>
               <h2 className="font-serif text-3xl leading-tight md:text-4xl">{section.heading}</h2>

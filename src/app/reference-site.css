@@ -115,6 +115,7 @@ body { background:var(--reference-paper) !important; }
 .portfolio-site .minimal-detail summary { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:14px; font-weight:400; letter-spacing:0; }
 .portfolio-site .minimal-detail-plus { border:0; }
 .reference-detail > article { width:min(calc(100% - 112px),720px); max-width:720px; margin:0 0 0 56px; padding:20px 0 70px; }
+.writing-detail > article { width:min(calc(100% - 112px),900px); max-width:900px; }
 .reference-detail article h1 { font-family:Georgia,'Times New Roman',serif; font-size:clamp(34px,4vw,52px); font-weight:400; letter-spacing:-.045em; line-height:1.15; }
 .reference-detail article h2 { font-family:Georgia,'Times New Roman',serif; font-size:28px; font-weight:400; letter-spacing:-.035em; }
 .reference-detail article header > p:first-child { color:var(--reference-muted); font-size:11px; letter-spacing:0; text-transform:none; }
