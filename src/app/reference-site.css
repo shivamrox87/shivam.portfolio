@@ -5,7 +5,7 @@ body { background:var(--reference-paper) !important; }
 .portfolio-site > main { min-height:calc(100vh - 113px); }
 .margin-artwork { display:none; }
 .writing-artwork-edge { position:fixed; top:113px; right:0; bottom:0; z-index:21; width:44px; padding:0; border:0; background:none; opacity:1; transition:opacity .6s ease; cursor:pointer; }
-.writing-artwork-edge::before { content:""; position:absolute; top:0; right:0; bottom:0; width:clamp(80px,10vw,140px); background:linear-gradient(to right,transparent,rgba(93,68,50,.025) 35%,rgba(93,68,50,.12)); pointer-events:none; }
+.writing-artwork-edge::before { content:""; position:absolute; top:0; right:0; bottom:0; width:clamp(110px,14vw,190px); background:linear-gradient(to right,transparent 0%,rgba(93,68,50,.025) 30%,rgba(93,68,50,.09) 68%,rgba(93,68,50,.21) 100%); pointer-events:none; }
 .writing-artwork-edge:focus-visible { outline:2px solid var(--reference-ink); outline-offset:-4px; }
 .writing-artwork-edge.is-hidden { opacity:0; pointer-events:none; }
 .writing-artwork-panel { position:fixed; top:113px; right:0; bottom:0; z-index:20; display:flex; align-items:center; justify-content:center; width:50vw; opacity:0; visibility:hidden; pointer-events:none; transform:translateX(100%); transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1),visibility .8s; }
@@ -153,7 +153,7 @@ body { background:var(--reference-paper) !important; }
   .reference-detail > article { width:calc(100% - 40px); margin-left:20px; padding-top:25px; }
   .writing-artwork-panel { top:88px; }
   .writing-artwork-edge { top:88px; width:24px; }
-  .writing-artwork-edge::before { width:56px; background:linear-gradient(to right,transparent,rgba(93,68,50,.08)); }
+  .writing-artwork-edge::before { width:72px; background:linear-gradient(to right,transparent,rgba(93,68,50,.13)); }
   .writing-artwork-open .writing-detail > article { width:calc(50vw - 28px); max-width:calc(50vw - 28px); margin-left:14px; }
   .writing-artwork-open .writing-detail article h1 { font-size:clamp(21px,5vw,32px); }
   .writing-artwork-open .writing-detail article h2 { font-size:clamp(18px,4vw,24px); }
