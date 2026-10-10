@@ -1,8 +1,8 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
-export async function getSocialPreviewArtwork() {
-  const artwork = await readFile(path.join(process.cwd(), "public", "social-preview-art.png"));
+export async function getSocialPreviewArtwork(filename = "social-preview-art.png") {
+  const artwork = await readFile(path.join(process.cwd(), "public", filename));
   return `data:image/png;base64,${artwork.toString("base64")}`;
 }
 

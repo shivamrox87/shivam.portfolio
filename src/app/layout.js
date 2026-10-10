@@ -34,7 +34,7 @@ export const metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Engraved astrolabe artwork for AI systems and developer tools",
+        alt: "Copper engraving of an Indian stepwell, books, armillary, and pavilion",
       },
     ],
   },
