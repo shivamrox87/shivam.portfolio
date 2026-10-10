@@ -107,12 +107,15 @@ body { background:var(--reference-paper) !important; }
 .portfolio-site .minimal-detail summary { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:14px; font-weight:400; letter-spacing:0; }
 .portfolio-site .minimal-detail-plus { border:0; }
 .reference-detail > article { width:min(calc(100% - 112px),720px); max-width:720px; margin:0 0 0 56px; padding:20px 0 70px; }
-.writing-detail > article { width:min(calc(100% - 112px),900px); max-width:900px; }
+.writing-detail > article { width:min(calc(100% - 112px),900px); max-width:900px; font-family:-apple-system,system-ui,"Segoe UI",sans-serif; }
 .reference-detail article h1 { font-family:Georgia,'Times New Roman',serif; font-size:clamp(34px,4vw,52px); font-weight:400; letter-spacing:-.045em; line-height:1.15; }
 .reference-detail article h2 { font-family:Georgia,'Times New Roman',serif; font-size:28px; font-weight:400; letter-spacing:-.035em; }
 .reference-detail article header > p:first-child { color:var(--reference-muted); font-size:11px; letter-spacing:0; text-transform:none; }
 .reference-detail article header > p:last-of-type { font-family:ui-monospace,SFMono-Regular,Menlo,monospace !important; font-size:14px; line-height:1.7; color:var(--reference-muted); }
 .reference-detail article section p { font-size:13px; line-height:1.8; }
+.writing-detail article h1 { font-size:40px; line-height:1.18; }
+.writing-detail article header > p:first-child,.writing-detail article > a { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+.writing-detail article section p { font-size:17px; line-height:1.8; }
 .reference-detail .eyebrow { text-transform:none; }
 .reference-detail .text-link { color:var(--reference-ink); }
 .reference-detail .page-section { padding-top:20px; padding-bottom:65px; }
@@ -139,6 +142,7 @@ body { background:var(--reference-paper) !important; }
   .reference-page { padding-top:25px; }
   .reference-page h1 { font-size:32px; }
   .reference-detail > article { width:calc(100% - 40px); margin-left:20px; padding-top:25px; }
+  .writing-detail article h1 { font-size:34px; }
   .writing-inline-artwork { width:min(100%,340px); margin-top:32px; }
   .reference-writing-group { grid-template-columns:56px 1fr; }
   .reference-about-section { grid-template-columns:1fr; gap:12px; margin-top:50px; }
