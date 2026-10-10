@@ -8,7 +8,7 @@ export const metadata = {
 const page = () => {
 
   return (
-    <div className="min-h-screen bg-[#fbfaf7]">
+    <div>
       <AboutSide />
     </div>
   )

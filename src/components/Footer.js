@@ -1,18 +1,19 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
-  return (
-    <footer className="border-t border-[#d8d5cc] bg-[#fbfaf7] py-10">
-      <div className="site-shell flex flex-col gap-8 text-sm text-[#68675f] md:flex-row md:items-end md:justify-between">
-        <Link href="/" className="font-serif text-2xl text-[#171714]">Shivam Maurya</Link>
-        <div className="flex flex-wrap gap-x-6 gap-y-3">
-          <a href="mailto:connect@shivammaurya.com" className="hover:text-[#b84a2b]">Email</a>
-          <a href="https://www.linkedin.com/in/shivam--maurya" target="_blank" rel="noreferrer" className="hover:text-[#b84a2b]">LinkedIn</a>
-          <a href="https://x.com/_shivammaurya__" target="_blank" rel="noreferrer" className="hover:text-[#b84a2b]">X</a>
-          <a href="https://medium.com/@shivam--maurya" target="_blank" rel="noreferrer" className="hover:text-[#b84a2b]">Medium</a>
-        </div>
-        <p>© {new Date().getFullYear()} Shivam Maurya</p>
-      </div>
-    </footer>
-  );
+  return <footer className="portfolio-footer">
+    <div className="portfolio-width reference-footer-inner">
+      <nav aria-label="Footer navigation">
+        <Link href="/sessions">Speaking &amp; teaching</Link>
+        <a href="https://x.com/_shivammaurya__" target="_blank" rel="noreferrer">X / Twitter</a>
+        <a href="https://www.linkedin.com/in/shivam--maurya" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://medium.com/@shivam--maurya" target="_blank" rel="noreferrer">Medium</a>
+        <a href="mailto:connect@shivammaurya.com">Email ↗</a>
+      </nav>
+    </div>
+    <div className="footer-panorama" aria-hidden="true">
+      <Image src="/engraving-india-footer.png" alt="" width={2172} height={724} sizes="100vw" />
+    </div>
+  </footer>;
 }

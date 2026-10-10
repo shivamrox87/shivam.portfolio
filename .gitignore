@@ -42,3 +42,9 @@ next-env.d.ts
 
 # Cache directories
 public/cache/
+
+# SDD plan workspaces (scratch: ledgers, briefs, review packages)
+.superpowers/
+
+# Claude Code local config (dev-server helpers etc.)
+.claude/

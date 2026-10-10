@@ -2,26 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Cool paper rather than warm cream, and a pen-blue signal rather than a
+   terracotta accent. Warm cream + high-contrast serif + terracotta is the
+   cluster generated pages land in by default; this is a document, and the
+   blue is the colour of a mark someone made on it by hand. */
 :root {
-  --paper: #fbfaf7;
-  --ink: #171714;
-  --muted: #68675f;
-  --line: #d8d5cc;
-  --accent: #b84a2b;
+  --paper: #EDEEEA;
+  --ink: #16181B;
+  --body: #3A3F45;
+  --muted: #6B7076;
+  --line: #C7C9C4;
+  --signal: #1F4FD8;
+  --struck: #B3261E;
 }
 
 html { scroll-behavior: smooth; }
 body { background: var(--paper); color: var(--ink); }
-::selection { background: #e8c9bc; color: var(--ink); }
+::selection { background: #c9d4f5; color: var(--ink); }
 
 @layer components {
   .site-shell { @apply mx-auto w-full max-w-[1120px] px-5 md:px-8; }
   .page-section { @apply py-16 md:py-24; }
-  .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.2em] text-[#b84a2b]; }
+
+  /* A heading does not need a label above it announcing that it is a heading.
+     This was a tracked-out all-caps eyebrow on every section of every page,
+     which is one of the commonest generated-design tells. It is now a plain
+     sentence-case qualifier — which is what those labels were actually for. */
+  .eyebrow { @apply text-[13px] leading-6 text-[#6B7076]; }
+
   .display-title { @apply font-serif text-5xl font-normal leading-[0.98] tracking-[-0.025em] md:text-7xl; }
   .section-title { @apply font-serif text-4xl font-normal leading-[1.05] tracking-[-0.02em] md:text-5xl; }
-  .body-copy { @apply text-base leading-8 text-[#4f4e48] md:text-[17px]; }
-  .text-link { @apply inline-flex border-b border-[#171714] pb-0.5 text-sm font-semibold transition-colors hover:border-[#b84a2b] hover:text-[#b84a2b]; }
+  .body-copy { @apply text-base leading-8 text-[#3A3F45] md:text-[17px]; }
+  .text-link { @apply inline-flex border-b border-[#16181B] pb-0.5 text-sm font-semibold transition-colors hover:border-[#1F4FD8] hover:text-[#1F4FD8]; }
+  .fieldHeader { @apply border-[#C7C9C4] bg-[#EDEEEA]/95; }
+
+  /* The one loud element on the page. Everything else stays quiet around it. */
+  .struck {
+    @apply font-serif line-through;
+    color: #B3261E;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.08em;
+  }
+
+  /* Status lamps carry real state, so they stay — but they are indicators,
+     not decoration, and the pulse is suppressed for reduced motion. */
+  .led { @apply inline-block h-[8px] w-[8px] shrink-0 rounded-full; }
+  .led-live { background: #2f7d4f; box-shadow: 0 0 0 0 rgba(47, 125, 79, .6); animation: ledPulse 2.4s infinite; }
+  .led-dead { background: #B3261E; }
+
+  @keyframes ledPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(47, 125, 79, .55); }
+    70%  { box-shadow: 0 0 0 7px rgba(47, 125, 79, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(47, 125, 79, 0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .led-live { animation: none; }
+  }
 }
 
 .custom-scrollbar {
@@ -49,7 +86,7 @@ body { background: var(--paper); color: var(--ink); }
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -57,3 +94,8 @@ body { background: var(--paper); color: var(--ink); }
     overflow: hidden;
   }
 }
+
+@font-face {font-family:'Satoshi';src:url('/fonts/satoshi-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face {font-family:'Satoshi';src:url('/fonts/satoshi-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;}
+@font-face {font-family:'Satoshi';src:url('/fonts/satoshi-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+@font-face {font-family:'Satoshi';src:url('/fonts/satoshi-900.woff2') format('woff2');font-weight:900;font-style:normal;font-display:swap;}

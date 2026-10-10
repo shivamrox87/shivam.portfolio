@@ -1,4 +1,5 @@
 import { blogs } from "@/server/data";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -46,18 +47,18 @@ export default async function WritingPage({ params }) {
   if (!article) notFound();
 
   return (
-    <main id="main-content">
-      <article className="mx-auto w-full max-w-[820px] px-5 py-12 md:px-8 md:py-20">
-        <Link href="/#writing" className="text-link">Back to home</Link>
+    <main id="main-content" className="reference-detail writing-detail">
+      <article className="mx-auto w-full max-w-[900px] px-5 py-12 md:px-8 md:py-20">
+        <Link href="/writing" className="text-link">Back to writing</Link>
 
-        <header className="mt-12 border-b border-[#d8d5cc] pb-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#b84a2b]">
+        <header className="mt-12 border-b border-[#C7C9C4] pb-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1F4FD8]">
             {article.postedAt} · {article.postedOn}
           </p>
           <h1 className="mt-5 font-serif text-5xl leading-[1.03] tracking-[-0.03em] md:text-7xl">
             {article.blogHeading}
           </h1>
-          <p className="mt-8 max-w-[680px] font-serif text-2xl leading-[1.5] text-[#302f2b] md:text-3xl">
+          <p className="mt-8 max-w-[820px] font-serif text-2xl leading-[1.5] text-[#302f2b] md:text-3xl">
             {article.content}
             {article.contentLink ? (
               <Link href={article.contentLink.href} className="text-link align-baseline text-2xl md:text-3xl">
@@ -66,22 +67,31 @@ export default async function WritingPage({ params }) {
             ) : null}
             {article.contentAfter}
           </p>
+          <Image
+            src={`/writing-artwork/${article.slug}-light.webp`}
+            alt={`Illustration for ${article.blogHeading}`}
+            width={1024}
+            height={1536}
+            sizes="(max-width: 760px) min(100vw - 40px, 340px), 420px"
+            className="writing-inline-artwork"
+            priority
+          />
         </header>
 
         {article.prompt ? (
-          <section className="mt-12 md:mt-16">
+          <section className="mt-12 max-w-[820px] md:mt-16">
             <h2 className="font-serif text-3xl leading-tight md:text-4xl">Prompt</h2>
-            <pre className="mt-5 overflow-x-auto whitespace-pre-wrap border border-[#d8d5cc] bg-[#f3f0e9] p-5 font-mono text-sm leading-7 text-[#302f2b] md:p-7">
+            <pre className="mt-5 overflow-x-auto whitespace-pre-wrap border border-[#C7C9C4] bg-[#f3f0e9] p-5 font-mono text-sm leading-7 text-[#302f2b] md:p-7">
               {article.prompt}
             </pre>
           </section>
         ) : null}
 
-        <div className="mt-12 space-y-12 md:mt-16 md:space-y-16">
+        <div className="mt-12 max-w-[820px] space-y-12 md:mt-16 md:space-y-16">
           {article.sections.map((section) => (
             <section key={section.heading}>
               <h2 className="font-serif text-3xl leading-tight md:text-4xl">{section.heading}</h2>
-              <div className="mt-5 space-y-5 text-base leading-8 text-[#4f4e48] md:text-lg">
+              <div className="mt-5 space-y-5 text-base leading-8 text-[#3A3F45] md:text-lg">
                 {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                 {section.sources?.length ? (
                   <ul className="space-y-2 pt-1 text-sm leading-6">
@@ -104,8 +114,8 @@ export default async function WritingPage({ params }) {
           ))}
         </div>
 
-        <div className="mt-16 border-t border-[#d8d5cc] pt-8 text-sm text-[#68675f]">
-          Written by Shivam Maurya. <Link href="/#writing" className="text-link">More writing</Link>
+        <div className="mt-16 border-t border-[#C7C9C4] pt-8 text-sm text-[#6B7076]">
+          Written by Shivam Maurya. <Link href="/writing" className="text-link">More writing</Link>
         </div>
       </article>
     </main>

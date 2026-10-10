@@ -1,6 +1,8 @@
 import "./globals.css";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import "./portfolio-site.css";
+import "./editorial-home.css";
+import "./reference-site.css";
+import SiteFrame from "@/components/SiteFrame";
 import { Manrope, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -22,9 +24,9 @@ export const metadata = {
   },
   description: "Shivam Maurya builds production AI systems across enterprise infrastructure, applied AI products, and developer workflows.",
   openGraph: {
-    title: "Shivam Maurya | AI Systems and Developer Tools",
+    title: "AI systems for real work",
     description: "AI systems, developer tools, and practical learning by Shivam Maurya.",
-    siteName: "Shivam Maurya",
+    siteName: "AI systems · developer tools",
     type: "website",
     url: "/",
     images: [
@@ -32,13 +34,13 @@ export const metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Shivam Maurya - AI systems, developer tools, and practical learning",
+        alt: "Copper engraving of an Indian stepwell, books, armillary, and pavilion",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shivam Maurya | AI Systems and Developer Tools",
+    title: "AI systems for real work",
     description: "AI systems, developer tools, and practical learning by Shivam Maurya.",
     images: ["/opengraph-image"],
   },
@@ -53,13 +55,11 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${newsreader.variable} bg-[#fbfaf7] font-sans text-[#171714] antialiased`}>
-        <a href="#main-content" className="sr-only z-[100] bg-[#171714] px-4 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
+      <body className={`${manrope.variable} ${newsreader.variable} bg-[#EDEEEA] font-sans text-[#16181B] antialiased`}>
+        <a href="#main-content" className="sr-only z-[100] bg-[#16181B] px-4 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           Skip to content
         </a>
-        <Header />
-        {children}
-        <Footer />
+        <SiteFrame>{children}</SiteFrame>
         <Analytics />
       </body>
     </html>

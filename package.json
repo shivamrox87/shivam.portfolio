@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check:home": "node --test scripts/check-home.mjs",
+    "x:import": "node scripts/import-x-archive.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^1.4.1",

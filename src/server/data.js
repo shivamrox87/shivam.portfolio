@@ -16,11 +16,50 @@ export const heroMetrics = [
   },
 ];
 
-export const builderPrinciples = [
-  "AI should reduce friction, not add novelty for its own sake.",
-  "The fastest way to credibility is shipping useful systems in public.",
-  "Developer experience is part of the product, not an afterthought.",
-  "Simple workflows win when they survive real usage and real constraints.",
+// The seven invariants, each carrying where it was actually learned. This
+// replaces an unattributed four-line list that nothing rendered; the same array
+// now drives both the About page and the console's invariants section.
+export const invariants = [
+  {
+    title: "Production before demos",
+    detail:
+      "A model response is only one part of a system. Identity, permissions, failure handling, cost, evaluation, and operations determine whether it is useful.",
+    learned: "Enterprise AI delivery",
+  },
+  {
+    title: "Evidence over vibes",
+    detail:
+      "You cannot improve what you do not measure, and you cannot measure what you never defined. The definition of good has to exist before the output does.",
+    learned: "The work journal, and the essay that came out of it",
+  },
+  {
+    title: "Own the whole system",
+    detail:
+      "The strongest solutions connect product intent, AI behaviour, backend services, cloud infrastructure, and the user workflow.",
+    learned: "The document agent, end to end",
+  },
+  {
+    title: "Curation over accumulation",
+    detail:
+      "Fewer inputs, deeper processing. Automation should serve judgement, not replace it.",
+    learned: "Replacing a twenty-feed firehose with a curated desk",
+  },
+  {
+    title: "Know your data before you generate",
+    detail:
+      "Generation quality is decided upstream of the model. Audit the source before you tune the prompt.",
+    learned: "The 14,000-row question-bank audit",
+  },
+  {
+    title: "Sunset without sentiment",
+    detail: "Killing a product on purpose is a skill, not a failure.",
+    learned: "ReqBeam and Boansel, September 2026",
+  },
+  {
+    title: "Explain like a teacher",
+    detail: "If a system cannot be explained, it cannot be trusted.",
+    learned: "Three years of teaching across India and Ghana",
+  },
 ];
 
 export const featuredWork = [
@@ -36,7 +75,7 @@ export const featuredWork = [
   {
     name: "ExplainGitHub",
     context: "Independent developer tool",
-    status: "In development",
+    status: "In development — first paying users",
     description:
       "An AI repository intelligence platform for understanding unfamiliar codebases, architecture, and implementation decisions.",
     scope: ["Repository ingestion", "Codebase Q&A", "Developer UX"],
@@ -45,9 +84,9 @@ export const featuredWork = [
   {
     name: "ReqBeam",
     context: "Independent developer product",
-    status: "Active exploration",
+    status: "Sunset",
     description:
-      "An AI-native workspace for understanding, testing, documenting, and debugging APIs.",
+      "AI-assisted API workspace — sunset in September 2026 to focus on ExplainGitHub.",
     scope: ["API testing", "Response analysis", "Agent workflows"],
     href: "/work/reqbeam",
   },
@@ -57,17 +96,17 @@ export const currentBuilds = [
   {
     name: "Personal AI Systems Lab",
     slug: "personal-ai-systems-lab",
-    stage: "Ongoing experimentation",
+    stage: "Exploration",
     summary:
       "A practical personal AI environment for testing persistent agents, multi-model workflows, local inference, model routing, and coding delegation across local and cloud systems.",
     focus: ["Persistent agents", "Local models", "Model routing", "Developer workflows"],
     statusNote: "Active hands-on research and infrastructure experimentation.",
-    accent: "from-[#18181b] via-[#3f3f46] to-[#b84a2b]",
+    accent: "from-[#18181b] via-[#3f3f46] to-[#1F4FD8]",
   },
   {
     name: "ExplainGitHub",
     slug: "explaingithub",
-    stage: "In development",
+    stage: "In development — first paying users",
     summary:
       "Repository understanding with AI, designed to help developers move from unfamiliar codebases to useful context faster.",
     focus: ["Repository intelligence", "LLM workflows", "Developer UX"],
@@ -77,9 +116,9 @@ export const currentBuilds = [
   {
     name: "ReqBeam",
     slug: "reqbeam",
-    stage: "Exploration",
+    stage: "Sunset",
     summary:
-      "An API collaboration and workflow product aimed at making requirements, requests, and iteration loops easier to manage.",
+      "AI-assisted API workspace — sunset in September 2026 to focus on ExplainGitHub.",
     focus: ["Product workflows", "Collaboration", "Backend systems"],
     statusNote: "Early product and workflow exploration.",
     accent: "from-[#0d0d0d] via-[#1d3557] to-[#457b9d]",
@@ -87,17 +126,17 @@ export const currentBuilds = [
   {
     name: "OpenWebUI AI Operating System",
     slug: "openwebui-operating-system",
-    stage: "Ongoing internal tooling",
+    stage: "In development",
     summary:
       "Custom tools and knowledge workflows for organising conversations, analysing recent work, managing Markdown knowledge, and producing recurring task summaries.",
     focus: ["OpenWebUI", "Custom tools", "Knowledge workflows"],
     statusNote: "Active platform and workflow experimentation.",
-    accent: "from-[#1f2937] via-[#374151] to-[#b84a2b]",
+    accent: "from-[#1f2937] via-[#374151] to-[#1F4FD8]",
   },
   {
     name: "RepoFlicks",
     slug: "repoflicks",
-    stage: "Shipped product",
+    stage: "Shipped",
     summary:
       "A social-feed-style product for discovering open-source repositories, built and deployed with production and development environments.",
     focus: ["Open-source discovery", "Next.js", "Cloud Run"],
@@ -107,9 +146,9 @@ export const currentBuilds = [
   {
     name: "Boansel",
     slug: "boansel",
-    stage: "Operating product",
+    stage: "Sunset",
     summary:
-      "A booking and payments platform direction that broadens the portfolio beyond AI-native internal tooling.",
+      "A booking and payments platform sunset in September 2026 to focus on ExplainGitHub.",
     focus: ["Transactions", "Operations", "Product execution"],
     statusNote: "Booking and payments product work.",
     accent: "from-[#1b4332] via-[#2d6a4f] to-[#40916c]",
@@ -120,20 +159,25 @@ export const caseStudies = [
   {
     id: "cs-00",
     slug: "enterprise-ai",
-    heading: "Enterprise AI Product and Platform Delivery",
+    heading: "Enterprise AI at AlphaFMC",
     category: "Enterprise AI",
     status: "Professional work",
     date: "2024 - Present",
     subHeading:
-      "Senior AI engineering across internal product delivery, shared platforms, and production operations for financial-services environments at AlphaFMC.",
+      "I build internal AI tools for financial-services teams and the shared services that make those tools secure and maintainable.",
     summary:
-      "A public, non-confidential view of hands-on work delivering internal AI experiences and the shared foundations that make them secure, usable, and operable for enterprise teams.",
+      "As a Senior AI Engineer, I work across product workflows, model access, identity, evaluation, and cloud delivery. One document agent produces a first draft in minutes, with expert review taking it to final in hours instead of the previous 4–6 week manual turnaround.",
     problem:
-      "Enterprise teams need useful AI products as well as dependable model access. Without shared foundations, each new workflow recreates authentication, provider integration, evaluation, routing, deployment, and operational support from scratch.",
+      "Teams needed AI tools for real work, including proposal and statement-of-work drafting. Building each tool separately would repeat the same work on authentication, model access, evaluation, deployment, and support.",
     solution:
-      "Build internal AI product experiences on top of shared capabilities for model access, identity, routing, evaluation, observability, storage integrations, and repeatable cloud delivery using established enterprise controls.",
+      "I helped deliver internal products on shared services for identity, model routing, evaluation, storage integration, and cloud releases. For the document agent, I also audited a 14,000-row question bank before generation and defined a five-part expert evaluation scorecard.",
     outcome:
-      "Delivered and improved internal AI capabilities while strengthening reusable platform foundations, so product teams can focus on useful workflows without duplicating core access, reliability, and operational concerns.",
+      "Manual document turnaround previously took 4–6 weeks. The agent produces a first draft in minutes, and experts refine it to final in hours. Shared services also give new AI workflows a foundation for access, reliability, and operations.",
+    metrics: [
+      { value: "4–6 weeks → hours", label: "Document turnaround. The agent drafts in minutes; experts review and finish the work in hours." },
+      { value: "14,000 rows", label: "Audited before generation; about 3% were flagged as low quality." },
+      { value: "5 criteria", label: "An expert scorecard checks coverage, question quality, metadata, factual accuracy, and format." },
+    ],
     role: "Senior AI Engineer",
     stack: ["Azure OpenAI", "Claude", "Gemini", "AWS Bedrock", "LiteLLM", "OpenWebUI"],
     responsibilities: [
@@ -226,18 +270,18 @@ export const caseStudies = [
     slug: "explaingithub",
     heading: "ExplainGitHub",
     category: "Developer AI",
-    status: "In development",
+    status: "In development — first paying users",
     date: "Current",
     subHeading:
-      "Repository understanding using AI so engineers can move from raw code to useful product and architecture context faster.",
+      "I founded ExplainGitHub to help developers understand unfamiliar codebases without piecing the architecture together file by file.",
     summary:
-      "An independent developer tool exploring how repository context can make unfamiliar codebases easier to navigate and understand.",
+      "ExplainGitHub turns repository structure and source files into explanations developers can navigate and question. It is in active development and has its first paying users.",
     problem:
-      "Developers waste time understanding unfamiliar repositories, tracing system intent, and reconstructing architecture from scattered files and conventions.",
+      "When joining a project or opening a new repository, developers have to trace behavior across many files before they can make a confident change.",
     solution:
-      "Build a repository intelligence workflow that turns source code into navigable explanations, product context, and actionable summaries.",
+      "I built workflows for GitHub authentication, repository ingestion, multi-file questions, and source-aware explanations. The product builds context in stages so answers stay tied to relevant code paths.",
     outcome:
-      "The current work is focused on context quality, traceability, and the developer experience around generated repository explanations.",
+      "The product has its first paying users. Current development focuses on the accuracy and traceability of explanations, especially for larger repositories.",
     role: "Founder, product builder, and AI engineer",
     stack: ["GitHub OAuth", "Repository ingestion", "LLM orchestration", "Backend workflows", "Product UX"],
     responsibilities: [
@@ -290,18 +334,18 @@ export const caseStudies = [
     slug: "reqbeam",
     heading: "ReqBeam",
     category: "Workflow Product",
-    status: "Active exploration",
-    date: "Evolving product",
+    status: "Sunset",
+    date: "September 2026",
     subHeading:
       "An AI-native workspace for understanding, testing, documenting, and debugging APIs.",
     summary:
-      "An evolving developer product combining API understanding, request creation, test generation, response analysis, and collaboration workflows.",
+      "An AI-assisted API workspace sunset in September 2026 to focus on ExplainGitHub.",
     problem:
       "Requirements, API iterations, and product feedback loops often break down across tools, threads, and handoffs.",
     solution:
       "Design an AI-assisted API workspace that can understand an endpoint, help create requests, generate tests, analyse responses, and preserve debugging context.",
     outcome:
-      "The exploration is testing whether clearer state, ownership, and shared context can reduce ambiguity across product and engineering handoffs.",
+      "The product was sunset in September 2026 so I could focus on ExplainGitHub. The work clarified how much API debugging depends on visible state, ownership, and shared context.",
     role: "Product builder and technical lead",
     stack: ["Next.js", "Backend APIs", "AI test generation", "Response analysis", "Product systems"],
     responsibilities: [
@@ -351,18 +395,18 @@ export const caseStudies = [
     slug: "repoflicks",
     heading: "RepoFlicks",
     category: "Developer Product",
-    status: "Shipped product",
+    status: "Shipped",
     date: "Launched",
     subHeading:
-      "A social-feed-style product for discovering open-source repositories and exploring what makes them useful.",
+      "I built and launched a visual feed for discovering open-source repositories, from the first product flow through production deployment.",
     summary:
-      "A founder-led product taken through authentication, application development, cloud deployment, environment separation, launch, and early growth experiments.",
+      "RepoFlicks is a shipped repository-discovery product. I owned the design, GitHub sign-in, onboarding, application build, deployment, and early growth experiments.",
     problem:
-      "Open-source discovery is often driven by search results and static lists, making it difficult to browse interesting repositories in a lightweight, visual way.",
+      "Search results and static lists make it hard to browse unfamiliar open-source projects and decide which ones are worth exploring.",
     solution:
-      "Build a feed-based repository discovery experience with GitHub authentication, structured repository data, media handling, onboarding, and production deployment.",
+      "I built a feed-based experience with GitHub sign-in, structured repository data, media handling, and onboarding, then deployed it with separate development and production environments.",
     outcome:
-      "Launched a working product with separate development and production environments, then used it to learn about onboarding, acquisition, analytics, deployment operations, and infrastructure costs.",
+      "RepoFlicks launched as a working product. Running it brought practical lessons in onboarding, user acquisition, analytics, deployment, and infrastructure costs.",
     role: "Founder and product engineer",
     stack: ["Next.js", "GitHub OAuth", "Supabase", "Cloudinary", "Docker", "Google Cloud Run"],
     responsibilities: [
@@ -526,27 +570,30 @@ export const otherProducts = [
     summary:
       "An exploration into reducing the gap between a working local application and a deployable cloud service, with infrastructure setup and repeatable delivery treated as part of the product experience.",
     focus: ["Cloud deployment", "Developer experience", "Infrastructure automation"],
+    lesson: "Infrastructure setup is part of the product experience, not a step after it."
   },
   {
     name: "Sarkari Samadhan",
-    status: "Civic-tech exploration",
+    status: "Exploration",
     summary:
       "A citizen-help product direction for making public-service processes, grievance routes, rights information, and government guidance easier to understand and act on.",
     focus: ["Civic tech", "Public information", "Knowledge systems"],
+    lesson: "Civic tech needs distribution more than it needs features."
   },
   {
     name: "Personal AI Systems Lab",
-    status: "Ongoing experimentation",
+    status: "Exploration",
     summary:
       "A hands-on environment for experimenting with persistent personal agents, local models, multi-provider routing, coding delegation, and the operating patterns that make AI systems useful over time.",
     focus: ["Agents", "Local inference", "Model routing", "AI infrastructure"],
   },
   {
     name: "Boansel",
-    status: "Launched product",
+    status: "Sunset · September 2026",
     summary:
       "A one-link booking and payments platform for experts and creators, covering appointment scheduling, payment collection, monthly payouts, and Indian payment-gateway evaluation.",
     focus: ["Creator monetisation", "Scheduling", "Payments", "Founder-led product development"],
+    lesson: "Payment mechanics teach you what users actually value."
   },
   {
     name: "SageRai",
@@ -554,13 +601,15 @@ export const otherProducts = [
     summary:
       "A privacy-sensitive personal-finance assistant for extracting UPI and SMS transaction data, categorising expenses, and turning financial activity into understandable insights.",
     focus: ["Indian fintech", "Transaction analysis", "Expense categorisation", "Privacy"],
+    lesson: "In fintech, data trust is the product."
   },
   {
     name: "Instant EduDoc",
-    status: "Shipped project",
+    status: "Shipped",
     summary:
       "An AI-powered educational document generator for structured CBSE notes, combining Gemini, automated content formatting, PDF generation, and student-facing workflows.",
     focus: ["Gemini", "Document generation", "WeasyPrint", "Education"],
+    lesson: "Content quality beats generation speed."
   },
   {
     name: "Arya",
@@ -690,7 +739,7 @@ export const companiesData = [
     activeYears: "2024 - Present",
     position: "Senior AI Engineer",
     description:
-      "Leading and contributing to internal AI product delivery and shared enterprise AI platforms for financial-services organisations. Work spans model-enabled workflows, multi-provider model integration, model gateways, identity and access, evaluation, backend services, cloud delivery, production debugging, technical mentoring, and architecture decisions with product, DevOps, IT, security, and engineering stakeholders.",
+      "Leading and contributing to internal AI product delivery and shared enterprise AI platforms for financial-services organisations. Work spans model-enabled workflows, multi-provider model integration, model gateways, identity and access, evaluation, backend services, cloud delivery, production debugging, technical mentoring, and architecture decisions with product, DevOps, IT, security, and engineering stakeholders. Currently leading evaluation methodology for AI product delivery.",
   },
   {
     id: "C-02",
@@ -820,6 +869,10 @@ export const skills = [
 ];
 
 export const playGround = [
+  {
+    category: "Evaluation",
+    name: "Evaluation methodology for LLM products",
+  },
   {
     image:
       "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
