@@ -96,6 +96,14 @@ body { background:var(--reference-paper) !important; }
 .reference-about-section li { display:grid; grid-template-columns:180px 1fr; gap:15px; padding:13px 0; border-bottom:1px solid var(--reference-line); font-size:12px; }
 .reference-about-section strong { font-weight:400; }
 .reference-about-section span { color:var(--reference-muted); }
+.reference-sessions-intro { max-width:660px; margin:22px 0 44px; color:var(--reference-muted); font-size:13px; line-height:1.8; }
+.reference-sessions-list { border-top:1px solid var(--reference-line); }
+.reference-session { display:grid; grid-template-columns:220px minmax(0,1fr); gap:30px; padding:30px 0; border-bottom:1px solid var(--reference-line); }
+.reference-session-image { display:block; width:220px; height:165px; object-fit:contain; background:#eceae3; }
+.reference-session-year { margin:0 0 4px; color:var(--reference-muted); font-size:11px; }
+.reference-session h2 { margin:0; font:400 27px/1.2 Georgia,'Times New Roman',serif; letter-spacing:-.035em; }
+.reference-session div > p:not(.reference-session-year) { margin:13px 0 17px; color:var(--reference-muted); font-size:12px; line-height:1.75; }
+.reference-session a { color:var(--reference-ink); font-size:12px; text-decoration:underline; text-underline-offset:4px; }
 .portfolio-site .site-shell { width:min(calc(100% - 112px),720px); max-width:720px; margin-left:56px; margin-right:0; }
 .portfolio-site .site-shell { padding-left:0; padding-right:0; }
 .portfolio-site .page-section { padding-top:20px; padding-bottom:65px; }
@@ -146,6 +154,8 @@ body { background:var(--reference-paper) !important; }
   .writing-inline-artwork { width:min(100%,340px); margin-top:32px; }
   .reference-writing-group { grid-template-columns:56px 1fr; }
   .reference-about-section { grid-template-columns:1fr; gap:12px; margin-top:50px; }
+  .reference-session { grid-template-columns:1fr; gap:18px; }
+  .reference-session-image { width:100%; height:auto; aspect-ratio:4/3; }
 }
 @media(max-width:440px) {
   .reference-intro { display:block; }
