@@ -34,7 +34,7 @@ export const metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Shivam Maurya - AI systems, developer tools, and practical learning",
+        alt: "Shivam Maurya, Senior AI Engineer, with engraved astrolabe artwork",
       },
     ],
   },
