@@ -3,6 +3,7 @@ import mediumPostsFallback from "@/data/medium-posts-fallback.json";
 import { load } from "cheerio";
 import Link from "next/link";
 import Parser from "rss-parser";
+import WritingSwitch from "./writing-switch";
 
 export const revalidate = 3600;
 
@@ -57,15 +58,11 @@ export default async function WritingPage() {
   return <main id="main-content" className="reference-page reference-shell">
     <h1>Writing</h1>
     <p className="reference-page-lead">Notes on AI systems, product work, and what I learn along the way.</p>
-    {years.map((year) => <section className="reference-writing-group" key={year} aria-label={`Writing from ${year}`}>
+    <WritingSwitch siteContent={years.map((year) => <section className="reference-writing-group" key={year} aria-label={`Writing from ${year}`}>
       <h2>{year}</h2>
       <ul>{groups[year].map((post) => <li key={post.slug}><Link href={`/writing/${post.slug}`}>{post.blogHeading}</Link><time>{post.postedOn.replace(/,?\s*20\d{2}/, "")}</time></li>)}</ul>
-    </section>)}
-    <section className="reference-medium" aria-labelledby="medium-heading">
-      <div className="reference-medium-heading">
-        <h2 id="medium-heading">On Medium</h2>
-        <a href={mediumProfile} target="_blank" rel="noopener noreferrer">View profile ↗</a>
-      </div>
+    </section>)} mediumContent={<section className="reference-medium" aria-label="Writing on Medium">
+      <a className="reference-medium-profile" href={mediumProfile} target="_blank" rel="noopener noreferrer">View Medium profile ↗</a>
       {mediumPosts.length ? <ul>
         {mediumPosts.map((post) => {
           const date = post.publishedAt ? new Date(post.publishedAt) : null;
@@ -77,6 +74,6 @@ export default async function WritingPage() {
           {post.excerpt ? <p>{post.excerpt}</p> : null}
         </li>; })}
       </ul> : <p className="reference-medium-fallback">More writing is available on my Medium profile.</p>}
-    </section>
+    </section>} />
   </main>;
 }
