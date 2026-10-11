@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "check:home": "node --test scripts/check-home.mjs",
+    "writing:images": "node scripts/prepare-writing-images.mjs",
     "x:import": "node scripts/import-x-archive.mjs"
   },
   "dependencies": {
