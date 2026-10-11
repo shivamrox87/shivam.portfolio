@@ -734,47 +734,55 @@ export const companiesData = [
     activeYears: "Jan 2026 - Present",
     position: "Senior AI Engineer",
     description:
-      "Building internal AI products and shared platform services for financial-services teams. Work spans model integrations, gateways, identity and access, evaluation, backend services, cloud delivery, production debugging, and architecture decisions with product, DevOps, IT, security, and engineering stakeholders.",
+      "Building internal AI products and shared services for model access, identity, evaluation, and delivery. I work with product, DevOps, IT, and security teams on production releases.",
   },
   {
     id: "C-02",
+    companyName: "PWM Group",
+    activeYears: "Oct 2024 - Present",
+    position: "Founder & Technical Architect",
+    description:
+      "Designing independent AI and developer products, including ExplainGitHub, with work spanning product architecture, backend engineering, and cloud delivery.",
+  },
+  {
+    id: "C-03",
     companyName: "Aiviq Ltd (part of AlphaFMC)",
     activeYears: "Jun 2025 - Nov 2025",
     position: "MLOps Engineer",
     description:
-      "Operated Azure ML pipelines and model deployments, supported Azure infrastructure and application releases, and managed containerized AI services on AKS with GitHub Actions, monitoring, and secure configuration.",
+      "Operated Azure ML pipelines and model deployments, and deployed containerized AI services on AKS with GitHub Actions, monitoring, and secure configuration.",
   },
   {
-    id: "C-03",
+    id: "C-04",
     companyName: "AlphaFMC",
     activeYears: "Nov 2024 - May 2025",
     position: "AI Engineer (contract)",
     description:
-      "Worked on internal AI applications and model integrations, including secure deployment and production support for financial-services workflows.",
-  },
-  {
-    id: "C-04",
-    companyName: "Protrain",
-    activeYears: "2023 - 2024",
-    position: "AI Engineer",
-    description:
-      "Built automation-heavy learning and content workflows across WordPress, AWS, SQL, Make.com, Placid, Discord, and Python. Used AI tooling to reduce manual operations and accelerate content and marketing execution.",
+      "Worked on internal AI applications and model integrations, including secure deployment and production support.",
   },
   {
     id: "C-05",
+    companyName: "Valdavi Educational Services Pvt. Ltd.",
+    activeYears: "Oct 2023 - Oct 2024",
+    position: "Head of Operations",
+    description:
+      "Led operations and built marketing and content workflows using Python scripts, APIs, and automation tools.",
+  },
+  {
+    id: "C-06",
     companyName: "Kyukey Technologies Private Limited (Mokx)",
     activeYears: "2023",
     position: "AI & Backend Engineer",
     description:
-      "Built Arya, an AI Acharya product using OpenAI, LangChain, Whisper, speech services, and retrieval pipelines across large knowledge corpora, then deployed it for multilingual usage via messaging platforms and APIs.",
+      "Built Arya, a multilingual AI assistant using retrieval and speech services, then delivered it through messaging platforms and APIs.",
   },
   {
-    id: "C-06",
+    id: "C-07",
     companyName: "Programming With Maurya",
-    activeYears: "2020 - 2023",
-    position: "Founder",
+    activeYears: "May 2020 - Oct 2024",
+    position: "Founder & Mentor",
     description:
-      "Built a training and community-led startup focused on Python, data science, and applied AI learning, with mentorship, internships, and program delivery across India and Ghana.",
+      "Led technology education and mentorship in Python, data science, and applied AI, including workshops and programs in India and Ghana.",
   },
 ];
 

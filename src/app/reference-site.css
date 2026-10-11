@@ -109,6 +109,7 @@ body { background:var(--reference-paper) !important; }
 .reference-about-section li { display:grid; grid-template-columns:180px 1fr; gap:15px; padding:13px 0; border-bottom:1px solid var(--reference-line); font-size:12px; }
 .reference-about-section strong { font-weight:400; }
 .reference-about-section span { color:var(--reference-muted); }
+.reference-experience-copy p { margin:5px 0 0; color:var(--reference-muted); font-size:12px; line-height:1.6; }
 .reference-sessions-intro { max-width:660px; margin:22px 0 44px; color:var(--reference-muted); font-size:13px; line-height:1.8; }
 .reference-sessions-list { border-top:1px solid var(--reference-line); }
 .reference-session { display:grid; grid-template-columns:220px minmax(0,1fr); gap:30px; padding:30px 0; border-bottom:1px solid var(--reference-line); }

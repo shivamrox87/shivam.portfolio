@@ -8,7 +8,7 @@ export default function AboutSide() {
     <div className="reference-about-intro">
       <div>
         <p>I&apos;m Shivam Maurya, a Senior AI Engineer at AlphaFMC. I build internal AI products for financial-services teams and the shared services that make them reliable: model access, identity, evaluation, and delivery.</p>
-        <p>I also founded <Link href="/work/explaingithub">ExplainGitHub</Link>, a tool for understanding unfamiliar codebases. Before engineering full time, I taught Python and AI in India and Ghana. Teaching still shapes how I explain systems and design for the person using them.</p>
+        <p>Through PWM Group, I build independent developer products including <Link href="/work/explaingithub">ExplainGitHub</Link>, a tool for understanding unfamiliar codebases. I have also taught Python and AI in India and Ghana. Teaching still shapes how I explain systems and design for the person using them.</p>
       </div>
       <Image src="/shivam-maurya-profile.png" alt="Shivam Maurya" width={320} height={360} className="reference-about-image" />
     </div>
@@ -18,7 +18,7 @@ export default function AboutSide() {
       <li><strong>Developer tools</strong><span>Products that help engineers understand complex systems and act with confidence.</span></li>
     </ul></section>
     <section className="reference-about-section"><h2>How I work</h2><ul>{invariants.map(({ title, detail }) => <li key={title}><strong>{title}</strong><span>{detail}</span></li>)}</ul></section>
-    <section className="reference-about-section" id="experience"><h2>Experience</h2><ul>{companiesData.map((company) => <li key={company.id}><strong>{company.companyName}</strong><span>{company.position} · {company.activeYears}</span></li>)}</ul></section>
+    <section className="reference-about-section" id="experience"><h2>Experience</h2><ul>{companiesData.map((company) => <li key={company.id}><strong>{company.companyName}</strong><div className="reference-experience-copy"><span>{company.position} · {company.activeYears}</span><p>{company.description}</p></div></li>)}</ul></section>
     <div className="reference-index-links"><Link href="/work">Projects →</Link><Link href="/sessions">Speaking &amp; teaching →</Link><Link href="/connect">Contact →</Link></div>
   </main>;
 }
