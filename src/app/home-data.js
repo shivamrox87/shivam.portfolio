@@ -76,13 +76,9 @@ export const proposed = otherProducts
   .map((entry) => entry.name);
 
 /**
- * The numbers band, in SLO-strip form. Counts that the data can answer are
- * computed; the rest are authored, and every one is defensible out loud.
+ * Public numbers, with counts derived where possible.
  */
 export const metrics = [
-  { value: "4–6 weeks → hours", label: "Document turnaround on the agent I built at work" },
-  { value: "14,000 rows", label: "Question bank audited before any generation work began" },
-  { value: "~3%", label: "Of those rows flagged as unusable before they could contaminate output" },
   { value: String(blogs.length), label: "Runbooks published, most of them one thesis each" },
   { value: "60+", label: "Participants in the AI workshop I ran in 2023" },
   { value: String(decommissioned.length), label: "Services decommissioned on purpose" },

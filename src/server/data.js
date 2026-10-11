@@ -48,7 +48,7 @@ export const invariants = [
     title: "Know your data before you generate",
     detail:
       "Generation quality is decided upstream of the model. Audit the source before you tune the prompt.",
-    learned: "The 14,000-row question-bank audit",
+    learned: "Auditing source data before building a generation workflow",
   },
   {
     title: "Sunset without sentiment",
@@ -66,7 +66,7 @@ export const featuredWork = [
   {
     name: "Enterprise AI product and platform delivery",
     context: "AlphaFMC · Financial services",
-    status: "Senior AI Engineer · 2024–present",
+    status: "Senior AI Engineer · Jan 2026–present",
     description:
       "Leading hands-on delivery of internal AI products and the shared infrastructure behind them: model access, identity, evaluation, routing, deployment, and operational reliability.",
     scope: ["Internal AI products", "Model gateways", "Identity", "Cloud delivery"],
@@ -162,22 +162,17 @@ export const caseStudies = [
     heading: "Enterprise AI at AlphaFMC",
     category: "Enterprise AI",
     status: "Professional work",
-    date: "2024 - Present",
+    date: "Jan 2026 - Present",
     subHeading:
       "I build internal AI tools for financial-services teams and the shared services that make those tools secure and maintainable.",
     summary:
-      "As a Senior AI Engineer, I work across product workflows, model access, identity, evaluation, and cloud delivery. One document agent produces a first draft in minutes, with expert review taking it to final in hours instead of the previous 4–6 week manual turnaround.",
+      "As a Senior AI Engineer, I build internal AI products and the shared services behind them. My work spans product workflows, model access, identity, evaluation, backend integration, and production delivery.",
     problem:
-      "Teams needed AI tools for real work, including proposal and statement-of-work drafting. Building each tool separately would repeat the same work on authentication, model access, evaluation, deployment, and support.",
+      "Teams need AI tools that fit real work. Building each product separately would repeat the same work on authentication, model access, evaluation, deployment, and support.",
     solution:
-      "I helped deliver internal products on shared services for identity, model routing, evaluation, storage integration, and cloud releases. For the document agent, I also audited a 14,000-row question bank before generation and defined a five-part expert evaluation scorecard.",
+      "I help deliver internal AI products on shared services for identity, model routing, evaluation, storage integration, and cloud releases. The work also includes reviewing source data and defining how experts evaluate model output before a workflow reaches production.",
     outcome:
-      "Manual document turnaround previously took 4–6 weeks. The agent produces a first draft in minutes, and experts refine it to final in hours. Shared services also give new AI workflows a foundation for access, reliability, and operations.",
-    metrics: [
-      { value: "4–6 weeks → hours", label: "Document turnaround. The agent drafts in minutes; experts review and finish the work in hours." },
-      { value: "14,000 rows", label: "Audited before generation; about 3% were flagged as low quality." },
-      { value: "5 criteria", label: "An expert scorecard checks coverage, question quality, metadata, factual accuracy, and format." },
-    ],
+      "Shared services give internal AI workflows a more consistent foundation for access, evaluation, deployment, and support. Expert review remains part of how document workflows are delivered.",
     role: "Senior AI Engineer",
     stack: ["Azure OpenAI", "Claude", "Gemini", "AWS Bedrock", "LiteLLM", "OpenWebUI"],
     responsibilities: [
@@ -736,13 +731,29 @@ export const companiesData = [
   {
     id: "C-01",
     companyName: "AlphaFMC",
-    activeYears: "2024 - Present",
+    activeYears: "Jan 2026 - Present",
     position: "Senior AI Engineer",
     description:
-      "Leading and contributing to internal AI product delivery and shared enterprise AI platforms for financial-services organisations. Work spans model-enabled workflows, multi-provider model integration, model gateways, identity and access, evaluation, backend services, cloud delivery, production debugging, technical mentoring, and architecture decisions with product, DevOps, IT, security, and engineering stakeholders. Currently leading evaluation methodology for AI product delivery.",
+      "Building internal AI products and shared platform services for financial-services teams. Work spans model integrations, gateways, identity and access, evaluation, backend services, cloud delivery, production debugging, and architecture decisions with product, DevOps, IT, security, and engineering stakeholders.",
   },
   {
     id: "C-02",
+    companyName: "Aiviq Ltd (part of AlphaFMC)",
+    activeYears: "Jun 2025 - Nov 2025",
+    position: "MLOps Engineer",
+    description:
+      "Operated Azure ML pipelines and model deployments, supported Azure infrastructure and application releases, and managed containerized AI services on AKS with GitHub Actions, monitoring, and secure configuration.",
+  },
+  {
+    id: "C-03",
+    companyName: "AlphaFMC",
+    activeYears: "Nov 2024 - May 2025",
+    position: "AI Engineer (contract)",
+    description:
+      "Worked on internal AI applications and model integrations, including secure deployment and production support for financial-services workflows.",
+  },
+  {
+    id: "C-04",
     companyName: "Protrain",
     activeYears: "2023 - 2024",
     position: "AI Engineer",
@@ -750,7 +761,7 @@ export const companiesData = [
       "Built automation-heavy learning and content workflows across WordPress, AWS, SQL, Make.com, Placid, Discord, and Python. Used AI tooling to reduce manual operations and accelerate content and marketing execution.",
   },
   {
-    id: "C-03",
+    id: "C-05",
     companyName: "Kyukey Technologies Private Limited (Mokx)",
     activeYears: "2023",
     position: "AI & Backend Engineer",
@@ -758,7 +769,7 @@ export const companiesData = [
       "Built Arya, an AI Acharya product using OpenAI, LangChain, Whisper, speech services, and retrieval pipelines across large knowledge corpora, then deployed it for multilingual usage via messaging platforms and APIs.",
   },
   {
-    id: "C-04",
+    id: "C-06",
     companyName: "Programming With Maurya",
     activeYears: "2020 - 2023",
     position: "Founder",

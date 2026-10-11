@@ -3,16 +3,14 @@ import { metrics } from "@/app/home-data";
 /**
  * A list, not a chart.
  *
- * These numbers carry different units — weeks, rows, a percentage, counts — so
- * bars would imply a comparison between them that does not exist. They are set
- * as plain figures with their source beside them.
+ * These numbers carry different units, so they are shown as a list.
  */
 export default function Readouts() {
   return (
     <section className="border-t border-[#C7C9C4]" aria-labelledby="readouts-heading">
       <div className="site-shell page-section">
         <h2 id="readouts-heading" className="section-title max-w-[700px]">
-          Six numbers I can defend out loud
+          A few numbers I can defend out loud
         </h2>
 
         <dl className="mt-12 border-t border-[#16181B]">
