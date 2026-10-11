@@ -81,6 +81,18 @@ body { background:var(--reference-paper) !important; }
 .reference-writing-group a { color:var(--reference-ink); font-size:13px; text-decoration:none; }
 .reference-writing-group a:hover { text-decoration:underline; text-underline-offset:3px; }
 .reference-writing-group time { color:var(--reference-muted); font-size:11px; white-space:nowrap; }
+.reference-medium { margin-top:58px; padding-top:24px; border-top:1px solid var(--reference-line); }
+.reference-medium-heading { display:flex; align-items:baseline; justify-content:space-between; gap:20px; margin-bottom:14px; }
+.reference-medium-heading h2 { margin:0; font:400 24px/1.2 Georgia,'Times New Roman',serif; letter-spacing:-.035em; }
+.reference-medium-heading > a { color:var(--reference-muted); font-size:11px; white-space:nowrap; text-decoration:none; }
+.reference-medium-heading > a:hover { color:var(--reference-ink); text-decoration:underline; text-underline-offset:3px; }
+.reference-medium ul { margin:0; padding:0; list-style:none; }
+.reference-medium li { padding:17px 0 18px; border-bottom:1px solid var(--reference-line); }
+.reference-medium-title { display:flex; justify-content:space-between; align-items:baseline; gap:20px; }
+.reference-medium-title a { color:var(--reference-ink); font-size:14px; line-height:1.45; text-decoration:none; }
+.reference-medium-title a:hover { text-decoration:underline; text-underline-offset:3px; }
+.reference-medium-title time { color:var(--reference-muted); font-size:11px; white-space:nowrap; }
+.reference-medium li p,.reference-medium-fallback { max-width:560px; margin:6px 0 0; color:var(--reference-muted); font-size:12px; line-height:1.6; }
 .reference-contact { min-height:290px; padding-top:12px; }
 .reference-contact p { max-width:530px; margin:37px 0 0; font-size:14px; line-height:1.65; }
 .reference-contact-form { margin-top:36px; }
@@ -153,6 +165,7 @@ body { background:var(--reference-paper) !important; }
   .writing-detail article h1 { font-size:34px; }
   .writing-inline-artwork { width:min(100%,340px); margin-top:32px; }
   .reference-writing-group { grid-template-columns:56px 1fr; }
+  .reference-medium-title { flex-direction:column; align-items:flex-start; gap:4px; }
   .reference-about-section { grid-template-columns:1fr; gap:12px; margin-top:50px; }
   .reference-session { grid-template-columns:1fr; gap:18px; }
   .reference-session-image { width:100%; height:auto; aspect-ratio:4/3; }

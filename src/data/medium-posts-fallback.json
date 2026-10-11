@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Most AI engineers can’t prove their work is good. I was one of them",
+    "href": "https://shivam--maurya.medium.com/the-day-i-couldnt-answer-how-do-you-know-it-s-good-b3a450e5d6eb",
+    "publishedAt": "Sun, 27 Sep 2026 07:31:46 GMT",
+    "excerpt": "Someone asked me a simple question about a system I’d built:"
+  },
+  {
+    "title": "The problem with being able to build almost anything",
+    "href": "https://shivam--maurya.medium.com/the-problem-with-being-able-to-build-almost-anything-94b5394e0cc4",
+    "publishedAt": "Thu, 03 Sep 2026 20:36:31 GMT",
+    "excerpt": "There was a time when having an idea for a software product meant asking a very practical question:"
+  },
+  {
+    "title": "I asked AI to judge how I use AI and it turns out, I’m at level 4, not level 6",
+    "href": "https://shivam--maurya.medium.com/i-asked-ai-to-judge-how-i-use-ai-and-it-turns-out-im-at-level-4-not-level-6-3169f6fbff12",
+    "publishedAt": "Sat, 29 Aug 2026 15:36:49 GMT",
+    "excerpt": "I’ve been using AI heavily for development, research, experimentation, and even some ongoing monitoring."
+  },
+  {
+    "title": "I was running too many projects at once, so I started managing my Life like a sprint",
+    "href": "https://shivam--maurya.medium.com/i-was-running-too-many-projects-at-once-so-i-started-managing-my-life-like-a-sprint-76caf5bc1e2b",
+    "publishedAt": "Fri, 28 Aug 2026 06:56:13 GMT",
+    "excerpt": "At some point, I realized I had a strange problem."
+  },
+  {
+    "title": "I Built a Hindi FM Radio for the Age of Infinite Playlists",
+    "href": "https://shivam--maurya.medium.com/i-built-a-hindi-fm-radio-for-the-age-of-infinite-playlists-fcd7026feeba",
+    "publishedAt": "Wed, 26 Aug 2026 17:28:13 GMT",
+    "excerpt": "Music apps give us every song in the world — and then ask us to make a hundred decisions."
+  },
+  {
+    "title": "I Stopped Trying to Build One AI Agent That Does Everything",
+    "href": "https://shivam--maurya.medium.com/i-stopped-trying-to-build-one-ai-agent-that-does-everything-fd8a725f4df4",
+    "publishedAt": "Tue, 25 Aug 2026 08:26:27 GMT",
+    "excerpt": "Hermes, Codex, OpenCode, local models and cloud APIs made me rethink what a personal AI assistant should actually be."
+  },
+  {
+    "title": "I Tried Way Too Many AI Models for My Personal Agent",
+    "href": "https://shivam--maurya.medium.com/i-tried-way-too-many-ai-models-for-my-personal-agent-05d217886c2f",
+    "publishedAt": "Sun, 23 Aug 2026 08:20:01 GMT",
+    "excerpt": "Qwen, Nemotron, Gemma, DeepSeek, local models, Bedrock, Azure and more — I was looking for a cheap, fast brain for my personal AI agent. I…"
+  },
+  {
+    "title": "I Tried Turning Hermes Agent Into My Personal AI Assistant",
+    "href": "https://shivam--maurya.medium.com/i-tried-turning-hermes-agent-into-my-personal-ai-assistant-46bd400fc53a",
+    "publishedAt": "Sun, 23 Aug 2026 08:12:26 GMT",
+    "excerpt": "I deployed it on my own Linux server, connected it to Google Chat, and tried to make it part of my daily life. It didn’t go exactly as…"
+  },
+  {
+    "title": "Reducing Engineering Bottlenecks by Making Repository Context Accessible",
+    "href": "https://shivam--maurya.medium.com/reducing-engineering-bottlenecks-by-making-repository-context-accessible-a3898d9e7513",
+    "publishedAt": "Wed, 22 Apr 2026 14:55:32 GMT",
+    "excerpt": "In most engineering teams, understanding a system still looks like this:"
+  },
+  {
+    "title": "Top 10 internal AI workflow risks and how to prevent them",
+    "href": "https://shivam--maurya.medium.com/top-10-internal-ai-workflow-risks-and-how-to-prevent-them-1476b2e8b7f2",
+    "publishedAt": "Fri, 17 Apr 2026 19:15:50 GMT",
+    "excerpt": "What happens:Teams start using AI inside old processes, so instead of removing work, AI adds another layer of checking, prompting, and editing. This is one of the main reasons comp"
+  }
+]
