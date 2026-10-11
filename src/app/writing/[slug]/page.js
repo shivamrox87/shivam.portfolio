@@ -75,13 +75,15 @@ export default async function WritingPage({ params }) {
             {article.contentAfter}
           </p>
           <Image
-            src={`/writing-artwork/${article.slug}-light.webp`}
+            src={`/writing-artwork/cutout/${article.slug}.webp`}
             alt={`Illustration for ${article.blogHeading}`}
-            width={1024}
-            height={1536}
+            width={720}
+            height={1080}
             sizes="(max-width: 760px) min(100vw - 40px, 340px), 420px"
             className="writing-inline-artwork"
             priority
+            fetchPriority="high"
+            unoptimized
           />
         </header>
 

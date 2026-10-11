@@ -4,7 +4,7 @@ body { background:var(--reference-paper) !important; }
 .portfolio-site { box-sizing:border-box; min-height:100vh; background:var(--reference-paper); color:var(--reference-ink); font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:13px; line-height:1.6; }
 .portfolio-site > main { min-height:calc(100vh - 113px); }
 .margin-artwork { display:none; }
-.writing-inline-artwork { display:block; width:min(100%,420px); height:auto; margin:42px auto 0; object-fit:contain; mask-image:radial-gradient(ellipse 85% 75% at center,black 65%,transparent 100%); -webkit-mask-image:radial-gradient(ellipse 85% 75% at center,black 65%,transparent 100%); }
+.writing-inline-artwork { display:block; width:min(100%,420px); height:auto; margin:42px auto 0; object-fit:contain; }
 @media(min-width:1200px) {
   .margin-artwork { position:fixed; top:50%; left:calc(50vw + 388px); z-index:0; display:block; width:clamp(310px,27vw,430px); opacity:1; transform:translate(-50%,-50%); transition:opacity .3s ease; pointer-events:none; }
   .margin-artwork.is-footer-near { opacity:0; }
