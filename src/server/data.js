@@ -920,6 +920,69 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Oct 12, 2026",
+    "blogHeading": "Who Can Open the File an Agent Leaves Behind?",
+    "slug": "who-can-open-the-file-an-agent-leaves-behind",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "AI Infrastructure",
+    "content": "An agent can finish its task while the files it created keep circulating. Reports, screenshots, and exported tool results need an owner, an access policy, and an expiry story. I would design that lifecycle alongside the download button.",
+    "sections": [
+      {
+        "heading": "Follow the result beyond the conversation",
+        "paragraphs": [
+          "Imagine an internal assistant investigating a support issue. It reads restricted records, saves a detailed CSV, and returns a short explanation with a download link. The explanation is appropriate for the conversation. The CSV contains considerably more. If the conversation is shared tomorrow, what exactly has been shared?",
+          "This is a practical question for agent products today. Deep Agents documents automatic offloading of large tool results and offers both thread-scoped state and storage that persists across threads. Its backend guide also describes routing internal agent files separately from project files. Moving content out of the prompt is useful, but the storage choice now affects who can encounter it later.",
+          "I think of each retained output as a small product surface. It needs a deliberate route from creation to inspection to deletion. A successful tool call only tells us the file was produced."
+        ],
+        "sources": [
+          {
+            "label": "LangChain: Deep Agents filesystem backends and storage scope",
+            "href": "https://docs.langchain.com/oss/python/deepagents/backends"
+          }
+        ]
+      },
+      {
+        "heading": "Give the artifact an identity before giving it a URL",
+        "paragraphs": [
+          "I would keep an application record containing an opaque artifact ID, tenant, creating run, owner, storage location, content type, creation time, retention deadline, and access policy. For evidence that people will review, I would also record an immutable object version or digest. Replacing the bytes behind a previously reviewed attachment should create a new version.",
+          "The download handler should resolve that record using the authenticated caller and check access before reading the object. A hard-to-guess ID helps avoid accidental discovery; it does not establish permission. The model can suggest a filename, but tenant identity and storage scope should come from the application.",
+          "For the support example, I would keep the detailed export restricted to its approved audience. A wider conversation audience could receive a separately prepared summary. Combining several sources should never silently expand their audience. If the product cannot determine who may receive the combined result, keep it private until an explicit sharing decision is made."
+        ]
+      },
+      {
+        "heading": "Decide what a download link promises",
+        "paragraphs": [
+          "A presigned URL is convenient because object storage can serve the bytes directly. AWS documents S3 presigned URLs as bearer tokens: possession grants access within the applicable permissions and validity period. They can be reused before expiry. That matters when a URL ends up in a transcript, browser history, or diagnostic log.",
+          "I would store the artifact ID in the conversation and issue a short-lived URL only after an authorized user clicks Download. Avoid recording the signed query string in telemetry. This reduces how long a copied link remains useful, but does not bind it to the original viewer.",
+          "If the requirement is to check current membership on every new download request, serve the file through an authenticated endpoint without exposing a reusable storage URL. That costs bandwidth and operational work. It also makes the promise clearer. A membership change in the application alone does not invalidate an already issued S3 URL. Neither approach can recall bytes someone has already downloaded.",
+          "Expiry is not an interrupt either: S3 checks it when the request starts, and a download begun before expiry can continue afterward. The interface should describe access expiry without implying that an open transfer will be cut off."
+        ],
+        "sources": [
+          {
+            "label": "AWS: S3 presigned URL permissions, reuse, and expiration",
+            "href": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html"
+          }
+        ]
+      },
+      {
+        "heading": "Separate working files from deliverables",
+        "paragraphs": [
+          "A raw tool response saved to help the agent reason is different from a report the user has chosen to retain. I would give temporary working files a bounded lifetime and require an explicit promotion step for durable deliverables. Promotion can assign the audience, retention policy, and reviewed version.",
+          "Then trace the copies. The export might exist in worker storage, a checkpoint, object storage, and a generated preview. Deleting the visible attachment should block new access through the application immediately and schedule removal from the storage locations it controls. Previously issued storage links still need the expiry or revocation policy described above. Keep enough metadata to report whether cleanup succeeded, without retaining the payload just to prove it was deleted.",
+          "The product should distinguish unavailable from physically removed. Backups and retained versions may follow separate deletion schedules. Write down those schedules before promising that a file disappears when the user deletes a conversation."
+        ]
+      },
+      {
+        "heading": "Test the link after the happy path",
+        "paragraphs": [
+          "I would start with one export and two test tenants. Copy its ID into a request from the other tenant. Remove the original user from the workspace, then try a fresh download and a previously issued link. Share the conversation with a narrower role. Each result should match the access promise the product actually makes.",
+          "Also test a resumed run after its temporary files expire, a deleted artifact whose preview is cached, and a failed cleanup job. The agent should explain that evidence is no longer available and request a fresh authorized read when needed. It should not quietly treat an old summary as the missing file.",
+          "The useful design question is simple: when someone opens this attachment next week, which component decides whether they should see it? I want a concrete answer in the application, with a policy and a test behind it."
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Oct 07, 2026",
     "blogHeading": "What an Agent’s Stop Button Can Actually Promise",
     "slug": "what-an-agents-stop-button-can-actually-promise",
