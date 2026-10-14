@@ -920,6 +920,69 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Oct 14, 2026",
+    "blogHeading": "Can Your Agent Find the Right Tool?",
+    "slug": "can-your-agent-find-the-right-tool",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "Developer Tools",
+    "content": "Loading tools on demand makes an agent’s context smaller. It also introduces a search problem before the agent can act. I want to know whether the right capability was found before I judge how well the model used it.",
+    "sections": [
+      {
+        "heading": "The failure can happen before the call",
+        "paragraphs": [
+          "Imagine asking a developer assistant which release is running in staging. The integration has a read-only deployment lookup, but the assistant finds a tool for starting deployments instead. It asks an unnecessary question, tries a less direct route, or says it cannot help. Nothing crashed. The useful tool simply never reached the decision.",
+          "On-demand discovery is already a concrete platform feature. Claude’s tool search documentation describes searching a catalog and expanding matching references into full definitions. That creates a useful boundary to inspect: the candidate tools returned by search, followed by the tool the model chooses.",
+          "My concern is the gap between those two steps. An evaluation that supplies the correct tool directly may show excellent calling behaviour while missing the failure users actually encounter. For a product with several integrations, discovery deserves its own test cases."
+        ],
+        "sources": [
+          {
+            "label": "Claude documentation: tool search and deferred loading",
+            "href": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool"
+          }
+        ]
+      },
+      {
+        "heading": "Describe the job in the user’s vocabulary",
+        "paragraphs": [
+          "For the staging question, I would describe a hypothetical lookup as: “Read the release currently deployed to an environment, including commit and deployment status. Does not start a deployment.” That tells a search system and a model more than “Get deployment data.” It also separates the lookup from a similarly named write operation.",
+          "I would collect ordinary phrasings such as “what is live in staging?”, “which commit reached test?”, and “show the current release.” These become discovery cases. They should not all be copied mechanically into every description; that can make neighbouring tools look equally relevant. The description should explain the actual capability, its inputs, and its limits.",
+          "Use concrete distinctions where the catalog has near neighbours: current state versus history, one repository versus an organisation, preview versus publish. Then hold back some phrasings for evaluation. Otherwise it is easy to improve search for the handful of sentences the author already knows."
+        ]
+      },
+      {
+        "heading": "Measure discovery and selection separately",
+        "paragraphs": [
+          "I would store each evaluation case with the request, a catalog snapshot, the caller’s allowed capabilities, and the acceptable tool or tools. Run it through the real search path. First ask whether an acceptable capability appeared within the candidate budget. Then ask whether the agent selected and called it correctly.",
+          "A useful diagnostic rerun gives the same request the correct definition directly. If that succeeds while discovery fails, investigate the query, indexing, descriptions, or ranking. If both fail, inspect ambiguity and argument construction. This is a way to narrow an investigation, not proof that one component is solely responsible.",
+          "Keep the end-to-end outcome alongside those measurements. A successful search followed by a wrong environment parameter still fails the task. Record search attempts, time to the first useful call, and definition tokens too. A smaller prompt is only a product improvement if the agent can still finish the work.",
+          "Include requests with no supported capability. An empty result should lead to an honest limitation or a useful clarification. Returning the closest-looking write tool for every read request can make a search metric look busy while making the product worse."
+        ]
+      },
+      {
+        "heading": "Keep the catalog tied to the caller",
+        "paragraphs": [
+          "I would construct the searchable catalog from capabilities the application permits this caller to discover, then check authorization again when a tool executes. A search result is a candidate action. It does not grant permission, and a previously loaded definition should not preserve access after a role changes.",
+          "Catalog freshness matters as well. MCP’s versioned tools specification supports paginated listing and an optional notification when the available list changes. A client building an index needs to consume the relevant pages and handle changes when that capability is advertised. The protocol mechanism alone does not keep an application’s separate search index current.",
+          "For a custom index, I would attach a catalog revision to evaluation runs and cached search results. Invalidate or rebuild affected entries when definitions change, and partition caches by the authorization scope that produced them. Test a removed tool and a revoked role explicitly. A harmless lookup becoming a broader operation behind a stale description is a change the application should detect."
+        ],
+        "sources": [
+          {
+            "label": "MCP 2025-11-25: tool listing, pagination, and list changes",
+            "href": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools"
+          }
+        ]
+      },
+      {
+        "heading": "Ship a small discovery regression set",
+        "paragraphs": [
+          "I would begin with a few tasks people actually want to complete: locate a deployment, read a build failure, find an issue, and prepare a change. For each, add a paraphrase, a similar but inappropriate tool, a restricted caller, and an unavailable-capability case. Check the expected route before adding a larger catalog.",
+          "Then run that set when a connector, description, or search configuration changes. For a renamed deployment lookup, the review should show whether the old user vocabulary still finds the new definition. For a newly added publishing tool, it should show that requests to inspect a release still reach the read path.",
+          "The question I want a failed trace to answer is precise: did the agent lack the capability, fail to discover it, or misuse it after discovery? Once those outcomes are visible, the next engineering step becomes much easier to choose."
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Oct 12, 2026",
     "blogHeading": "Who Can Open the File an Agent Leaves Behind?",
     "slug": "who-can-open-the-file-an-agent-leaves-behind",
