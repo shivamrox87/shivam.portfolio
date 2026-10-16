@@ -920,6 +920,74 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Oct 16, 2026",
+    "blogHeading": "What Happens to a Paused Agent When You Deploy?",
+    "slug": "what-happens-to-a-paused-agent-when-you-deploy",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "AI Infrastructure",
+    "content": "An agent waiting for approval can outlive the code that started it. The next deployment needs to account for that unfinished work: which version will resume it, what its saved state means, and whether the action the user reviewed still matches the action ahead.",
+    "sections": [
+      {
+        "heading": "Yesterday’s work meets today’s code",
+        "paragraphs": [
+          "Imagine a release assistant that prepares a staging deployment and pauses for review. Overnight, a refactor renames the deployment node and changes how the target environment is stored. The next morning, someone clicks approve. Fresh requests passed every test, but this request carries yesterday’s state into today’s application.",
+          "That boundary is easy to miss because a paused agent consumes little visible compute. It still has dependencies: a place to resume, a state format, and a proposed action. I would treat those dependencies as part of the release surface. A green health check says the service is running; it says very little about the work waiting inside it.",
+          "LangGraph’s current migration documentation makes one failure concrete: an interrupted thread may need a node whose name was removed or changed. It also notes that renaming a state key loses its saved value in existing threads. These are useful reminders that an internal refactor can become a compatibility change once state is persisted."
+        ],
+        "sources": [
+          {
+            "label": "LangGraph: graph migrations and saved-state compatibility",
+            "href": "https://docs.langchain.com/oss/python/langgraph/graph-api#graph-migrations"
+          }
+        ]
+      },
+      {
+        "heading": "Choose which code will receive the resume",
+        "paragraphs": [
+          "Before discussing migration scripts, I want an explicit routing decision. Will an existing run continue on its original implementation, or will the current implementation accept its saved state? Either can work. An accidental mixture is much harder to operate.",
+          "Temporal’s Worker Versioning offers pinned workflows that stay on a particular worker deployment version, alongside auto-upgrading workflows that require replay-safe changes. Its documentation describes keeping multiple versions available while older work drains. That is a concrete example of making the routing decision part of deployment infrastructure.",
+          "For an agent product, pinning also creates an operating obligation. Someone must retain compatible workers and dependencies until their runs finish or are deliberately retired. A version label in a database is insufficient if every worker now runs the new code. I would record the implementation revision and state schema version separately, then verify that the dispatcher actually honours them."
+        ],
+        "sources": [
+          {
+            "label": "Temporal: Worker Versioning, pinning, and deployment strategies",
+            "href": "https://docs.temporal.io/production-deployment/worker-deployments/worker-versioning"
+          }
+        ]
+      },
+      {
+        "heading": "Preserve meaning as well as fields",
+        "paragraphs": [
+          "Suppose the old deployment state contains environment: staging, while the new code expects target: {name, region}. A migration can copy the name, but it cannot safely invent the region. I would require a documented mapping or pause for a new decision. Silently filling in the application’s current default could change what the user is approving.",
+          "Behaviour can drift even when every field loads. LangGraph’s backward-compatibility guide distinguishes technical compatibility from business compatibility and describes storing a behavioural version at thread creation. That provides a way to keep an existing conversation on a deliberate path while new conversations use the revised flow.",
+          "My application rule would be stricter at the action boundary: bind approval to a concrete target and payload. If migration changes either, invalidate that approval and show the revised proposal. Keep current authorization checks outside any promise to preserve old behaviour. Retaining an old workflow should never preserve a permission that has since been revoked."
+        ],
+        "sources": [
+          {
+            "label": "LangGraph: technical and business compatibility for in-flight runs",
+            "href": "https://docs.langchain.com/oss/python/langgraph/backward-compatibility"
+          }
+        ]
+      },
+      {
+        "heading": "Test the crossing, including the way back",
+        "paragraphs": [
+          "I would add a small deployment rehearsal alongside the normal fresh-run checks. Create synthetic checkpoints with the previous release at meaningful boundaries: waiting for approval, waiting for a tool result, and ready to produce the final answer. Resume them with the candidate release through the same routing path production uses.",
+          "The assertions should describe outcomes. The staging request must retain its target. A missing region must produce an explicit hold. An already recorded deployment must not be submitted again. Rejected state should remain inspectable with a clear reason, rather than disappearing into a generic resume error. External writes in this rehearsal belong behind test doubles or isolated test services.",
+          "Then rehearse rollback after the candidate has written state. Routing new requests back to the old release does not establish that the old release can read those new checkpoints. Where that compatibility is absent, keep affected runs on compatible workers or hold them for recovery. I would document that limit before rollout, while the team still has time to choose."
+        ]
+      },
+      {
+        "heading": "Give old versions a retirement condition",
+        "paragraphs": [
+          "Keeping every version forever is an expensive way to avoid making a migration decision. I would maintain an inventory of resumable runs by implementation version, schema version, waiting reason, and age. Include dormant approval requests, not just workers currently executing. A quiet queue can still contain work that will wake up next week.",
+          "For each release, decide what happens to those runs: finish on retained code, migrate through a tested path, or expire with a useful explanation and a safe restart route. Set a retention deadline and make it visible to the product team. A restart must still account for any external work already completed.",
+          "The release question I want answered is simple: if someone approves yesterday’s request tomorrow, which code receives it, and what proves it still means the same thing? Answering that makes continuous delivery compatible with agents that need time to finish."
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Oct 14, 2026",
     "blogHeading": "Can Your Agent Find the Right Tool?",
     "slug": "can-your-agent-find-the-right-tool",
