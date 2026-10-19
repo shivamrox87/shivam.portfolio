@@ -920,6 +920,68 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Oct 19, 2026",
+    "blogHeading": "Count the Missing Results in Your Batch Eval",
+    "slug": "count-the-missing-results-in-your-batch-eval",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "AI Infrastructure",
+    "content": "An overnight evaluation can finish processing without producing every answer you expected. Before trusting its score, account for the requests that never became usable results. Otherwise, the batch infrastructure quietly chooses which cases your model gets judged on.",
+    "sections": [
+      {
+        "heading": "Start with the cases that disappeared",
+        "paragraphs": [
+          "Imagine an evaluation with 1,000 cases. By morning, 900 have usable answers and 810 pass the grader. A dashboard reports 90%. That arithmetic is correct for the answers it graded. It leaves a different question unanswered: what happened to the other 100 cases? These are illustrative numbers, but the reporting mistake is easy to build into a real pipeline.",
+          "If the missing cases cluster around long documents or a particular request shape, the completed subset may tell a flattering story. I would show 900 of 1,000 cases with usable answers alongside the 810 of 900 grading result. For a release gate, I would also show 810 of 1,000 planned cases passing end to end, with the unresolved remainder broken down by cause.",
+          "Claude’s current batch documentation makes the distinction explicit: processing can end with individual requests marked succeeded, errored, canceled, or expired. Result order is not guaranteed. A finished batch is therefore the point where reconciliation can begin."
+        ],
+        "sources": [
+          {
+            "label": "Claude documentation: batch result states and ordering",
+            "href": "https://platform.claude.com/docs/en/build-with-claude/batch-processing#retrieving-batch-results"
+          }
+        ]
+      },
+      {
+        "heading": "Write the manifest before submitting",
+        "paragraphs": [
+          "I would start each evaluation with an immutable manifest of the intended cases. Give every case an opaque identifier, record its dataset revision, and bind it to the exact request configuration: prompt revision, requested model identifier, generation settings, and grader revision. Keep sensitive inputs in controlled storage; a provider-visible identifier does not need a customer name or document title.",
+          "Separate the logical case from the attempt. Case 42 remains case 42 when it moves into a recovery batch, but that submission gets its own attempt record. Store the mapping from the provider’s custom_id and batch ID back to both. Matching by line position would make a reordered result file look like a model failure against the wrong reference answer.",
+          "The manifest gives the importer something independent to check. Every expected attempt should resolve to an outcome; unexpected identifiers and conflicting duplicates should stop finalization. Comparing counts alone is insufficient because one duplicated result can hide one missing result while leaving the total unchanged."
+        ]
+      },
+      {
+        "heading": "Keep receipt, usability, and quality separate",
+        "paragraphs": [
+          "There are several boundaries between receiving a response and passing an evaluation. Did the importer durably save the provider result? Did the response contain a complete answer in the expected format? Did the grader run successfully? Did that answer meet the task’s criteria? I would record those outcomes separately so an importer bug cannot masquerade as a reasoning failure.",
+          "For a document extraction eval, a successfully returned message might still contain truncated output or an invalid field value. Those cases belong in the report under explicit rules. A failed grader should remain an evaluation-system error until resolved; it should not silently become either a pass or a model-quality failure.",
+          "Make ingestion safe to repeat. If a download stops halfway through, rerunning the importer should leave already stored results unchanged and fill the remaining gaps. Use a unique key for each provider batch and request identifier, retain enough provenance to investigate conflicts, and mark import completion only after checking the whole manifest."
+        ]
+      },
+      {
+        "heading": "Recovery must preserve the experiment",
+        "paragraphs": [
+          "Before the run starts, decide which failures may be retried, how many attempts are allowed, and which result counts. A temporary service failure can justify another attempt. A disappointing but valid answer is an observed outcome. Resubmitting only the disappointing answers until they pass changes what the evaluation measures.",
+          "Keep the first-attempt report even when recovery succeeds. Then publish a separate view after the declared recovery policy has run, including the extra attempts and elapsed time. That lets a team distinguish model quality from the operational cost of obtaining a complete result set.",
+          "If recovery changes the prompt, model, or input, give it a new experiment identity. It can still be useful evidence, but mixing it into the original score hides the intervention. For comparisons, inspect missingness by task category and input size as well as the overall total. The same completion percentage can conceal very different gaps."
+        ]
+      },
+      {
+        "heading": "Make finalization an explicit decision",
+        "paragraphs": [
+          "My finalization rule would require an outcome for every planned case, no unexplained identifiers, and a recorded reason for every excluded score. Finalized does not have to mean every request succeeded. It means the report accounts for the entire experiment and clearly states whether its release criteria were met.",
+          "Retrieve results promptly rather than treating the provider as the evaluation archive. Claude currently documents a result-download window of 29 days from batch creation. I would store the evidence needed for the decision under the project’s own access and retention rules, and alert when a completed batch has not been imported.",
+          "A useful rehearsal is deliberately unglamorous: shuffle the result lines, interrupt a download, replay the importer, and include a failed request and a grader error. The report should preserve the original denominator throughout. That is the check I want before an overnight score becomes a reason to ship."
+        ],
+        "sources": [
+          {
+            "label": "Claude documentation: batch limits and result availability",
+            "href": "https://platform.claude.com/docs/en/build-with-claude/batch-processing#batch-limitations"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Oct 16, 2026",
     "blogHeading": "What Happens to a Paused Agent When You Deploy?",
     "slug": "what-happens-to-a-paused-agent-when-you-deploy",
