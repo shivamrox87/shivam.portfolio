@@ -920,6 +920,74 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Oct 21, 2026",
+    "blogHeading": "When More Agent Workers Make the Queue Slower",
+    "slug": "when-more-agent-workers-make-the-queue-slower",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "Cloud Deployment",
+    "content": "A growing queue makes adding workers feel obvious. For an agent that spends most of its time waiting on a model API, extra replicas can create more throttling without completing more work. I would first ask which part of the system has capacity to make progress.",
+    "sections": [
+      {
+        "heading": "Find out what the workers are waiting for",
+        "paragraphs": [
+          "Imagine a document review service with a queue of jobs and several worker pods. Each job parses a file, calls a model, and saves a report. The queue grows while CPU stays low. A CPU-based autoscaler sees little pressure, even though users are waiting. Switching to queue length looks like the natural fix.",
+          "That helps if the application lacks worker slots and the model service has spare capacity. If those workers already saturate the available model quota, more pods compete for the same allowance. Throttled requests wait or retry, jobs remain unfinished, and the queue continues asking for more workers. The autoscaler can amplify the congestion it was meant to resolve.",
+          "I would split task time into local processing, waiting for model admission, remote execution, and retry delay. Alongside that, measure completed jobs per minute and the age of the oldest runnable job. Those measurements distinguish a shortage of compute from a shortage of permission to send the next request."
+        ]
+      },
+      {
+        "heading": "Define what belongs in the scaling signal",
+        "paragraphs": [
+          "An agent queue can contain work in very different states. A job ready to parse a file needs a worker. A job waiting for a user's approval may need only durable storage. A delayed retry needs a future wakeup. Counting all three as immediate demand buys capacity that cannot help two of them yet.",
+          "The queue adapter's definition matters. KEDA's versioned SQS documentation says its default scaling count includes both visible and in-flight messages; delayed messages are optional. In-flight work can usefully keep capacity present while jobs finish, but it also includes messages whose workers may be waiting on a dependency. Inspect that meaning before tuning the target.",
+          "For a simple service, I would start with a bounded worker pool and a clearly defined ready queue. If parsing and model waiting have very different resource needs, separate those stages when the operational benefit justifies it. Keep parked approvals out of the ready count, and keep an independent alert on their age so they do not disappear from operational view."
+        ],
+        "sources": [
+          {
+            "label": "KEDA 2.18: SQS queue counts, in-flight messages, and delayed messages",
+            "href": "https://keda.sh/docs/2.18/scalers/aws-sqs/"
+          }
+        ]
+      },
+      {
+        "heading": "Keep the shared limit shared",
+        "paragraphs": [
+          "Suppose a hypothetical deployment allows four concurrent model calls per pod. Scaling from three pods to twelve changes the potential concurrency from twelve calls to forty-eight. A per-pod setting has become a much larger system-wide decision. The same multiplication happens when each worker owns an independent rate limiter.",
+          "I would enforce model admission across the workers sharing a provider quota, accounting for other applications using that quota too. Concurrency and rate are different constraints: a semaphore bounds active calls, while a rate policy controls requests or tokens over time. An agent can need both. Worker autoscaling should operate within those boundaries.",
+          "There is a subtle Kubernetes trap here. When an HPA has multiple metrics, it chooses the largest replica recommendation, within the configured maximum. Adding a provider-capacity metric beside queue depth does not make that metric a veto. Use a deliberate admission mechanism and a bounded replica policy; verify any combined scaling calculation explicitly."
+        ],
+        "sources": [
+          {
+            "label": "Kubernetes: how HPA combines multiple metrics",
+            "href": "https://kubernetes.io/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale/#scaling-on-multiple-metrics"
+          }
+        ]
+      },
+      {
+        "heading": "Measure whether another replica helps",
+        "paragraphs": [
+          "I would run a controlled load test with representative documents and a fixed model route. Increase worker capacity in steps while holding the workload and admission policy steady. Watch useful completions, queue age, throttling, and resource use. The useful range ends when another step mostly adds waiting, retries, or idle memory.",
+          "Repeat with a mix of short and long jobs. Ten queue entries can represent ten quick classifications or ten lengthy reviews. A target calibrated on one mix can perform badly on the other. Separate queues by materially different service needs if that makes scheduling easier to reason about; avoid inventing precise token estimates that the application cannot actually produce.",
+          "Replica changes also take time. A pod needs to start and become ready before it contributes. Kubernetes provides scaling-rate policies and stabilization windows, which help control how rapidly replica counts change. Tune them against measured startup and workload behaviour. They cannot create downstream capacity, and a smooth replica graph is not evidence that users are getting results."
+        ],
+        "sources": [
+          {
+            "label": "Kubernetes: configurable scaling behaviour and stabilization",
+            "href": "https://kubernetes.io/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale/#configurable-scaling-behavior"
+          }
+        ]
+      },
+      {
+        "heading": "Rehearse recovery before enabling aggressive scaling",
+        "paragraphs": [
+          "The test I care about most is a temporary downstream slowdown. Reduce the model allowance, keep submitting work for a bounded interval, then restore it. The system should retain an honest backlog, keep retries bounded, and recover without every worker releasing a burst at once. Check the oldest jobs as well as aggregate throughput; a healthy average can hide stranded work.",
+          "Also exercise scale-down while jobs are active. Workers should stop taking new jobs and either finish within the shutdown allowance or leave recoverable work behind. Queue lease handling and duplicate-safe effects still matter when termination comes from an autoscaler. A lower replica count should not turn a nearly finished report into an unexplained disappearance.",
+          "Before raising the replica ceiling, I want to be able to explain what the next worker will do immediately and which shared resource lets it finish. If the answer is that it will wait for the same exhausted model allowance, I would keep the backlog visible and work on admission, scheduling, or capacity."
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Oct 19, 2026",
     "blogHeading": "Count the Missing Results in Your Batch Eval",
     "slug": "count-the-missing-results-in-your-batch-eval",
