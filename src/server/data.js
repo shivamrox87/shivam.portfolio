@@ -920,6 +920,74 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Oct 23, 2026",
+    "blogHeading": "Changing Embedding Models While Documents Keep Moving",
+    "slug": "changing-embedding-models-while-documents-keep-moving",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "AI Infrastructure",
+    "content": "A new embedding model can improve search and still leave your application serving stale documents. The difficult part of the switch is keeping each vector attached to the right document revision while the corpus continues to change.",
+    "sections": [
+      {
+        "heading": "The backfill can finish last and still be wrong",
+        "paragraphs": [
+          "Imagine a policy document at revision 17. A migration worker reads it and starts generating a new embedding. Meanwhile, an editor publishes revision 18, and the live ingestion path writes its new vector. The slower migration worker then finishes and overwrites that vector with revision 17. Every document has an embedding. The migration dashboard is green. Search is now using an older version of the policy.",
+          "This is the failure I would put at the centre of an embedding migration review. A completed scan says which records the worker visited. It does not establish that the destination represents the latest source state.",
+          "Qdrant's current migration guide explicitly calls out this race. Its named-vector backfill pauses updates and deletes to existing points while allowing searches and new inserts. That is a useful operational constraint to notice before adopting the example. If the product cannot pause edits, the migration needs additional coordination."
+        ],
+        "sources": [
+          {
+            "label": "Qdrant: embedding migration and concurrent-update constraints",
+            "href": "https://qdrant.tech/documentation/tutorials-operations/embedding-model-migration/"
+          }
+        ]
+      },
+      {
+        "heading": "Give every embedding a source revision",
+        "paragraphs": [
+          "I would identify an embedding by the document ID, source revision, chunk identity, and embedding configuration. The configuration includes the model and preprocessing choices. If chunking changes, a document can gain or lose chunks, so an old chunk number alone is a poor identity. Keep an explicit manifest of which chunks belong to the revision being indexed.",
+          "For a service that must accept edits throughout the migration, I would route live changes and backfill through one ordered ingestion path per document, or use destination writes that atomically reject older source revisions. Checking the revision and then writing in separate operations leaves another race between those two steps. The chosen datastore has to support the enforcement the design assumes.",
+          "Elasticsearch's reindex API provides a concrete example of version-aware writes: external versioning can reject an incoming version that is not newer. That is a storage-specific capability, not a guarantee to assume for every vector database. Where atomic revision checks are unavailable, serializing writes or scheduling a bounded edit pause may be easier to operate."
+        ],
+        "sources": [
+          {
+            "label": "Elasticsearch: reindex destination version semantics",
+            "href": "https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-reindex"
+          }
+        ]
+      },
+      {
+        "heading": "Deleted documents need a place in the migration",
+        "paragraphs": [
+          "Now change the example: the editor deletes the document while the worker is embedding it. A late insert can resurrect it in the new index. A scan of currently existing source documents will never tell the migration worker about that deletion.",
+          "I would retain a deletion record with the document ID and its revision until every migration consumer has passed it. The ingestion path should reject older work for that ID, remove all affected chunks, and preserve enough progress information to resume after a crash. Treat permission changes as source changes too; carrying old access metadata into the new index can expose material that the current application would exclude.",
+          "A practical cutover check is to record a position in the source change stream, then verify that the candidate index has applied every change through that position. Reconcile document revisions and chunk membership as well as counts. Equal counts can hide one missing document and one resurrected document. Keep processing subsequent changes while preparing the switch; reaching a checkpoint does not freeze the corpus."
+        ]
+      },
+      {
+        "heading": "Switch the query encoder with the index",
+        "paragraphs": [
+          "I would publish a retrieval configuration that binds the query encoder to its destination vector field or collection. Resolve that configuration once per request and carry it through the search. Updating a global collection alias independently from application code can otherwise send an old query vector to a new document space. Matching vector dimensions alone does not establish compatibility.",
+          "The input mode belongs in that configuration too. Cohere's Embed API distinguishes search_document for stored passages from search_query for queries. A model name by itself therefore does not describe the complete encoding contract. Include the retrieval configuration in cache keys so cached query vectors cannot leak across a switch.",
+          "For an initial model comparison, I would hold chunking, filters, and reranking steady. Inspect queries involving exact identifiers, short ambiguous phrases, and the languages the product actually serves. Decide what counts as relevant evidence before looking at the candidate results. A different ranking is an observation; calling it an improvement requires checking what the user needed."
+        ],
+        "sources": [
+          {
+            "label": "Cohere Embed API: query and document input modes",
+            "href": "https://docs.cohere.com/reference/embed"
+          }
+        ]
+      },
+      {
+        "heading": "Rehearse the awkward writes before cutover",
+        "paragraphs": [
+          "My rehearsal would deliberately delay a backfill result, edit its source twice, then release the delayed result. Repeat with a deletion and a permission removal. Interrupt the worker after it writes vectors but before it records progress, then restart it. Verify that replay leaves the correct revision and chunk set visible to the correct caller.",
+          "Keep the old retrieval configuration usable during an observation period, including its ingestion path. A rollback to an index that stopped receiving edits sends users back to stale evidence. Record the point at which keeping that path current ends, and treat later recovery as a rebuild or catch-up operation with its own validation.",
+          "The release decision should include evidence that a late revision-17 embedding cannot replace revision 18, and that deleted content stays absent after replay. Those are small tests with concrete expected outcomes. I would want them passing before letting a better retrieval score justify the production switch."
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Oct 21, 2026",
     "blogHeading": "When More Agent Workers Make the Queue Slower",
     "slug": "when-more-agent-workers-make-the-queue-slower",
