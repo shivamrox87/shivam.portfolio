@@ -920,6 +920,74 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Oct 26, 2026",
+    "blogHeading": "When an Agent Mistakes a Partial Result for the Whole",
+    "slug": "when-an-agent-mistakes-a-partial-result-for-the-whole",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "Developer Tools",
+    "content": "An agent can call the right tool, receive a successful response, and still draw the wrong conclusion. If the response contains only part of the evidence, the application needs to keep that limitation visible all the way to the answer.",
+    "sections": [
+      {
+        "heading": "A successful request can leave work unfinished",
+        "paragraphs": [
+          "Imagine asking a coding agent whether a repository still uses an old configuration key. It lists the files, inspects the paths it receives, and reports that the migration is complete. One directory never appeared in the listing. The agent searched everything it saw, but the application let that become a claim about the entire repository.",
+          "GitHub’s tree API makes this a concrete integration concern. A recursive response can be truncated, and the documentation tells callers to fetch subtrees individually when that happens. A wrapper that returns only the paths throws away the signal that should change the agent’s next action.",
+          "I would review this boundary whenever adding a repository connector to an agent. The useful question is whether the caller can distinguish a complete inventory from a useful first portion. Returning a large amount of data can make the omission harder to notice, because the response already looks thorough."
+        ],
+        "sources": [
+          {
+            "label": "GitHub Docs: truncated tree responses and subtree traversal",
+            "href": "https://docs.github.com/en/rest/git/trees#get-a-tree"
+          }
+        ]
+      },
+      {
+        "heading": "Carry coverage beside the evidence",
+        "paragraphs": [
+          "I would give an inventory tool separate fields for its items, the scope examined, the revision observed, and whether enumeration is complete. If more work remains, include the supported continuation mechanism or a concrete reason it cannot continue. These are application fields I would define; they are not a universal tool protocol.",
+          "For example, a file listing might identify one repository and commit, report that three subtrees remain, and return handles for those subtrees. A capped search might instead report that its result limit was reached and suggest narrower queries. Those situations need different recovery paths. A single success boolean does not tell the caller which path to take.",
+          "MCP provides structuredContent and optional outputSchema support for tool results, so these details can travel as validated data. The adapter still has to populate them honestly. If an upstream service does not establish completeness, I would represent it as unknown. An empty list with unknown coverage must stay distinguishable from a completed search with no matches."
+        ],
+        "sources": [
+          {
+            "label": "MCP tools specification: structured results and output schemas",
+            "href": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools#structured-content"
+          }
+        ]
+      },
+      {
+        "heading": "Finishing the pages does not prove the claim",
+        "paragraphs": [
+          "Pagination is only one source of missing evidence. GitHub’s search API limits results and can return incomplete_results when a query times out. It also documents that searches across multiple resources only return resources accessible to the caller. Finishing the available pages therefore cannot establish that every repository in an organisation was examined.",
+          "I would separate three questions in the run record: did we consume the available results, did the source cover the requested scope, and can this query detect what the user asked about? Searching for one literal key cannot prove that no code constructs it dynamically. Exhaustive retrieval and an adequate search method are separate requirements.",
+          "For a migration check, first agree on a bounded claim: tracked files at a particular commit, with declared exclusions and a stated matching rule. Pin traversal to that commit where supported. If the source can only expose a changing view, retain that limitation. Otherwise a sequence of individually valid pages can silently describe different moments."
+        ],
+        "sources": [
+          {
+            "label": "GitHub Docs: search limits, incomplete results, and access scope",
+            "href": "https://docs.github.com/en/rest/search/search#about-search"
+          }
+        ]
+      },
+      {
+        "heading": "Keep the limitation through every transformation",
+        "paragraphs": [
+          "The connector is only the first place coverage can disappear. A gateway may shorten a tool response to fit a context budget. A summarizer may keep the matching files and discard the warning. A later agent may inherit the findings without the unvisited directories. I would make coverage part of the retained result envelope at each boundary.",
+          "Keep traversal bookkeeping in application state: visited partitions, pending continuations, source revision, and the reason work stopped. Let the model inspect compact findings and request more evidence. This avoids asking a conversational summary to serve as the only record of whether a scan finished.",
+          "The product should also make an honest partial answer useful. If the time budget ends, report the matches found and the scope still unchecked. For an action conditioned on a complete scan, such as removing a compatibility path, enforce that prerequisite in application code. A confident sentence from the model should not satisfy the condition."
+        ]
+      },
+      {
+        "heading": "Test the missing page, then read the answer",
+        "paragraphs": [
+          "My first fixture would put the only remaining use of the old key in the final page. The expected behaviour is to fetch it and report the match. A second fixture would make that page unavailable. This time the expected behaviour is an explicitly incomplete assessment, with the deletion step blocked.",
+          "I would also test an empty page that still has a continuation, a repeated cursor, a truncated tree, and a result shortened by our own adapter. Repeated continuations need a bounded failure path so that completeness checks cannot trap the agent in a loop. Test the final user-facing claim as well as the internal state; a correct flag is little help if the answer says the repository is clear.",
+          "The release check I care about is simple: whenever the system says it checked the whole agreed scope, can it show how that scope was exhausted? When it cannot, the answer should name what remains. That gives a developer something concrete to finish, and keeps an unfinished search from becoming an unsafe decision."
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Oct 23, 2026",
     "blogHeading": "Changing Embedding Models While Documents Keep Moving",
     "slug": "changing-embedding-models-while-documents-keep-moving",
