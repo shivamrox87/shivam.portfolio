@@ -920,6 +920,66 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Oct 28, 2026",
+    "blogHeading": "A Model Alias Is a Release Channel, Not a Default",
+    "slug": "a-model-alias-is-a-release-channel-not-a-default",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "AI Infrastructure",
+    "content": "A model alias can improve an application without a code deploy. It can also change behaviour, cost, tool use, or availability underneath a running workflow. I would treat that movement as a release: make it visible, test it against the work, and promote it deliberately.",
+    "sections": [
+      {
+        "heading": "The configuration can change while the service is still green",
+        "paragraphs": [
+          "Imagine a document assistant configured with a convenient model alias. On Monday its extraction and review path passes the release suite. On Tuesday the provider advances the alias. Requests still return 200, but the model now formats one field differently, uses a tool in a different order, or needs a slightly different prompt to reach the same result. Nothing in the application repository changed, so a normal deployment dashboard has no event to point at.",
+          "That is why I would not describe an alias as merely a default. It is a provider-managed release channel. Google’s model documentation makes the distinction unusually explicit: a specific stable ID usually does not change, while its `latest` aliases are hot-swapped as new releases arrive. The useful engineering question is not whether moving aliases are bad. It is whether the product can tell that the dependency it selected yesterday is no longer the one serving today.",
+          "A provider can also retire a fixed ID. Anthropic’s deprecation guidance says requests to models past their retirement date fail and recommends testing replacements before that date. Pinning protects reproducibility for a while; it does not remove the need for an eventual migration plan."
+        ],
+        "sources": [
+          {
+            "label": "Gemini API: model version names, stable IDs, and moving latest aliases",
+            "href": "https://ai.google.dev/gemini-api/docs/models"
+          },
+          {
+            "label": "Anthropic: model deprecations and replacement testing",
+            "href": "https://docs.anthropic.com/en/docs/about-claude/model-deprecations"
+          }
+        ]
+      },
+      {
+        "heading": "Record what actually answered the request",
+        "paragraphs": [
+          "At the gateway, I would keep the requested policy separate from the resolved provider model. A policy might say “the approved fast extraction channel”; the request record should capture the provider, model identifier returned or selected, gateway policy revision, prompt revision, tool schema revision, and the input and output contracts that matter for the workflow. Do not put sensitive prompts or customer content into general-purpose logs just to make this possible.",
+          "That record turns a vague report — “it worked last week” — into a comparison. It lets an operator ask whether the break began after a policy edit, a provider version change, a tool-definition change, or an application release. It also keeps the experiment honest: an evaluation score without its resolved model and configuration is difficult to reproduce.",
+          "The gateway should preserve this provenance even when it presents one convenient API to several providers. Normalizing request syntax is useful. Collapsing model identity into a single friendly label is not. The label is a routing decision; the resolved dependency is evidence."
+        ]
+      },
+      {
+        "heading": "Promote an alias with a small compatibility gate",
+        "paragraphs": [
+          "I would make each channel point to a named candidate before it reaches a consequential workflow. Run a compact regression set through the candidate with the production prompt, response schema, and tool definitions. Include the things that tend to survive happy-path demos: a malformed source, an ambiguous request, a tool denial, a long input, and an output that must be rejected rather than guessed.",
+          "The gate does not need to predict every future answer. Its job is narrower: detect meaningful drift in the product behaviours the team has decided matter. Compare task outcomes and policy violations first, then inspect latency, token use, refusal behaviour, structured-output validity, and tool-call traces where those affect the workflow. A lower cost is not a safe trade if the candidate changes the action boundary.",
+          "For moving aliases, schedule this check around the provider’s announced change window when one exists, and run it after the first observed resolution as well. For a fixed-model migration, use the same gate before switching traffic. The mechanism differs; the product risk is familiar."
+        ]
+      },
+      {
+        "heading": "Separate observation from promotion",
+        "paragraphs": [
+          "There is a useful middle state between “use it everywhere” and “never touch it.” Send a bounded, non-consequential slice of eligible work to the candidate, or replay recorded test inputs under the right access controls. Keep its result beside the incumbent’s without allowing it to make an external write. This can reveal a real integration mismatch that an isolated evaluation did not cover.",
+          "I would avoid calling this shadowing when the candidate receives a different prompt, different tools, or a different traffic mix. Those are different experiments. Record the assignment rule and compare within the same task class. If production inputs are sensitive, a synthetic suite or redacted replay may be the only appropriate option; privacy is a constraint on the experiment design, not a reason to pretend the comparison happened.",
+          "Promotion should be a gateway policy change with an owner, timestamp, and rollback target. That gives the on-call path something concrete to do when reports change: route new eligible work back to the previous approved version while the team investigates."
+        ]
+      },
+      {
+        "heading": "Make the rollback answerable before the change",
+        "paragraphs": [
+          "Before advancing a channel, I would ask four plain questions: Which exact model will serve new requests? Which workflows are allowed to receive it? What evidence must remain stable? Where does new traffic go if that evidence changes? Those questions expose missing ownership faster than a long provider comparison spreadsheet.",
+          "Some work must be pinned for longer. An asynchronous evaluation, a regulated review, or an agent waiting for approval may need to finish with the model and contract it started with, or be explicitly restarted under a new version. A silent mid-run substitution makes later review much harder. The application should make that choice at its own workflow boundary rather than inherit it accidentally from a provider alias.",
+          "The practical goal is modest: a model change should be as observable as any other production dependency change. When a team can name what moved, show what it was tested against, and safely choose the previous route, aliases become useful operational tools instead of invisible sources of drift."
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Oct 26, 2026",
     "blogHeading": "When an Agent Mistakes a Partial Result for the Whole",
     "slug": "when-an-agent-mistakes-a-partial-result-for-the-whole",
