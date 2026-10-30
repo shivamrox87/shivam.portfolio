@@ -920,6 +920,68 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Oct 30, 2026",
+    "blogHeading": "A Stateless Agent Server Still Needs Durable Work IDs",
+    "slug": "a-stateless-agent-server-still-needs-durable-work-ids",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "AI Infrastructure",
+    "content": "Making an agent endpoint stateless can simplify deployment. It does not make the work stateless. The useful boundary is to keep transport connections disposable while giving each real piece of work an explicit, durable identity.",
+    "sections": [
+      {
+        "heading": "A connection is a poor place to hide a job",
+        "paragraphs": [
+          "An agent can begin a repository review, wait for an approval, call a slow provider, and return after the browser tab has disappeared. If the server remembers that work only because a particular HTTP session is still alive, a load balancer, reconnect, or deployment turns a product concern into a transport accident. The agent may lose its place, repeat an external write, or quietly start a second run.",
+          "The July 2026 MCP revision makes this separation especially visible. It removes protocol-level sessions from the core and says servers that need state across calls should mint an explicit handle that the client passes back. That is a helpful direction for agent products even outside MCP: a connection can carry a request, but it should not be the only name for consequential work.",
+          "I would give a real unit of work its own ID before the first slow or side-effectful step. Store the task intent, initiating identity, current lifecycle state, chosen workflow revision, and a bounded summary of inputs behind that ID. The request that created it can safely finish. A later request can ask what happened without needing to land on the same process."
+        ],
+        "sources": [
+          {
+            "label": "Model Context Protocol: the 2026-07-28 stateless core and explicit handles",
+            "href": "https://blog.modelcontextprotocol.io/posts/2026-07-28/"
+          }
+        ]
+      },
+      {
+        "heading": "Make the handle a reference, not a bearer permission",
+        "paragraphs": [
+          "A durable work ID answers “which run?” It should not, by itself, answer “who may see or continue it?” A random-looking URL parameter is useful for routing and correlation, but treating it as authority makes copied links and logs part of the access-control system. Resolve the handle under the authenticated caller, then check the task’s tenant, owner, delegation rules, and current policy before returning state or accepting the next operation.",
+          "This distinction also improves the model-facing interface. The model may carry a compact run reference between tool calls, while the application keeps credentials, customer data, and approvals behind a server-side record. A resumed call can obtain the narrow credential it needs at the moment of execution rather than recovering a broad token from yesterday’s context.",
+          "MCP’s current TypeScript guidance follows the same shape at the transport boundary: the server verifies a bearer token and passes verified auth information into handlers. Its resource check is about whether a token was issued for this server, not proof that any caller may operate on every task the server knows about. Application authorization still belongs at the work record."
+        ],
+        "sources": [
+          {
+            "label": "MCP TypeScript SDK: bearer-token verification and resource-bound tokens",
+            "href": "https://ts.sdk.modelcontextprotocol.io/v2/serving/authorization"
+          }
+        ]
+      },
+      {
+        "heading": "Use lifecycle state to make retries boring",
+        "paragraphs": [
+          "An explicit work record lets the service distinguish a new instruction from a retry. I would give the create operation an idempotency key and record its accepted result before launching expensive work. A retry with the same key returns the existing work ID; it does not begin another deployment, ticket, or payment because the user refreshed a page.",
+          "The record should state more than running or done. Useful states include awaiting input, awaiting approval, queued, executing, succeeded, failed, cancelled, and expired. Each transition needs an owner and a timestamp. For actions with an external effect, preserve the downstream operation reference and its observed outcome. “The worker timed out” is not enough to decide whether it is safe to call the downstream system again.",
+          "That means a reconnect path can be pleasantly simple: load the work ID, return the latest state and a monotonic event position, then either replay retained events or ask the client to poll. The UI does not need to infer whether silence means completed, disconnected, or stuck. The agent does not need to rerun its reasoning merely to reconstruct a status page."
+        ]
+      },
+      {
+        "heading": "Bind approvals to the work that will execute",
+        "paragraphs": [
+          "A durable ID is also a useful place to anchor a human decision. When a run asks to create a production change, store the proposed target, argument digest, policy revision, approver, and expiry with that work record. On resume, compare the pending operation with what was approved and re-check current authorization. If the target or payload changed, ask again rather than treating approval as a conversational mood that survives any later plan.",
+          "Keep the approval smaller than the task when possible. A multi-step investigation may be allowed to read systems for an hour while a single write needs a separate approval. When the write succeeds, record that fact against the work ID. A later retry can report the existing result or begin a declared recovery flow instead of presenting the same confirmation twice.",
+          "This is not about making every harmless lookup durable. It is about choosing the boundary where an interruption would otherwise create ambiguity. If losing a connection can change what the system does next, that decision deserves a record outside the connection."
+        ]
+      },
+      {
+        "heading": "Exercise the restart paths before they become incidents",
+        "paragraphs": [
+          "My first tests would disconnect the client after task creation, restart a worker while an operation is in flight, submit the same create request twice, revoke the caller’s role while the run waits for approval, and resume after the task’s retention window. Each test needs a specific expected result: return the same work ID, reconcile the external effect, deny the resumed action, or explain that the record expired. A vague “resume” feature is hard to trust until those answers exist.",
+          "I would also test a deployment that changes the workflow implementation. The work record should identify which revision started the task and whether it is safe to continue under the new revision, stay on the old one, or restart with a fresh approval. Stateless routing makes it easier to put any request on any instance; it does not remove compatibility decisions from the application.",
+          "The payoff is modest but important: connections can come and go without becoming the source of truth. The system can name the work, explain its state, check who is asking, and recover without guessing. That is a much better foundation for an agent than hoping a long-lived request stays alive."
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Oct 28, 2026",
     "blogHeading": "A Model Alias Is a Release Channel, Not a Default",
     "slug": "a-model-alias-is-a-release-channel-not-a-default",
