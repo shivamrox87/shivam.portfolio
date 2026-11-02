@@ -920,6 +920,63 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Nov 02, 2026",
+    "blogHeading": "An Agent Approval Needs a Versioned Target, Not Just a Yes",
+    "slug": "an-agent-approval-needs-a-versioned-target-not-just-a-yes",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "AI Infrastructure",
+    "content": "An approval can be genuine and still be unsafe to reuse. If an agent pauses, the record, branch, invoice, or deployment it planned to change may move before it resumes. The approval needs to travel with a precise version of the proposed action, not just with the conversation that produced it.",
+    "sections": [
+      {
+        "heading": "A permission can be right while the action is wrong",
+        "paragraphs": [
+          "Consider an agent that prepares a change to a production configuration, then asks someone to approve it. The approver sees the intended environment and a clear summary. Ten minutes later, another operator changes the configuration, or the agent revises its own plan after receiving a new tool result. If resume means only “the user said yes earlier,” the system can apply a valid permission to a different state of the world.",
+          "This is not a reason to make every approval burdensome. It is a reason to distinguish authority from the proposal it was evaluating. A role, scope, or tool grant may say who can make a kind of change. It does not establish that this exact change, against this exact target, remains the one a person reviewed."
+        ]
+      },
+      {
+        "heading": "Make the proposed action a small, stable record",
+        "paragraphs": [
+          "Before asking, I would create a server-side action record with the operation name, canonical target identifier, target revision or concurrency token, normalized arguments, initiating identity, policy revision, and a short human-readable explanation. Compute a digest over the fields that make the action consequential. The UI can show friendly language, but the resume path should compare the stored record rather than attempt to recover intent from chat history.",
+          "OAuth’s Rich Authorization Requests offer a useful protocol-level analogy: they carry structured authorization details beyond a broad scope string. An agent application does not need to adopt that format internally, but the design lesson is valuable. The security decision becomes more reviewable when it can name the type of action, the resource, and its constraints instead of relying on a label like “write access.”"
+        ],
+        "sources": [
+          {
+            "label": "IETF RFC 9396: OAuth 2.0 Rich Authorization Requests",
+            "href": "https://www.rfc-editor.org/rfc/rfc9396"
+          }
+        ]
+      },
+      {
+        "heading": "Check freshness at the execution boundary",
+        "paragraphs": [
+          "Approval time and execution time should both have a policy check. At resume, load the action record, verify the approver is still eligible, enforce its expiry, and compare the current target revision with the approved one. Then pass an optimistic-concurrency condition to the downstream system where it supports one. A database row version, an HTTP ETag, a Git commit SHA, or a deployment generation can turn “apply this if it is still what I reviewed” into an enforceable condition.",
+          "A mismatch should not silently refresh the proposal. Mark the action stale, explain what changed at the right level of sensitivity, and create a replacement record for renewed approval. If the target has no reliable revision, make the limitation explicit and narrow the action where possible. Guessing that the new state is close enough is exactly the decision the approval step was meant to keep visible."
+        ]
+      },
+      {
+        "heading": "Keep the confirmation and the credential separate",
+        "paragraphs": [
+          "A confirmation is evidence that a person accepted a proposal. A credential is what the service uses to call the downstream API. Treating them as the same thing leads to awkward designs: a long-lived token becomes an approval, or an approval link becomes a bearer secret. I would keep the decision record in the application and obtain a narrow, short-lived credential only when the action is admitted for execution.",
+          "This also makes product behaviour easier to explain. OpenAI’s current guidance for full MCP connectors notes that confirmation is based on permissions and the action’s context. That pairing is important: the tool may be available, while a particular invocation still deserves a decision. The application can preserve that distinction even when its downstream system only understands a conventional access token."
+        ],
+        "sources": [
+          {
+            "label": "OpenAI Help: developer mode and full MCP connectors",
+            "href": "https://help.openai.com/en/articles/12584461-developer-mode-and-full-mcp-connectors-in-chatgpt"
+          }
+        ]
+      },
+      {
+        "heading": "Test the pause like a concurrency feature",
+        "paragraphs": [
+          "The tests I want are deliberately unglamorous: approve a change, edit its target, and resume; approve one argument set, alter a hidden default, and resume; revoke the approver’s role while the action waits; let the approval expire; submit the same resume request twice. Each should leave a clear result: execute once, reject as stale, require a fresh decision, or reconcile an already-completed downstream operation.",
+          "Those cases turn approval from a modal dialog into a dependable control point. The goal is not to force a person to re-authorize every agent step. It is to ensure that a yes means yes to a versioned operation the system can still name when it finally executes. That is a small bit of discipline with a large payoff when agents work across pauses, retries, and busy shared systems."
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Oct 30, 2026",
     "blogHeading": "A Stateless Agent Server Still Needs Durable Work IDs",
     "slug": "a-stateless-agent-server-still-needs-durable-work-ids",
