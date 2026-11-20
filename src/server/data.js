@@ -920,6 +920,74 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Nov 20, 2026",
+    "blogHeading": "An Agent File Upload Needs a Handle and a Receipt",
+    "slug": "an-agent-file-upload-needs-a-handle-and-a-receipt",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "AI Infrastructure",
+    "content": "When an agent needs a PDF, a CSV, or a screenshot, the easy implementation is to hand the model a base64 string. That works until the file is large, the call is retried, or the bytes have to pass through somebody else’s storage. The cleaner split is to give the model a handle and the system a receipt.",
+    "sections": [
+      {
+        "heading": "A base64 blob is a file pretending to be text",
+        "paragraphs": [
+          "Files are now routine agent inputs: a contract to review, a sales export, a screenshot of a failing job. The quickest tool schema takes a string called data and asks the model to produce base64. It works for a small text file. Then the payload grows by roughly a third during encoding, consumes context that the task actually needed, and gets re-sent on every retry. An argument assembled token by token can also hit an output limit or be cut off mid-stream, and a truncated blob may look plausible right up until it fails to decode.",
+          "On November 10, the MCP project published an exploration of a draft file-transfer extension, io.modelcontextprotocol/files, that takes a more careful position: metadata travels in the tool call, and bytes move separately. It is still experimental, with no reference implementation yet, so I would not build a production integration around every detail. But the shape is worth borrowing even inside a proprietary agent framework."
+        ],
+        "sources": [
+          {
+            "label": "MCP Blog: Exploring File Uploads and Downloads in MCP",
+            "href": "https://blog.modelcontextprotocol.io/posts/exploring-file-uploads-and-downloads-in-mcp/"
+          }
+        ]
+      },
+      {
+        "heading": "Let the model name the file, not carry it",
+        "paragraphs": [
+          "The draft defines a FileInput with an id, an optional name, a required mimeType, a required size, an optional SHA-256 digest, and an optional inline data field. A tool marks a file argument with an x-mcp-file annotation and can declare accept and maxSize hints for the client’s file picker. Small files may be sent inline as long as their total decoded size fits the server’s maxInlineBytes, which keeps the JSON-RPC request self-contained.",
+          "Larger files take the out-of-band path. The client sends the same metadata with data omitted, the server returns an upload target with either a url or a path, and the client writes the bytes with an HTTPS PUT or a multipart POST outside JSON-RPC. The model only needs to know that a file was attached and what it represents. The draft tells hosts not to expose file annotations in a way that makes models emit argument tokens, and to keep file bytes out of model context. That is the interface decision that matters: a handle the model can reason about, and a transfer path it never has to see."
+        ]
+      },
+      {
+        "heading": "The receipt makes the retry safe",
+        "paragraphs": [
+          "After the upload succeeds, the client retries tools/call with the original arguments and an opaque requestState. That state binds the tool name, the exact arguments, the upload target, and the authenticated principal. The server verifies it, re-checks that the bytes actually arrived, and only then runs the tool. A second retry carrying a consumed state must fail, so a flaky connection cannot turn one upload into two executions. If any file in the call failed to transfer, the client must not retry the tool at all.",
+          "The draft states plainly that a retry is not proof the bytes arrived. That is a useful boundary for any agent system: storage acknowledgement and execution permission are separate facts. The client uploads, the server verifies, the tool runs. Collapsing those into one step is how an agent ends up summarising an empty file or processing a half-written CSV. I would also make the state expire, carry it through every later round trip, and refuse to accept an upload target that was issued for a different tool or argument set."
+        ],
+        "sources": [
+          {
+            "label": "MCP draft specification: File uploads and downloads",
+            "href": "https://github.com/modelcontextprotocol/experimental-ext-file-uploads/blob/main/specification/draft/file-uploads.md"
+          },
+          {
+            "label": "MCP 2026-07-28 specification: Multi Round-Trip Requests",
+            "href": "https://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/mrtr"
+          }
+        ]
+      },
+      {
+        "heading": "Credentials belong to the destination",
+        "paragraphs": [
+          "An upload target can carry credentials set to omit or include. Omit means the target itself owns authorization; the client must not attach the MCP credential, cookies, client certificates, or platform authentication. Include is allowed only for a path target or an HTTPS URL on the same origin as the server’s canonical URI, and clients must reject redirects rather than follow them. Forbidden headers such as an extra Authorization or Cookie value are supposed to be refused outright.",
+          "The less obvious risk is a server pointing the client at an endpoint it controls. The draft recommends allowlisting origins for omit targets and still lists a mandatory allowlist as an open question. For a production agent, I would treat the upload URL as a capability: one destination, one file, a short expiry, and no forwarding of the agent’s own token. A file upload should never become a way to borrow the user’s session for an unrelated host."
+        ]
+      },
+      {
+        "heading": "A digest proves arrival, not safety",
+        "paragraphs": [
+          "The optional digest lets the server hash what it stored and reject a mismatch, which catches truncation, encoding errors, and interrupted transfers. It does not make the file safe. A client-supplied digest is an assertion about bytes, not a trust decision about content. Servers still need to enforce maxSize on decoded bytes, verify the content type instead of trusting the declared one, scan where the product requires it, and keep the file inside the tenant and run that requested it.",
+          "I would also keep inline and out-of-band limits consistent. A tool that accepts a hundred megabytes out of band while advertising a tiny maxInlineBytes is inviting a late failure, after the model has already been told the file is present. Context hygiene is part of the same control: the model should receive a filename, a content type, a size, and perhaps a short extract, not raw bytes it cannot meaningfully inspect."
+        ]
+      },
+      {
+        "heading": "Test the edges, not the happy path",
+        "paragraphs": [
+          "The tests I want look like this: send inline data that decodes larger than maxInlineBytes; retry a consumed requestState; change an argument between upload and retry; let the state expire mid-transfer; return a cross-origin target with include credentials; declare one size and send another; spoof the MIME type; repeat a file id inside one call; and let the upload succeed while the storage read fails. Each should produce a clear refusal or a single, verified execution.",
+          "None of this is exotic. It is the same discipline we already apply to idempotency keys, presigned URLs, and webhook retries, moved to a new kind of argument. The model’s job is to decide that a file is needed and why. The host’s job is to move it, the server’s job is to prove it arrived, and the tool’s job is to use it once. A handle and a receipt are enough to keep those jobs separate."
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Nov 02, 2026",
     "blogHeading": "An Agent Approval Needs a Versioned Target, Not Just a Yes",
     "slug": "an-agent-approval-needs-a-versioned-target-not-just-a-yes",
