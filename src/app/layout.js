@@ -52,9 +52,24 @@ export const viewport = {
   maximumScale: 5,
 };
 
+const themeInitScript = `
+(function () {
+  try {
+    var stored = localStorage.getItem("theme");
+    var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var theme = stored === "dark" || stored === "light" ? stored : (prefersDark ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch (e) {}
+})();
+`;
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className={`${manrope.variable} ${newsreader.variable} bg-[#EDEEEA] font-sans text-[#16181B] antialiased`}>
         <a href="#main-content" className="sr-only z-[100] bg-[#16181B] px-4 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           Skip to content
