@@ -920,6 +920,104 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Nov 24, 2026",
+    "blogHeading": "An Agent Sandbox Is a Policy, Not a Perimeter",
+    "slug": "an-agent-sandbox-is-a-policy-not-a-perimeter",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "AI Infrastructure",
+    "content": "“Sandboxed” sounds like a place an agent goes and a boundary it crosses once. In practice it is a list of rules applied at different moments: when a process starts, when a path is resolved, when a socket connects. The gaps in a sandbox are usually rules evaluated somewhere other than where the effect actually happens.",
+    "sections": [
+      {
+        "heading": "A perimeter is crossed once; a policy is evaluated many times",
+        "paragraphs": [
+          "The word sandbox brings to mind a walled area. A coding agent’s sandbox is closer to a policy engine attached to process creation. On Linux, bubblewrap builds a mount namespace and hides most of the host filesystem; on macOS, Seatbelt applies a profile to the commands that are started. Read two recent first-party descriptions side by side — OpenAI’s November 18 write-up of the Codex sandbox and the Claude Code sandboxing documentation — and the common shape is not a box but a series of decisions: which paths are writable, which hosts are reachable, and which commands are allowed to leave the boundary at all.",
+          "That distinction matters when you are judging risk. “Is the agent sandboxed?” is not a yes-or-no question. The useful question is: for each effect — a file write, a network connect, a process spawn, a tool result — where is the rule checked, and what happens when no rule was written for that point? Almost every gap documented in these systems is not a broken wall. It is an effect that occurs somewhere the policy was never asked."
+        ],
+        "sources": [
+          {
+            "label": "OpenAI: Inside the Codex sandbox",
+            "href": "https://openai.com/index/inside-the-codex-sandbox/"
+          },
+          {
+            "label": "Claude Code: Sandboxing",
+            "href": "https://code.claude.com/docs/en/sandboxing"
+          }
+        ]
+      },
+      {
+        "heading": "The filesystem rule is compiled before the command runs",
+        "paragraphs": [
+          "Bubblewrap’s own README is blunt about this layer: it is not a complete, ready-made sandbox, and the launching program’s arguments determine the security policy. Those arguments are mostly resolved once. A directory can be mounted read-only, another hidden behind an empty tmpfs, a file denied outright. Then the command starts, and the view is largely fixed. Codex’s deny rules inherit the same property: glob patterns are expanded to concrete paths before launch, and a path created later that happens to match the pattern is not automatically added to the deny set.",
+          "The practical consequence is that denies should name things that exist, and they should be re-established per command rather than per session. If a task may create directories, a deny pattern for a file inside one of those directories is a promise the mount namespace cannot keep. I would rather define the writable set as a small number of concrete roots, deny credential directories by absolute path, and test with a path that appears only after the process has started. Claude Code shows a useful variant of the same discipline: when read rules overlap, the narrower one wins, so a deny for a .env file still holds inside a broadly allowed parent directory."
+        ],
+        "sources": [
+          {
+            "label": "bubblewrap README",
+            "href": "https://github.com/containers/bubblewrap"
+          },
+          {
+            "label": "OpenAI: Inside the Codex sandbox",
+            "href": "https://openai.com/index/inside-the-codex-sandbox/"
+          }
+        ]
+      },
+      {
+        "heading": "Egress is where the perimeter claim falls apart",
+        "paragraphs": [
+          "Network isolation sounds like one control. It is really three different promises: no route at all, a direct route, or a route through a proxy that applies domain rules. Codex exposes the proxy to commands through environment variables such as HTTP_PROXY and PIP_PROXY, and its write-up notes that not all programs honor those variables; direct external connections are still blocked at the operating-system layer. The Claude Code documentation describes the same asymmetry from the other side. curl and npm work through the proxy once a host is allowed, while plain ssh, most database drivers, scp, and rsync cannot connect at all because they ignore the variables. UDP, QUIC, and ICMP cannot leave either.",
+          "This is why the proxy should be treated as observability and approval, not as the wall. The wall is the network namespace or the OS rule. Codex is explicit that a network-enabled profile only enforces domain rules when a proxy is actually configured; otherwise traffic takes the direct path. For any profile of my own, I would require the proxy whenever networking is enabled, block the link-local metadata range explicitly, and avoid wildcard DNS entries, because a broad DNS wildcard can still carry data out even when connections themselves are filtered."
+        ],
+        "sources": [
+          {
+            "label": "Claude Code: Sandboxing",
+            "href": "https://code.claude.com/docs/en/sandboxing"
+          },
+          {
+            "label": "OpenAI: Inside the Codex sandbox",
+            "href": "https://openai.com/index/inside-the-codex-sandbox/"
+          }
+        ]
+      },
+      {
+        "heading": "Not every process starts inside the boundary",
+        "paragraphs": [
+          "The most instructive gaps are the ones both systems admit. Codex does not sandbox the startup command for a stdio MCP server because it cannot reliably infer what that server needs. Claude Code’s sandbox covers shell commands only: its built-in file and web tools, hooks, local MCP servers, LSP servers, plugin monitors, and status-line commands run outside it. OpenAI’s post points at a slower leak as well. An agent can modify an ignored dependency inside the workspace, and an editor that runs a formatter outside the sandbox later executes that changed code.",
+          "A boundary that covers the shell but not the MCP launcher, the hook, or the program that consumes its output has several doors. I would wrap MCP launch commands in the sandbox with a minimal, explicit profile, keep exclusions to specific binaries instead of patterns like docker * or python *, and treat every excluded command as unsandboxed by definition. Claude Code is equally direct about the failure mode: when the platform does not support the sandbox, commands run without one unless failIfUnavailable is set. A default that fails open is fine for an experiment and wrong for a fleet."
+        ],
+        "sources": [
+          {
+            "label": "OpenAI: Inside the Codex sandbox",
+            "href": "https://openai.com/index/inside-the-codex-sandbox/"
+          },
+          {
+            "label": "Claude Code: Sandboxing",
+            "href": "https://code.claude.com/docs/en/sandboxing"
+          }
+        ]
+      },
+      {
+        "heading": "A wide read is a quiet write",
+        "paragraphs": [
+          "Both write-ups treat reads as the softer side of the profile. Codex allows broad filesystem access so compilers and build tools work, and its author notes that configuration files carrying API keys may remain readable. Claude Code’s default read access covers the whole computer except denied directories, and the documentation says that default still allows reading credential files such as ~/.ssh and ~/.aws/credentials. A read an agent can perform is information that can end up in model context, a trace, or a tool result. The rule is about reading, but the effect is a write somewhere the operator did not choose.",
+          "I would invert the default for agent work: allow reads under the workspace and named toolchain roots, deny credential directories and local socket files, and mask environment variables that carry secrets. Two details are worth borrowing from the Claude Code implementation. The narrower of overlapping read rules wins, so a deny for a specific file survives inside an allowed parent. And credential masking that works by extracting a pattern is only as reliable as the extraction: when the pattern matches nothing, the default is to warn and skip that entry, which leaves the real file readable. Any masking scheme needs a test where the mask fails, not just one where it succeeds."
+        ],
+        "sources": [
+          {
+            "label": "Claude Code: Sandboxing",
+            "href": "https://code.claude.com/docs/en/sandboxing"
+          }
+        ]
+      },
+      {
+        "heading": "Test the boundary, not the badge",
+        "paragraphs": [
+          "My test list for any agent sandbox is short and adversarial. Write to .git/config and to the agent’s own settings file. Create a path after launch that matches a deny pattern, then write to it. Connect to a raw IP and port without honoring proxy variables, and try the link-local metadata address. Start a stdio MCP server that reads a host file. Run a package install with networking disabled and confirm it fails loudly instead of succeeding from a warmed cache. Run an excluded command and see what it can touch. Modify an ignored dependency and ask which later process executes it.",
+          "None of those are exotic attacks. They are the documented seams. The useful artifact is not a checkbox that says the agent is sandboxed; it is a table with one row per effect — read, write, connect, spawn — and three columns: what the rule is, where it is enforced, and what runs outside it. A sandbox that can be described that way behaves like a policy. One that can only be described as a place is a perimeter, and perimeters have doors."
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Nov 20, 2026",
     "blogHeading": "An Agent File Upload Needs a Handle and a Receipt",
     "slug": "an-agent-file-upload-needs-a-handle-and-a-receipt",
