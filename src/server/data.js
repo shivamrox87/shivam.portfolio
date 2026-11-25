@@ -920,6 +920,94 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Nov 25, 2026",
+    "blogHeading": "The Consent Screen Was Never the Policy",
+    "slug": "the-consent-screen-was-never-the-policy",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "AI Infrastructure",
+    "content": "Consent screens were designed for a person connecting one app to one service. Agents have turned that click into the moment where an entire enterprise's access policy is supposed to happen, which it was never built to carry. The interesting change this year is not a better consent page. It is that the identity provider, not the user's click, is becoming the place where the decision lives.",
+    "sections": [
+      {
+        "heading": "A click is an event, not a policy",
+        "paragraphs": [
+          "A consent screen answers one narrow question: did this user, at this moment, approve this client for these scopes? It does not record which task the access serves, when the approval should lapse, who in the organization owns the connection, or whether the answer is still correct after the next deployment. That is an event with a timestamp, not a policy with an owner.",
+          "The arithmetic was tolerable when a person connected one app to one calendar. An agent breaks it. A single workflow may touch a dozen MCP servers, each with its own authorization server, client registration, and consent page. The number of clicks grows linearly while the number of connections anyone can actually review shrinks toward zero. Under the screen, the mechanics have also changed more than most people noticed: the 2026-07-28 MCP authorization revision prefers Client ID Metadata Documents over Dynamic Client Registration, keeps DCR only as a deprecated fallback, requires the resource parameter on both the authorization and token requests, and requires clients to validate the RFC 9207 issuer value to close authorization-server mix-up attacks.",
+          "None of that appears in the consent UI. The click stayed identical while every control that actually enforces the boundary moved. That gap is the thing worth designing around."
+        ],
+        "sources": [
+          {
+            "label": "Model Context Protocol: Authorization specification",
+            "href": "https://modelcontextprotocol.io/specification/draft/basic/authorization"
+          }
+        ]
+      },
+      {
+        "heading": "Three tokens, three different jobs",
+        "paragraphs": [
+          "Enterprise-managed authorization adds a third artifact, and the easy mistake is to collapse all three. An ID token says who signed in through SSO. An ID-JAG — an Identity Assertion JWT Authorization Grant, now at IETF draft-06 — says this client may act for this user at this resource, according to the identity provider's policy. An access token is what the MCP server will actually honor. They are issued by different parties for different purposes, and only the last one carries the scopes the resource server enforces.",
+          "The flow in MCP's Enterprise-Managed Authorization extension is compact. The user signs into the MCP client through the enterprise identity provider. The client presents its ID token to the identity provider's token endpoint using OAuth token exchange and asks for an ID-JAG. It then presents that ID-JAG to the MCP server's authorization server under the JWT bearer grant from RFC 7523 and receives an access token scoped to that server. There is no redirect to the MCP server's own authorization endpoint and no per-server consent page on this path.",
+          "That division is the whole idea. The identity provider vouches for the delegation. The MCP server's authorization server issues the credential it will accept. Two parties, two checks, and neither is a rubber stamp for the other. It also explains why Dynamic Client Registration does not apply here: the client is already registered with the identity provider, and the downstream server is being asked to accept an assertion, not to onboard an unknown client."
+        ],
+        "sources": [
+          {
+            "label": "Model Context Protocol: Enterprise-Managed Authorization",
+            "href": "https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization"
+          },
+          {
+            "label": "IETF: Identity Assertion JWT Authorization Grant (draft-06)",
+            "href": "https://datatracker.ietf.org/doc/draft-ietf-oauth-identity-assertion-authz-grant/"
+          }
+        ]
+      },
+      {
+        "heading": "A valid assertion is not an access token",
+        "paragraphs": [
+          "The first production failure I would expect is a well-formed ID-JAG being treated as permission. It is not. The resource server still has to validate that the access token came from its own authorization server, that it was issued for this server as the intended audience, and that it is inside its lifetime. The MCP authorization specification is direct about this: servers must validate that tokens were issued specifically for them, and must not accept or pass through tokens minted for someone else.",
+          "The audience check is the one that fails quietly. A gateway in front of five internal services that verifies signatures but not the audience turns five services into one. An ID-JAG makes that mistake easier to make, because it looks authoritative — it came from the corporate identity provider, it is signed, and it names a real user. But the identity provider is asserting a relationship between a user, a client, and a resource. It is not granting the downstream API's permissions. The access token is the only thing that carries those.",
+          "I would write the negative tests before the happy path. Take a correctly signed token and change its audience; confirm the server rejects it. Take a valid token for server A and present it to server B; confirm B rejects it. If either test passes, the delegation is wider than the diagram says, and no amount of consent-screen polish fixes it."
+        ],
+        "sources": [
+          {
+            "label": "Model Context Protocol: Authorization security considerations",
+            "href": "https://modelcontextprotocol.io/specification/draft/basic/authorization/security-considerations"
+          }
+        ]
+      },
+      {
+        "heading": "Account linking is the quiet failure",
+        "paragraphs": [
+          "Removing consent also removes the moment where a human would have noticed that the wrong account was being connected. When the identity provider vouches for a user, the MCP server still has to map that assertion onto an account of its own. The extension treats the subject claim as the primary stable identifier and email as a fallback for accounts that existed before this flow.",
+          "Email is a poor primary key. It gets reassigned when people leave, aliased when teams merge, and shared more often than anyone admits. A linker that falls back to email in a multi-tenant agent system can quietly attach an agent's request to the wrong tenant — no error, no prompt, just data returned into the wrong context. That is worse than a failed login, because nothing surfaces it.",
+          "The mapping I would build is issuer plus subject, written once at first link and never overwritten by a later email match. A missing link should fail closed and wait for an administrator, not guess. If enterprise-managed authorization removes the consent click, it should raise the bar for identity ambiguity rather than lower it."
+        ],
+        "sources": [
+          {
+            "label": "Notion: Enterprise-managed authorization",
+            "href": "https://developers.notion.com/guides/mcp/enterprise-managed-authorization"
+          },
+          {
+            "label": "Supabase: Enterprise-Managed Authorization for MCP",
+            "href": "https://supabase.com/docs/guides/platform/sso/enterprise-mcp-authorization"
+          }
+        ]
+      },
+      {
+        "heading": "Move the decision somewhere you can test",
+        "paragraphs": [
+          "The real prize is central revocation. Today, cutting off an agent means locating every authorization server it ever consented to and hoping the list is complete. When the identity provider is the source of the assertion, disabling the user, the client, or the policy stops new grants in one place. For an enterprise, that is the difference between a policy and a hope.",
+          "Centralization cuts both ways, though. A policy mistake at the identity provider now applies everywhere at once, which is why the control that makes this survivable is not a bigger consent screen but a test suite. For this user, this client, and this resource: does the identity provider issue an assertion, and does the MCP server accept the resulting token? Those are two separate assertions that fail for different reasons, and they deserve separate tests.",
+          "In practice, I would build the seam before the feature. One authorization broker in the agent runtime that can run per-server OAuth consent today and an ID-JAG exchange when the extension is available. The broker performs the exchange and injects the resulting access token at the tool boundary. The model never sees an ID token, an ID-JAG, or a refresh token, because none of those are things a prompt should be trusted to hold. As an extension, enterprise-managed authorization is opt-in on the client rather than automatic, which is the right default for a draft and a good reason to have the interface ready rather than the flow hard-coded."
+        ],
+        "sources": [
+          {
+            "label": "Model Context Protocol: Enterprise-Managed Authorization",
+            "href": "https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Nov 24, 2026",
     "blogHeading": "An Agent Sandbox Is a Policy, Not a Perimeter",
     "slug": "an-agent-sandbox-is-a-policy-not-a-perimeter",
