@@ -920,6 +920,108 @@ export const playGround = [
 
 export const blogs = [
   {
+    "postedOn": "Nov 27, 2026",
+    "blogHeading": "An Agent Event Feed Needs a Delivery Contract, Not Just a Callback",
+    "slug": "an-agent-event-feed-needs-a-delivery-contract-not-just-a-callback",
+    "postedBy": "Shivam Maurya",
+    "postedAt": "AI Infrastructure",
+    "content": "Connecting an unattended agent to upstream events looks like plumbing: register a webhook, receive a POST, start a turn. The webhook is the least interesting part. The real design work is deciding what happens when an event is missed, when the same event arrives twice, and whether receiving an event was ever permission to act.",
+    "sections": [
+      {
+        "heading": "A notification is not an event",
+        "paragraphs": [
+          "Most agent platforms already have some form of notification. MCP has resource-updated notifications and the list_changed family. They answer a narrow question: something you were already watching changed. They do not carry subscription arguments, a payload schema, or a stable identifier for the occurrence, and they exist only while a live subscription stream is open. A client that was offline when the notification fired has no way to learn that it missed anything.",
+          "The MCP Events extension draws the line more carefully. SEP-3415 is final and the extension is in beta. A server publishes event types, each with an input schema for subscription arguments, a payload schema, and a set of supported delivery modes. A client subscribes to a named event with arguments and receives occurrences shaped like {eventId, name, timestamp, data, cursor}. That sounds cosmetic until you have to build the consumer: the client now owns a subscription registry, durable cursor state, and a deduplication rule.",
+          "This is what makes unattended automation possible. The agent does not need a user to ask a question. It needs a durable statement that something happened, plus enough information to decide whether to care."
+        ],
+        "sources": [
+          {
+            "label": "Model Context Protocol: Events extension overview",
+            "href": "https://modelcontextprotocol.io/extensions/events/overview"
+          }
+        ]
+      },
+      {
+        "heading": "The cursor is the real product surface",
+        "paragraphs": [
+          "Every delivery mode in Events ends at the same small object: an opaque cursor. Poll returns it at the response level; push and webhook attach it to each occurrence. The client stores the latest cursor durably and presents it after a crash, a redeploy, or a laptop closing. That is the entire resumability story. If the server can still serve from that position, the agent resumes from a point it can trust. If it cannot, the server sets truncated: true, and the client is told that events were skipped.",
+          "Replay is optional per event type, and this is the detail I would design around first. A server may return a null cursor for an event type with no addressable history; a client then always starts from now and accepts that anything during the gap is gone. Even when replay exists, maxAgeMs bounds how far back a stale client may ask. A host that was offline for a week should not wake up and replay a week of incidents into a model context.",
+          "The question is therefore not whether to support webhooks. It is what this agent is supposed to do after a six-hour outage. My answer would be: resume from the cursor, inspect the truncated flag, then re-read authoritative state through normal tools before acting. The event tells the agent where to look; the tool call tells it what is true now."
+        ],
+        "sources": [
+          {
+            "label": "SEP-3415: MCP Events extension specification",
+            "href": "https://modelcontextprotocol.io/seps/3415-events-extension"
+          }
+        ]
+      },
+      {
+        "heading": "At-least-once means the reaction must be idempotent",
+        "paragraphs": [
+          "The Events extension gives a client one strong tool for duplicates: eventId is a stable identifier for the upstream occurrence, assigned by the server and often taken directly from the source system's own identifier. Within a subscription, the client can discard repeats. That is enough for the transport. It is not enough for the agent runtime, because a restarted client may resubscribe, a webhook may be retried after a timeout, and two subscriptions with overlapping arguments can legitimately both deliver the same underlying event.",
+          "The reaction therefore needs its own key. I would store an occurrence record keyed by tenant, event ID, and workflow before starting a turn, and make starting work for that occurrence an idempotent operation against the record. The deduplication window is an admission decision, not a cache optimization: if it is too short, a retry after a restart replays an incident; if it is too long, a genuinely new occurrence with a reused upstream identifier is silently dropped.",
+          "Ordering deserves the same honesty. Poll and push deliver occurrences in order within a subscription; webhook delivery is best effort, and the timestamp field exists so the client can order what it receives. An agent that reads “deploy succeeded” before it reads “deploy started,” because two callbacks overtook each other, will produce a coherent and wrong narrative. If the workflow depends on order, carry the rule explicitly instead of hoping the queue preserves it."
+        ],
+        "sources": [
+          {
+            "label": "Model Context Protocol: Events extension overview",
+            "href": "https://modelcontextprotocol.io/extensions/events/overview"
+          }
+        ]
+      },
+      {
+        "heading": "Receipt is not authority",
+        "paragraphs": [
+          "An event arriving at the runtime is proof that something happened upstream. It is not proof that the agent may act. The Events security model keeps those two statements separate. The server checks that the principal may subscribe to the requested event type with those arguments, and it re-checks authorization at delivery time, terminating the subscription if access was revoked. The client is expected to treat the event as a trigger, not a grant: any follow-up tool call still goes through normal MCP authorization.",
+          "I like this because it closes a gap that keeps appearing in agent systems. A well-meaning implementation receives an incident event, then uses an ambient service token to comment on the incident, page the owner, and open a ticket. The upstream event has now become a capability. The safer shape is smaller: the event carries identities and a subject, the runtime checks whether this agent instance is still allowed to act on that subject, and each tool call enforces its own permission. Revocation should end both the subscription and the action path, not just one of them.",
+          "Webhook mode adds the usual surface: HTTPS callback URLs, signed deliveries, endpoint verification and SSRF checks on destinations, and a renewable TTL that the client refreshes. Those are not obscure hardening steps. They are the difference between a callback and a subscription."
+        ],
+        "sources": [
+          {
+            "label": "Model Context Protocol: Events extension overview",
+            "href": "https://modelcontextprotocol.io/extensions/events/overview"
+          }
+        ]
+      },
+      {
+        "heading": "Payloads are untrusted input",
+        "paragraphs": [
+          "The most underrated line in the specification is that event payloads are untrusted data, like tool results. That is not a formality. An event may be an email subject, an issue description, a commit message, or a comment written by anyone with access to the upstream system. Putting that text directly into an agent prompt is how a commit message becomes an instruction.",
+          "I would keep payloads deliberately small on the server side, using subscription arguments to filter and redact before delivery, and keep the client side equally suspicious: label the event as external data, never let its text redefine the agent's task, and fetch the full record through a read tool when more context is needed. The specification's advice to send enough to triage and let tools retrieve the rest is good product design, not just security advice. It keeps the event cheap to store, easy to audit, and hard to mistake for an instruction."
+        ],
+        "sources": [
+          {
+            "label": "Model Context Protocol: Events extension overview",
+            "href": "https://modelcontextprotocol.io/extensions/events/overview"
+          },
+          {
+            "label": "OWASP: AI Agent Security Cheat Sheet",
+            "href": "https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "heading": "Wake work; don't run it inline",
+        "paragraphs": [
+          "An event feed is a queue with a schema, and queues fail differently from callbacks. A P1 incident, a bulk import, or a repository that suddenly receives a thousand pushes can arrive as a burst. If each occurrence starts an agent turn immediately, the model quota that was sized for interactive use becomes the bottleneck for background work. The queue grows, retries multiply, and the agent appears busy while completing less.",
+          "The runtime should own admission: a per-subscription and per-tenant concurrency budget, coalescing for event types where only the latest state matters, a bounded queue with an explicit drop or delay policy, and an alert on cursor lag and truncated counts. Before starting a turn, write the occurrence record; after the turn, record its outcome against the same event ID. That gives support a way to answer whether a given incident was handled without reading a model transcript.",
+          "Finally, distinguish waking from waiting. If an agent is waiting on a long-running operation it started itself, that is a task with its own lifecycle, not an upstream event subscription. Events are for things the agent did not initiate. Mixing the two produces a system where the runtime cannot tell whether it is being told about the world or about its own work.",
+          "The callback is easy. The delivery contract is the product."
+        ],
+        "sources": [
+          {
+            "label": "Model Context Protocol: Events extension overview",
+            "href": "https://modelcontextprotocol.io/extensions/events/overview"
+          },
+          {
+            "label": "Model Context Protocol: ext-events repository",
+            "href": "https://github.com/modelcontextprotocol/ext-events"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "postedOn": "Nov 25, 2026",
     "blogHeading": "The Consent Screen Was Never the Policy",
     "slug": "the-consent-screen-was-never-the-policy",
